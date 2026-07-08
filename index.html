@@ -402,7 +402,7 @@
 <a class="wa-floating" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Chat">✉</a>
 
 <script>
-  // ---------- LOGIKA PICKER FOTO PERMANEN (LOCALSTORAGE) ----------
+  // ---------- LOGIKA PICKER FOTO PERMANEN (DENGAN KOMPRESI OTOMATIS) ----------
   function bukaGaleri(inputId) {
     document.getElementById(inputId).click();
   }
@@ -411,19 +411,41 @@
     if (input.files && input.files[0]) {
       const reader = new FileReader();
       reader.onload = function(e) {
-        const base64Data = e.target.result;
-        document.getElementById(imgId).src = base64Data;
-        try {
-          localStorage.setItem(storageKey, base64Data);
-        } catch (error) {
-          console.log("Ukuran gambar terlalu besar untuk local storage.");
-        }
+        const img = new Image();
+        img.onload = function() {
+          // Membuat canvas untuk mengompres data gambar di latar belakang
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          
+          // Batasi lebar maksimal ke 400px agar ukuran file menjadi sangat kecil (di bawah 50KB)
+          const max_width = 400;
+          const scale = max_width / img.width;
+          canvas.width = max_width;
+          canvas.height = img.height * scale;
+          
+          // Menggambar ulang gambar asli ke dalam canvas dengan resolusi baru
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          
+          // Konversi hasil gambar menjadi format JPEG dengan kualitas 0.7 (ringan namun tetap jelas)
+          const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+          
+          // Memperbarui tampilan gambar di browser
+          document.getElementById(imgId).src = compressedBase64;
+          
+          // Menyimpan secara permanen ke localStorage browser
+          try {
+            localStorage.setItem(storageKey, compressedBase64);
+          } catch (error) {
+            console.log("Gagal menyimpan ke penyimpanan lokal.");
+          }
+        };
+        img.src = e.target.result;
       };
       reader.readAsDataURL(input.files[0]);
     }
   }
 
-  // Load foto yang tersimpan otomatis saat web dibuka kembali
+  // Memuat gambar yang tersimpan secara otomatis saat halaman dibuka kembali
   window.addEventListener('DOMContentLoaded', () => {
     const keys = [
       { key: 'save-profil', id: 'img-profil' },
@@ -473,7 +495,27 @@
   document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Lele, saya pemilik rumah makan/kuliner ingin mengajukan kerja sama grosir suplai lele rutin.');
   document.getElementById('wa-float').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Danang, saya melihat portofolio Anda dan tertarik untuk bertanya lebih lanjut.');
 
-  // ---------- LOGIKA STATUS REAL-TIME & WA INTEGRATION ----------
+  // ---------- LOGIKA STATUS REAL-TIME & INTEGRASI WHATSAPP ----------
   const statusStok = document.getElementById('stok-keterangan');
-  const jamSekarang = tgl.getHours
-  
+  const jamSekarang = tgl.getHours();
+
+  if (jamSekarang >= 21 || jamSekarang < 5) {
+    statusStok.innerHTML = `<span style="color: #ff3b30; font-weight: 800;">● RESTOCK_PROCESS</span> — Pemesanan malam ini akan dialokasikan untuk pengiriman subuh/pagi besok agar lele tetap segar.`;
+  } else {
+    statusStok.innerHTML = `<span style="color: var(--cyber-green); font-weight: 800;">● LIVE_STOK_READY</span> — Kolam produksi siap panen harian. Ukuran standar konsumsi warung tersedia optimal saat ini.`;
+  }
+
+  document.getElementById('hitung-btn').addEventListener('click', () => {
+    const porsiVal = parseFloat(document.getElementById('porsi').value);
+    const isiVal = document.getElementById('ukuran').options[document.getElementById('ukuran').selectedIndex].text;
+    const kgHasil = document.getElementById('hasil-kg').textContent;
+
+    if (porsiVal > 0) {
+      const pesanWA = `Halo Mas Eko Lele, saya sudah menghitung di web. Saya butuh suplai untuk target ${porsiVal} porsi dengan spek ${isiVal}. Estimasi kebutuhan sekitar ${kgHasil}. Mau tanya info langganan grosirnya dong.`;
+      document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent(pesanWA);
+    }
+  });
+</script>
+
+</body>
+</html>
