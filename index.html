@@ -373,7 +373,9 @@
         </div>
       </div>
 
-    </d    </div> <div style="margin-top: 40px; text-align: center; border-top: 1px dashed var(--border); padding-top: 32px;">
+    </d    </div> 
+    
+    <div style="margin-top: 40px; text-align: center; border-top: 1px dashed var(--border); padding-top: 32px;">
       <p class="sub" style="margin-bottom: 16px;">Membutuhkan pasokan rutin terjadwal skala warung atau restoran?</p>
       <a class="btn btn-outline" id="wa-langganan" href="#" target="_blank" rel="noopener" style="border-color: var(--cyber-green); color: var(--cyber-green);">Kemitraan Grosir Via WA</a>
     </div>
@@ -473,25 +475,5 @@
 
   // ---------- LOGIKA STATUS REAL-TIME & WA INTEGRATION ----------
   const statusStok = document.getElementById('stok-keterangan');
-  const jamSekarang = tgl.getHours();
-
-  if (jamSekarang >= 21 || jamSekarang < 5) {
-    statusStok.innerHTML = `<span style="color: #ff3b30; font-weight: 800;">● RESTOCK_PROCESS</span> — Pemesanan malam ini akan dialokasikan untuk pengiriman subuh/pagi besok agar lele tetap segar.`;
-  } else {
-    statusStok.innerHTML = `<span style="color: var(--cyber-green); font-weight: 800;">● LIVE_STOK_READY</span> — Kolam produksi siap panen harian. Ukuran standar konsumsi warung tersedia optimal saat ini.`;
-  }
-
-  document.getElementById('hitung-btn').addEventListener('click', () => {
-    const porsiVal = parseFloat(document.getElementById('porsi').value);
-    const isiVal = document.getElementById('ukuran').options[document.getElementById('ukuran').selectedIndex].text;
-    const kgHasil = document.getElementById('hasil-kg').textContent;
-
-    if (porsiVal > 0) {
-      const pesanWA = `Halo Mas Eko Lele, saya sudah menghitung di web. Saya butuh suplai untuk target ${porsiVal} porsi dengan spek ${isiVal}. Estimasi kebutuhan sekitar ${kgHasil}. Mau tanya info langganan grosirnya dong.`;
-      document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent(pesanWA);
-    }
-  });
-</script>
-
-</body>
-</html>
+  const jamSekarang = tgl.getHours
+  
