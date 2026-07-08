@@ -57,13 +57,13 @@
   .navbar nav a { font-size: 0.9rem; font-weight: 600; margin-left: 20px; color: var(--text-sub); transition: 0.2s; }
   .navbar nav a:hover { color: var(--cyber-green); }
 
-  /* ---------- HERO SECTION ---------- */
+  /* ---------- HERO SECTION & UPLOAD STYLE ---------- */
   .hero { padding: 80px 0 60px 0; background: linear-gradient(180deg, var(--bg-main) 0%, var(--bg-sub) 100%); }
   .hero .tag-status { display: inline-block; background: rgba(0,255,102,0.1); border: 1px solid rgba(0,255,102,0.3); color: var(--cyber-green); padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.75rem; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
   .hero h1 { font-size: 2.8rem; margin-bottom: 16px; line-height: 1.2; background: linear-gradient(120deg, #fff 40%, var(--text-sub)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   .hero p { font-size: 1.1rem; color: var(--text-sub); max-width: 620px; margin-bottom: 30px; }
   
-  .btn { display: inline-block; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: 0.2s; text-align: center; }
+  .btn { display: inline-block; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: 0.2s; text-align: center; border: none; }
   .btn-cyber { background: var(--cyber-green); color: #000; box-shadow: 0 4px 20px var(--cyber-glow); }
   .btn-cyber:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0, 255, 102, 0.4); }
   .btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
@@ -72,12 +72,16 @@
 
   .profile-section { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; margin-top: 40px; }
   
+  /* BOX FOTO WA/TIKTOK STYLE PERMANEN */
   .photo-box { 
-    width: 100%; max-width: 340px; height: 220px; background: var(--bg-card); border: 1px solid var(--border); 
-    border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative;
+    width: 150px; height: 150px; background: var(--bg-card); border: 3px solid var(--cyber-green); 
+    border-radius: 50%; overflow: hidden; box-shadow: 0 0 20px var(--cyber-glow); position: relative; cursor: pointer;
   }
-  .photo-box img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9) contrast(1.1); }
-  .photo-box::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; pointer-events: none; }
+  .photo-box img { width: 100%; height: 100%; object-fit: cover; }
+  .upload-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--cyber-green); font-weight: bold; opacity: 0; transition: 0.2s; text-align: center; padding: 10px; }
+  .photo-box:hover .upload-overlay { opacity: 1; }
+  
+  .input-galeri { display: none; }
 
   /* ---------- SECTIONS & GRID ---------- */
   section { padding: 80px 0; border-top: 1px solid var(--border); }
@@ -133,7 +137,7 @@
   .lele-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
   .lele-card:hover { border-color: rgba(0,255,102,0.3); transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.4); }
   
-  .lele-photo { width: 100%; height: 160px; border-radius: 10px; margin-bottom: 16px; overflow: hidden; background: #222; position: relative; }
+  .lele-photo { width: 100%; height: 160px; border-radius: 10px; margin-bottom: 16px; overflow: hidden; background: #222; position: relative; cursor: pointer; }
   .lele-photo img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
   .lele-card:hover .lele-photo img { transform: scale(1.05); }
   
@@ -155,8 +159,8 @@
   @media (max-width: 768px) {
     .grid-2 { grid-template-columns: 1fr; gap: 32px; }
     .hero h1 { font-size: 2.2rem; }
-    .profile-section { flex-direction: column; align-items: stretch; gap: 24px; }
-    .photo-box { max-width: 100%; height: 180px; }
+    .profile-section { flex-direction: column; align-items: center; text-align: center; gap: 24px; }
+    .hero-buttons { justify-content: center; }
     .navbar nav { display: none; }
     .lele-app { padding: 24px; }
   }
@@ -182,9 +186,13 @@
     <span class="tag-status">● CORE_TKJ_ENGINEER</span>
     <h1>Eko Danang Subiyanto</h1>
     <div class="profile-section">
-      <div class="photo-box">
-        <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=80" alt="Wallpaper Eko Lele">
+      
+      <div class="photo-box" onclick="bukaGaleri('input-profil')">
+        <img id="img-profil" src="wallpaper lele.jpg" alt="Foto Profil">
+        <div class="upload-overlay">GANTI FOTO PROFIL</div>
       </div>
+      <input type="file" id="input-profil" class="input-galeri" accept="image/*" onchange="prosesFoto(this, 'img-profil', 'save-profil')">
+
       <div>
         <p>Siswa Teknik Komputer &amp; Jaringan yang fokus mendalami arsitektur pemrograman web. Mengembangkan infrastruktur lokal dan aplikasi berbasis mobile emulator langsung menggunakan Android.</p>
         <div class="hero-buttons">
@@ -222,7 +230,7 @@
         <div class="info-table">
           <div class="info-row"><span>Spesialisasi</span><span>Web Dev &amp; Jaringan</span></div>
           <div class="info-row"><span>Lingkungan</span><span>Mobile Linux System</span></div>
-          <div class="info-row"><span>Bahasa</span><span>Indonesia / Javascript</span></div>
+          <div class="info-row"><span>Bahasa</span><span>Indonesia / JavaScript</span></div>
           <div class="info-row"><span>Status</span><span>Membangun Solusi Praktis</span></div>
         </div>
       </div>
@@ -312,13 +320,17 @@
       </div>
     </div>
 
-    <h3 style="margin-bottom: 24px; font-size: 1.3rem;">Daftar Produk Unggulan</h3>
+    <h3 style="margin-bottom: 4px; font-size: 1.3rem;">Daftar Produk Unggulan</h3>
+    <p class="sub" style="font-size: 0.8rem; margin-bottom: 24px; color: var(--cyber-green);">💡 Tip: Klik gambar produk untuk menggantinya langsung dari galeri HP &amp; otomatis tersimpan permanen!</p>
+    
     <div class="lele-grid">
       
       <div class="lele-card">
-        <div class="lele-photo">
-          <img src="https://images.unsplash.com/photo-1514170311861-a5327c5ff0e7?w=500&auto=format&fit=crop&q=80" alt="Lele Hidup Standar">
+        <div class="lele-photo" onclick="bukaGaleri('input-produk1')">
+          <img id="img-produk1" src="lele segar.jpg" alt="Lele Hidup Standar">
+          <div class="upload-overlay">KLIK UNTUK UBAH FOTO</div>
         </div>
+        <input type="file" id="input-produk1" class="input-galeri" accept="image/*" onchange="prosesFoto(this, 'img-produk1', 'save-prod1')">
         <div>
           <h4>Lele Hidup Standar</h4>
           <p class="sub" style="font-size: 0.85rem; margin-top: 4px;">Isi 8–10 ekor/kg. Pilihan utama bisnis kuliner.</p>
@@ -330,9 +342,11 @@
       </div>
 
       <div class="lele-card">
-        <div class="lele-photo">
-          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop&q=80" alt="Lele Hidup Besar">
+        <div class="lele-photo" onclick="bukaGaleri('input-produk2')">
+          <img id="img-produk2" src="lele segar.jpg" alt="Lele Hidup Besar">
+          <div class="upload-overlay">KLIK UNTUK UBAH FOTO</div>
         </div>
+        <input type="file" id="input-produk2" class="input-galeri" accept="image/*" onchange="prosesFoto(this, 'img-produk2', 'save-prod2')">
         <div>
           <h4>Lele Hidup Besar</h4>
           <p class="sub" style="font-size: 0.85rem; margin-top: 4px;">Isi 6–7 ekor/kg. Daging tebal memuaskan.</p>
@@ -344,9 +358,11 @@
       </div>
 
       <div class="lele-card">
-        <div class="lele-photo">
-          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&auto=format&fit=crop&q=80" alt="Lele Bumbu Kuning">
+        <div class="lele-photo" onclick="bukaGaleri('input-produk3')">
+          <img id="img-produk3" src="lele bumbu.jpg" alt="Lele Bumbu Kuning">
+          <div class="upload-overlay">KLIK UNTUK UBAH FOTO</div>
         </div>
+        <input type="file" id="input-produk3" class="input-galeri" accept="image/*" onchange="prosesFoto(this, 'img-produk3', 'save-prod3')">
         <div>
           <h4>Lele Bumbu Kuning</h4>
           <p class="sub" style="font-size: 0.85rem; margin-top: 4px;">Siap goreng, bumbu marinasi resep khusus.</p>
@@ -357,9 +373,7 @@
         </div>
       </div>
 
-    </div>
-
-    <div style="margin-top: 40px; text-align: center; border-top: 1px dashed var(--border); padding-top: 32px;">
+    </d    </div> <div style="margin-top: 40px; text-align: center; border-top: 1px dashed var(--border); padding-top: 32px;">
       <p class="sub" style="margin-bottom: 16px;">Membutuhkan pasokan rutin terjadwal skala warung atau restoran?</p>
       <a class="btn btn-outline" id="wa-langganan" href="#" target="_blank" rel="noopener" style="border-color: var(--cyber-green); color: var(--cyber-green);">Kemitraan Grosir Via WA</a>
     </div>
@@ -386,7 +400,44 @@
 <a class="wa-floating" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Chat">✉</a>
 
 <script>
-  // ---------- LOGIKA SCRIPT UTAMA & KALKULATOR ----------
+  // ---------- LOGIKA PICKER FOTO PERMANEN (LOCALSTORAGE) ----------
+  function bukaGaleri(inputId) {
+    document.getElementById(inputId).click();
+  }
+
+  function prosesFoto(input, imgId, storageKey) {
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64Data = e.target.result;
+        document.getElementById(imgId).src = base64Data;
+        try {
+          localStorage.setItem(storageKey, base64Data);
+        } catch (error) {
+          console.log("Ukuran gambar terlalu besar untuk local storage.");
+        }
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  // Load foto yang tersimpan otomatis saat web dibuka kembali
+  window.addEventListener('DOMContentLoaded', () => {
+    const keys = [
+      { key: 'save-profil', id: 'img-profil' },
+      { key: 'save-prod1', id: 'img-produk1' },
+      { key: 'save-prod2', id: 'img-produk2' },
+      { key: 'save-prod3', id: 'img-produk3' }
+    ];
+    keys.forEach(item => {
+      const savedImg = localStorage.getItem(item.key);
+      if (savedImg) {
+        document.getElementById(item.id).src = savedImg;
+      }
+    });
+  });
+
+  // ---------- LOGIKA KODE UTAMA & KALKULATOR ----------
   const tgl = new Date();
   document.getElementById('nomor-nota').textContent =
     tgl.getFullYear().toString().slice(2) + String(tgl.getMonth()+1).padStart(2,'0') + String(tgl.getDate()).padStart(2,'0') +
