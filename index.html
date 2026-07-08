@@ -3,234 +3,629 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eko Danang Subiyanto — Portfolio TKJ</title>
+<title>Eko — Portofolio TKJ &amp; Web Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg-main: #0a0a0c;
-    --bg-card: #121215;
-    --border-color: #222226;
-    --text-primary: #f4f4f5;
-    --text-secondary: #a1a1aa;
-    --accent: #3b82f6;
+  /* ---------- STYLE UTAMA PORTOFOLIO ---------- */
+  :root{
+    --paper:#EDF1F0;
+    --panel:#E2E9E7;
+    --ink:#1B2B2E;
+    --ink-soft:#4A5B5E;
+    --signal:#E8712A;
+    --patch:#3E8E7E;
+    --wire:#6B7573;
+    --line: rgba(27,43,46,0.15);
+
+    /* Variable Eko Lele */
+    --kertas:#F2EDE1;
+    --kertas-gelap:#E9E1CF;
+    --tinta:#1B3A5C;
+    --tinta-muda:#3E5C79;
+    --stempel:#B23A2F;
+    --kolam:#2F6E5C;
+    --bumbu:#D9A441;
+    --abu:#8A8378;
+    --garis: rgba(27,58,92,0.25);
   }
-  
-  *{margin:0;padding:0;box-sizing:border-box;}
+  *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    background: var(--bg-main);
-    color: var(--text-primary);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    line-height: 1.6;
+    background:var(--paper); color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif; line-height:1.6;
   }
+  h1,h2,h3{ font-family:'Oswald', sans-serif; text-transform:uppercase; letter-spacing:0.02em; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  .stamp-font{ font-family:'Special Elite', cursive; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:980px; margin:0 auto; padding:0 24px; }
+
+  /* ---------- Nav / patch strip ---------- */
+  .patchbar{
+    background:var(--ink); color:var(--paper); padding:14px 0; position:sticky; top:0; z-index:40;
+  }
+  .patchbar .wrap{ display:flex; justify-content:space-between; align-items:center; }
+  .patchbar .logo{ font-family:'JetBrains Mono'; font-size:0.85rem; letter-spacing:0.1em; }
+  .patchbar .led{ display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--patch); margin-right:8px; box-shadow:0 0 6px var(--patch); }
+  .patchbar nav a{ font-family:'JetBrains Mono'; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; margin-left:20px; color:#B7C4C2; }
+  .patchbar nav a:hover{ color:var(--patch); }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding:70px 0 56px; border-bottom:1px solid var(--line); }
+  .hero .eyebrow{ font-family:'JetBrains Mono'; font-size:0.72rem; color:var(--signal); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:14px; display:block;}
+  .hero h1{ font-size:2.6rem; line-height:1.1; max-width:680px; }
+  .hero p.desc{ margin-top:18px; max-width:520px; color:var(--ink-soft); font-size:1rem; }
+  .hero-actions{ margin-top:28px; display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    display:inline-block; border:2px solid var(--ink); padding:11px 20px; border-radius:2px;
+    font-family:'Oswald'; text-transform:uppercase; font-size:0.82rem; letter-spacing:0.04em; cursor:pointer;
+  }
+  .btn-solid{ background:var(--ink); color:var(--paper); }
+  .btn-outline{ background:transparent; color:var(--ink); }
+  .btn-solid:hover, .btn-outline:hover{ opacity:0.85; }
+
+  /* ---------- Panel jack strip ---------- */
+  .jackstrip{ display:flex; gap:6px; margin-top:44px; flex-wrap:wrap; }
+  .jack{
+    width:38px; height:38px; border-radius:3px; background:var(--panel); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .jack::after{ content:''; width:6px; height:6px; border-radius:50%; background:var(--wire); }
+  .jack.on::after{ background:var(--patch); box-shadow:0 0 5px var(--patch); }
+
+  /* ---------- Section umum ---------- */
+  section{ padding:56px 0; border-bottom:1px solid var(--line); }
+  .label{ font-family:'JetBrains Mono'; font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--signal); display:block; margin-bottom:8px; }
+  section h2.judul{ font-size:1.8rem; margin-bottom:30px; }
+
+  /* ---------- Tentang ---------- */
+  .tentang-grid{ display:grid; grid-template-columns:1fr 1fr; gap:36px; }
+  .tentang-grid p{ color:var(--ink-soft); font-size:0.95rem; margin-bottom:14px; }
+  .info-strip{ background:var(--panel); border-radius:4px; padding:20px; }
+  .info-strip .baris{ display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px dashed var(--line); font-size:0.85rem; }
+  .info-strip .baris:last-child{ border-bottom:none; }
+  .info-strip .baris span:first-child{ font-family:'JetBrains Mono'; color:var(--wire); font-size:0.75rem; text-transform:uppercase;}
+
+  /* ---------- Skill ---------- */
+  .skill-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:16px; }
+  .skill-port{ background:var(--panel); border-radius:4px; padding:18px; border-left:3px solid var(--patch); }
+  .skill-port .port-no{ font-family:'JetBrains Mono'; font-size:0.7rem; color:var(--wire); }
+  .skill-port h3{ font-size:0.95rem; margin:6px 0 6px; }
+  .skill-port p{ font-size:0.82rem; color:var(--ink-soft); }
+
+  /* ---------- Proyek ---------- */
+  .proyek-list{ display:flex; flex-direction:column; gap:16px; }
+  .proyek-card{
+    background:var(--panel); border-radius:4px; padding:24px; display:flex; gap:20px; flex-wrap:wrap;
+    align-items:center; justify-content:space-between; border:1px solid transparent; transition:border-color .15s ease;
+  }
+  .proyek-card:hover{ border-color:var(--patch); }
+  .proyek-info .port-no{ font-family:'JetBrains Mono'; font-size:0.7rem; color:var(--signal); }
+  .proyek-info h3{ font-size:1.2rem; margin:6px 0 8px; }
+  .proyek-info p{ font-size:0.88rem; color:var(--ink-soft); max-width:480px; }
+  .tags{ margin-top:10px; display:flex; gap:6px; flex-wrap:wrap; }
+  .tag{ font-family:'JetBrains Mono'; font-size:0.65rem; padding:3px 9px; border-radius:9px; background:rgba(62,142,126,0.15); color:var(--patch); }
+  .proyek-status{ font-family:'JetBrains Mono'; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.06em; padding:5px 10px; border-radius:9px; white-space:nowrap; }
+  .status-aktif{ background:rgba(62,142,126,0.18); color:var(--patch); }
+  .status-progress{ background:rgba(232,113,42,0.18); color:var(--signal); }
+
+  /* ---------- STYLE KHUSUS HALAMAN EKO LELE ---------- */
+  .lele-page-wrapper {
+    background:var(--kertas);
+    background-image: radial-gradient(rgba(27,58,92,0.035) 1px, transparent 1px);
+    background-size: 6px 6px;
+    color:var(--tinta);
+    padding: 40px 0;
+    border-top: 4px solid var(--tinta);
+    border-bottom: 4px solid var(--tinta);
+  }
+  .nota-header{ border-bottom:3px double var(--tinta); padding:28px 0 20px; }
+  .nota-header .wrap{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;}
+  .brand{ display:flex; align-items:center; gap:14px; }
+  .brand-mark{
+    width:52px; height:52px; border:2px solid var(--tinta); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Oswald'; font-weight:700; font-size:0.85rem; text-align:center; line-height:1.05;
+    background:var(--kertas-gelap);
+  }
+  .brand h1{ font-size:1.6rem; color: var(--tinta); }
+  .brand p{ font-family:'JetBrains Mono'; font-size:0.72rem; color:var(--abu); letter-spacing:0.08em; }
+  .nota-meta{ text-align:right; font-family:'JetBrains Mono'; font-size:0.75rem; color:var(--tinta-muda); }
   
-  .mono {font-family: 'JetBrains Mono', monospace;}
-  a {color: inherit; text-decoration: none; transition: all .25s ease;}
-  ::selection {background: var(--text-primary); color: var(--bg-main);}
+  .stok-bar{ background:var(--kertas-gelap); border-bottom:1px dashed var(--garis); }
+  .stok-inner{ display:flex; align-items:center; gap:18px; padding:16px 0; flex-wrap:wrap; }
+  .stempel{
+    flex-shrink:0; width:96px; height:96px; border-radius:50%; border:3px solid var(--stempel); color:var(--stempel);
+    display:flex; align-items:center; justify-content:center; text-align:center; transform:rotate(-9deg);
+    font-family:'Special Elite', cursive; font-size:0.72rem; line-height:1.15; text-transform:uppercase; padding:6px; position:relative;
+  }
+  .stempel::before{ content:''; position:absolute; inset:6px; border:1px solid var(--stempel); border-radius:50%; opacity:0.6; }
+  .stok-teks h2{ font-size:1.05rem; color:var(--tinta); }
+  .stok-teks p{ font-size:0.85rem; color:var(--tinta-muda); margin-top:2px;}
+  .stok-teks .waktu{ font-family:'JetBrains Mono'; font-size:0.7rem; color:var(--abu); margin-top:4px; }
 
-  .wrap {max-width: 840px; margin: 0 auto; padding: 0 24px;}
+  .lele-section{ padding:52px 0; border-bottom:1px dashed var(--garis); }
+  .lele-section h2.judul{ font-size:1.7rem; margin-bottom:6px; color: var(--tinta); }
+  .sub{ color:var(--tinta-muda); max-width:560px; margin-bottom:28px; font-size:0.95rem; }
 
-  /* ---------- navbar ---------- */
-  header.nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(10, 10, 12, 0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-color);
+  .kalkulator{ background:var(--kertas); border:2px solid var(--tinta); border-radius:4px; padding:26px; position:relative; }
+  .kalkulator::before{
+    content:'FORMULIR PESANAN'; position:absolute; top:-11px; left:20px; background:var(--kertas);
+    padding:0 8px; font-family:'JetBrains Mono'; font-size:0.68rem; letter-spacing:0.1em; color:var(--abu);
   }
-  .nav-inner {
-    display: flex; align-items: center; justify-content: space-between;
-    height: 70px;
+  .form-row{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:18px; }
+  .field{ flex:1; min-width:180px; }
+  .field label{ display:block; font-family:'JetBrains Mono'; font-size:0.72rem; color:var(--tinta-muda); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.04em;}
+  .field input, .field select{
+    width:100%; padding:10px 12px; border:1px solid var(--tinta); border-radius:2px; background:#fff; font-family:'JetBrains Mono'; font-size:0.95rem; color:var(--tinta);
   }
-  .brand {
-    font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.05em;
-  }
-  .navlinks {display: flex; gap: 28px; font-size: 14px; color: var(--text-secondary); font-weight: 500;}
-  .navlinks a:hover {color: var(--text-primary);}
+  .btn-stempel{ background:var(--stempel); border-color:var(--stempel); color:#fff; }
+  .btn-kolam{ background:var(--kolam); border-color:var(--kolam); color:#fff; }
+  .hasil{ margin-top:20px; padding:18px; background:var(--kertas-gelap); border-left:4px solid var(--kolam); border-radius:2px; display:none; }
+  .hasil.tampil{ display:block; }
+  .hasil .angka{ font-family:'JetBrains Mono'; font-size:2rem; font-weight:700; color:var(--kolam); }
+  .hasil .ket{ font-size:0.82rem; color:var(--tinta-muda); margin-top:4px; }
 
-  #menu-toggle, .burger {display: none;}
-  @media (max-width: 600px){
-    .navlinks {
-      position: absolute; top: 70px; left: 0; right: 0;
-      background: var(--bg-main); border-bottom: 1px solid var(--border-color);
-      flex-direction: column; gap: 0; max-height: 0; overflow: hidden;
-    }
-    .navlinks a {padding: 16px 24px; border-top: 1px solid var(--border-color);}
-    #menu-toggle:checked ~ .navlinks {max-height: 200px;}
-    .burger {
-      display: flex; flex-direction: column; gap: 5px; cursor: pointer;
-      width: 24px; height: 24px; justify-content: center;
-    }
-    .burger span {display: block; width: 100%; height: 2px; background: var(--text-primary);}
-  }
+  table.harga{ width:100%; border-collapse:collapse; }
+  table.harga th{ text-align:left; font-family:'JetBrains Mono'; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--abu); padding:10px 8px; border-bottom:2px solid var(--tinta); }
+  table.harga td{ padding:14px 8px; border-bottom:1px dashed var(--garis); font-size:0.92rem; vertical-align:top; }
+  table.harga td.nama{ font-family:'Oswald'; font-weight:600; font-size:1rem; }
+  table.harga td.harga-num{ font-family:'JetBrains Mono'; font-weight:700; color:var(--stempel); white-space:nowrap; }
+  .tag-hidup{ background:rgba(47,110,92,0.15); color:var(--kolam); }
+  .tag-frozen{ background:rgba(217,164,65,0.2); color:#8a6412; }
 
-  /* ---------- hero ---------- */
-  .hero {padding: 90px 0 70px;}
-  .school-tag {
-    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent);
-    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;
-    background: rgba(59, 130, 246, 0.1); padding: 4px 10px; border-radius: 4px; display: inline-block;
-  }
-  .hero h1 {font-size: clamp(32px, 7vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 18px; line-height: 1.2;}
-  .hero-sub {font-size: 16.5px; color: var(--text-secondary); max-width: 620px; margin-bottom: 30px;}
-  .hero-actions {display: flex; gap: 14px;}
-  
-  .btn {
-    font-size: 14px; font-weight: 600; padding: 12px 24px; border-radius: 6px; display: inline-block;
-  }
-  .btn-primary {background: var(--text-primary); color: var(--bg-main);}
-  .btn-primary:hover {transform: translateY(-2px); opacity: 0.95;}
-  .btn-secondary {border: 1px solid var(--border-color); color: var(--text-primary);}
-  .btn-secondary:hover {background: var(--bg-card); border-color: var(--text-secondary); transform: translateY(-2px);}
+  .edukasi-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:18px; }
+  .kartu{ background:var(--kertas-gelap); border-radius:4px; padding:20px; border-top:3px solid var(--kolam); }
+  .kartu h3{ font-size:1rem; margin-bottom:8px; color:var(--tinta); }
+  .kartu p{ font-size:0.87rem; color:var(--tinta-muda); }
+  .kartu .ikon{ font-family:'JetBrains Mono'; font-size:0.68rem; color:var(--abu); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px; display:block;}
 
-  /* ---------- section shell ---------- */
-  section {padding: 70px 0; border-top: 1px solid var(--border-color);}
-  .section-title {font-size: 22px; font-weight: 700; margin-bottom: 28px; letter-spacing: -0.02em;}
+  .langganan{ background:var(--tinta); color:var(--kertas); border-radius:6px; padding:36px; text-align:center; }
+  .langganan h2{ color:var(--kertas); }
+  .langganan p{ color:#C9D4DD; max-width:480px; margin:10px auto 22px; font-size:0.92rem; }
+  .langganan .btn{ background:var(--bumbu); border-color:var(--bumbu); color:var(--tinta); }
 
-  /* ---------- profil ---------- */
-  .profil-content p {color: var(--text-secondary); font-size: 15.5px; margin-bottom: 18px; text-align: justify;}
-  .profil-content p strong {color: var(--text-primary); font-weight: 600;}
-  .meta-list {
-    margin-top: 28px; font-family: 'JetBrains Mono', monospace; font-size: 13px;
-    display: flex; flex-direction: column; gap: 10px; color: var(--text-secondary);
-    background: var(--bg-card); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);
-  }
-  .meta-list span b {color: var(--text-primary); font-weight: 500;}
+  .tiktok-box{ display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .tiktok-card{ flex:1; min-width:260px; background:#000; color:#fff; border-radius:10px; padding:26px; position:relative; overflow:hidden; }
+  .tiktok-card h3{ color:#fff; font-size:1.1rem; margin-bottom:6px; }
+  .tiktok-card p{ color:#c9c9c9; font-size:0.85rem; margin-bottom:16px; }
+  .tiktok-card .handle{ font-family:'JetBrains Mono'; color:#25F4EE; font-size:0.9rem; }
+  .tiktok-list{ flex:1; min-width:260px; }
+  .tiktok-list ul{ list-style:none; }
+  .tiktok-list li{ padding:10px 0; border-bottom:1px dashed var(--garis); font-size:0.88rem; color: var(--tinta-muda); }
+  .tiktok-list li b{ display:block; font-family:'Oswald'; font-size:0.9rem; margin-bottom:2px; color: var(--tinta); }
 
-  /* ---------- keahlian ---------- */
-  .grid-tools {display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;}
-  @media (max-width: 540px){ .grid-tools {grid-template-columns: 1fr;} }
-  
-  .tool {
-    background: var(--bg-card); border: 1px solid var(--border-color);
-    padding: 24px; border-radius: 8px; transition: transform 0.2s ease, border-color 0.2s ease;
-  }
-  .tool:hover {
-    transform: translateY(-4px);
-    border-color: #3e3e4a;
-  }
-  .tool h3 {font-size: 16px; font-weight: 700; margin-bottom: 8px;}
-  .tool p {font-size: 13.5px; color: var(--text-secondary); margin-bottom: 20px;}
-  
-  .skill-track {height: 3px; background: #222226; width: 100%; position: relative; border-radius: 2px;}
-  .skill-bar {height: 100%; background: var(--text-primary); display: block; border-radius: 2px;}
-  .skill-info {
-    display: flex; justify-content: space-between; margin-top: 8px;
-    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-secondary);
+  .testi-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:18px; }
+  .testi{ background:var(--kertas); border:1px solid var(--garis); border-radius:4px; padding:18px; position:relative; }
+  .testi::before{ content:'“'; font-family:'Special Elite'; font-size:2.2rem; color:var(--bumbu); position:absolute; top:2px; left:12px; opacity:0.7;}
+  .testi p{ font-size:0.88rem; padding-top:14px; color:var(--tinta-muda); }
+  .testi .nama{ margin-top:12px; font-family:'JetBrains Mono'; font-size:0.75rem; color:var(--tinta); }
+
+  /* ---------- Kontak ---------- */
+  .kontak-box{ background:var(--ink); color:var(--paper); border-radius:6px; padding:40px; text-align:center; }
+  .kontak-box h2{ color:var(--paper); border:none; }
+  .kontak-box p{ color:#B7C4C2; max-width:440px; margin:12px auto 24px; font-size:0.92rem; }
+  .kontak-box .btn-solid{ background:var(--signal); border-color:var(--signal); color:var(--ink); }
+
+  footer{ padding:40px 0; text-align:center; background: var(--ink); color: var(--paper); }
+  footer p{ font-family:'JetBrains Mono'; font-size:0.72rem; color:#B7C4C2; margin-bottom: 5px; }
+
+  .wa-float{
+    position:fixed; right:18px; bottom:18px; background:var(--kolam); color:#fff; width:56px; height:56px;
+    border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.5rem;
+    box-shadow:0 4px 14px rgba(0,0,0,0.25); z-index:50; text-decoration:none;
   }
 
-  /* ---------- kontak ---------- */
-  .contact-wrapper {
-    background: var(--bg-card); border: 1px solid var(--border-color);
-    padding: 36px; border-radius: 8px;
-  }
-  .contact-wrapper p {color: var(--text-secondary); margin-bottom: 24px; font-size: 15.5px;}
-  .social-grid {display: flex; flex-direction: column; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 14px;}
-  .social-link {display: flex; align-items: center; gap: 10px; color: var(--text-secondary); width: fit-content;}
-  .social-link:hover {color: var(--accent); transform: translateX(4px);}
-  .social-link span {color: var(--text-primary); font-weight: 500;}
-
-  /* ---------- footer ---------- */
-  footer {
-    padding: 44px 0; text-align: center; color: #52525b; font-size: 12px;
-    font-family: 'JetBrains Mono', monospace; border-top: 1px solid var(--border-color);
+  @media (max-width:700px){
+    .tentang-grid{ grid-template-columns:1fr; }
+    .hero h1{ font-size:2rem; }
+    .patchbar nav a{ margin-left:12px; }
+    .nota-header .wrap{ flex-direction:column; align-items:flex-start; }
+    .nota-meta{ text-align:left; }
   }
 </style>
 </head>
 <body>
 
-<header class="nav">
-  <div class="wrap nav-inner">
-    <div class="brand">EDS // PORTFOLIO</div>
-    <input type="checkbox" id="menu-toggle">
-    <nav class="navlinks">
-      <a href="#profil">Profil</a>
-      <a href="#keahlian">Keahlian</a>
+<div class="patchbar">
+  <div class="wrap">
+    <div class="logo"><span class="led"></span>EKO / TKJ-WEBDEV</div>
+    <nav>
+      <a href="#tentang">Tentang</a>
+      <a href="#skill">Skill</a>
+      <a href="#proyek">Proyek</a>
+      <a href="#ekolele">Eko Lele</a>
       <a href="#kontak">Kontak</a>
     </nav>
-    <label class="burger" for="menu-toggle"><span></span><span></span><span></span></label>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Siswa TKJ · Web Developer</span>
+    <h1>Membangun sistem digital dari kolam lele sampai kabel fiber optik.</h1>
+    <p class="desc">Saya Eko — siswa Teknik Komputer dan Jaringan yang belajar web development lewat proyek nyata: LMS pendidikan, alat bantu usaha keluarga, sampai eksperimen AI. Semua dikerjakan langsung dari HP lewat Termux.</p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#proyek">Lihat Proyek</a>
+      <a class="btn btn-outline" href="#kontak">Hubungi Saya</a>
+    </div>
+    <div class="jackstrip" aria-hidden="true">
+      <div class="jack on"></div><div class="jack on"></div><div class="jack on"></div>
+      <div class="jack"></div><div class="jack"></div><div class="jack"></div>
+      <div class="jack on"></div><div class="jack"></div><div class="jack"></div><div class="jack"></div>
+    </div>
   </div>
 </header>
 
-<main class="wrap">
-
-  <section class="hero" style="border-top:none;">
-    <div class="school-tag">SMK Dwija Bhakti Jombang</div>
-    <h1>Hi, saya Eko Danang.</h1>
-    <p class="hero-sub">Siswa TKJ yang berfokus mendalami dunia infrastruktur jaringan internet, khususnya sebagai teknisi penyambungan kabel serat optik (Fiber Optic Jointer).</p>
-    <div class="hero-actions">
-      <a href="#keahlian" class="btn btn-primary">Lihat Spek Keahlian</a>
-      <a href="#kontak" class="btn btn-secondary">Hubungi Saya</a>
-    </div>
-  </section>
-
-  <section id="profil">
-    <h2 class="section-title">Profil Singkat</h2>
-    <div class="profil-content">
-      <p>Saat ini saya sedang menempuh pendidikan di bidang <strong>Teknik Komputer dan Jaringan (TKJ)</strong>. Ketertarikan terbesar saya berada di bagian instalasi fisik jaringan fiber optik—mulai dari penanganan core kabel, menjaga kestabilan redaman sinyal, hingga teknik penyambungan yang presisi.</p>
-      <p>Melalui sesi praktikum intensif, saya terus mengasah ketelitian kerja untuk memastikan setiap sambungan memiliki loss sekecil mungkin demi menjaga performa jaringan tetap optimal.</p>
-      <div class="meta-list">
-        <span><b>Sekolah:</b> SMK Dwija Bhakti Jombang</span>
-        <span><b>Kelas / No Absen:</b> TKJ 3 / 10</span>
-        <span><b>Fokus Kompetensi:</b> Fiber Optic Jointer</span>
+<section id="tentang">
+  <div class="wrap">
+    <span class="label">Profil</span>
+    <h2 class="judul">Tentang Saya</h2>
+    <div class="tentang-grid">
+      <div>
+        <p>Latar belakang saya di jurusan TKJ membuat saya terbiasa berpikir dalam sistem — jaringan, port, koneksi. Cara berpikir yang sama saya pakai saat membangun aplikasi web: setiap fitur adalah simpul yang harus tersambung rapi ke fitur lain.</p>
+        <p>Saya lebih suka membangun sesuatu yang benar-benar dipakai daripada sekadar tugas sekolah. Karena itu proyek-proyek saya biasanya lahir dari kebutuhan nyata: usaha keluarga, materi praktik jurusan, atau rasa penasaran pribadi soal AI.</p>
+      </div>
+      <div class="info-strip">
+        <div class="baris"><span>Jurusan</span><span>Teknik Komputer &amp; Jaringan</span></div>
+        <div class="baris"><span>Fokus</span><span>Web Development</span></div>
+        <div class="baris"><span>Lingkungan Kerja</span><span>Termux (Android)</span></div>
+        <div class="baris"><span>Bahasa</span><span>Indonesia</span></div>
+        <div class="baris"><span>Status</span><span>Aktif belajar &amp; membangun</span></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="keahlian">
-    <h2 class="section-title">Alat & Kompetensi Pengukuran</h2>
-    <div class="grid-tools">
-      <div class="tool">
-        <h3>Fusion Splicer</h3>
-        <p>Penyambungan core serat optik lewat metode peleburan busur listrik berpresisi tinggi.</p>
-        <div class="skill-track"><span class="skill-bar" style="width:85%"></span></div>
-        <div class="skill-info"><span>Splicing Capability</span><span>85%</span></div>
+<section id="skill">
+  <div class="wrap">
+    <span class="label">Kemampuan</span>
+    <h2 class="judul">Skill</h2>
+    <div class="skill-grid">
+      <div class="skill-port">
+        <span class="port-no">PORT 01</span>
+        <h3>HTML / CSS / JavaScript</h3>
+        <p>Membangun aplikasi single-file yang ringan dan bisa langsung jalan di browser tanpa server rumit.</p>
       </div>
-      <div class="tool">
-        <h3>OTDR Testing</h3>
-        <p>Menganalisis kualitas link sirkuit, melacak titik putus kabel, dan mendeteksi besaran loss.</p>
-        <div class="skill-track"><span class="skill-bar" style="width:75%"></span></div>
-        <div class="skill-info"><span>Measurement</span><span>75%</span></div>
+      <div class="skill-port">
+        <span class="port-no">PORT 02</span>
+        <h3>UI/UX Praktis</h3>
+        <p>Merancang tampilan yang sesuai konteks penggunanya — bukan sekadar ikut tren desain umum.</p>
       </div>
-      <div class="tool">
-        <h3>Fiber Cleaver & Stripper</h3>
-        <p>Pengupasan pelindung kabel dan pemotongan sudut core kaca agar rata sempurna sebelum di-splice.</p>
-        <div class="skill-track"><span class="skill-bar" style="width:90%"></span></div>
-        <div class="skill-info"><span>Precision Cut</span><span>90%</span></div>
+      <div class="skill-port">
+        <span class="port-no">PORT 03</span>
+        <h3>Integrasi API</h3>
+        <p>Menghubungkan aplikasi dengan layanan luar seperti Gemini API untuk fitur AI chat.</p>
       </div>
-      <div class="tool">
-        <h3>OPM & OLS</h3>
-        <p>Mengukur margin redaman daya pancar cahaya transmisi pada jaringan FTTH / backbone.</p>
-        <div class="skill-track"><span class="skill-bar" style="width:80%"></span></div>
-        <div class="skill-info"><span>Optical Power Test</span><span>80%</span></div>
+      <div class="skill-port">
+        <span class="port-no">PORT 04</span>
+        <h3>Jaringan Komputer</h3>
+        <p>Dasar TKJ: konfigurasi jaringan, kabel fiber optik, dan pemahaman infrastruktur yang mendukung aplikasi web.</p>
+      </div>
+      <div class="skill-port">
+        <span class="port-no">PORT 05</span>
+        <h3>Local-first Development</h3>
+        <p>Terbiasa membangun dan menguji aplikasi langsung dari perangkat mobile lewat Termux.</p>
+      </div>
+      <div class="skill-port">
+        <span class="port-no">PORT 06</span>
+        <h3>Desain Sistem Sederhana</h3>
+        <p>Merancang alur data client-side (localStorage, role-based dashboard) untuk aplikasi skala kecil-menengah.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="kontak">
-    <h2 class="section-title">Kontak & Media Sosial</h2>
-    <div class="contact-wrapper">
-      <p>Butuh koordinasi seputar project instalasi jaringan atau informasi magang? Silakan hubungi saya di bawah ini:</p>
-      <div class="social-grid">
-        <a href="https://wa.me/6281532900269" target="_blank" class="social-link">
-          <span>WhatsApp:</span> +62 815-3290-0269 ↗
-        </a>
-        <a href="https://www.tiktok.com/@ekodanang1986" target="_blank" class="social-link">
-          <span>TikTok:</span> @ekodanang1986 ↗
-        </a>
-        <div class="social-link">
-          <span>Lokasi:</span> Jombang, Jawa Timur
+<section id="proyek">
+  <div class="wrap">
+    <span class="label">Karya</span>
+    <h2 class="judul">Proyek</h2>
+    <div class="proyek-list">
+
+      <div class="proyek-card">
+        <div class="proyek-info">
+          <span class="port-no">PROYEK 01</span>
+          <h3>Eko Lele</h3>
+          <p>Website untuk usaha keluarga: cek stok kolam harian, kalkulator kebutuhan porsi untuk warung pecel lele, dan jalur langganan grosir via WhatsApp.</p>
+          <div class="tags">
+            <span class="tag">UMKM</span>
+            <span class="tag">Kalkulator</span>
+            <span class="tag">WhatsApp Integration</span>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
+          <span class="proyek-status status-aktif">Aktif Dipakai</span>
+          <a class="btn btn-outline" href="#ekolele">Buka Demo Di Bawah ↓</a>
+        </div>
+      </div>
+
+      <div class="proyek-card">
+        <div class="proyek-info">
+          <span class="port-no">PROYEK 02</span>
+          <h3>Jointer FO</h3>
+          <p>LMS berbasis web untuk pembelajaran penyambungan fiber optik siswa TKJ kelas 11 — dashboard multi-peran dan simulasi splicing 7 langkah dengan penilaian presisi.</p>
+          <div class="tags">
+            <span class="tag">LMS</span>
+            <span class="tag">Simulasi</span>
+            <span class="tag">Pendidikan Vokasi</span>
+          </div>
+        </div>
+        <span class="proyek-status status-progress">Dalam Pengembangan</span>
+      </div>
+
+      <div class="proyek-card">
+        <div class="proyek-info">
+          <span class="port-no">PROYEK 03</span>
+          <h3>OmniAI X</h3>
+          <p>Aplikasi chat AI single-file berbasis Gemini API dengan fitur voice chat, upload file, dan tampilan glassmorphism — dijalankan lokal lewat Termux.</p>
+          <div class="tags">
+            <span class="tag">AI Chat</span>
+            <span class="tag">Gemini API</span>
+            <span class="tag">Voice Interface</span>
+           </div>
+        </div>
+        <span class="proyek-status status-aktif">Aktif Dipakai</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div id="ekolele" class="lele-page-wrapper">
+  <div class="wrap">
+    <header class="nota-header">
+      <div class="brand">
+        <div class="brand-mark">EKO<br>LELE</div>
+        <div>
+          <h1>Eko Lele</h1>
+          <p>PEMASOK LELE HIDUP &amp; BUMBU KUNING — SEJAK KOLAM SENDIRI</p>
+        </div>
+      </div>
+      <div class="nota-meta">
+        NO. NOTA: <span id="nomor-nota">—</span><br>
+        TANGGAL: <span id="tanggal-nota">—</span>
+      </div>
+    </header>
+  </div>
+
+  <div class="stok-bar">
+    <div class="wrap stok-inner">
+      <div class="stempel" id="stempel-stok">MELIMPAH<br>SIAP KIRIM</div>
+      <div class="stok-teks">
+        <h2>Cek Stok Kolam Hari Ini</h2>
+        <p id="stok-keterangan">Kolam A &amp; B panen pagi ini. Ukuran 8–10 ekor/kg tersedia, siap kirim dalam 2 jam.</p>
+        <p class="waktu">Update terakhir: <span id="jam-update">—</span> WIB</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="kalkulator" class="lele-section">
+    <div class="wrap">
+      <span class="eyebrow">Untuk Pemilik Warung</span>
+      <h2 class="judul">Kalkulator Kebutuhan Porsi</h2>
+      <p class="sub">Masukkan target porsi pecel lele harianmu, kami hitungkan langsung berapa kilo yang perlu dipesan.</p>
+
+      <div class="kalkulator">
+        <div class="form-row">
+          <div class="field">
+            <label for="porsi">Jumlah porsi dibutuhkan</label>
+            <input type="number" id="porsi" min="1" placeholder="misal 50">
+          </div>
+          <div class="field">
+            <label for="ukuran">Ukuran isi per kg</label>
+            <select id="ukuran">
+              <option value="6">6–7 ekor / kg (besar)</option>
+              <option value="9" selected>8–10 ekor / kg (standar warung)</option>
+              <option value="13">12–14 ekor / kg (sedang)</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-kolam" id="hitung-btn">Hitung Kebutuhan</button>
+
+        <div class="hasil" id="hasil-box">
+          <div class="angka" id="hasil-kg">— kg</div>
+          <div class="ket" id="hasil-ket">Isi jumlah porsi dulu ya.</div>
         </div>
       </div>
     </div>
   </section>
 
-</main>
+  <section id="harga" class="lele-section">
+    <div class="wrap">
+      <span class="eyebrow">Papan Harga</span>
+      <h2 class="judul">Daftar Lele Hari Ini</h2>
+      <p class="sub">Harga grosir menyesuaikan jumlah pesanan. Hubungi WhatsApp untuk harga langganan mingguan.</p>
+
+      <table class="harga">
+        <thead>
+          <tr><th>Produk</th><th>Ukuran</th><th>Harga</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="nama">Lele Hidup<br><span class="tag tag-hidup">garansi hidup sampai tempat</span></td>
+            <td>8–10 ekor/kg</td>
+            <td class="harga-num">Rp 24.000/kg</td>
+          </tr>
+          <tr>
+            <td class="nama">Lele Hidup</td>
+            <td>6–7 ekor/kg (besar)</td>
+            <td class="harga-num">Rp 27.000/kg</td>
+          </tr>
+          <tr>
+            <td class="nama">Lele Bumbu Kuning Frozen<br><span class="tag tag-frozen">siap goreng</span></td>
+            <td>8–10 ekor/kg</td>
+            <td class="harga-num">Rp 30.000/kg</td>
+          </tr>
+          <tr>
+            <td class="nama">Lele Bersih Tanpa Jeroan</td>
+            <td>sesuai pesanan</td>
+            <td class="harga-num">Rp 28.000/kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="edukasi" class="lele-section">
+    <div class="wrap">
+      <span class="eyebrow">Kenapa Pilih Kami</span>
+      <h2 class="judul">Jaminan dari Kolam Kami</h2>
+      <p class="sub">Bukan cuma jualan, ini yang bikin lele kami beda saat sampai di wajan.</p>
+
+      <div class="edukasi-grid">
+        <div class="kartu">
+          <span class="ikon">Jaminan Rasa</span>
+          <h3>Zero Bau Tanah</h3>
+          <p>Air kolam dijaga bersih dan pakan dipilih agar dagingnya gurih, tidak bau lumpur saat digoreng.</p>
+        </div>
+        <div class="kartu">
+          <span class="ikon">Panduan Dapur</span>
+          <h3>Cara Olah Lele Frozen</h3>
+          <p>Cairkan di suhu ruang 20–30 menit sebelum digoreng, jangan pakai air panas agar bumbu tidak luntur dan kulit tetap renyah.</p>
+        </div>
+        <div class="kartu">
+          <span class="ikon">Pengiriman</span>
+          <h3>Garansi Hidup Sampai Tempat</h3>
+          <p>Dikirim dengan sirkulasi oksigen yang cukup, lele tetap segar dan aktif saat diterima.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="langganan" class="lele-section">
+    <div class="wrap">
+      <div class="langganan">
+        <h2 class="judul" style="border:none;">Langganan Warung Pecel Lele</h2>
+        <p>Untuk pemilik warung atau restoran yang butuh pasokan rutin tiap minggu. Chat langsung, kami siapkan jalur grosir khusus.</p>
+        <a class="btn" id="wa-langganan" href="#" target="_blank" rel="noopener">Buka WhatsApp Langganan Warung</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="tiktok" class="lele-section">
+    <div class="wrap">
+      <span class="eyebrow">Lihat Langsung dari Kolam</span>
+      <h2 class="judul">Behind The Scenes di TikTok</h2>
+      <p class="sub">Video asli proses panen, pembersihan, dan pengemasan lele — bukan foto katalog.</p>
+
+      <div class="tiktok-box">
+        <div class="tiktok-card">
+          <h3>Eko Danang</h3>
+          <p>Proses kasih makan, panen, dan bersihin lele tanpa jeroan — semua direkam apa adanya.</p>
+          <div class="handle">@ekodanang1986</div>
+          <a class="btn btn-outline" style="margin-top:16px; border-color:#fff; color:#fff;" href="https://www.tiktok.com/@ekodanang1986" target="_blank" rel="noopener">Kunjungi TikTok →</a>
+        </div>
+        <div class="tiktok-list">
+          <ul>
+            <li><b>Panen Pagi Kolam A</b>Proses angkat jaring sampai lele masuk ember oksigen.</li>
+            <li><b>Bersih Tanpa Jeroan</b>Cara membersihkan lele higienis sebelum dikemas bumbu kuning.</li>
+            <li><b>Packing Kirim Warung</b>Pengemasan lele hidup dengan oksigen untuk pengiriman jauh.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimoni" class="lele-section" style="border-bottom:none;">
+    <div class="wrap">
+      <span class="eyebrow">Kata Pelanggan</span>
+      <h2 class="judul">Sudah Dicoba Warung Lain</h2>
+      <div class="testi-grid">
+        <div class="testi">
+          <p>Lelenya nggak bau tanah, pelanggan warung saya sampai nanya bumbunya apa. Padahal cuma lelenya yang beda.</p>
+          <div class="nama">— Bu Yanti, Warung Pecel Lele Sedap Malam</div>
+        </div>
+        <div class="testi">
+          <p>Kalkulator porsinya membantu banget, saya nggak perlu tebak-tebak lagi pesan berapa kilo tiap minggu.</p>
+          <div class="nama">— Pak Dedi, Warung Lele Berkah</div>
+        </div>
+        <div class="testi">
+          <p>Sampai kolam saya lelenya masih gesit semua, langsung masuk kolam penampungan tanpa yang mati.</p>
+          <div class="nama">— Mas Rian, Pengepul Lokal</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section id="kontak" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="kontak-box">
+      <h2 class="judul">Hubungi Sinergi Jaringan</h2>
+      <p>Terbuka untuk program PKL instansi, kolaborasi pengembangan produk digital, atau optimasi sistem manajemen usaha.</p>
+      <a class="btn btn-solid" href="https://wa.me/6281200000000" target="_blank" rel="noopener">Hubungkan Via WhatsApp</a>
+    </div>
+  </div>
+</section>
 
 <footer>
-  &copy; 2026 Eko Danang Subiyanto. Powered by GitHub Pages.
+  <div class="wrap">
+    <p>EKO — TKJ &amp; WEB DEVELOPER PORTFOLIO · © 2026</p>
+    <blockquote style="font-size:0.75rem; color:#A2B1AF; font-style:italic;">"Dibuat sepenuhnya menggunakan perangkat mobile Android + lingkungan emulator Termux."</blockquote>
+  </div>
 </footer>
 
-</body>
-  </html>
+<a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Chat WhatsApp">☏</a>
+
+<script>
+  // ---------- LOGIKA OPERASIONAL NOTA & STOK EKO LELE ----------
+  const curDate = new Date();
+  document.getElementById('nomor-nota').textContent =
+    curDate.getFullYear().toString().slice(2) + String(curDate.getMonth()+1).padStart(2,'0') + String(curDate.getDate()).padStart(2,'0') +
+    '-' + String(Math.floor(curDate.getHours()*60+curDate.getMinutes())).padStart(4,'0');
   
+  document.getElementById('tanggal-nota').textContent =
+    curDate.toLocaleDateString('id-ID', { day:'2-digit', month:'long', year:'numeric' });
+  
+  document.getElementById('jam-update').textContent =
+    curDate.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+
+  const STATUS_STOK = 'melimpah'; 
+  const statusData = {
+    melimpah: { label: 'MELIMPAH<br>SIAP KIRIM', warna: 'var(--kolam)', ket: 'Kolam A & B panen pagi ini. Ukuran 8–10 ekor/kg tersedia, siap kirim dalam 2 jam.' },
+    terbatas: { label: 'STOK<br>TERBATAS', warna: 'var(--bumbu)', ket: 'Sisa stok menipis untuk ukuran besar. Disarankan pesan lebih awal via WhatsApp.' },
+    panen: { label: 'SIAP<br>PANEN', warna: 'var(--stempel)', ket: 'Kolam C siap panen sore ini. Pre-order sekarang untuk kirim besok pagi.' }
+  };
+
+  const currentStokObj = statusData[STATUS_STOK];
+  const targetStempel = document.getElementById('stempel-stok');
+  if(targetStempel) {
+    targetStempel.innerHTML = currentStokObj.label;
+    targetStempel.style.borderColor = currentStokObj.warna;
+    targetStempel.style.color = currentStokObj.warna;
+    document.getElementById('stok-keterangan').textContent = currentStokObj.ket;
+  }
+
+  // ---------- LOGIKA KALKULATOR PORSI ----------
+  document.getElementById('hitung-btn').addEventListener('click', () => {
+    const porsiAmt = parseFloat(document.getElementById('porsi').value);
+    const isiPerKgAmt = parseFloat(document.getElementById('ukuran').value);
+    const resultContainer = document.getElementById('hasil-box');
+
+    if (!porsiAmt || porsiAmt <= 0) {
+      resultContainer.classList.add('tampil');
+      document.getElementById('hasil-kg').textContent = '—';
+      document.getElementById('hasil-ket').textContent = 'Isi jumlah porsi yang benar dulu ya (angka lebih dari 0).';
+      return;
+    }
+
+    const calculatedKg = porsiAmt / isiPerKgAmt;
+    const roundedKg = Math.ceil(calculatedKg * 2) / 2; 
+
+    resultContainer.classList.add('tampil');
+    document.getElementById('hasil-kg').textContent = roundedKg.toFixed(1) + ' kg';
+    document.getElementById('hasil-ket').textContent =
+      `Untuk ${porsiAmt} porsi (± ${porsiAmt} ekor) dengan spesifikasi isi ${isiPerKgAmt} ekor/kg, kebutuhan pasokan berkisar ${roundedKg.toFixed(1)} kg lele harian.`;
+  });
+
+  // ---------- INTEGRASI ENDPOINT WHATSAPP ----------
+  const TARGET_WA_NUM = '6281200000000'; 
+  const langgananTextEncoded = encodeURIComponent('Halo Eko Lele, saya pemilik warung kuliner bermaksud mendaftar kemitraan pasokan lele rutin berkala. Bagaimana skema harga grosirnya?');
+  document.getElementById('wa-langganan').href = `https://wa.me/${TARGET_WA_NUM}?text=${langgananTextEncoded}`;
+
+  const infoUmumTextEncoded = encodeURIComponent('Halo Eko Lele, saya ingin berkonsultasi mengenai sisa kuantitas stok operasional lele siap kirim hari ini.');
+  document.getElementById('wa-float').href = `https://wa.me/${TARGET_WA_NUM}?text=${infoUmumTextEncoded}`;
+</script>
+</body>
+</html>
