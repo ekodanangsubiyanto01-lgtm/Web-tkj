@@ -373,9 +373,7 @@
         </div>
       </div>
 
-    </d    </div> 
-    
-    <div style="margin-top: 40px; text-align: center; border-top: 1px dashed var(--border); padding-top: 32px;">
+    </d    </div> <div style="margin-top: 40px; text-align: center; border-top: 1px dashed var(--border); padding-top: 32px;">
       <p class="sub" style="margin-bottom: 16px;">Membutuhkan pasokan rutin terjadwal skala warung atau restoran?</p>
       <a class="btn btn-outline" id="wa-langganan" href="#" target="_blank" rel="noopener" style="border-color: var(--cyber-green); color: var(--cyber-green);">Kemitraan Grosir Via WA</a>
     </div>
@@ -402,7 +400,8 @@
 <a class="wa-floating" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Chat">✉</a>
 
 <script>
-  // ---------- LOGIKA PICKER FOTO PERMANEN (DENGAN KOMPRESI OTOMATIS) ----------
+  // ---------- LOGIKA PICKER FOTO DENGAN KOMPRESI OTOMATIS ----------
+  // Solusi mutakhir agar browser tidak eror "QuotaExceededError" akibat foto kamera HP terlalu besar
   function bukaGaleri(inputId) {
     document.getElementById(inputId).click();
   }
@@ -413,30 +412,30 @@
       reader.onload = function(e) {
         const img = new Image();
         img.onload = function() {
-          // Membuat canvas untuk mengompres data gambar di latar belakang
+          // Membuat canvas bayangan untuk mereduksi resolusi gambar asli
           const canvas = document.createElement('canvas');
           const ctx = canvas.getContext('2d');
           
-          // Batasi lebar maksimal ke 400px agar ukuran file menjadi sangat kecil (di bawah 50KB)
+          // Membatasi lebar maksimal foto ke 400px (Sangat ringan untuk penyimpanan lokal)
           const max_width = 400;
           const scale = max_width / img.width;
           canvas.width = max_width;
           canvas.height = img.height * scale;
           
-          // Menggambar ulang gambar asli ke dalam canvas dengan resolusi baru
+          // Menggambar ulang foto ke canvas berukuran mini
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
           
-          // Konversi hasil gambar menjadi format JPEG dengan kualitas 0.7 (ringan namun tetap jelas)
+          // Mengubah data gambar menjadi format JPEG berukuran < 40KB
           const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
           
-          // Memperbarui tampilan gambar di browser
+          // Update visual di layar web
           document.getElementById(imgId).src = compressedBase64;
           
-          // Menyimpan secara permanen ke localStorage browser
+          // Menyimpan secara aman ke memori browser
           try {
             localStorage.setItem(storageKey, compressedBase64);
           } catch (error) {
-            console.log("Gagal menyimpan ke penyimpanan lokal.");
+            console.log("Penyimpanan lokal penuh, gagal menyimpan foto permanen.");
           }
         };
         img.src = e.target.result;
@@ -445,7 +444,7 @@
     }
   }
 
-  // Memuat gambar yang tersimpan secara otomatis saat halaman dibuka kembali
+  // Meload foto secara otomatis setiap kali website dimuat ulang oleh user
   window.addEventListener('DOMContentLoaded', () => {
     const keys = [
       { key: 'save-profil', id: 'img-profil' },
@@ -495,7 +494,7 @@
   document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Lele, saya pemilik rumah makan/kuliner ingin mengajukan kerja sama grosir suplai lele rutin.');
   document.getElementById('wa-float').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Danang, saya melihat portofolio Anda dan tertarik untuk bertanya lebih lanjut.');
 
-  // ---------- LOGIKA STATUS REAL-TIME & INTEGRASI WHATSAPP ----------
+  // ---------- LOGIKA STATUS REAL-TIME & WA INTEGRATION ----------
   const statusStok = document.getElementById('stok-keterangan');
   const jamSekarang = tgl.getHours();
 
