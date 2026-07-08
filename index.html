@@ -3,23 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eko Danang Subiyanto — Portfolio</title>
+<title>Eko Danang Subiyanto — Cyber Portfolio</title>
 
 <style>
-  /* ---------- TEMA HITAM PUTIH MINIMALIS ---------- */
+  /* ---------- MODERN DARK CYBER TEMA ---------- */
   :root {
-    --bg-main: #ffffff;
-    --bg-sub: #f8f9fa;
-    --bg-dark: #121212;
-    --bg-card: #ffffff;
+    --bg-main: #0a0a0c;
+    --bg-sub: #111115;
+    --bg-card: #16161e;
+    --bg-input: #1f1f2e;
     
-    --text-main: #111111;
-    --text-sub: #555555;
-    --text-light: #ffffff;
-    
-    --border: #e5e5e5;
-    --border-dark: #222222;
+    --text-main: #f0f0f5;
+    --text-sub: #9499b3;
     --cyber-green: #00ff66;
+    --cyber-glow: rgba(0, 255, 102, 0.15);
+    --border: #232330;
+    --border-focus: #444460;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,20 +29,22 @@
     color: var(--text-main);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4 {
     font-weight: 700;
     color: var(--text-main);
+    letter-spacing: -0.5px;
   }
 
   a { color: inherit; text-decoration: none; }
   .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
 
-  /* ---------- NAVBAR ---------- */
+  /* ---------- NAVBAR PREMIUM ---------- */
   .navbar {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(12px);
+    background: rgba(10, 10, 12, 0.8);
+    backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
@@ -51,99 +52,113 @@
     padding: 16px 0;
   }
   .navbar .wrap { display: flex; justify-content: space-between; align-items: center; }
-  .navbar .logo { font-weight: 700; font-size: 1.1rem; }
-  .navbar nav a { font-size: 0.9rem; font-weight: 500; margin-left: 20px; color: var(--text-sub); }
-  .navbar nav a:hover { color: #000000; }
+  .navbar .logo { font-weight: 800; font-size: 1.1rem; color: #fff; display: flex; align-items: center; gap: 8px; }
+  .navbar .logo::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--cyber-green); border-radius: 50%; box-shadow: 0 0 10px var(--cyber-green); }
+  .navbar nav a { font-size: 0.9rem; font-weight: 600; margin-left: 20px; color: var(--text-sub); transition: 0.2s; }
+  .navbar nav a:hover { color: var(--cyber-green); }
 
-  /* ---------- HERO SECTION & WALLPAPER ---------- */
-  .hero { padding: 60px 0; background: var(--bg-main); }
-  .hero .tag-status { display: inline-block; background: var(--bg-dark); color: var(--cyber-green); padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; margin-bottom: 20px; }
-  .hero h1 { font-size: 2.5rem; margin-bottom: 16px; }
-  .hero p { font-size: 1.05rem; color: var(--text-sub); max-width: 600px; margin-bottom: 24px; }
+  /* ---------- HERO SECTION ---------- */
+  .hero { padding: 80px 0 60px 0; background: linear-gradient(180deg, var(--bg-main) 0%, var(--bg-sub) 100%); }
+  .hero .tag-status { display: inline-block; background: rgba(0,255,102,0.1); border: 1px solid rgba(0,255,102,0.3); color: var(--cyber-green); padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.75rem; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
+  .hero h1 { font-size: 2.8rem; margin-bottom: 16px; line-height: 1.2; background: linear-gradient(120deg, #fff 40%, var(--text-sub)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { font-size: 1.1rem; color: var(--text-sub); max-width: 620px; margin-bottom: 30px; }
   
-  .btn { display: inline-block; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
-  .btn-dark { background: #000000; color: var(--text-light); }
-  .btn-dark:hover { opacity: 0.8; }
-  .btn-light { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
-  .btn-light:hover { background: var(--bg-sub); }
-  .hero-buttons { display: flex; gap: 12px; }
+  .btn { display: inline-block; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: 0.2s; text-align: center; }
+  .btn-cyber { background: var(--cyber-green); color: #000; box-shadow: 0 4px 20px var(--cyber-glow); }
+  .btn-cyber:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0, 255, 102, 0.4); }
+  .btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
+  .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: var(--text-sub); }
+  .hero-buttons { display: flex; gap: 16px; }
 
-  .profile-section { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; margin-top: 30px; }
+  .profile-section { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; margin-top: 40px; }
   
   .photo-box { 
-    width: 100%; max-width: 320px; height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: 1px solid var(--border); 
-    border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 4rem;
+    width: 100%; max-width: 340px; height: 220px; background: var(--bg-card); border: 1px solid var(--border); 
+    border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative;
   }
-  .photo-box img { width: 100%; height: 100%; object-fit: cover; }
+  .photo-box img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9) contrast(1.1); }
+  .photo-box::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; pointer-events: none; }
 
   /* ---------- SECTIONS & GRID ---------- */
-  section { padding: 60px 0; border-top: 1px solid var(--border); }
+  section { padding: 80px 0; border-top: 1px solid var(--border); }
   section:nth-of-type(even) { background: var(--bg-sub); }
   
-  .section-label { font-size: 0.8rem; font-weight: 700; color: var(--text-sub); margin-bottom: 8px; display: block; }
-  section h2 { font-size: 1.8rem; margin-bottom: 30px; }
+  .section-label { font-size: 0.75rem; font-weight: 800; color: var(--cyber-green); margin-bottom: 12px; display: block; text-transform: uppercase; letter-spacing: 1.5px; }
+  section h2 { font-size: 2rem; margin-bottom: 40px; }
 
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-  .card-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .card-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
   
-  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
-  .card h3 { font-size: 1.15rem; margin-bottom: 8px; }
-  .card p { font-size: 0.9rem; color: var(--text-sub); }
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: 0.3s; }
+  .card:hover { border-color: var(--border-focus); transform: translateY(-4px); }
+  .card h3 { font-size: 1.2rem; margin-bottom: 10px; color: #fff; }
+  .card p { font-size: 0.95rem; color: var(--text-sub); }
 
-  .timeline { border-left: 2px solid var(--border); padding-left: 20px; margin-top: 20px; }
-  .timeline-item { margin-bottom: 20px; }
-  .timeline-year { font-weight: 700; font-size: 0.85rem; color: var(--text-sub); }
-  .timeline-title { font-size: 1rem; font-weight: 600; }
-  .timeline-desc { font-size: 0.85rem; color: var(--text-sub); }
+  .timeline { border-left: 2px solid var(--border); padding-left: 24px; margin-top: 20px; }
+  .timeline-item { margin-bottom: 28px; position: relative; }
+  .timeline-item::before { content: ''; position: absolute; left: -29px; top: 6px; width: 8px; height: 8px; background: var(--bg-main); border: 2px solid var(--cyber-green); border-radius: 50%; }
+  .timeline-year { font-weight: 800; font-size: 0.8rem; color: var(--cyber-green); text-transform: uppercase; margin-bottom: 4px; }
+  .timeline-title { font-size: 1.1rem; font-weight: 700; color: #fff; }
+  .timeline-desc { font-size: 0.9rem; color: var(--text-sub); }
 
-  .info-table { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--bg-card); }
-  .info-row { display: flex; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  .info-table { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--bg-card); }
+  .info-row { display: flex; justify-content: space-between; padding: 16px 24px; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
   .info-row:last-child { border-bottom: none; }
-  .info-row span:first-child { font-weight: 600; color: var(--text-sub); }
+  .info-row span:first-child { font-weight: 700; color: var(--text-sub); }
+  .info-row span:last-child { color: #fff; font-weight: 500; }
 
-  /* ---------- PANEL EKO LELE MURNI HITAM ---------- */
-  .lele-app { background: var(--bg-dark); color: var(--text-light); border-radius: 20px; padding: 30px; margin: 40px 0; }
-  .lele-app h1, .lele-app h2, .lele-app h3 { color: var(--text-light); }
-  .lele-app .sub { color: #aaaaaa; }
+  /* ---------- APP PANEL PREMIUM ---------- */
+  .lele-app { background: #0e0e12; border: 1px solid var(--border); border-radius: 24px; padding: 36px; margin: 40px 0; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+  .lele-app h1 { color: #fff; }
+  .lele-app .sub { color: var(--text-sub); }
   
-  .nota-header { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-dark); padding-bottom: 20px; margin-bottom: 30px; flex-wrap: wrap; gap: 16px; }
+  .nota-header { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding-bottom: 24px; margin-bottom: 36px; flex-wrap: wrap; gap: 16px; }
   
-  .calc-box { background: #1a1a1a; padding: 24px; border-radius: 12px; margin-bottom: 30px; }
-  .form-group { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  .calc-box { background: var(--bg-card); padding: 28px; border-radius: 16px; margin-bottom: 40px; border: 1px solid var(--border); }
+  .form-group { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
   .form-group .field { flex: 1; min-width: 200px; }
-  .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: #aaaaaa; margin-bottom: 8px; }
+  .form-group label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-sub); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  
   .form-group input, .form-group select {
-    width: 100%; padding: 12px; background: #222; border: 1px solid var(--border-dark); border-radius: 6px; color: #fff; font-size: 0.95rem;
+    width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 10px; color: #fff; font-size: 1rem; transition: 0.2s; outline: none;
   }
-  .hasil-container { background: #000; padding: 20px; border-radius: 6px; border-left: 4px solid var(--cyber-green); margin-top: 20px; display: none; }
+  .form-group input:focus, .form-group select:focus { border-color: var(--cyber-green); box-shadow: 0 0 10px rgba(0,255,102,0.1); }
+  
+  .hasil-container { background: #050507; padding: 24px; border-radius: 12px; border-left: 4px solid var(--cyber-green); margin-top: 24px; display: none; box-shadow: inset 0 2px 8px rgba(0,0,0,0.8); }
   .hasil-container.tampil { display: block; }
-  .hasil-container .angka { font-size: 2rem; font-weight: 700; color: var(--cyber-green); }
+  .hasil-container .angka { font-size: 2.5rem; font-weight: 800; color: var(--cyber-green); text-shadow: 0 0 15px var(--cyber-glow); }
 
-  .lele-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-  .lele-card { background: #1a1a1a; border: 1px solid var(--border-dark); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
+  /* DAFTAR PRODUK CYBER SYSTEM */
+  .lele-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .lele-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
+  .lele-card:hover { border-color: rgba(0,255,102,0.3); transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.4); }
   
-  .lele-photo { width: 100%; height: 140px; border-radius: 8px; margin-bottom: 14px; overflow: hidden; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
-  .lele-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .lele-photo { width: 100%; height: 160px; border-radius: 10px; margin-bottom: 16px; overflow: hidden; background: #222; position: relative; }
+  .lele-photo img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+  .lele-card:hover .lele-photo img { transform: scale(1.05); }
   
-  .price { font-size: 1.2rem; font-weight: 700; color: var(--cyber-green); margin: 12px 0; }
-  .btn-buy { display: block; text-align: center; background: #fff; color: #000; padding: 10px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; }
-  .btn-buy:hover { background: var(--cyber-green); }
+  .lele-card h4 { font-size: 1.15rem; color: #fff; margin-bottom: 4px; }
+  .price { font-size: 1.3rem; font-weight: 800; color: var(--cyber-green); margin: 16px 0; text-shadow: 0 0 10px var(--cyber-glow); }
+  
+  .btn-buy { display: block; text-align: center; background: #fff; color: #000; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 700; transition: 0.2s; }
+  .btn-buy:hover { background: var(--cyber-green); box-shadow: 0 0 15px var(--cyber-glow); }
 
-  .contact-box { background: var(--bg-dark); color: var(--text-light); text-align: center; padding: 50px 40px; border-radius: 16px; margin-top: 40px; }
-  .contact-box h2 { color: #fff; margin-bottom: 12px; }
-  .contact-box p { color: #aaa; margin-bottom: 24px; }
+  .contact-box { background: linear-gradient(135deg, var(--bg-card) 0%, #0e0e12 100%); border: 1px solid var(--border); text-align: center; padding: 60px 40px; border-radius: 20px; margin-top: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
+  .contact-box h2 { color: #fff; margin-bottom: 16px; font-size: 2rem; }
+  .contact-box p { color: var(--text-sub); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
   
-  footer { text-align: center; padding: 40px 0; color: var(--text-sub); font-size: 0.85rem; border-top: 1px solid var(--border); }
+  footer { text-align: center; padding: 40px 0; color: var(--text-sub); font-size: 0.85rem; border-top: 1px solid var(--border); background: var(--bg-main); }
 
-  .wa-floating { position: fixed; right: 24px; bottom: 24px; background: #fff; color: #000; border: 1px solid var(--border); width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: 0.2s; z-index: 99; }
-  .wa-floating:hover { background: var(--cyber-green); }
+  .wa-floating { position: fixed; right: 24px; bottom: 24px; background: var(--cyber-green); color: #000; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 8px 24px rgba(0, 255, 102, 0.3); z-index: 200; font-weight: bold; transition: 0.2s; }
+  .wa-floating:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 12px 28px rgba(0, 255, 102, 0.5); }
 
   @media (max-width: 768px) {
-    .grid-2 { grid-template-columns: 1fr; gap: 24px; }
-    .hero h1 { font-size: 2rem; }
-    .profile-section { flex-direction: column; align-items: stretch; }
-    .photo-box { max-width: 100%; }
+    .grid-2 { grid-template-columns: 1fr; gap: 32px; }
+    .hero h1 { font-size: 2.2rem; }
+    .profile-section { flex-direction: column; align-items: stretch; gap: 24px; }
+    .photo-box { max-width: 100%; height: 180px; }
     .navbar nav { display: none; }
+    .lele-app { padding: 24px; }
   }
 </style>
 </head>
@@ -164,16 +179,17 @@
 
 <header class="hero">
   <div class="wrap">
-    <span class="tag-status">● Siswa Aktif TKJ</span>
+    <span class="tag-status">● CORE_TKJ_ENGINEER</span>
     <h1>Eko Danang Subiyanto</h1>
     <div class="profile-section">
-      <div class="photo-box">🐟</div>
+      <div class="photo-box">
+        <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=80" alt="Wallpaper Eko Lele">
+      </div>
       <div>
-        <p>Siswa Teknik Komputer &amp; Jaringan yang suka utak-atik web development. Belajar sambil bikin project yang beneran dipakai — semuanya saya kerjakan langsung dari HP pakai Termux.</p>
-        <p style="font-size: 0.9rem; color: var(--text-sub); margin-top: 12px;">🔧 Mencintai otomasi, 🌐 web development, dan 📡 jaringan komputer. Tersedia untuk PKL, kolaborasi, atau sekadar berbagi pengetahuan.</p>
+        <p>Siswa Teknik Komputer &amp; Jaringan yang fokus mendalami arsitektur pemrograman web. Mengembangkan infrastruktur lokal dan aplikasi berbasis mobile emulator langsung menggunakan Android.</p>
         <div class="hero-buttons">
-          <a class="btn btn-dark" href="#proyek">Lihat Proyek</a>
-          <a class="btn btn-light" href="#kontak">Hubungi Saya</a>
+          <a class="btn btn-cyber" href="#proyek">Lihat Proyek</a>
+          <a class="btn btn-outline" href="#kontak">Hubungi Chat</a>
         </div>
       </div>
     </div>
@@ -182,32 +198,32 @@
 
 <section id="tentang">
   <div class="wrap">
-    <span class="section-label">Profil</span>
+    <span class="section-label">Profil Kelulusan</span>
     <h2>Tentang Saya</h2>
     <div class="grid-2">
       <div>
-        <p style="color: var(--text-sub); margin-bottom: 20px;">Latar belakang TKJ bikin saya terbiasa mikir dalam sistem — kayak jaringan, tiap bagian saling nyambung. Cara pikir yang sama saya terapkan di web development. Saya percaya kode yang baik adalah kode yang bisa dirawat, dipakai, dan dipahami.</p>
+        <p style="color: var(--text-sub); margin-bottom: 24px;">Berpikir layaknya struktur topologi jaringan. Saya memandang setiap komponen dalam aplikasi web sebagai interkoneksi simpul data terstruktur yang harus berjalan optimal tanpa hambatan data.</p>
         
         <div class="timeline">
           <div class="timeline-item">
-            <div class="timeline-year">Awal Mula</div>
-            <div class="timeline-title">Mulai dari HP</div>
-            <div class="timeline-desc">Setup Linux di HP pakai Termux, jadi bisa ngoding di mana aja tanpa laptop.</div>
+            <div class="timeline-year">Langkah Awal</div>
+            <div class="timeline-title">Setup Ekosistem Kerja</div>
+            <div class="timeline-desc">Konfigurasi penuh Linux environment via perangkat mobile untuk ruang kerja portabel.</div>
           </div>
           <div class="timeline-item">
             <div class="timeline-year">Sekarang</div>
-            <div class="timeline-title">Belajar Sambil Praktik</div>
-            <div class="timeline-desc">Terus belajar HTML, CSS, dan JavaScript lewat project nyata, bukan cuma teori.</div>
+            <div class="timeline-title">Eksplorasi Antarmuka</div>
+            <div class="timeline-desc">Mendalami semantik struktur HTML5, tata letak CSS Grid/Flexbox, dan kontrol sistem logika.</div>
           </div>
         </div>
       </div>
       
       <div>
         <div class="info-table">
-          <div class="info-row"><span>Fokus</span><span>Web Dev &amp; Jaringan</span></div>
-          <div class="info-row"><span>Lingkungan Kerja</span><span>Termux (Android)</span></div>
-          <div class="info-row"><span>Bahasa</span><span>Indonesia / JavaScript</span></div>
-          <div class="info-row"><span>Status</span><span>Aktif belajar &amp; bikin project</span></div>
+          <div class="info-row"><span>Spesialisasi</span><span>Web Dev &amp; Jaringan</span></div>
+          <div class="info-row"><span>Lingkungan</span><span>Mobile Linux System</span></div>
+          <div class="info-row"><span>Bahasa</span><span>Indonesia / Javascript</span></div>
+          <div class="info-row"><span>Status</span><span>Membangun Solusi Praktis</span></div>
         </div>
       </div>
     </div>
@@ -216,20 +232,20 @@
 
 <section id="skill">
   <div class="wrap">
-    <span class="section-label">Kemampuan</span>
-    <h2>Skill</h2>
+    <span class="section-label">Kemampuan Dasar</span>
+    <h2>Spesifikasi Keahlian</h2>
     <div class="card-list">
       <div class="card">
-        <h3>HTML &amp; CSS</h3>
-        <p>Bikin tampilan web yang ringan dan enak dipakai, terutama di HP.</p>
+        <h3>HTML &amp; CSS Layouting</h3>
+        <p>Membangun antarmuka modern responsif super ringan yang ramah performa perangkat mobile.</p>
       </div>
       <div class="card">
-        <h3>JavaScript</h3>
-        <p>Bikin fitur interaktif — kalkulator, form, sampai integrasi WhatsApp otomatis.</p>
+        <h3>JavaScript Logic</h3>
+        <p>Eksekusi manipulasi data murni untuk fungsionalitas aplikasi interaktif pengguna.</p>
       </div>
       <div class="card">
-        <h3>Jaringan Komputer</h3>
-        <p>Dasar TKJ: IP address, subnetting, dan routing — modal buat ngerti gimana sistem saling terhubung.</p>
+        <h3>Computer Network</h3>
+        <p>Dasar TKJ mendalam: manajemen IP Address, subnetting kelas jaringan, dan skema routing dasar.</p>
       </div>
     </div>
   </div>
@@ -237,19 +253,19 @@
 
 <section id="proyek">
   <div class="wrap">
-    <span class="section-label">Karya</span>
-    <h2>Proyek</h2>
+    <span class="section-label">Arsip Kode</span>
+    <h2>Proyek Pilihan</h2>
     <div class="card-list">
       <div class="card">
-        <span style="color:var(--text-sub); font-size: 0.85rem; font-weight: bold;">PROYEK 01</span>
-        <h3 style="margin-top:6px;">Eko Lele</h3>
-        <p>Website usaha keluarga: kalkulator kebutuhan porsi buat warung pecel lele, sampai pemesanan langsung via WhatsApp.</p>
-        <div style="margin-top: 16px;"><a href="#ekolele" style="text-decoration: underline; font-weight: 600; font-size: 0.9rem;">Lihat Aplikasi ↓</a></div>
+        <span style="color:var(--cyber-green); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">PROYEK 01</span>
+        <h3 style="margin-top:6px;">Eko Lele Dashboard</h3>
+        <p>Aplikasi web terintegrasi kalkulator porsi logistik konsumsi kolam harian UMKM warung pecel lele lokal.</p>
+        <div style="margin-top: 20px;"><a href="#ekolele" style="color: var(--cyber-green); font-weight: 700; font-size: 0.9rem;">Buka Dasbor Aplikasi →</a></div>
       </div>
       <div class="card">
-        <span style="color:var(--text-sub); font-size: 0.85rem; font-weight: bold;">PROYEK 02</span>
-        <h3 style="margin-top:6px;">Jointer FO</h3>
-        <p>Platform belajar penyambungan fiber optik buat siswa TKJ, lengkap dengan simulasi visual. Masih dalam pengembangan.</p>
+        <span style="color:var(--text-sub); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">PROYEK 02</span>
+        <h3 style="margin-top:6px;">Jointer FO Platform</h3>
+        <p>Rancangan platform simulasi visual berbasis web materi pembelajaran penyambungan inti kabel Fiber Optik.</p>
       </div>
     </div>
   </div>
@@ -259,28 +275,28 @@
   <div class="lele-app">
     <div class="nota-header">
       <div>
-        <h1 style="letter-spacing: -0.5px;">Eko Lele</h1>
-        <p class="sub" style="font-size: 0.85rem; text-transform: uppercase; margin-top: 4px;">Lele Hidup &amp; Olahan Segar, Langsung dari Kolam</p>
+        <h1 style="letter-spacing: -0.5px;">Eko Lele Sistem</h1>
+        <p class="sub" style="font-size: 0.85rem; text-transform: uppercase; margin-top: 4px; color: var(--cyber-green); font-weight: 700; letter-spacing: 0.5px;">Pemasok Lele Hidup Berkualitas &amp; Olahan Segar</p>
       </div>
-      <div style="font-size: 0.85rem; text-align: right; color: #aaa;">
-        NO. NOTA: <span id="nomor-nota">—</span><br>
-        TANGGAL: <span id="tanggal-nota">—</span>
+      <div style="font-size: 0.85rem; text-align: right; color: var(--text-sub); font-family: monospace;">
+        ID NOTA: <span id="nomor-nota" style="color:#fff;">—</span><br>
+        TANGGAL: <span id="tanggal-nota" style="color:#fff;">—</span>
       </div>
     </div>
 
     <div style="margin-bottom: 40px;">
-      <h3 id="stok-keterangan" style="color: var(--cyber-green);">● Stok Siap Kirim</h3>
+      <h3 id="stok-keterangan" style="font-size: 1.1rem;">● SYSTEM_CHECKING</h3>
     </div>
 
     <div class="calc-box">
-      <h3 style="margin-bottom: 16px; font-size: 1.1rem;">Kalkulator Kebutuhan Porsi</h3>
+      <h3 style="margin-bottom: 20px; font-size: 1.2rem; color: #fff;">Kalkulator Kebutuhan Porsi</h3>
       <div class="form-group">
         <div class="field">
           <label>Target Jumlah Porsi</label>
           <input type="number" id="porsi" placeholder="Contoh: 60">
         </div>
         <div class="field">
-          <label>Ukuran Isi per Kilo</label>
+          <label>Klasifikasi Kiloan</label>
           <select id="ukuran">
             <option value="6">6–7 ekor / kg (Besar)</option>
             <option value="9" selected>8–10 ekor / kg (Standar Pecel Lele)</option>
@@ -288,58 +304,64 @@
           </select>
         </div>
       </div>
-      <button class="btn btn-dark" id="hitung-btn" style="background:#fff; color:#000; width:100%;">Hitung Kebutuhan</button>
+      <button class="btn btn-cyber" id="hitung-btn" style="width:100%; color:#000;">Proses Data Kiloan</button>
 
       <div class="hasil-container" id="hasil-box">
         <div class="angka" id="hasil-kg">— kg</div>
-        <p class="sub" id="hasil-ket" style="font-size: 0.85rem; margin-top: 6px;"></p>
+        <p class="sub" id="hasil-ket" style="font-size: 0.9rem; margin-top: 8px;"></p>
       </div>
     </div>
 
-    <h3 style="margin-bottom: 20px;">Daftar Produk</h3>
+    <h3 style="margin-bottom: 24px; font-size: 1.3rem;">Daftar Produk Unggulan</h3>
     <div class="lele-grid">
       
       <div class="lele-card">
-        <div class="lele-photo">🐟</div>
+        <div class="lele-photo">
+          <img src="https://images.unsplash.com/photo-1514170311861-a5327c5ff0e7?w=500&auto=format&fit=crop&q=80" alt="Lele Hidup Standar">
+        </div>
         <div>
           <h4>Lele Hidup Standar</h4>
-          <p class="sub" style="font-size: 0.8rem; margin-top: 4px;">Isi 8–10 ekor/kg. Pilihan favorit warung pecel lele.</p>
+          <p class="sub" style="font-size: 0.85rem; margin-top: 4px;">Isi 8–10 ekor/kg. Pilihan utama bisnis kuliner.</p>
         </div>
         <div>
-          <div class="price">Rp 24.000/kg</div>
-          <a class="btn-buy" href="https://wa.me/6281532900269?text=Halo%20Eko%20Lele,%20saya%20mau%20pesan%20Lele%20Hidup%20Standar%208-10%20ekor/kg" target="_blank" rel="noopener">Pesan</a>
+          <div class="price">Rp 24.000<span style="font-size:0.85rem; color:var(--text-sub);">/kg</span></div>
+          <a class="btn-buy" href="https://wa.me/6281532900269?text=Halo%20Eko%20Lele,%20saya%20mau%20pesan%20Lele%20Hidup%20Standar%208-10%20ekor/kg" target="_blank" rel="noopener">Pesan Sekarang</a>
         </div>
       </div>
 
       <div class="lele-card">
-        <div class="lele-photo">🐟</div>
+        <div class="lele-photo">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop&q=80" alt="Lele Hidup Besar">
+        </div>
         <div>
           <h4>Lele Hidup Besar</h4>
-          <p class="sub" style="font-size: 0.8rem; margin-top: 4px;">Isi 6–7 ekor/kg. Dagingnya tebal, cocok buat porsi jumbo.</p>
+          <p class="sub" style="font-size: 0.85rem; margin-top: 4px;">Isi 6–7 ekor/kg. Daging tebal memuaskan.</p>
         </div>
         <div>
-          <div class="price">Rp 27.000/kg</div>
-          <a class="btn-buy" href="https://wa.me/6281532900269?text=Halo%20Eko%20Lele,%20saya%20mau%20pesan%20Lele%20Hidup%20Besar%206-7%20ekor/kg" target="_blank" rel="noopener">Pesan</a>
+          <div class="price">Rp 27.000<span style="font-size:0.85rem; color:var(--text-sub);">/kg</span></div>
+          <a class="btn-buy" href="https://wa.me/6281532900269?text=Halo%20Eko%20Lele,%20saya%20mau%20pesan%20Lele%20Hidup%20Besar%206-7%20ekor/kg" target="_blank" rel="noopener">Pesan Sekarang</a>
         </div>
       </div>
 
       <div class="lele-card">
-        <div class="lele-photo">🍽️</div>
-        <div>
-          <h4>Lele Bumbu Kuning</h4>
-          <p class="sub" style="font-size: 0.8rem; margin-top: 4px;">Siap goreng, sudah dimarinasi bumbu kuning racikan sendiri.</p>
+        <div class="lele-photo">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&auto=format&fit=crop&q=80" alt="Lele Bumbu Kuning">
         </div>
         <div>
-          <div class="price">Rp 30.000/kg</div>
-          <a class="btn-buy" href="https://wa.me/6281532900269?text=Halo%20Eko%20Lele,%20saya%20mau%20pesan%20Lele%20Bumbu%20Kuning%20Frozen" target="_blank" rel="noopener">Pesan</a>
+          <h4>Lele Bumbu Kuning</h4>
+          <p class="sub" style="font-size: 0.85rem; margin-top: 4px;">Siap goreng, bumbu marinasi resep khusus.</p>
+        </div>
+        <div>
+          <div class="price">Rp 30.000<span style="font-size:0.85rem; color:var(--text-sub);">/kg</span></div>
+          <a class="btn-buy" href="https://wa.me/6281532900269?text=Halo%20Eko%20Lele,%20saya%20mau%20pesan%20Lele%20Bumbu%20Kuning%20Frozen" target="_blank" rel="noopener">Pesan Sekarang</a>
         </div>
       </div>
 
     </div>
 
-    <div style="margin-top: 40px; text-align: center; border-top: 1px dashed var(--border-dark); padding-top: 32px;">
-      <p class="sub" style="margin-bottom: 16px;">Punya warung atau resto dan butuh pasokan rutin tiap minggu?</p>
-      <a class="btn btn-dark" id="wa-langganan" href="#" target="_blank" rel="noopener" style="background:#fff; color:#000;">Langganan Grosir via WA</a>
+    <div style="margin-top: 40px; text-align: center; border-top: 1px dashed var(--border); padding-top: 32px;">
+      <p class="sub" style="margin-bottom: 16px;">Membutuhkan pasokan rutin terjadwal skala warung atau restoran?</p>
+      <a class="btn btn-outline" id="wa-langganan" href="#" target="_blank" rel="noopener" style="border-color: var(--cyber-green); color: var(--cyber-green);">Kemitraan Grosir Via WA</a>
     </div>
 
   </div>
@@ -348,23 +370,23 @@
 <section id="kontak" style="border-top: none;">
   <div class="wrap">
     <div class="contact-box">
-      <h2>Hubungi Saya</h2>
-      <p>Terbuka buat PKL, kolaborasi project, atau sekadar ngobrol soal web development dan jaringan.</p>
-      <a class="btn btn-light" style="background:#fff; color:#000; border:none;" href="https://wa.me/6281532900269" target="_blank" rel="noopener">Kirim Pesan WhatsApp</a>
+      <h2>Hubungi Pengembang</h2>
+      <p>Terbuka untuk kolaborasi project internal jaringan, implementasi web, atau integrasi sistem bisnis UMKM lokal.</p>
+      <a class="btn btn-cyber" href="https://wa.me/6281532900269" target="_blank" rel="noopener">Kirim Pesan WhatsApp</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <p>© 2026 Eko Danang Subiyanto — dibuat dari HP pakai Termux.</p>
+    <p>© 2026 Eko Danang Subiyanto. Mobile Cyber Client System.</p>
   </div>
 </footer>
 
-<a class="wa-floating" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Chat">☏</a>
+<a class="wa-floating" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Chat">✉</a>
 
 <script>
-  // ---------- NOMOR NOTA & TANGGAL ----------
+  // ---------- LOGIKA SCRIPT UTAMA & KALKULATOR ----------
   const tgl = new Date();
   document.getElementById('nomor-nota').textContent =
     tgl.getFullYear().toString().slice(2) + String(tgl.getMonth()+1).padStart(2,'0') + String(tgl.getDate()).padStart(2,'0') +
@@ -373,30 +395,15 @@
   document.getElementById('tanggal-nota').textContent =
     tgl.toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
 
-  // ---------- STATUS STOK OTOMATIS BERDASARKAN JAM ----------
-  const statusStok = document.getElementById('stok-keterangan');
-  const jamSekarang = tgl.getHours();
-
-  if (jamSekarang >= 21 || jamSekarang < 5) {
-    statusStok.innerHTML = `<span style="color: #ff3b30;">●</span> Lagi Restock — pesanan malam ini dikirim subuh/pagi besok biar lelenya tetap segar.`;
-  } else {
-    statusStok.innerHTML = `<span style="color: var(--cyber-green);">●</span> Stok Siap Kirim — kolam panen hari ini, ukuran standar warung tersedia.`;
-  }
-
-  // ---------- KALKULATOR PORSI ----------
-  const HP_EKO = '6281532900269';
-
   document.getElementById('hitung-btn').addEventListener('click', () => {
     const porsiVal = parseFloat(document.getElementById('porsi').value);
-    const ukuranEl = document.getElementById('ukuran');
-    const isiVal = parseFloat(ukuranEl.value);
-    const isiLabel = ukuranEl.options[ukuranEl.selectedIndex].text;
+    const isiVal = parseFloat(document.getElementById('ukuran').value);
     const boxHasil = document.getElementById('hasil-box');
 
     if (!porsiVal || porsiVal <= 0) {
       boxHasil.classList.add('tampil');
       document.getElementById('hasil-kg').textContent = '—';
-      document.getElementById('hasil-ket').textContent = 'Isi dulu jumlah porsi yang kamu butuhkan ya.';
+      document.getElementById('hasil-ket').textContent = 'Masukkan nilai target porsi lele terlebih dahulu.';
       return;
     }
 
@@ -406,16 +413,33 @@
     boxHasil.classList.add('tampil');
     document.getElementById('hasil-kg').textContent = bulatkanKg.toFixed(1) + ' kg';
     document.getElementById('hasil-ket').textContent =
-      `Untuk ± ${porsiVal} porsi, sekitar ${bulatkanKg.toFixed(1)} kg lele yang perlu dipesan.`;
-
-    // update pesan WA langganan biar sudah include hasil hitungan
-    const pesanWA = `Halo Eko Lele, saya sudah hitung di web. Butuh suplai untuk target ${porsiVal} porsi dengan ukuran ${isiLabel}, kira-kira ${bulatkanKg.toFixed(1)} kg. Boleh info langganan grosir rutin?`;
-    document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent(pesanWA);
+      `Estimasi alokasi bahan baku untuk suplai harian sebanyak ± ${porsiVal} porsi konsumsi kuliner.`;
   });
 
-  // ---------- LINK WA DEFAULT (sebelum kalkulator dipakai) ----------
-  document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Eko Lele, saya pemilik warung/resto dan mau tanya soal langganan grosir rutin.');
-  document.getElementById('wa-float').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Eko, saya lihat portofolio kamu dan mau tanya-tanya lebih lanjut.');
+  const HP_EKO = '6281532900269';
+  document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Lele, saya pemilik rumah makan/kuliner ingin mengajukan kerja sama grosir suplai lele rutin.');
+  document.getElementById('wa-float').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Danang, saya melihat portofolio Anda dan tertarik untuk bertanya lebih lanjut.');
+
+  // ---------- LOGIKA STATUS REAL-TIME & WA INTEGRATION ----------
+  const statusStok = document.getElementById('stok-keterangan');
+  const jamSekarang = tgl.getHours();
+
+  if (jamSekarang >= 21 || jamSekarang < 5) {
+    statusStok.innerHTML = `<span style="color: #ff3b30; font-weight: 800;">● RESTOCK_PROCESS</span> — Pemesanan malam ini akan dialokasikan untuk pengiriman subuh/pagi besok agar lele tetap segar.`;
+  } else {
+    statusStok.innerHTML = `<span style="color: var(--cyber-green); font-weight: 800;">● LIVE_STOK_READY</span> — Kolam produksi siap panen harian. Ukuran standar konsumsi warung tersedia optimal saat ini.`;
+  }
+
+  document.getElementById('hitung-btn').addEventListener('click', () => {
+    const porsiVal = parseFloat(document.getElementById('porsi').value);
+    const isiVal = document.getElementById('ukuran').options[document.getElementById('ukuran').selectedIndex].text;
+    const kgHasil = document.getElementById('hasil-kg').textContent;
+
+    if (porsiVal > 0) {
+      const pesanWA = `Halo Mas Eko Lele, saya sudah menghitung di web. Saya butuh suplai untuk target ${porsiVal} porsi dengan spek ${isiVal}. Estimasi kebutuhan sekitar ${kgHasil}. Mau tanya info langganan grosirnya dong.`;
+      document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent(pesanWA);
+    }
+  });
 </script>
 
 </body>
