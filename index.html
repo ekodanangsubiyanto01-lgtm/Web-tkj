@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eko Danang Subiyanto — Portfolio TKJ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #0a0a0c;
+    --bg-card: #121215;
+    --border-color: #222226;
+    --text-primary: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --accent: #3b82f6;
+  }
+  
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    line-height: 1.6;
+  }
+  
+  .mono {font-family: 'JetBrains Mono', monospace;}
+  a {color: inherit; text-decoration: none; transition: all .25s ease;}
+  ::selection {background: var(--text-primary); color: var(--bg-main);}
+
+  .wrap {max-width: 840px; margin: 0 auto; padding: 0 24px;}
+
+  /* ---------- navbar ---------- */
+  header.nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10, 10, 12, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+  }
+  .brand {
+    font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.05em;
+  }
+  .navlinks {display: flex; gap: 28px; font-size: 14px; color: var(--text-secondary); font-weight: 500;}
+  .navlinks a:hover {color: var(--text-primary);}
+
+  #menu-toggle, .burger {display: none;}
+  @media (max-width: 600px){
+    .navlinks {
+      position: absolute; top: 70px; left: 0; right: 0;
+      background: var(--bg-main); border-bottom: 1px solid var(--border-color);
+      flex-direction: column; gap: 0; max-height: 0; overflow: hidden;
+    }
+    .navlinks a {padding: 16px 24px; border-top: 1px solid var(--border-color);}
+    #menu-toggle:checked ~ .navlinks {max-height: 200px;}
+    .burger {
+      display: flex; flex-direction: column; gap: 5px; cursor: pointer;
+      width: 24px; height: 24px; justify-content: center;
+    }
+    .burger span {display: block; width: 100%; height: 2px; background: var(--text-primary);}
+  }
+
+  /* ---------- hero ---------- */
+  .hero {padding: 90px 0 70px;}
+  .school-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;
+    background: rgba(59, 130, 246, 0.1); padding: 4px 10px; border-radius: 4px; display: inline-block;
+  }
+  .hero h1 {font-size: clamp(32px, 7vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 18px; line-height: 1.2;}
+  .hero-sub {font-size: 16.5px; color: var(--text-secondary); max-width: 620px; margin-bottom: 30px;}
+  .hero-actions {display: flex; gap: 14px;}
+  
+  .btn {
+    font-size: 14px; font-weight: 600; padding: 12px 24px; border-radius: 6px; display: inline-block;
+  }
+  .btn-primary {background: var(--text-primary); color: var(--bg-main);}
+  .btn-primary:hover {transform: translateY(-2px); opacity: 0.95;}
+  .btn-secondary {border: 1px solid var(--border-color); color: var(--text-primary);}
+  .btn-secondary:hover {background: var(--bg-card); border-color: var(--text-secondary); transform: translateY(-2px);}
+
+  /* ---------- section shell ---------- */
+  section {padding: 70px 0; border-top: 1px solid var(--border-color);}
+  .section-title {font-size: 22px; font-weight: 700; margin-bottom: 28px; letter-spacing: -0.02em;}
+
+  /* ---------- profil ---------- */
+  .profil-content p {color: var(--text-secondary); font-size: 15.5px; margin-bottom: 18px; text-align: justify;}
+  .profil-content p strong {color: var(--text-primary); font-weight: 600;}
+  .meta-list {
+    margin-top: 28px; font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    display: flex; flex-direction: column; gap: 10px; color: var(--text-secondary);
+    background: var(--bg-card); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);
+  }
+  .meta-list span b {color: var(--text-primary); font-weight: 500;}
+
+  /* ---------- keahlian ---------- */
+  .grid-tools {display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;}
+  @media (max-width: 540px){ .grid-tools {grid-template-columns: 1fr;} }
+  
+  .tool {
+    background: var(--bg-card); border: 1px solid var(--border-color);
+    padding: 24px; border-radius: 8px; transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .tool:hover {
+    transform: translateY(-4px);
+    border-color: #3e3e4a;
+  }
+  .tool h3 {font-size: 16px; font-weight: 700; margin-bottom: 8px;}
+  .tool p {font-size: 13.5px; color: var(--text-secondary); margin-bottom: 20px;}
+  
+  .skill-track {height: 3px; background: #222226; width: 100%; position: relative; border-radius: 2px;}
+  .skill-bar {height: 100%; background: var(--text-primary); display: block; border-radius: 2px;}
+  .skill-info {
+    display: flex; justify-content: space-between; margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-secondary);
+  }
+
+  /* ---------- kontak ---------- */
+  .contact-wrapper {
+    background: var(--bg-card); border: 1px solid var(--border-color);
+    padding: 36px; border-radius: 8px;
+  }
+  .contact-wrapper p {color: var(--text-secondary); margin-bottom: 24px; font-size: 15.5px;}
+  .social-grid {display: flex; flex-direction: column; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 14px;}
+  .social-link {display: flex; align-items: center; gap: 10px; color: var(--text-secondary); width: fit-content;}
+  .social-link:hover {color: var(--accent); transform: translateX(4px);}
+  .social-link span {color: var(--text-primary); font-weight: 500;}
+
+  /* ---------- footer ---------- */
+  footer {
+    padding: 44px 0; text-align: center; color: #52525b; font-size: 12px;
+    font-family: 'JetBrains Mono', monospace; border-top: 1px solid var(--border-color);
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand">EDS // PORTFOLIO</div>
+    <input type="checkbox" id="menu-toggle">
+    <nav class="navlinks">
+      <a href="#profil">Profil</a>
+      <a href="#keahlian">Keahlian</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+    <label class="burger" for="menu-toggle"><span></span><span></span><span></span></label>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="border-top:none;">
+    <div class="school-tag">SMK Dwija Bhakti Jombang</div>
+    <h1>Hi, saya Eko Danang.</h1>
+    <p class="hero-sub">Siswa TKJ yang berfokus mendalami dunia infrastruktur jaringan internet, khususnya sebagai teknisi penyambungan kabel serat optik (Fiber Optic Jointer).</p>
+    <div class="hero-actions">
+      <a href="#keahlian" class="btn btn-primary">Lihat Spek Keahlian</a>
+      <a href="#kontak" class="btn btn-secondary">Hubungi Saya</a>
+    </div>
+  </section>
+
+  <section id="profil">
+    <h2 class="section-title">Profil Singkat</h2>
+    <div class="profil-content">
+      <p>Saat ini saya sedang menempuh pendidikan di bidang <strong>Teknik Komputer dan Jaringan (TKJ)</strong>. Ketertarikan terbesar saya berada di bagian instalasi fisik jaringan fiber optik—mulai dari penanganan core kabel, menjaga kestabilan redaman sinyal, hingga teknik penyambungan yang presisi.</p>
+      <p>Melalui sesi praktikum intensif, saya terus mengasah ketelitian kerja untuk memastikan setiap sambungan memiliki loss sekecil mungkin demi menjaga performa jaringan tetap optimal.</p>
+      <div class="meta-list">
+        <span><b>Sekolah:</b> SMK Dwija Bhakti Jombang</span>
+        <span><b>Kelas / No Absen:</b> TKJ 3 / 10</span>
+        <span><b>Fokus Kompetensi:</b> Fiber Optic Jointer</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="keahlian">
+    <h2 class="section-title">Alat & Kompetensi Pengukuran</h2>
+    <div class="grid-tools">
+      <div class="tool">
+        <h3>Fusion Splicer</h3>
+        <p>Penyambungan core serat optik lewat metode peleburan busur listrik berpresisi tinggi.</p>
+        <div class="skill-track"><span class="skill-bar" style="width:85%"></span></div>
+        <div class="skill-info"><span>Splicing Capability</span><span>85%</span></div>
+      </div>
+      <div class="tool">
+        <h3>OTDR Testing</h3>
+        <p>Menganalisis kualitas link sirkuit, melacak titik putus kabel, dan mendeteksi besaran loss.</p>
+        <div class="skill-track"><span class="skill-bar" style="width:75%"></span></div>
+        <div class="skill-info"><span>Measurement</span><span>75%</span></div>
+      </div>
+      <div class="tool">
+        <h3>Fiber Cleaver & Stripper</h3>
+        <p>Pengupasan pelindung kabel dan pemotongan sudut core kaca agar rata sempurna sebelum di-splice.</p>
+        <div class="skill-track"><span class="skill-bar" style="width:90%"></span></div>
+        <div class="skill-info"><span>Precision Cut</span><span>90%</span></div>
+      </div>
+      <div class="tool">
+        <h3>OPM & OLS</h3>
+        <p>Mengukur margin redaman daya pancar cahaya transmisi pada jaringan FTTH / backbone.</p>
+        <div class="skill-track"><span class="skill-bar" style="width:80%"></span></div>
+        <div class="skill-info"><span>Optical Power Test</span><span>80%</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <h2 class="section-title">Kontak & Media Sosial</h2>
+    <div class="contact-wrapper">
+      <p>Butuh koordinasi seputar project instalasi jaringan atau informasi magang? Silakan hubungi saya di bawah ini:</p>
+      <div class="social-grid">
+        <a href="https://wa.me/6281532900269" target="_blank" class="social-link">
+          <span>WhatsApp:</span> +62 815-3290-0269 ↗
+        </a>
+        <a href="https://www.tiktok.com/@ekodanang1986" target="_blank" class="social-link">
+          <span>TikTok:</span> @ekodanang1986 ↗
+        </a>
+        <div class="social-link">
+          <span>Lokasi:</span> Jombang, Jawa Timur
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2026 Eko Danang Subiyanto. Powered by GitHub Pages.
+</footer>
+
+</body>
+  </html>
+  
