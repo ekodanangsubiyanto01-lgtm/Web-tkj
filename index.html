@@ -20,6 +20,7 @@
     --border: #232330;
     --border-focus: #444460;
     --cyber-red: #ff3b30;
+    --gold: #ffd700;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,15 +69,16 @@
   .hero h1 { font-size: 2.8rem; margin-bottom: 16px; line-height: 1.2; background: linear-gradient(120deg, #fff 40%, var(--text-sub)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   .hero p { font-size: 1.1rem; color: var(--text-sub); max-width: 620px; margin-bottom: 30px; }
   
-  .btn { display: inline-block; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: 0.2s; text-align: center; border: none; }
+  .btn { display: inline-block; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-align: center; border: none; }
   .btn-cyber { background: var(--cyber-green); color: #000; box-shadow: 0 4px 20px var(--cyber-glow); }
   .btn-cyber:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0, 255, 102, 0.4); }
   .btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
-  .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: var(--text-sub); }
+  .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: var(--text-sub); transform: translateY(-1px); }
   .hero-buttons { display: flex; gap: 16px; }
 
   .profile-section { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; margin-top: 40px; }
   
+  /* FOTO PROFIL (TETAP ASLI) */
   .photo-box { 
     width: 150px; height: 150px; background: var(--bg-card); border: 3px solid var(--cyber-green); 
     border-radius: 50%; overflow: hidden; box-shadow: 0 0 20px var(--cyber-glow); position: relative; cursor: pointer;
@@ -86,6 +88,13 @@
   .photo-box:hover .upload-overlay { opacity: 1; }
   
   .input-galeri { display: none; }
+
+  /* ---------- UPGRADE: SEKSI STATISTIK ---------- */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 40px; }
+  .stats-card { background: linear-gradient(135deg, var(--bg-card) 0%, rgba(22,22,30,0.5) 100%); border: 1px solid var(--border); padding: 20px; border-radius: 12px; text-align: center; transition: 0.3s; }
+  .stats-card:hover { border-color: var(--cyber-green); box-shadow: 0 5px 15px rgba(0,255,102,0.05); }
+  .stats-number { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 4px; font-family: monospace; }
+  .stats-label { font-size: 0.8rem; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.5px; }
 
   /* ---------- SECTIONS & GRID ---------- */
   section { padding: 80px 0; border-top: 1px solid var(--border); }
@@ -98,8 +107,9 @@
   .grid-12 { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
   .card-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
   
-  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: 0.3s; }
-  .card:hover { border-color: var(--border-focus); transform: translateY(-4px); }
+  /* ANIMASI HOVER HALUS PADA CARD */
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s; }
+  .card:hover { border-color: var(--border-focus); transform: translateY(-5px); }
   .card h3 { font-size: 1.2rem; margin-bottom: 10px; color: #fff; }
   .card p { font-size: 0.95rem; color: var(--text-sub); }
 
@@ -130,15 +140,15 @@
   }
   .form-group input:focus, .form-group select:focus { border-color: var(--cyber-green); box-shadow: 0 0 10px rgba(0,255,102,0.1); }
   
-  .hasil-container { background: #050507; padding: 24px; border-radius: 12px; border-left: 4px solid var(--cyber-green); margin-top: 24px; display: none; box-shadow: inset 0 2px 8px rgba(0,0,0,0.8); }
+  .hasil-container { background: #050507; padding: 24px; border-radius: 12px; border-left: 4px solid var(--cyber-green); margin-top: 24px; display: none; box-shadow: inset 0 2px 8px rgba(0,0,0,0.8); animation: fadeIn 0.4s ease; }
   .hasil-container.tampil { display: block; }
   .hasil-container .angka { font-size: 2.2rem; font-weight: 800; color: var(--cyber-green); text-shadow: 0 0 15px var(--cyber-glow); }
 
   /* SENTIMEN METER VISUAL */
   .sentiment-wrapper { background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 16px; margin-bottom: 20px; }
   .sentiment-bar-container { display: flex; height: 24px; border-radius: 6px; overflow: hidden; margin: 12px 0; background: #222; }
-  .bar-short { background: var(--cyber-red); width: 65%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; color: #fff; transition: 0.5s; }
-  .bar-long { background: var(--cyber-green); width: 35%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; color: #000; transition: 0.5s; }
+  .bar-short { background: var(--cyber-red); width: 65%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; color: #fff; transition: width 0.6s ease; }
+  .bar-long { background: var(--cyber-green); width: 35%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; color: #000; transition: width 0.6s ease; }
 
   /* DATA RINCIAN LOGISTIK */
   .rincian-logistik { margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(255,255,255,0.1); font-size: 0.85rem; color: var(--text-sub); }
@@ -163,14 +173,28 @@
   /* TRADINGVIEW INTEGRATION BOX */
   .chart-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; height: 450px; overflow: hidden; margin-bottom: 24px; }
 
-  /* NEW: AI BOX STYLE */
+  /* AI BOX STYLE */
   .ai-result-box { background: #07090e; border: 1px solid #1a2a4a; padding: 16px; border-radius: 10px; margin-top: 16px; font-family: monospace; font-size: 0.85rem; color: #a9c2f0; white-space: pre-wrap; line-height: 1.5; display: none; }
+
+  /* ---------- UPGRADE: SEKSI TESTIMONI ---------- */
+  .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 20px; }
+  .testimonial-card { background: var(--bg-sub); border-left: 3px solid var(--cyber-green); padding: 24px; border-radius: 0 16px 16px 0; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .testimonial-text { font-style: italic; color: var(--text-main); font-size: 0.95rem; margin-bottom: 16px; line-height: 1.5; }
+  .testimonial-user { font-size: 0.85rem; font-weight: 700; color: var(--cyber-green); display: flex; align-items: center; gap: 8px; }
+  .testimonial-user::before { content: '■'; font-size: 0.6rem; }
 
   .contact-box { background: linear-gradient(135deg, var(--bg-card) 0%, #0e0e12 100%); border: 1px solid var(--border); text-align: center; padding: 60px 40px; border-radius: 20px; margin-top: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
   .contact-box h2 { color: #fff; margin-bottom: 16px; font-size: 2rem; }
   
   footer { text-align: center; padding: 40px 0; color: var(--text-sub); font-size: 0.85rem; border-top: 1px solid var(--border); background: var(--bg-main); }
   .wa-floating { position: fixed; right: 24px; bottom: 24px; background: var(--cyber-green); color: #000; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 8px 24px rgba(0, 255, 102, 0.3); z-index: 200; font-weight: bold; transition: 0.2s; }
+  .wa-floating:hover { transform: scale(1.1); }
+
+  /* KEYFRAMES ANIMASI FADE-IN */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
   @media (max-width: 992px) {
     .grid-12 { display: flex; flex-direction: column; }
@@ -199,6 +223,7 @@
       <a href="#proyek">Proyek Portal</a>
       <a href="#xauanalytics">XAU.Analytics</a>
       <a href="#ekolele">Eko Lele</a>
+      <a href="#testimoni">Testimoni</a>
       <a href="#kontak">Kontak</a>
     </nav>
   </div>
@@ -224,6 +249,26 @@
         </div>
       </div>
     </div>
+
+    <div class="stats-grid">
+      <div class="stats-card">
+        <div class="stats-number">150+</div>
+        <div class="stats-label">Jam Belajar Coding</div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-number">20+</div>
+        <div class="stats-label">Sistem Repositori</div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-number">2</div>
+        <div class="stats-label">Aplikasi Aktif</div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-number">&lt; 15ms</div>
+        <div class="stats-label">Optimasi Latensi</div>
+      </div>
+    </div>
+
   </div>
 </header>
 
@@ -294,7 +339,7 @@
         <div style="margin-top: 20px;"><a href="#xauanalytics" style="color: var(--cyber-green); font-weight: 700; font-size: 0.9rem;">Buka Terminal Analisis Emas →</a></div>
       </div>
       <div class="card">
-        <span style="color:var(--cyber-green); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">PROYEK LOGISTIK UMKM</span>
+        <span style="color:var(--cyber-green); font-size: 0.75rem; font-        <span style="color:var(--cyber-green); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">PROYEK LOGISTIK UMKM</span>
         <h3 style="margin-top:6px;">Eko Lele Dashboard</h3>
         <p>Aplikasi otomasi kalkulasi porsi logistik harian, inventarisasi pasokan stok kolam, dan integrasi pesanan instan untuk pedagang kuliner pecel lele.</p>
         <div style="margin-top: 20px;"><a href="#ekolele" style="color: var(--cyber-green); font-weight: 700; font-size: 0.9rem;">Buka Sistem Eko Lele →</a></div>
@@ -333,7 +378,7 @@
           
           <div style="margin-bottom: 12px;">
             <label style="display:block; font-size:0.7rem; color:var(--text-sub); margin-bottom:4px; font-weight:bold;">GEMINI API KEY:</label>
-            <input type="password" id="gemini-key" placeholder="Masukkan API Key Gemini Anda..." style="width:100%; padding:8px; background:var(--bg-input); border:1px solid var(--border); border-radius:6px; color:#fff; f            <input type="password" id="gemini-key" placeholder="Masukkan API Key Gemini Anda..." style="width:100%; padding:8px; background:var(--bg-input); border:1px solid var(--border); border-radius:6px; color:#fff; font-size:0.8rem; outline:none;">
+            <input type="password" id="gemini-key" placeholder="Masukkan API Key Gemini Anda..." style="width:100%; padding:8px; background:var(--bg-input); border:1px solid var(--border); border-radius:6px; color:#fff; font-size:0.8rem; outline:none;">
             <span style="font-size:0.65rem; color:var(--text-sub);">Dapatkan kunci gratis di Google AI Studio.</span>
           </div>
 
@@ -409,7 +454,7 @@
 </div>
 
 <div class="wrap" id="ekolele">
-  <div class="lele-app">
+  <div class="lele-app" style="background: var(--bg-main); padding: 24px 0;">
     <div class="app-header">
       <div>
         <h1 style="letter-spacing: -0.5px;">Eko Lele Sistem</h1>
@@ -526,6 +571,23 @@
   </div>
 </div>
 
+<section id="testimoni">
+  <div class="wrap">
+    <span class="section-label">Validasi Sistem</span>
+    <h2>Ulasan Pengguna &amp; Mitra</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Kalkulator logistik porsi di dasbor Eko sangat akurat membantu warung kami meminimalkan sisa bahan baku lele hidup setiap harinya. Kemasan oksigennya aman!"</p>
+        <div class="testimonial-user">Pemilik Pecel Lele Lamongan Jaya</div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Terminal XAU.Analytics sangat praktis untuk cek bias sentimen pasar secara kilat lewat HP saat di luar rumah. Fitur hitung lot-nya menghindari over-margin."</p>
+        <div class="testimonial-user">Trader Ritel Komoditas Komunitas Local-Gold</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="kontak" style="border-top: none;">
   <div class="wrap">
     <div class="contact-box">
@@ -551,14 +613,12 @@
     document.getElementById(inputId).click();
   }
 
-  // Preview Khusus untuk AI Gambar Chart
   function loadPreviewAi(input) {
     if (input.files && input.files[0]) {
       const reader = new FileReader();
       reader.onload = function(e) {
         document.getElementById('img-preview-ai').src = e.target.result;
         document.getElementById('ai-preview-container').style.display = 'block';
-        // Ambil string base64 murni tanpa prefix data:image/...
         base64AiImage = e.target.result.split(',')[1];
       };
       reader.readAsDataURL(input.files[0]);
@@ -613,7 +673,6 @@
     terminalResult.style.display = "block";
     terminalResult.textContent = "Connecting to Google Gemini Nodes...\nAnalyzing Candlestick Structures & Price Action...";
 
-    // Prompt instruksi khusus agar AI mengembalikan data TP, SL, Tren, dan Info Harga Terkini
     const promptText = "Analisis gambar screenshot chart trading XAUUSD (Emas) ini secara detail. Tentukan: 1. Tren harga saat ini (Bullish/Bearish/Sideways). 2. Harga berjalan yang terdeteksi di chart. 3. Target Take Profit (TP) yang logis berdasarkan struktur support/resistance terdekat. 4. Batas Stop Loss (SL) yang aman. Berikan jawaban ringkas dengan gaya penulisan terminal komputer/cyber.";
 
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
@@ -655,7 +714,7 @@
     }
   });
 
-  // ---------- WINDOW ONLOAD DATA INTERAL ----------
+  // ---------- WINDOW ONLOAD DATA INTERNAL ----------
   window.addEventListener('DOMContentLoaded', () => {
     const keys = [
       { key: 'save-profil', id: 'img-profil' },
@@ -689,7 +748,7 @@
   });
 
   // ---------- LOGIKA LOGISTIK EKO LELE ----------
-  const tgl = new Date();
+  const tg  const tgl = new Date();
   document.getElementById('nomor-nota').textContent =
     tgl.getFullYear().toString().slice(2) + String(tgl.getMonth()+1).padStart(2,'0') + String(tgl.getDate()).padStart(2,'0') +
     '-' + String(Math.floor(tgl.getHours()*60+tgl.getMinutes())).padStart(4,'0');
@@ -745,7 +804,19 @@
 
     if(!balance || !riskPercent || !stopLossPips) {
       boxHasilGold.classList.add('tampil');
-      document.getElementById('gold-lot').textCon      document.getElementById('gold-lot').textContent = calculatedLot.toFixed(2) + ' Lots';
+      document.getElementById('gold-lot').textContent = '— Lots';
+      document.getElementById('gold-risk-usd').textContent = 'Isi data kalkulator risiko dengan benar.';
+      return;
+    }
+
+    this.textContent = "Menghitung Batas Margin Lot...";
+    setTimeout(() => {
+      this.textContent = "Hitung Ukuran Lot Maksimal";
+      const riskUsd = balance * (riskPercent / 100);
+      const calculatedLot = riskUsd / (stopLossPips * 10);
+
+      boxHasilGold.classList.add('tampil');
+      document.getElementById('gold-lot').textContent = calculatedLot.toFixed(2) + ' Lots';
       document.getElementById('gold-risk-usd').textContent = `Risiko Maksimal Kehilangan Uang: $${riskUsd.toFixed(2)} USD jika menyentuh level Stop-Loss.`;
     }, 400);
   });
