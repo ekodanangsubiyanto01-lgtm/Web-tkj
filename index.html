@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eko Danang Subiyanto — Cyber Portfolio &amp; Financial Analytics</title>
+<title>Eko Danang Subiyanto — Cyber Portfolio &amp; Financial AI Analytics</title>
 
 <style>
   /* ---------- MODERN DARK CYBER TEMA ---------- */
@@ -163,6 +163,9 @@
   /* TRADINGVIEW INTEGRATION BOX */
   .chart-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; height: 450px; overflow: hidden; margin-bottom: 24px; }
 
+  /* NEW: AI BOX STYLE */
+  .ai-result-box { background: #07090e; border: 1px solid #1a2a4a; padding: 16px; border-radius: 10px; margin-top: 16px; font-family: monospace; font-size: 0.85rem; color: #a9c2f0; white-space: pre-wrap; line-height: 1.5; display: none; }
+
   .contact-box { background: linear-gradient(135deg, var(--bg-card) 0%, #0e0e12 100%); border: 1px solid var(--border); text-align: center; padding: 60px 40px; border-radius: 20px; margin-top: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
   .contact-box h2 { color: #fff; margin-bottom: 16px; font-size: 2rem; }
   
@@ -304,7 +307,7 @@
   <div class="app-panel" style="border-color: rgba(255,215,0,0.2);">
     <div class="app-header">
       <div>
-        <h1 style="color:#fff;">XAU.Analytics Terminal <span style="font-size: 0.8rem; color: #ffd700; font-family: monospace;">[GOLD_EDITION v1.0]</span></h1>
+        <h1 style="color:#fff;">XAU.Analytics Terminal <span style="font-size: 0.8rem; color: #ffd700; font-family: monospace;">[GOLD_EDITION v1.5]</span></h1>
         <p class="sub" style="font-size: 0.85rem; text-transform: uppercase; margin-top: 4px; color: #ffd700; font-weight: 700; letter-spacing: 0.5px;">100% Dedicated Gold Trading Tactical Hub</p>
       </div>
       <div style="font-size: 0.85rem; text-align: right; color: var(--text-sub); font-family: monospace;">
@@ -325,22 +328,27 @@
           <p id="sentiment-bias" style="font-size: 0.75rem; color: var(--cyber-green); font-family: monospace; text-align: center;">BIAS: BULLISH CONTRARIAN SIGNAL</p>
         </div>
 
-        <div class="calc-box" style="margin-bottom:0;">
-          <h4 style="font-size:0.85rem; text-transform: uppercase; color: var(--text-main); margin-bottom: 12px;">Kalender Ekonomi USD (High Impact)</h4>
-          <div style="font-size: 0.8rem; font-family: monospace;">
-            <div style="border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 8px;">
-              <span style="color: var(--cyber-red); font-weight: bold;">[HIGH]</span> 19:30 WIB<br>
-              <span style="color: #fff;">US Core CPI MoM (Est: 0.3%)</span><br>
-              <span style="color: var(--text-sub);">Status: Terjadwal Hari Ini</span>
-            </div>
-            <div>
-              <span style="color: var(--cyber-red); font-weight: bold;">[HIGH]</span> 21:00 WIB<br>
-              <span style="color: #fff;">FOMC Press Conference</span>            <div>
-              <span style="color: var(--cyber-red); font-weight: bold;">[HIGH]</span> 21:00 WIB<br>
-              <span style="color: #fff;">FOMC Press Conference</span><br>
-              <span style="color: var(--text-sub);">Status: Menunggu Konfirmasi Angka</span>
-            </div>
+        <div class="calc-box">
+          <h4 style="font-size:0.85rem; text-transform: uppercase; color: #ffd700; margin-bottom: 12px;">⚡ AI Screenshot Analyzer</h4>
+          
+          <div style="margin-bottom: 12px;">
+            <label style="display:block; font-size:0.7rem; color:var(--text-sub); margin-bottom:4px; font-weight:bold;">GEMINI API KEY:</label>
+            <input type="password" id="gemini-key" placeholder="Masukkan API Key Gemini Anda..." style="width:100%; padding:8px; background:var(--bg-input); border:1px solid var(--border); border-radius:6px; color:#fff; f            <input type="password" id="gemini-key" placeholder="Masukkan API Key Gemini Anda..." style="width:100%; padding:8px; background:var(--bg-input); border:1px solid var(--border); border-radius:6px; color:#fff; font-size:0.8rem; outline:none;">
+            <span style="font-size:0.65rem; color:var(--text-sub);">Dapatkan kunci gratis di Google AI Studio.</span>
           </div>
+
+          <div style="margin-bottom: 12px;">
+            <button class="btn btn-outline" onclick="bukaGaleri('input-chart-ai')" style="width:100%; padding:10px; font-size:0.8rem; border-color:#ffd700; color:#ffd700;">📁 Unggah Screenshot Chart</button>
+            <input type="file" id="input-chart-ai" class="input-galeri" accept="image/*" onchange="loadPreviewAi(this)">
+          </div>
+
+          <div id="ai-preview-container" style="display:none; text-align:center; margin-bottom:12px; border:1px solid var(--border); padding:6px; border-radius:6px;">
+            <img id="img-preview-ai" src="" style="max-width:100%; max-height:150px; object-fit:contain; border-radius:4px;">
+          </div>
+
+          <button class="btn btn-cyber" id="proses-ai-btn" style="width:100%; font-size:0.85rem; padding:12px; background:#ffd700; color:#000;">Mulai Analisis AI</button>
+
+          <div class="ai-result-box" id="hasil-ai-terminal"></div>
         </div>
       </div>
 
@@ -365,7 +373,7 @@
             });
             </script>
           </div>
-          </div>
+        </div>
 
         <div class="calc-box">
           <h3 style="margin-bottom: 16px; font-size: 1.1rem; color: #fff;">Kalkulator Risiko Manajemen Ukuran Lot (Emas)</h3>
@@ -399,7 +407,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="wrap" id="ekolele">
   <div class="lele-app">
@@ -463,7 +470,6 @@
     <p class="sub" style="font-size: 0.8rem; margin-bottom: 24px; color: var(--cyber-green);">💡 Tip: Klik gambar produk untuk menggantinya langsung dari galeri HP &amp; otomatis tersimpan permanen!</p>
     
     <div class="lele-grid">
-      
       <div class="lele-card">
         <div class="lele-photo" onclick="bukaGaleri('input-produk1')">
           <img id="img-produk1" src="lele-segar.jpg" alt="Lele Hidup Standar" loading="lazy">
@@ -511,14 +517,12 @@
           <a class="btn-buy" href="https://wa.me/6281532900269?text=Halo%20Eko%20Lele,%20saya%20mau%20pesan%20Lele%20Bumbu%20Kuning%20Frozen" target="_blank" rel="noopener">Pesan Sekarang</a>
         </div>
       </div>
-
     </div> 
     
     <div style="margin-top: 40px; text-align: center; border-top: 1px dashed var(--border); padding-top: 32px;">
       <p class="sub" style="margin-bottom: 16px;">Membutuhkan pasokan rutin terjadwal skala warung atau restoran?</p>
       <a class="btn btn-outline" id="wa-langganan" href="#" target="_blank" rel="noopener" style="border-color: var(--cyber-green); color: var(--cyber-green);">Kemitraan Grosir Via WA</a>
     </div>
-
   </div>
 </div>
 
@@ -541,9 +545,24 @@
 <a class="wa-floating" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Chat">✉</a>
 
 <script>
-  // ---------- LOGIKA PICKER FOTO PERMANEN DENGAN REDUKSI CANVAS ----------
+  let base64AiImage = "";
+
   function bukaGaleri(inputId) {
     document.getElementById(inputId).click();
+  }
+
+  // Preview Khusus untuk AI Gambar Chart
+  function loadPreviewAi(input) {
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('img-preview-ai').src = e.target.result;
+        document.getElementById('ai-preview-container').style.display = 'block';
+        // Ambil string base64 murni tanpa prefix data:image/...
+        base64AiImage = e.target.result.split(',')[1];
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
   }
 
   function prosesFoto(input, imgId, storageKey) {
@@ -575,7 +594,68 @@
     }
   }
 
-  // ---------- WINDOW ONLOAD AGREGASI DATA INTERAL ----------
+  // ---------- ALUR UTAMA INTEGRASI GEMINI VISION API ----------
+  document.getElementById('proses-ai-btn').addEventListener('click', async function() {
+    const apiKey = document.getElementById('gemini-key').value.trim();
+    const terminalResult = document.getElementById('hasil-ai-terminal');
+
+    if (!apiKey) {
+      alert("Harap masukkan API Key Gemini Anda terlebih dahulu.");
+      return;
+    }
+    if (!base64AiImage) {
+      alert("Harap pilih atau unggah screenshot gambar chart XAU/USD.");
+      return;
+    }
+
+    this.textContent = "AI SEDANG MEMBACA CHART...";
+    this.disabled = true;
+    terminalResult.style.display = "block";
+    terminalResult.textContent = "Connecting to Google Gemini Nodes...\nAnalyzing Candlestick Structures & Price Action...";
+
+    // Prompt instruksi khusus agar AI mengembalikan data TP, SL, Tren, dan Info Harga Terkini
+    const promptText = "Analisis gambar screenshot chart trading XAUUSD (Emas) ini secara detail. Tentukan: 1. Tren harga saat ini (Bullish/Bearish/Sideways). 2. Harga berjalan yang terdeteksi di chart. 3. Target Take Profit (TP) yang logis berdasarkan struktur support/resistance terdekat. 4. Batas Stop Loss (SL) yang aman. Berikan jawaban ringkas dengan gaya penulisan terminal komputer/cyber.";
+
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    
+    const payload = {
+      contents: [{
+        parts: [
+          { text: promptText },
+          {
+            inlineData: {
+              mimeType: "image/jpeg",
+              data: base64AiImage
+            }
+          }
+        ]
+      }]
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+      if (data.candidates && data.candidates[0].content.parts[0].text) {
+        let aiOutput = data.candidates[0].content.parts[0].text;
+        terminalResult.textContent = `[AI ANALYSIS COMPLETE]\n---------------------------\n${aiOutput}`;
+      } else {
+        terminalResult.textContent = "[ERROR]: Gagal membaca struktur data gambar dari API AI.";
+      }
+    } catch (error) {
+      console.error(error);
+      terminalResult.textContent = `[CONNECTION ERROR]: Periksa kembali koneksi internet atau validitas API Key Anda.\nDetail: ${error.message}`;
+    } finally {
+      document.getElementById('proses-ai-btn').textContent = "Mulai Analisis AI";
+      document.getElementById('proses-ai-btn').disabled = false;
+    }
+  });
+
+  // ---------- WINDOW ONLOAD DATA INTERAL ----------
   window.addEventListener('DOMContentLoaded', () => {
     const keys = [
       { key: 'save-profil', id: 'img-profil' },
@@ -585,17 +665,13 @@
     ];
     keys.forEach(item => {
       const savedImg = localStorage.getItem(item.key);
-      if (savedImg) {
-        document.getElementById(item.id).src = savedImg;
-      }
+      if (savedImg) document.getElementById(item.id).src = savedImg;
     });
 
-    // Simulasi TKJ Latency Ping
     const pings = [11, 14, 12, 15, 9, 13];
     const randomPing = pings[Math.floor(Math.random() * pings.length)];
     document.getElementById('terminal-ping').innerHTML = `&nbsp;&nbsp; Latency to local database node: <span style="color: var(--cyber-green); font-weight: bold;">${randomPing}ms (Excellent)</span>`;
 
-    // Simulasi Loop Hitung Mundur Rilis Berita Finansial USD
     let menit = 12; let detik = 40;
     setInterval(() => {
       detik--;
@@ -604,8 +680,7 @@
       document.getElementById('top-countdown').textContent = `USD NEWS COUNTDOWN: CPI Rilis dlm ${menit}m ${detik}s`;
     }, 1000);
 
-    // Variasi Data Sentimen Acak Dinamis Broker Finansial
-    const shortRatio = Math.floor(Math.random() * (75 - 60 + 1)) + 60; // 60% s.d 75%
+    const shortRatio = Math.floor(Math.random() * (75 - 60 + 1)) + 60;
     const longRatio = 100 - shortRatio;
     document.getElementById('bar-short').style.width = shortRatio + '%';
     document.getElementById('bar-short').textContent = `Short ${shortRatio}%`;
@@ -619,8 +694,7 @@
     tgl.getFullYear().toString().slice(2) + String(tgl.getMonth()+1).padStart(2,'0') + String(tgl.getDate()).padStart(2,'0') +
     '-' + String(Math.floor(tgl.getHours()*60+tgl.getMinutes())).padStart(4,'0');
   
-  document.getElementById('tanggal-nota').textContent =
-    tgl.toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
+  document.getElementById('tanggal-nota').textContent = tgl.toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
 
   const HP_EKO = '6281532900269';
 
@@ -658,7 +732,7 @@
     }, 400);
   });
 
-  // ---------- LOGIKA KALKULATOR TRADING EMAS (XAU/USD) ----------
+  // ---------- LOGIKA KALKULATOR LOT TRADING EMAS ----------
   document.getElementById('hitung-gold-btn').addEventListener('click', function() {
     let balance = parseFloat(document.getElementById('gold-balance').value);
     let riskPercent = parseFloat(document.getElementById('gold-risk').value);
@@ -671,31 +745,14 @@
 
     if(!balance || !riskPercent || !stopLossPips) {
       boxHasilGold.classList.add('tampil');
-      document.getElementById('gold-lot').textContent = '— Lots';
-      document.getElementById('gold-risk-usd').textContent = 'Isi data kalkulator risiko dengan benar.';
-      return;
-    }
-
-    this.textContent = "Menghitung Batas Margin Lot...";
-    setTimeout(() => {
-      this.textContent = "Hitung Ukuran Lot Maksimal";
-      
-      // Rumus Trading Emas: Risk USD = Balance * (Risk% / 100)
-      // Max Lot = Risk USD / (SL Pips * $10)
-      const riskUsd = balance * (riskPercent / 100);
-      const calculatedLot = riskUsd / (stopLossPips * 10);
-
-      boxHasilGold.classList.add('tampil');
-      document.getElementById('gold-lot').textContent = calculatedLot.toFixed(2) + ' Lots';
+      document.getElementById('gold-lot').textCon      document.getElementById('gold-lot').textContent = calculatedLot.toFixed(2) + ' Lots';
       document.getElementById('gold-risk-usd').textContent = `Risiko Maksimal Kehilangan Uang: $${riskUsd.toFixed(2)} USD jika menyentuh level Stop-Loss.`;
     }, 400);
   });
 
-  // Default Link WA Global
   document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Lele, saya pemilik rumah makan ingin bertanya kerja sama suplai lele.');
   document.getElementById('wa-float').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Danang, saya melihat full portofolio sistem Anda dan tertarik bekerja sama.');
 
-  // Check Status Jam
   const statusStok = document.getElementById('stok-keterangan');
   const jamSekarang = tgl.getHours();
   if (jamSekarang >= 21 || jamSekarang < 5) {
