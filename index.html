@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eko Danang Subiyanto — Cyber Portfolio &amp; Financial AI Analytics</title>
+<title>Eko Danang Subiyanto — Cyber Portfolio &amp; Financial Analytics</title>
 
 <style>
   /* ---------- MODERN DARK CYBER TEMA ---------- */
@@ -78,7 +78,6 @@
 
   .profile-section { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; margin-top: 40px; }
   
-  /* FOTO PROFIL (TETAP ASLI) */
   .photo-box { 
     width: 150px; height: 150px; background: var(--bg-card); border: 3px solid var(--cyber-green); 
     border-radius: 50%; overflow: hidden; box-shadow: 0 0 20px var(--cyber-glow); position: relative; cursor: pointer;
@@ -89,7 +88,7 @@
   
   .input-galeri { display: none; }
 
-  /* ---------- UPGRADE: SEKSI STATISTIK ---------- */
+  /* ---------- SEKSI STATISTIK ---------- */
   .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 40px; }
   .stats-card { background: linear-gradient(135deg, var(--bg-card) 0%, rgba(22,22,30,0.5) 100%); border: 1px solid var(--border); padding: 20px; border-radius: 12px; text-align: center; transition: 0.3s; }
   .stats-card:hover { border-color: var(--cyber-green); box-shadow: 0 5px 15px rgba(0,255,102,0.05); }
@@ -107,7 +106,6 @@
   .grid-12 { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
   .card-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
   
-  /* ANIMASI HOVER HALUS PADA CARD */
   .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s; }
   .card:hover { border-color: var(--border-focus); transform: translateY(-5px); }
   .card h3 { font-size: 1.2rem; margin-bottom: 10px; color: #fff; }
@@ -173,10 +171,7 @@
   /* TRADINGVIEW INTEGRATION BOX */
   .chart-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; height: 450px; overflow: hidden; margin-bottom: 24px; }
 
-  /* AI BOX STYLE */
-  .ai-result-box { background: #07090e; border: 1px solid #1a2a4a; padding: 16px; border-radius: 10px; margin-top: 16px; font-family: monospace; font-size: 0.85rem; color: #a9c2f0; white-space: pre-wrap; line-height: 1.5; display: none; }
-
-  /* ---------- UPGRADE: SEKSI TESTIMONI ---------- */
+  /* TESTIMONI */
   .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 20px; }
   .testimonial-card { background: var(--bg-sub); border-left: 3px solid var(--cyber-green); padding: 24px; border-radius: 0 16px 16px 0; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
   .testimonial-text { font-style: italic; color: var(--text-main); font-size: 0.95rem; margin-bottom: 16px; line-height: 1.5; }
@@ -190,7 +185,6 @@
   .wa-floating { position: fixed; right: 24px; bottom: 24px; background: var(--cyber-green); color: #000; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 8px 24px rgba(0, 255, 102, 0.3); z-index: 200; font-weight: bold; transition: 0.2s; }
   .wa-floating:hover { transform: scale(1.1); }
 
-  /* KEYFRAMES ANIMASI FADE-IN */
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -339,10 +333,10 @@
         <div style="margin-top: 20px;"><a href="#xauanalytics" style="color: var(--cyber-green); font-weight: 700; font-size: 0.9rem;">Buka Terminal Analisis Emas →</a></div>
       </div>
       <div class="card">
-        <span style="color:var(--cyber-green); font-size: 0.75rem; font-        <span style="color:var(--cyber-green); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">PROYEK LOGISTIK UMKM</span>
+        <span style="color:var(--cyber-green); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">PROYEK LOGISTIK UMKM</span>
         <h3 style="margin-top:6px;">Eko Lele Dashboard</h3>
         <p>Aplikasi otomasi kalkulasi porsi logistik harian, inventarisasi pasokan stok kolam, dan integrasi pesanan instan untuk pedagang kuliner pecel lele.</p>
-        <div style="margin-top: 20px;"><a href="#ekolele" style="color: var(--cyber-green); font-weight: 700; font-size: 0.9rem;">Buka Sistem Eko Lele →</a></div>
+        <div style="margin-top: 20px;"><a href="#ekolele" style="color: var(--cyber-green); font-weight: 700; font-size: 0.9rem;"        <div style="margin-top: 20px;"><a href="#ekolele" style="color: var(--cyber-green); font-weight: 700; font-size: 0.9rem;">Buka Sistem Eko Lele →</a></div>
       </div>
     </div>
   </div>
@@ -374,26 +368,31 @@
         </div>
 
         <div class="calc-box">
-          <h4 style="font-size:0.85rem; text-transform: uppercase; color: #ffd700; margin-bottom: 12px;">⚡ AI Screenshot Analyzer</h4>
-          
-          <div style="margin-bottom: 12px;">
-            <label style="display:block; font-size:0.7rem; color:var(--text-sub); margin-bottom:4px; font-weight:bold;">GEMINI API KEY:</label>
-            <input type="password" id="gemini-key" placeholder="Masukkan API Key Gemini Anda..." style="width:100%; padding:8px; background:var(--bg-input); border:1px solid var(--border); border-radius:6px; color:#fff; font-size:0.8rem; outline:none;">
-            <span style="font-size:0.65rem; color:var(--text-sub);">Dapatkan kunci gratis di Google AI Studio.</span>
+          <h3 style="margin-bottom: 16px; font-size: 1.1rem; color: #fff;">Manajemen Risiko Lot (Emas)</h3>
+          <div class="form-group" style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="field">
+              <label>Saldo Akun (USD)</label>
+              <input type="number" id="gold-balance" value="1000" min="1">
+            </div>
+            <div class="field">
+              <label>Risiko Diinginkan (%)</label>
+              <input type="number" id="gold-risk" value="2" min="1" max="100">
+            </div>
+            <div class="field">
+              <label>Jarak Stop-Loss (Pips)</label>
+              <input type="number" id="gold-sl" value="50" min="1" placeholder="Contoh: 50 pips">
+            </div>
           </div>
+          <button class="btn btn-cyber" id="hitung-gold-btn" style="width:100%; background:#ffd700; color:#000; margin-top:12px;">Hitung Ukuran Lot Maksimal</button>
 
-          <div style="margin-bottom: 12px;">
-            <button class="btn btn-outline" onclick="bukaGaleri('input-chart-ai')" style="width:100%; padding:10px; font-size:0.8rem; border-color:#ffd700; color:#ffd700;">📁 Unggah Screenshot Chart</button>
-            <input type="file" id="input-chart-ai" class="input-galeri" accept="image/*" onchange="loadPreviewAi(this)">
+          <div class="hasil-container" id="hasil-gold-box" style="border-left-color: #ffd700;">
+            <div class="angka" id="gold-lot" style="color: #ffd700; text-shadow: 0 0 15px rgba(255,215,0,0.3);">— Lots</div>
+            <p class="sub" id="gold-risk-usd" style="font-size: 0.9rem; margin-top: 8px; color: var(--text-sub);"></p>
+            <div class="rincian-logistik" style="font-size:0.8rem;">
+              <li>Nilai Pip per Lot Standar Komoditas Emas = $10 per 1 Pip</li>
+              <li>Pastikan pengaturan margin akun broker Anda mendukung.</li>
+            </div>
           </div>
-
-          <div id="ai-preview-container" style="display:none; text-align:center; margin-bottom:12px; border:1px solid var(--border); padding:6px; border-radius:6px;">
-            <img id="img-preview-ai" src="" style="max-width:100%; max-height:150px; object-fit:contain; border-radius:4px;">
-          </div>
-
-          <button class="btn btn-cyber" id="proses-ai-btn" style="width:100%; font-size:0.85rem; padding:12px; background:#ffd700; color:#000;">Mulai Analisis AI</button>
-
-          <div class="ai-result-box" id="hasil-ai-terminal"></div>
         </div>
       </div>
 
@@ -419,35 +418,6 @@
             </script>
           </div>
         </div>
-
-        <div class="calc-box">
-          <h3 style="margin-bottom: 16px; font-size: 1.1rem; color: #fff;">Kalkulator Risiko Manajemen Ukuran Lot (Emas)</h3>
-          <div class="form-group">
-            <div class="field">
-              <label>Saldo Akun (USD)</label>
-              <input type="number" id="gold-balance" value="1000" min="1">
-            </div>
-            <div class="field">
-              <label>Risiko Diinginkan (%)</label>
-              <input type="number" id="gold-risk" value="2" min="1" max="100">
-            </div>
-            <div class="field">
-              <label>Jarak Stop-Loss (Pips)</label>
-              <input type="number" id="gold-sl" value="50" min="1" placeholder="Contoh: 50 pips = $5.0">
-            </div>
-          </div>
-          <button class="btn btn-cyber" id="hitung-gold-btn" style="width:100%; background:#ffd700; color:#000;">Hitung Ukuran Lot Maksimal</button>
-
-          <div class="hasil-container" id="hasil-gold-box" style="border-left-color: #ffd700;">
-            <div class="angka" id="gold-lot" style="color: #ffd700; text-shadow: 0 0 15px rgba(255,215,0,0.3);">— Lots</div>
-            <p class="sub" id="gold-risk-usd" style="font-size: 0.9rem; margin-top: 8px; color: var(--text-sub);"></p>
-            <div class="rincian-logistik" style="font-size:0.8rem;">
-              <li>Nilai Pip per Lot Standar Komoditas Emas = $10 per 1 Pip (0.10 Pergerakan Harga)</li>
-              <li>Pastikan pengaturan akun leverage broker Anda mendukung margin lot di atas sebelum mengeksekusi order.</li>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -607,22 +577,8 @@
 <a class="wa-floating" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Chat">✉</a>
 
 <script>
-  let base64AiImage = "";
-
   function bukaGaleri(inputId) {
     document.getElementById(inputId).click();
-  }
-
-  function loadPreviewAi(input) {
-    if (input.files && input.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        document.getElementById('img-preview-ai').src = e.target.result;
-        document.getElementById('ai-preview-container').style.display = 'block';
-        base64AiImage = e.target.result.split(',')[1];
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
   }
 
   function prosesFoto(input, imgId, storageKey) {
@@ -653,66 +609,6 @@
       reader.readAsDataURL(input.files[0]);
     }
   }
-
-  // ---------- ALUR UTAMA INTEGRASI GEMINI VISION API ----------
-  document.getElementById('proses-ai-btn').addEventListener('click', async function() {
-    const apiKey = document.getElementById('gemini-key').value.trim();
-    const terminalResult = document.getElementById('hasil-ai-terminal');
-
-    if (!apiKey) {
-      alert("Harap masukkan API Key Gemini Anda terlebih dahulu.");
-      return;
-    }
-    if (!base64AiImage) {
-      alert("Harap pilih atau unggah screenshot gambar chart XAU/USD.");
-      return;
-    }
-
-    this.textContent = "AI SEDANG MEMBACA CHART...";
-    this.disabled = true;
-    terminalResult.style.display = "block";
-    terminalResult.textContent = "Connecting to Google Gemini Nodes...\nAnalyzing Candlestick Structures & Price Action...";
-
-    const promptText = "Analisis gambar screenshot chart trading XAUUSD (Emas) ini secara detail. Tentukan: 1. Tren harga saat ini (Bullish/Bearish/Sideways). 2. Harga berjalan yang terdeteksi di chart. 3. Target Take Profit (TP) yang logis berdasarkan struktur support/resistance terdekat. 4. Batas Stop Loss (SL) yang aman. Berikan jawaban ringkas dengan gaya penulisan terminal komputer/cyber.";
-
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-    
-    const payload = {
-      contents: [{
-        parts: [
-          { text: promptText },
-          {
-            inlineData: {
-              mimeType: "image/jpeg",
-              data: base64AiImage
-            }
-          }
-        ]
-      }]
-    };
-
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await response.json();
-      if (data.candidates && data.candidates[0].content.parts[0].text) {
-        let aiOutput = data.candidates[0].content.parts[0].text;
-        terminalResult.textContent = `[AI ANALYSIS COMPLETE]\n---------------------------\n${aiOutput}`;
-      } else {
-        terminalResult.textContent = "[ERROR]: Gagal membaca struktur data gambar dari API AI.";
-      }
-    } catch (error) {
-      console.error(error);
-      terminalResult.textContent = `[CONNECTION ERROR]: Periksa kembali koneksi internet atau validitas API Key Anda.\nDetail: ${error.message}`;
-    } finally {
-      document.getElementById('proses-ai-btn').textContent = "Mulai Analisis AI";
-      document.getElementById('proses-ai-btn').disabled = false;
-    }
-  });
 
   // ---------- WINDOW ONLOAD DATA INTERNAL ----------
   window.addEventListener('DOMContentLoaded', () => {
@@ -748,7 +644,7 @@
   });
 
   // ---------- LOGIKA LOGISTIK EKO LELE ----------
-  const tg  const tgl = new Date();
+  const tgl = new Date();
   document.getElementById('nomor-nota').textContent =
     tgl.getFullYear().toString().slice(2) + String(tgl.getMonth()+1).padStart(2,'0') + String(tgl.getDate()).padStart(2,'0') +
     '-' + String(Math.floor(tgl.getHours()*60+tgl.getMinutes())).padStart(4,'0');
@@ -834,4 +730,5 @@
 </script>
 
 </body>
-</html>
+            </html>
+  
