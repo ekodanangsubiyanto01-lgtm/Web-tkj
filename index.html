@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eko Danang Subiyanto — Cyber Portfolio</title>
+<title>Eko Danang Subiyanto — Cyber Portfolio &amp; Financial Analytics</title>
 
 <style>
   /* ---------- MODERN DARK CYBER TEMA ---------- */
@@ -19,6 +19,7 @@
     --cyber-glow: rgba(0, 255, 102, 0.15);
     --border: #232330;
     --border-focus: #444460;
+    --cyber-red: #ff3b30;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,7 +40,7 @@
   }
 
   a { color: inherit; text-decoration: none; }
-  .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
 
   /* ---------- NAVBAR PREMIUM ---------- */
   .navbar {
@@ -57,6 +58,10 @@
   .navbar nav a { font-size: 0.9rem; font-weight: 600; margin-left: 20px; color: var(--text-sub); transition: 0.2s; }
   .navbar nav a:hover { color: var(--cyber-green); }
 
+  /* ---------- TICKER ATAS ---------- */
+  .ticker-bar { background: #000; border-bottom: 1px solid var(--border); font-family: monospace; font-size: 0.8rem; padding: 6px 0; color: var(--text-sub); }
+  .ticker-bar .wrap { display: flex; justify-content: space-between; align-items: center; }
+
   /* ---------- HERO SECTION & UPLOAD STYLE ---------- */
   .hero { padding: 80px 0 60px 0; background: linear-gradient(180deg, var(--bg-main) 0%, var(--bg-sub) 100%); }
   .hero .tag-status { display: inline-block; background: rgba(0,255,102,0.1); border: 1px solid rgba(0,255,102,0.3); color: var(--cyber-green); padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.75rem; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
@@ -72,7 +77,6 @@
 
   .profile-section { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; margin-top: 40px; }
   
-  /* BOX FOTO PERMANEN */
   .photo-box { 
     width: 150px; height: 150px; background: var(--bg-card); border: 3px solid var(--cyber-green); 
     border-radius: 50%; overflow: hidden; box-shadow: 0 0 20px var(--cyber-glow); position: relative; cursor: pointer;
@@ -91,6 +95,7 @@
   section h2 { font-size: 2rem; margin-bottom: 40px; }
 
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .grid-12 { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
   .card-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
   
   .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: 0.3s; }
@@ -111,26 +116,29 @@
   .info-row span:first-child { font-weight: 700; color: var(--text-sub); }
   .info-row span:last-child { color: #fff; font-weight: 500; }
 
-  /* ---------- APP PANEL PREMIUM ---------- */
-  .lele-app { background: #0e0e12; border: 1px solid var(--border); border-radius: 24px; padding: 36px; margin: 40px 0; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
-  .lele-app h1 { color: #fff; }
-  .lele-app .sub { color: var(--text-sub); }
+  /* ---------- APP LAYOUTS GENERAL ---------- */
+  .app-panel { background: #0e0e12; border: 1px solid var(--border); border-radius: 24px; padding: 36px; margin: 40px 0; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+  .app-header { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding-bottom: 24px; margin-bottom: 36px; flex-wrap: wrap; gap: 16px; }
   
-  .nota-header { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding-bottom: 24px; margin-bottom: 36px; flex-wrap: wrap; gap: 16px; }
-  
-  .calc-box { background: var(--bg-card); padding: 28px; border-radius: 16px; margin-bottom: 20px; border: 1px solid var(--border); }
-  .form-group { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
-  .form-group .field { flex: 1; min-width: 200px; }
-  .form-group label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-sub); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .calc-box { background: var(--bg-card); padding: 24px; border-radius: 16px; margin-bottom: 20px; border: 1px solid var(--border); }
+  .form-group { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  .form-group .field { flex: 1; min-width: 160px; }
+  .form-group label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--text-sub); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
   
   .form-group input, .form-group select {
-    width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 10px; color: #fff; font-size: 1rem; transition: 0.2s; outline: none;
+    width: 100%; padding: 12px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 8px; color: #fff; font-size: 0.95rem; transition: 0.2s; outline: none;
   }
   .form-group input:focus, .form-group select:focus { border-color: var(--cyber-green); box-shadow: 0 0 10px rgba(0,255,102,0.1); }
   
   .hasil-container { background: #050507; padding: 24px; border-radius: 12px; border-left: 4px solid var(--cyber-green); margin-top: 24px; display: none; box-shadow: inset 0 2px 8px rgba(0,0,0,0.8); }
   .hasil-container.tampil { display: block; }
-  .hasil-container .angka { font-size: 2.5rem; font-weight: 800; color: var(--cyber-green); text-shadow: 0 0 15px var(--cyber-glow); }
+  .hasil-container .angka { font-size: 2.2rem; font-weight: 800; color: var(--cyber-green); text-shadow: 0 0 15px var(--cyber-glow); }
+
+  /* SENTIMEN METER VISUAL */
+  .sentiment-wrapper { background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 16px; margin-bottom: 20px; }
+  .sentiment-bar-container { display: flex; height: 24px; border-radius: 6px; overflow: hidden; margin: 12px 0; background: #222; }
+  .bar-short { background: var(--cyber-red); width: 65%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; color: #fff; transition: 0.5s; }
+  .bar-long { background: var(--cyber-green); width: 35%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; color: #000; transition: 0.5s; }
 
   /* DATA RINCIAN LOGISTIK */
   .rincian-logistik { margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(255,255,255,0.1); font-size: 0.85rem; color: var(--text-sub); }
@@ -142,41 +150,42 @@
   .terminal-header { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--cyber-green); border-bottom: 1px solid rgba(0,255,102,0.1); padding-bottom: 8px; margin-bottom: 10px; font-weight: bold; }
   .terminal-line { margin-bottom: 4px; line-height: 1.4; }
 
-  /* DAFTAR PRODUK CYBER SYSTEM */
+  /* GRIDS PRODUK LELE */
   .lele-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
   .lele-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
   .lele-card:hover { border-color: rgba(0,255,102,0.3); transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.4); }
-  
   .lele-photo { width: 100%; height: 160px; border-radius: 10px; margin-bottom: 16px; overflow: hidden; background: #222; position: relative; cursor: pointer; }
   .lele-photo img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
-  .lele-card:hover .lele-photo img { transform: scale(1.05); }
-  
-  .lele-card h4 { font-size: 1.15rem; color: #fff; margin-bottom: 4px; }
   .price { font-size: 1.3rem; font-weight: 800; color: var(--cyber-green); margin: 16px 0; text-shadow: 0 0 10px var(--cyber-glow); }
-  
   .btn-buy { display: block; text-align: center; background: #fff; color: #000; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 700; transition: 0.2s; }
   .btn-buy:hover { background: var(--cyber-green); box-shadow: 0 0 15px var(--cyber-glow); }
 
+  /* TRADINGVIEW INTEGRATION BOX */
+  .chart-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; height: 450px; overflow: hidden; margin-bottom: 24px; }
+
   .contact-box { background: linear-gradient(135deg, var(--bg-card) 0%, #0e0e12 100%); border: 1px solid var(--border); text-align: center; padding: 60px 40px; border-radius: 20px; margin-top: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
   .contact-box h2 { color: #fff; margin-bottom: 16px; font-size: 2rem; }
-  .contact-box p { color: var(--text-sub); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
   
   footer { text-align: center; padding: 40px 0; color: var(--text-sub); font-size: 0.85rem; border-top: 1px solid var(--border); background: var(--bg-main); }
-
   .wa-floating { position: fixed; right: 24px; bottom: 24px; background: var(--cyber-green); color: #000; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 8px 24px rgba(0, 255, 102, 0.3); z-index: 200; font-weight: bold; transition: 0.2s; }
-  .wa-floating:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 12px 28px rgba(0, 255, 102, 0.5); }
 
-  @media (max-width: 768px) {
-    .grid-2 { grid-template-columns: 1fr; gap: 32px; }
+  @media (max-width: 992px) {
+    .grid-12 { display: flex; flex-direction: column; }
     .hero h1 { font-size: 2.2rem; }
     .profile-section { flex-direction: column; align-items: center; text-align: center; gap: 24px; }
-    .hero-buttons { justify-content: center; }
     .navbar nav { display: none; }
-    .lele-app { padding: 24px; }
+    .app-panel { padding: 24px; }
   }
 </style>
 </head>
 <body>
+
+<div class="ticker-bar">
+  <div class="wrap">
+    <span>[SYSTEM_STATUS: ACTIVE] NODE_MIGRATION_LINK_OK</span>
+    <span style="color: var(--cyber-green);" id="top-countdown">USD NEWS COUNTDOWN: CPI Rilis dlm 12m 40s</span>
+  </div>
+</div>
 
 <div class="navbar">
   <div class="wrap">
@@ -184,7 +193,8 @@
     <nav>
       <a href="#tentang">Tentang</a>
       <a href="#skill">Skill</a>
-      <a href="#proyek">Proyek</a>
+      <a href="#proyek">Proyek Portal</a>
+      <a href="#xauanalytics">XAU.Analytics</a>
       <a href="#ekolele">Eko Lele</a>
       <a href="#kontak">Kontak</a>
     </nav>
@@ -193,7 +203,7 @@
 
 <header class="hero">
   <div class="wrap">
-    <span class="tag-status">● CORE_TKJ_ENGINEER</span>
+    <span class="tag-status">● CORE_TKJ_FULLSTACK_ENGINEER</span>
     <h1>Eko Danang Subiyanto</h1>
     <div class="profile-section">
       
@@ -204,10 +214,10 @@
       <input type="file" id="input-profil" class="input-galeri" accept="image/*" onchange="prosesFoto(this, 'img-profil', 'save-profil')">
 
       <div>
-        <p>Siswa Teknik Komputer &amp; Jaringan yang fokus mendalami arsitektur pemrograman web. Mengembangkan infrastruktur lokal dan aplikasi berbasis mobile emulator langsung menggunakan Android.</p>
+        <p>Siswa Teknik Komputer &amp; Jaringan yang mendalami ekosistem Full-Stack Web Architecture. Berfokus pada sistem optimasi data real-time, alat bantu finansial komoditas, dan infrastruktur sistem modular terdistribusi.</p>
         <div class="hero-buttons">
-          <a class="btn btn-cyber" href="#proyek">Lihat Proyek</a>
-          <a class="btn btn-outline" href="#kontak">Hubungi Chat</a>
+          <a class="btn btn-cyber" href="#proyek">Lihat Portofolio Kerja</a>
+          <a class="btn btn-outline" href="#kontak">Hubungi Dev</a>
         </div>
       </div>
     </div>
@@ -216,32 +226,32 @@
 
 <section id="tentang">
   <div class="wrap">
-    <span class="section-label">Profil Kelulusan</span>
+    <span class="section-label">Arsitektur Berpikir</span>
     <h2>Tentang Saya</h2>
     <div class="grid-2">
       <div>
-        <p style="color: var(--text-sub); margin-bottom: 24px;">Berpikir layaknya struktur topologi jaringan. Saya memandang setiap komponen dalam aplikasi web sebagai interkoneksi simpul data terstruktur yang harus berjalan optimal tanpa hambatan data.</p>
+        <p style="color: var(--text-sub); margin-bottom: 24px;">Memanfaatkan logika topologi jaringan komputer untuk membangun struktur aplikasi perangkat lunak. Saya merancang sistem fungsional yang berfokus penuh pada kecepatan pemrosesan latensi rendah dan pengalaman intuitif bebas hambatan.</p>
         
         <div class="timeline">
           <div class="timeline-item">
-            <div class="timeline-year">Langkah Awal</div>
-            <div class="timeline-title">Setup Ekosistem Kerja</div>
-            <div class="timeline-desc">Konfigurasi penuh Linux environment via perangkat mobile untuk ruang kerja portabel.</div>
+            <div class="timeline-year">Infrastruktur</div>
+            <div class="timeline-title">Setup Environment Kerja Portabel</div>
+            <div class="timeline-desc">Konfigurasi penuh Linux Environment di dalam perangkat Android (Termux Core) untuk pengerjaan project fleksibel.</div>
           </div>
           <div class="timeline-item">
             <div class="timeline-year">Sekarang</div>
-            <div class="timeline-title">Eksplorasi Antarmuka</div>
-            <div class="timeline-desc">Mendalami semantik struktur HTML5, tata letak CSS Grid/Flexbox, dan kontrol sistem logika.</div>
+            <div class="timeline-title">Sistem &amp; Agregasi Finansial</div>
+            <div class="timeline-desc">Mengkombinasikan UI/UX interaktif dengan kalkulator manajemen risiko logistik dan pasar finansial makro.</div>
           </div>
         </div>
       </div>
       
       <div>
         <div class="info-table">
-          <div class="info-row"><span>Spesialisasi</span><span>Web Dev &amp; Jaringan</span></div>
-          <div class="info-row"><span>Lingkungan</span><span>Mobile Linux System</span></div>
-          <div class="info-row"><span>Bahasa</span><span>Indonesia / JavaScript</span></div>
-          <div class="info-row"><span>Status</span><span>Membangun Solusi Praktis</span></div>
+          <div class="info-row"><span>Spesialisasi</span><span>Full-Stack Web &amp; Jaringan</span></div>
+          <div class="info-row"><span>Arsitektur DB</span><span>PostgreSQL Relational / Redis Cache</span></div>
+          <div class="info-row"><span>Bahasa Pemrograman</span><span>JavaScript ES6 / Node.js</span></div>
+          <div class="info-row"><span>Metrik UX</span><span>Zero-Click Dashboards</span></div>
         </div>
       </div>
     </div>
@@ -250,20 +260,20 @@
 
 <section id="skill">
   <div class="wrap">
-    <span class="section-label">Kemampuan Dasar</span>
-    <h2>Spesifikasi Keahlian</h2>
+    <span class="section-label">Spesifikasi Engine</span>
+    <h2>Kemampuan Teknis</h2>
     <div class="card-list">
       <div class="card">
-        <h3>HTML &amp; CSS Layouting</h3>
-        <p>Membangun antarmuka modern responsif super ringan yang ramah performa perangkat mobile.</p>
+        <h3>Front-End UI Design</h3>
+        <p>Implementasi CSS Grid/Flexbox semantik modern untuk menghasilkan visual super lancar di gawai seluler.</p>
       </div>
       <div class="card">
-        <h3>JavaScript Logic</h3>
-        <p>Eksekusi manipulasi data murni untuk fungsionalitas aplikasi interaktif pengguna.</p>
+        <h3>Logic &amp; API Integration</h3>
+        <p>Integrasi stream data dinamis WebSocket, manipulasi struktur matematika kompleks, dan efisiensi lokal storage.</p>
       </div>
       <div class="card">
-        <h3>Computer Network</h3>
-        <p>Dasar TKJ mendalam: manajemen IP Address, subnetting kelas jaringan, dan skema routing dasar.</p>
+        <h3>Network &amp; Subnetting</h3>
+        <p>Dasar TKJ kuat: Alokasi tabel IP Address, manajemen skema routing komputer, dan pemantauan latensi jaringan.</p>
       </div>
     </div>
   </div>
@@ -271,27 +281,129 @@
 
 <section id="proyek">
   <div class="wrap">
-    <span class="section-label">Arsip Kode</span>
-    <h2>Proyek Pilihan</h2>
+    <span class="section-label">Katalog Aplikasi</span>
+    <h2>Proyek Sistem Terintegrasi</h2>
     <div class="card-list">
       <div class="card">
-        <span style="color:var(--cyber-green); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">PROYEK 01</span>
-        <h3 style="margin-top:6px;">Eko Lele Dashboard</h3>
-        <p>Aplikasi web terintegrasi kalkulator porsi logistik konsumsi kolam harian UMKM warung pecel lele lokal.</p>
-        <div style="margin-top: 20px;"><a href="#ekolele" style="color: var(--cyber-green); font-weight: 700; font-size: 0.9rem;">Buka Dasbor Aplikasi →</a></div>
+        <span style="color:var(--cyber-green); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">PROYEK FINANSIAL</span>
+        <h3 style="margin-top:6px;">XAU.Analytics Terminal</h3>
+        <p>Website analisis instrumen emas (XAU/USD) dilengkapi chart TradingView, kalkulator lot trading, sentimen ritel, dan kalender makro ekonomi AS.</p>
+        <div style="margin-top: 20px;"><a href="#xauanalytics" style="color: var(--cyber-green); font-weight: 700; font-size: 0.9rem;">Buka Terminal Analisis Emas →</a></div>
       </div>
       <div class="card">
-        <span style="color:var(--text-sub); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">PROYEK 02</span>
-        <h3 style="margin-top:6px;">Jointer FO Platform</h3>
-        <p>Rancangan platform simulasi visual berbasis web materi pembelajaran penyambungan inti kabel Fiber Optik.</p>
+        <span style="color:var(--cyber-green); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">PROYEK LOGISTIK UMKM</span>
+        <h3 style="margin-top:6px;">Eko Lele Dashboard</h3>
+        <p>Aplikasi otomasi kalkulasi porsi logistik harian, inventarisasi pasokan stok kolam, dan integrasi pesanan instan untuk pedagang kuliner pecel lele.</p>
+        <div style="margin-top: 20px;"><a href="#ekolele" style="color: var(--cyber-green); font-weight: 700; font-size: 0.9rem;">Buka Sistem Eko Lele →</a></div>
       </div>
     </div>
   </div>
 </section>
 
+<div class="wrap" id="xauanalytics">
+  <div class="app-panel" style="border-color: rgba(255,215,0,0.2);">
+    <div class="app-header">
+      <div>
+        <h1 style="color:#fff;">XAU.Analytics Terminal <span style="font-size: 0.8rem; color: #ffd700; font-family: monospace;">[GOLD_EDITION v1.0]</span></h1>
+        <p class="sub" style="font-size: 0.85rem; text-transform: uppercase; margin-top: 4px; color: #ffd700; font-weight: 700; letter-spacing: 0.5px;">100% Dedicated Gold Trading Tactical Hub</p>
+      </div>
+      <div style="font-size: 0.85rem; text-align: right; color: var(--text-sub); font-family: monospace;">
+        MARKET: <span style="color:#00ff66; font-weight: bold;">LIVE TRACKING</span><br>
+        INSTRUMEN: <span style="color:#fff;">XAU/USD (SPOT GOLD)</span>
+      </div>
+    </div>
+
+    <div class="grid-12">
+      <div style="grid-column: span 4;">
+        <div class="sentiment-wrapper">
+          <h4 style="font-size:0.85rem; text-transform: uppercase; color: var(--text-main);">XAU/USD Sentiment Meter</h4>
+          <p class="sub" style="font-size:0.75rem; color: var(--text-sub);">Rasio Posisi Ritel Broker Besar</p>
+          <div class="sentiment-bar-container">
+            <div class="bar-short" id="bar-short">Short 68%</div>
+            <div class="bar-long" id="bar-long">Long 32%</div>
+          </div>
+          <p id="sentiment-bias" style="font-size: 0.75rem; color: var(--cyber-green); font-family: monospace; text-align: center;">BIAS: BULLISH CONTRARIAN SIGNAL</p>
+        </div>
+
+        <div class="calc-box" style="margin-bottom:0;">
+          <h4 style="font-size:0.85rem; text-transform: uppercase; color: var(--text-main); margin-bottom: 12px;">Kalender Ekonomi USD (High Impact)</h4>
+          <div style="font-size: 0.8rem; font-family: monospace;">
+            <div style="border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 8px;">
+              <span style="color: var(--cyber-red); font-weight: bold;">[HIGH]</span> 19:30 WIB<br>
+              <span style="color: #fff;">US Core CPI MoM (Est: 0.3%)</span><br>
+              <span style="color: var(--text-sub);">Status: Terjadwal Hari Ini</span>
+            </div>
+            <div>
+              <span style="color: var(--cyber-red); font-weight: bold;">[HIGH]</span> 21:00 WIB<br>
+              <span style="color: #fff;">FOMC Press Conference</span>            <div>
+              <span style="color: var(--cyber-red); font-weight: bold;">[HIGH]</span> 21:00 WIB<br>
+              <span style="color: #fff;">FOMC Press Conference</span><br>
+              <span style="color: var(--text-sub);">Status: Menunggu Konfirmasi Angka</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="grid-column: span 8;">
+        <div class="chart-container">
+          <div class="tradingview-widget-container" style="height:100%;width:100%;">
+            <div id="tradingview_xau" style="height:100%;width:100%;"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+            <script type="text/javascript">
+            new TradingView.widget({
+              "autosize": true,
+              "symbol": "OANDA:XAUUSD",
+              "interval": "60",
+              "timezone": "Asia/Jakarta",
+              "theme": "dark",
+              "style": "1",
+              "locale": "id",
+              "enable_publishing": false,
+              "hide_side_toolbar": false,
+              "allow_symbol_change": false,
+              "container_id": "tradingview_xau"
+            });
+            </script>
+          </div>
+          </div>
+
+        <div class="calc-box">
+          <h3 style="margin-bottom: 16px; font-size: 1.1rem; color: #fff;">Kalkulator Risiko Manajemen Ukuran Lot (Emas)</h3>
+          <div class="form-group">
+            <div class="field">
+              <label>Saldo Akun (USD)</label>
+              <input type="number" id="gold-balance" value="1000" min="1">
+            </div>
+            <div class="field">
+              <label>Risiko Diinginkan (%)</label>
+              <input type="number" id="gold-risk" value="2" min="1" max="100">
+            </div>
+            <div class="field">
+              <label>Jarak Stop-Loss (Pips)</label>
+              <input type="number" id="gold-sl" value="50" min="1" placeholder="Contoh: 50 pips = $5.0">
+            </div>
+          </div>
+          <button class="btn btn-cyber" id="hitung-gold-btn" style="width:100%; background:#ffd700; color:#000;">Hitung Ukuran Lot Maksimal</button>
+
+          <div class="hasil-container" id="hasil-gold-box" style="border-left-color: #ffd700;">
+            <div class="angka" id="gold-lot" style="color: #ffd700; text-shadow: 0 0 15px rgba(255,215,0,0.3);">— Lots</div>
+            <p class="sub" id="gold-risk-usd" style="font-size: 0.9rem; margin-top: 8px; color: var(--text-sub);"></p>
+            <div class="rincian-logistik" style="font-size:0.8rem;">
+              <li>Nilai Pip per Lot Standar Komoditas Emas = $10 per 1 Pip (0.10 Pergerakan Harga)</li>
+              <li>Pastikan pengaturan akun leverage broker Anda mendukung margin lot di atas sebelum mengeksekusi order.</li>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="wrap" id="ekolele">
   <div class="lele-app">
-    <div class="nota-header">
+    <div class="app-header">
       <div>
         <h1 style="letter-spacing: -0.5px;">Eko Lele Sistem</h1>
         <p class="sub" style="font-size: 0.85rem; text-transform: uppercase; margin-top: 4px; color: var(--cyber-green); font-weight: 700; letter-spacing: 0.5px;">Pemasok Lele Hidup Berkualitas &amp; Olahan Segar</p>
@@ -365,7 +477,10 @@
         <div>
           <div class="price">Rp 24.000<span style="font-size:0.85rem; color:var(--text-sub);">/kg</span></div>
           <a class="btn-buy" href="https://wa.me/6281532900269?text=Halo%20Eko%20Lele,%20saya%20mau%20pesan%20Lele%20Hidup%20Standar%208-10%20ekor/kg" target="_blank" rel="noopener">Pesan Sekarang</a>
-          </div>      </div> <div class="lele-card">
+        </div>
+      </div>
+
+      <div class="lele-card">
         <div class="lele-photo" onclick="bukaGaleri('input-produk2')">
           <img id="img-produk2" src="lele-besar.jpg" alt="Lele Hidup Besar" loading="lazy">
           <div class="upload-overlay">KLIK UNTUK UBAH FOTO</div>
@@ -411,7 +526,7 @@
   <div class="wrap">
     <div class="contact-box">
       <h2>Hubungi Pengembang</h2>
-      <p>Terbuka untuk kolaborasi project internal jaringan, implementasi web, atau integrasi sistem bisnis UMKM lokal.</p>
+      <p>Terbuka untuk kolaborasi project manajemen infrastruktur jaringan internal, rekayasa fullstack website, atau integrasi logika automasi analitik UMKM.</p>
       <a class="btn btn-cyber" href="https://wa.me/6281532900269" target="_blank" rel="noopener">Kirim Pesan WhatsApp</a>
     </div>
   </div>
@@ -419,7 +534,7 @@
 
 <footer>
   <div class="wrap">
-    <p>© 2026 Eko Danang Subiyanto. Mobile Cyber Client System.</p>
+    <p>© 2026 Eko Danang Subiyanto. Mobile Cyber Enterprise Architecture.</p>
   </div>
 </footer>
 
@@ -437,25 +552,21 @@
       reader.onload = function(e) {
         const img = new Image();
         img.onload = function() {
-          // Membuat canvas bayangan untuk meresize resolusi agar tidak melebihi kuota localStorage browser
           const canvas = document.createElement('canvas');
           const ctx = canvas.getContext('2d');
-          
-          const max_width = 400; // Lebar gambar maksimal 400px (Sangat cukup untuk web mobile)
+          const max_width = 400; 
           const scale = max_width / img.width;
           canvas.width = max_width;
           canvas.height = img.height * scale;
           
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          
-          // Kompres kualitas ke JPEG 0.7 (File di bawah 40KB)
           const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
           
           document.getElementById(imgId).src = compressedBase64;
           try {
             localStorage.setItem(storageKey, compressedBase64);
           } catch (error) {
-            console.log("Storage penuh, gagal menyimpan permanen.");
+            console.log("Storage penuh, gagal menyimpan.");
           }
         };
         img.src = e.target.result;
@@ -464,7 +575,7 @@
     }
   }
 
-  // Muat otomatis foto dari penyimpanan lokal saat web dibuka kembali
+  // ---------- WINDOW ONLOAD AGREGASI DATA INTERAL ----------
   window.addEventListener('DOMContentLoaded', () => {
     const keys = [
       { key: 'save-profil', id: 'img-profil' },
@@ -479,13 +590,30 @@
       }
     });
 
-    // Sentuhan TKJ: Efek ping acak murni pada panel terminal
+    // Simulasi TKJ Latency Ping
     const pings = [11, 14, 12, 15, 9, 13];
     const randomPing = pings[Math.floor(Math.random() * pings.length)];
     document.getElementById('terminal-ping').innerHTML = `&nbsp;&nbsp; Latency to local database node: <span style="color: var(--cyber-green); font-weight: bold;">${randomPing}ms (Excellent)</span>`;
+
+    // Simulasi Loop Hitung Mundur Rilis Berita Finansial USD
+    let menit = 12; let detik = 40;
+    setInterval(() => {
+      detik--;
+      if (detik < 0) { detik = 59; menit--; }
+      if (menit < 0) { menit = 59; }
+      document.getElementById('top-countdown').textContent = `USD NEWS COUNTDOWN: CPI Rilis dlm ${menit}m ${detik}s`;
+    }, 1000);
+
+    // Variasi Data Sentimen Acak Dinamis Broker Finansial
+    const shortRatio = Math.floor(Math.random() * (75 - 60 + 1)) + 60; // 60% s.d 75%
+    const longRatio = 100 - shortRatio;
+    document.getElementById('bar-short').style.width = shortRatio + '%';
+    document.getElementById('bar-short').textContent = `Short ${shortRatio}%`;
+    document.getElementById('bar-long').style.width = longRatio + '%';
+    document.getElementById('bar-long').textContent = `Long ${longRatio}%`;
   });
 
-  // ---------- LOGIKA LOGISTIK UTAMA & KALKULATOR ----------
+  // ---------- LOGIKA LOGISTIK EKO LELE ----------
   const tgl = new Date();
   document.getElementById('nomor-nota').textContent =
     tgl.getFullYear().toString().slice(2) + String(tgl.getMonth()+1).padStart(2,'0') + String(tgl.getDate()).padStart(2,'0') +
@@ -500,71 +628,82 @@
     let porsiVal = parseFloat(document.getElementById('porsi').value);
     const isiVal = parseFloat(document.getElementById('ukuran').value);
     const boxHasil = document.getElementById('hasil-box');
-    const btnHitung = this;
 
-    // Proteksi Keamanan Sistem: Ubah input minus secara paksa menjadi nilai mutlak positif
-    if (porsiVal < 0) {
-      porsiVal = Math.abs(porsiVal);
-      document.getElementById('porsi').value = porsiVal;
-    }
+    if (porsiVal < 0) { porsiVal = Math.abs(porsiVal); document.getElementById('porsi').value = porsiVal; }
 
     if (!porsiVal || porsiVal <= 0) {
       boxHasil.classList.add('tampil');
       document.getElementById('hasil-kg').textContent = '—';
-      document.getElementById('hasil-ket').textContent = 'Masukkan nilai target porsi lele yang valid terlebih dahulu.';
-      document.getElementById('logistik-ekor').textContent = 'Estimasi kebutuhan fisik: — ekor';
-      document.getElementById('logistik-packing').textContent = 'Rekomendasi kemasan: —';
+      document.getElementById('hasil-ket').textContent = 'Masukkan nilai target porsi lele yang valid.';
       return;
     }
 
-    // Micro-interactions: Efek visual loading pada tombol pemroses data
-    btnHitung.textContent = "Menganalisis Data...";
-    btnHitung.style.opacity = "0.7";
-    btnHitung.style.transform = "scale(0.98)";
-
+    this.textContent = "Menganalisis Data...";
     setTimeout(() => {
-      btnHitung.textContent = "Proses Data Kiloan";
-      btnHitung.style.opacity = "1";
-      btnHitung.style.transform = "none";
-
+      this.textContent = "Proses Data Kiloan";
       const hitungKg = porsiVal / isiVal;
-      const bulatkanKg = Math.ceil(hitungKg * 2) / 2; // Pembulatan logistik per 0.5 kg terdekat
-
+      const bulatkanKg = Math.ceil(hitungKg * 2) / 2;
       let totalEkor = Math.round(bulatkanKg * isiVal);
-      let kantongPacking = Math.ceil(bulatkanKg / 5); // Standar 1 wadah plastik muat maksimal 5kg lele hidup
+      let kantongPacking = Math.ceil(bulatkanKg / 5);
 
       boxHasil.classList.add('tampil');
       document.getElementById('hasil-kg').textContent = bulatkanKg.toFixed(1) + ' kg';
-      document.getElementById('hasil-ket').textContent =
-        `Estimasi alokasi bahan baku untuk suplai harian sebanyak ± ${porsiVal} porsi konsumsi kuliner.`;
-      
+      document.getElementById('hasil-ket').textContent = `Estimasi alokasi bahan baku untuk suplai harian sebanyak ± ${porsiVal} porsi konsumsi.`;
       document.getElementById('logistik-ekor').textContent = `Estimasi kebutuhan fisik: ± ${totalEkor} ekor lele hidup.`;
-      document.getElementById('logistik-packing').textContent = `Rekomendasi kemasan: ${kantongPacking} Kantong Plastik Oksigen Standar.`;
+      document.getElementById('logistik-packing').textContent = `Rekomendasi kemasan: ${kantongPacking} Kantong Plastik Oksigen.`;
 
-      // Otomatisasi pembentukan template pesan WhatsApp berdasarkan kalkulasi terbaru
       const spekText = document.getElementById('ukuran').options[document.getElementById('ukuran').selectedIndex].text;
-      const pesanWA = `Halo Mas Eko Lele, saya sudah menghitung di web. Saya butuh suplai untuk target ${porsiVal} porsi dengan spek ${spekText}. Estimasi kebutuhan sekitar ${bulatkanKg.toFixed(1)} kg (± ${totalEkor} ekor). Mau tanya info langganan grosirnya dong.`;
+      const pesanWA = `Halo Mas Eko Lele, saya butuh suplai untuk target ${porsiVal} porsi dengan spek ${spekText}. Estimasi kebutuhan sekitar ${bulatkanKg.toFixed(1)} kg (± ${totalEkor} ekor).`;
       document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent(pesanWA);
-
     }, 400);
   });
 
-  // Init tautan default awal tombol WhatsApp
-  document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Lele, saya pemilik rumah makan/kuliner ingin mengajukan kerja sama grosir suplai lele rutin.');
-  document.getElementById('wa-float').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Danang, saya melihat portofolio Anda dan tertarik untuk bertanya lebih lanjut.');
+  // ---------- LOGIKA KALKULATOR TRADING EMAS (XAU/USD) ----------
+  document.getElementById('hitung-gold-btn').addEventListener('click', function() {
+    let balance = parseFloat(document.getElementById('gold-balance').value);
+    let riskPercent = parseFloat(document.getElementById('gold-risk').value);
+    let stopLossPips = parseFloat(document.getElementById('gold-sl').value);
+    const boxHasilGold = document.getElementById('hasil-gold-box');
 
-  // ---------- LOGIKA STATUS REAL-TIME STOK KOLAM ----------
+    if(balance < 0) balance = Math.abs(balance);
+    if(riskPercent < 0) riskPercent = Math.abs(riskPercent);
+    if(stopLossPips < 0) stopLossPips = Math.abs(stopLossPips);
+
+    if(!balance || !riskPercent || !stopLossPips) {
+      boxHasilGold.classList.add('tampil');
+      document.getElementById('gold-lot').textContent = '— Lots';
+      document.getElementById('gold-risk-usd').textContent = 'Isi data kalkulator risiko dengan benar.';
+      return;
+    }
+
+    this.textContent = "Menghitung Batas Margin Lot...";
+    setTimeout(() => {
+      this.textContent = "Hitung Ukuran Lot Maksimal";
+      
+      // Rumus Trading Emas: Risk USD = Balance * (Risk% / 100)
+      // Max Lot = Risk USD / (SL Pips * $10)
+      const riskUsd = balance * (riskPercent / 100);
+      const calculatedLot = riskUsd / (stopLossPips * 10);
+
+      boxHasilGold.classList.add('tampil');
+      document.getElementById('gold-lot').textContent = calculatedLot.toFixed(2) + ' Lots';
+      document.getElementById('gold-risk-usd').textContent = `Risiko Maksimal Kehilangan Uang: $${riskUsd.toFixed(2)} USD jika menyentuh level Stop-Loss.`;
+    }, 400);
+  });
+
+  // Default Link WA Global
+  document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Lele, saya pemilik rumah makan ingin bertanya kerja sama suplai lele.');
+  document.getElementById('wa-float').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Danang, saya melihat full portofolio sistem Anda dan tertarik bekerja sama.');
+
+  // Check Status Jam
   const statusStok = document.getElementById('stok-keterangan');
   const jamSekarang = tgl.getHours();
-
   if (jamSekarang >= 21 || jamSekarang < 5) {
-    statusStok.innerHTML = `<span style="color: #ff3b30; font-weight: 800;">● RESTOCK_PROCESS</span> — Pemesanan malam ini akan dialokasikan untuk pengiriman subuh/pagi besok agar lele tetap segar.`;
+    statusStok.innerHTML = `<span style="color: #ff3b30; font-weight: 800;">● RESTOCK_PROCESS</span> — Pemesanan malam dialokasikan untuk pengiriman subuh besok.`;
   } else {
-    statusStok.innerHTML = `<span style="color: var(--cyber-green); font-weight: 800;">● LIVE_STOK_READY</span> — Kolam produksi siap panen harian. Ukuran standar konsumsi warung tersedia optimal saat ini.`;
+    statusStok.innerHTML = `<span style="color: var(--cyber-green); font-weight: 800;">● LIVE_STOK_READY</span> — Kolam produksi siap panen harian skala warung kuliner.`;
   }
 </script>
 
 </body>
 </html>
-
-          
