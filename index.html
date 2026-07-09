@@ -72,7 +72,7 @@
 
   .profile-section { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; margin-top: 40px; }
   
-  /* BOX FOTO WA/TIKTOK STYLE PERMANEN */
+  /* BOX FOTO PERMANEN */
   .photo-box { 
     width: 150px; height: 150px; background: var(--bg-card); border: 3px solid var(--cyber-green); 
     border-radius: 50%; overflow: hidden; box-shadow: 0 0 20px var(--cyber-glow); position: relative; cursor: pointer;
@@ -118,7 +118,7 @@
   
   .nota-header { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding-bottom: 24px; margin-bottom: 36px; flex-wrap: wrap; gap: 16px; }
   
-  .calc-box { background: var(--bg-card); padding: 28px; border-radius: 16px; margin-bottom: 40px; border: 1px solid var(--border); }
+  .calc-box { background: var(--bg-card); padding: 28px; border-radius: 16px; margin-bottom: 20px; border: 1px solid var(--border); }
   .form-group { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
   .form-group .field { flex: 1; min-width: 200px; }
   .form-group label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-sub); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -131,6 +131,16 @@
   .hasil-container { background: #050507; padding: 24px; border-radius: 12px; border-left: 4px solid var(--cyber-green); margin-top: 24px; display: none; box-shadow: inset 0 2px 8px rgba(0,0,0,0.8); }
   .hasil-container.tampil { display: block; }
   .hasil-container .angka { font-size: 2.5rem; font-weight: 800; color: var(--cyber-green); text-shadow: 0 0 15px var(--cyber-glow); }
+
+  /* DATA RINCIAN LOGISTIK */
+  .rincian-logistik { margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(255,255,255,0.1); font-size: 0.85rem; color: var(--text-sub); }
+  .rincian-logistik li { list-style: none; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .rincian-logistik li::before { content: '→'; color: var(--cyber-green); font-weight: bold; }
+
+  /* TKJ CYBER TERMINAL BOX */
+  .cyber-terminal { background: #050507; border: 1px solid var(--border); border-radius: 12px; padding: 16px; font-family: monospace; font-size: 0.8rem; color: #a4a9c6; margin-bottom: 40px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.8); }
+  .terminal-header { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--cyber-green); border-bottom: 1px solid rgba(0,255,102,0.1); padding-bottom: 8px; margin-bottom: 10px; font-weight: bold; }
+  .terminal-line { margin-bottom: 4px; line-height: 1.4; }
 
   /* DAFTAR PRODUK CYBER SYSTEM */
   .lele-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
@@ -188,7 +198,7 @@
     <div class="profile-section">
       
       <div class="photo-box" onclick="bukaGaleri('input-profil')">
-        <img id="img-profil" src="wallpaper lele.jpg" alt="Foto Profil">
+        <img id="img-profil" src="wallpaper-lele.jpg" alt="Foto Profil">
         <div class="upload-overlay">GANTI FOTO PROFIL</div>
       </div>
       <input type="file" id="input-profil" class="input-galeri" accept="image/*" onchange="prosesFoto(this, 'img-profil', 'save-profil')">
@@ -301,7 +311,7 @@
       <div class="form-group">
         <div class="field">
           <label>Target Jumlah Porsi</label>
-          <input type="number" id="porsi" placeholder="Contoh: 60">
+          <input type="number" id="porsi" placeholder="Contoh: 60" min="1">
         </div>
         <div class="field">
           <label>Klasifikasi Kiloan</label>
@@ -317,7 +327,24 @@
       <div class="hasil-container" id="hasil-box">
         <div class="angka" id="hasil-kg">— kg</div>
         <p class="sub" id="hasil-ket" style="font-size: 0.9rem; margin-top: 8px;"></p>
+        
+        <div class="rincian-logistik">
+          <li id="logistik-ekor">Estimasi kebutuhan fisik: — ekor</li>
+          <li id="logistik-packing">Rekomendasi kemasan: —</li>
+        </div>
       </div>
+    </div>
+
+    <div class="cyber-terminal">
+      <div class="terminal-header">
+        <span>[NODE_CONNECTION_MONITOR]</span>
+        <span>STATUS: ONLINE</span>
+      </div>
+      <div class="terminal-line" style="color: var(--cyber-green);">ekodanang@cyber-client:~# systemctl status eko-lele-dashboard</div>
+      <div class="terminal-line">• pool_node_01.service - Pool Logistical Link System</div>
+      <div class="terminal-line">&nbsp;&nbsp; Active: active (running) since localized boot system</div>
+      <div class="terminal-line" id="terminal-ping">&nbsp;&nbsp; Latency to local database node: checking...</div>
+      <div class="terminal-line">&nbsp;&nbsp; Environment: Mobile Linux Core (Termux-Android Environment)</div>
     </div>
 
     <h3 style="margin-bottom: 4px; font-size: 1.3rem;">Daftar Produk Unggulan</h3>
@@ -327,7 +354,7 @@
       
       <div class="lele-card">
         <div class="lele-photo" onclick="bukaGaleri('input-produk1')">
-          <img id="img-produk1" src="lele segar.jpg" alt="Lele Hidup Standar">
+          <img id="img-produk1" src="lele-segar.jpg" alt="Lele Hidup Standar" loading="lazy">
           <div class="upload-overlay">KLIK UNTUK UBAH FOTO</div>
         </div>
         <input type="file" id="input-produk1" class="input-galeri" accept="image/*" onchange="prosesFoto(this, 'img-produk1', 'save-prod1')">
@@ -338,12 +365,9 @@
         <div>
           <div class="price">Rp 24.000<span style="font-size:0.85rem; color:var(--text-sub);">/kg</span></div>
           <a class="btn-buy" href="https://wa.me/6281532900269?text=Halo%20Eko%20Lele,%20saya%20mau%20pesan%20Lele%20Hidup%20Standar%208-10%20ekor/kg" target="_blank" rel="noopener">Pesan Sekarang</a>
-        </div>
-      </div>
-
-      <div class="lele-card">
+          </div>      </div> <div class="lele-card">
         <div class="lele-photo" onclick="bukaGaleri('input-produk2')">
-          <img id="img-produk2" src="lele segar.jpg" alt="Lele Hidup Besar">
+          <img id="img-produk2" src="lele-besar.jpg" alt="Lele Hidup Besar" loading="lazy">
           <div class="upload-overlay">KLIK UNTUK UBAH FOTO</div>
         </div>
         <input type="file" id="input-produk2" class="input-galeri" accept="image/*" onchange="prosesFoto(this, 'img-produk2', 'save-prod2')">
@@ -359,7 +383,7 @@
 
       <div class="lele-card">
         <div class="lele-photo" onclick="bukaGaleri('input-produk3')">
-          <img id="img-produk3" src="lele bumbu.jpg" alt="Lele Bumbu Kuning">
+          <img id="img-produk3" src="lele-bumbu.jpg" alt="Lele Bumbu Kuning" loading="lazy">
           <div class="upload-overlay">KLIK UNTUK UBAH FOTO</div>
         </div>
         <input type="file" id="input-produk3" class="input-galeri" accept="image/*" onchange="prosesFoto(this, 'img-produk3', 'save-prod3')">
@@ -373,7 +397,9 @@
         </div>
       </div>
 
-    </d    </div> <div style="margin-top: 40px; text-align: center; border-top: 1px dashed var(--border); padding-top: 32px;">
+    </div> 
+    
+    <div style="margin-top: 40px; text-align: center; border-top: 1px dashed var(--border); padding-top: 32px;">
       <p class="sub" style="margin-bottom: 16px;">Membutuhkan pasokan rutin terjadwal skala warung atau restoran?</p>
       <a class="btn btn-outline" id="wa-langganan" href="#" target="_blank" rel="noopener" style="border-color: var(--cyber-green); color: var(--cyber-green);">Kemitraan Grosir Via WA</a>
     </div>
@@ -400,8 +426,7 @@
 <a class="wa-floating" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Chat">✉</a>
 
 <script>
-  // ---------- LOGIKA PICKER FOTO DENGAN KOMPRESI OTOMATIS ----------
-  // Solusi mutakhir agar browser tidak eror "QuotaExceededError" akibat foto kamera HP terlalu besar
+  // ---------- LOGIKA PICKER FOTO PERMANEN DENGAN REDUKSI CANVAS ----------
   function bukaGaleri(inputId) {
     document.getElementById(inputId).click();
   }
@@ -412,30 +437,25 @@
       reader.onload = function(e) {
         const img = new Image();
         img.onload = function() {
-          // Membuat canvas bayangan untuk mereduksi resolusi gambar asli
+          // Membuat canvas bayangan untuk meresize resolusi agar tidak melebihi kuota localStorage browser
           const canvas = document.createElement('canvas');
           const ctx = canvas.getContext('2d');
           
-          // Membatasi lebar maksimal foto ke 400px (Sangat ringan untuk penyimpanan lokal)
-          const max_width = 400;
+          const max_width = 400; // Lebar gambar maksimal 400px (Sangat cukup untuk web mobile)
           const scale = max_width / img.width;
           canvas.width = max_width;
           canvas.height = img.height * scale;
           
-          // Menggambar ulang foto ke canvas berukuran mini
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
           
-          // Mengubah data gambar menjadi format JPEG berukuran < 40KB
+          // Kompres kualitas ke JPEG 0.7 (File di bawah 40KB)
           const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
           
-          // Update visual di layar web
           document.getElementById(imgId).src = compressedBase64;
-          
-          // Menyimpan secara aman ke memori browser
           try {
             localStorage.setItem(storageKey, compressedBase64);
           } catch (error) {
-            console.log("Penyimpanan lokal penuh, gagal menyimpan foto permanen.");
+            console.log("Storage penuh, gagal menyimpan permanen.");
           }
         };
         img.src = e.target.result;
@@ -444,7 +464,7 @@
     }
   }
 
-  // Meload foto secara otomatis setiap kali website dimuat ulang oleh user
+  // Muat otomatis foto dari penyimpanan lokal saat web dibuka kembali
   window.addEventListener('DOMContentLoaded', () => {
     const keys = [
       { key: 'save-profil', id: 'img-profil' },
@@ -458,9 +478,14 @@
         document.getElementById(item.id).src = savedImg;
       }
     });
+
+    // Sentuhan TKJ: Efek ping acak murni pada panel terminal
+    const pings = [11, 14, 12, 15, 9, 13];
+    const randomPing = pings[Math.floor(Math.random() * pings.length)];
+    document.getElementById('terminal-ping').innerHTML = `&nbsp;&nbsp; Latency to local database node: <span style="color: var(--cyber-green); font-weight: bold;">${randomPing}ms (Excellent)</span>`;
   });
 
-  // ---------- LOGIKA KODE UTAMA & KALKULATOR ----------
+  // ---------- LOGIKA LOGISTIK UTAMA & KALKULATOR ----------
   const tgl = new Date();
   document.getElementById('nomor-nota').textContent =
     tgl.getFullYear().toString().slice(2) + String(tgl.getMonth()+1).padStart(2,'0') + String(tgl.getDate()).padStart(2,'0') +
@@ -469,32 +494,66 @@
   document.getElementById('tanggal-nota').textContent =
     tgl.toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
 
-  document.getElementById('hitung-btn').addEventListener('click', () => {
-    const porsiVal = parseFloat(document.getElementById('porsi').value);
+  const HP_EKO = '6281532900269';
+
+  document.getElementById('hitung-btn').addEventListener('click', function() {
+    let porsiVal = parseFloat(document.getElementById('porsi').value);
     const isiVal = parseFloat(document.getElementById('ukuran').value);
     const boxHasil = document.getElementById('hasil-box');
+    const btnHitung = this;
+
+    // Proteksi Keamanan Sistem: Ubah input minus secara paksa menjadi nilai mutlak positif
+    if (porsiVal < 0) {
+      porsiVal = Math.abs(porsiVal);
+      document.getElementById('porsi').value = porsiVal;
+    }
 
     if (!porsiVal || porsiVal <= 0) {
       boxHasil.classList.add('tampil');
       document.getElementById('hasil-kg').textContent = '—';
-      document.getElementById('hasil-ket').textContent = 'Masukkan nilai target porsi lele terlebih dahulu.';
+      document.getElementById('hasil-ket').textContent = 'Masukkan nilai target porsi lele yang valid terlebih dahulu.';
+      document.getElementById('logistik-ekor').textContent = 'Estimasi kebutuhan fisik: — ekor';
+      document.getElementById('logistik-packing').textContent = 'Rekomendasi kemasan: —';
       return;
     }
 
-    const hitungKg = porsiVal / isiVal;
-    const bulatkanKg = Math.ceil(hitungKg * 2) / 2;
+    // Micro-interactions: Efek visual loading pada tombol pemroses data
+    btnHitung.textContent = "Menganalisis Data...";
+    btnHitung.style.opacity = "0.7";
+    btnHitung.style.transform = "scale(0.98)";
 
-    boxHasil.classList.add('tampil');
-    document.getElementById('hasil-kg').textContent = bulatkanKg.toFixed(1) + ' kg';
-    document.getElementById('hasil-ket').textContent =
-      `Estimasi alokasi bahan baku untuk suplai harian sebanyak ± ${porsiVal} porsi konsumsi kuliner.`;
+    setTimeout(() => {
+      btnHitung.textContent = "Proses Data Kiloan";
+      btnHitung.style.opacity = "1";
+      btnHitung.style.transform = "none";
+
+      const hitungKg = porsiVal / isiVal;
+      const bulatkanKg = Math.ceil(hitungKg * 2) / 2; // Pembulatan logistik per 0.5 kg terdekat
+
+      let totalEkor = Math.round(bulatkanKg * isiVal);
+      let kantongPacking = Math.ceil(bulatkanKg / 5); // Standar 1 wadah plastik muat maksimal 5kg lele hidup
+
+      boxHasil.classList.add('tampil');
+      document.getElementById('hasil-kg').textContent = bulatkanKg.toFixed(1) + ' kg';
+      document.getElementById('hasil-ket').textContent =
+        `Estimasi alokasi bahan baku untuk suplai harian sebanyak ± ${porsiVal} porsi konsumsi kuliner.`;
+      
+      document.getElementById('logistik-ekor').textContent = `Estimasi kebutuhan fisik: ± ${totalEkor} ekor lele hidup.`;
+      document.getElementById('logistik-packing').textContent = `Rekomendasi kemasan: ${kantongPacking} Kantong Plastik Oksigen Standar.`;
+
+      // Otomatisasi pembentukan template pesan WhatsApp berdasarkan kalkulasi terbaru
+      const spekText = document.getElementById('ukuran').options[document.getElementById('ukuran').selectedIndex].text;
+      const pesanWA = `Halo Mas Eko Lele, saya sudah menghitung di web. Saya butuh suplai untuk target ${porsiVal} porsi dengan spek ${spekText}. Estimasi kebutuhan sekitar ${bulatkanKg.toFixed(1)} kg (± ${totalEkor} ekor). Mau tanya info langganan grosirnya dong.`;
+      document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent(pesanWA);
+
+    }, 400);
   });
 
-  const HP_EKO = '6281532900269';
+  // Init tautan default awal tombol WhatsApp
   document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Lele, saya pemilik rumah makan/kuliner ingin mengajukan kerja sama grosir suplai lele rutin.');
   document.getElementById('wa-float').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Danang, saya melihat portofolio Anda dan tertarik untuk bertanya lebih lanjut.');
 
-  // ---------- LOGIKA STATUS REAL-TIME & WA INTEGRATION ----------
+  // ---------- LOGIKA STATUS REAL-TIME STOK KOLAM ----------
   const statusStok = document.getElementById('stok-keterangan');
   const jamSekarang = tgl.getHours();
 
@@ -503,18 +562,9 @@
   } else {
     statusStok.innerHTML = `<span style="color: var(--cyber-green); font-weight: 800;">● LIVE_STOK_READY</span> — Kolam produksi siap panen harian. Ukuran standar konsumsi warung tersedia optimal saat ini.`;
   }
-
-  document.getElementById('hitung-btn').addEventListener('click', () => {
-    const porsiVal = parseFloat(document.getElementById('porsi').value);
-    const isiVal = document.getElementById('ukuran').options[document.getElementById('ukuran').selectedIndex].text;
-    const kgHasil = document.getElementById('hasil-kg').textContent;
-
-    if (porsiVal > 0) {
-      const pesanWA = `Halo Mas Eko Lele, saya sudah menghitung di web. Saya butuh suplai untuk target ${porsiVal} porsi dengan spek ${isiVal}. Estimasi kebutuhan sekitar ${kgHasil}. Mau tanya info langganan grosirnya dong.`;
-      document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent(pesanWA);
-    }
-  });
 </script>
 
 </body>
 </html>
+
+          
