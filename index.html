@@ -7,6 +7,8 @@
     <title>King Lobster - Tangkapan Segar Premium Langsung dari Nelayan</title>
     <meta name="description" content="Jual lobster laut segar premium langsung dari nelayan lokal. Garansi segar, kualitas bintang lima, siap kirim dengan rantai pasok dingin terjamin.">
     <meta name="keywords" content="jual lobster segar, lobster laut premium, lobster mutiara, nelayan lobster, seafood fresh">
+    <meta name="robots" content="index,follow">
+    <meta name="author" content="Eko Danang">
     
     <meta name="theme-color" content="#0f172a">
 
@@ -26,7 +28,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22 width=%2232%22 height=%2232%22><text y=%2226%22 font-size=%2226%22>🦞</text></svg>">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link class="manifest" href="manifest.json">
+    <link rel="manifest" href="manifest.json">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -58,6 +60,15 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
     </style>
 
@@ -225,7 +236,7 @@
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </span>
-                <input type="text" id="search-input" oninput="filterAndSearchProducts()" placeholder="Cari lobster favoritmu..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm transition shadow-sm">
+                <input type="text" id="search-input" oninput="filterAndSearchProducts()" placeholder="Cari berdasarkan nama, jenis, deskripsi..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm transition shadow-sm">
             </div>
             
             <div class="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
@@ -235,7 +246,26 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 space-y-4">
+                <div class="skeleton w-full aspect-[4/3] rounded-xl"></div>
+                <div class="skeleton h-6 w-2/3 rounded-md"></div>
+                <div class="skeleton h-4 w-full rounded-md"></div>
+                <div class="skeleton h-10 w-full rounded-xl"></div>
+            </div>
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 space-y-4">
+                <div class="skeleton w-full aspect-[4/3] rounded-xl"></div>
+                <div class="skeleton h-6 w-2/3 rounded-md"></div>
+                <div class="skeleton h-4 w-full rounded-md"></div>
+                <div class="skeleton h-10 w-full rounded-xl"></div>
+            </div>
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 space-y-4">
+                <div class="skeleton w-full aspect-[4/3] rounded-xl"></div>
+                <div class="skeleton h-6 w-2/3 rounded-md"></div>
+                <div class="skeleton h-4 w-full rounded-md"></div>
+                <div class="skeleton h-10 w-full rounded-xl"></div>
+            </div>
+        </div>
     </section>
 
     <section id="galeri" class="py-20 bg-white border-y border-slate-100">
@@ -245,22 +275,22 @@
                 <p class="text-slate-500 mt-2">Galeri real-time kualitas komoditas segar langsung dari kapal nelayan lokal kami.</p>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm" data-aos="zoom-in">
+                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in" data-aos="zoom-in" onclick="openZoomImage(this)">
                     <img src="https://images.unsplash.com/photo-1559742811-82410b451b9b?auto=format&fit=crop&w=400&q=80" loading="lazy" alt="Dokumentasi King Lobster 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 </div>
-                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm" data-aos="zoom-in" data-aos-delay="50">
+                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in" data-aos="zoom-in" data-aos-delay="50" onclick="openZoomImage(this)">
                     <img src="https://images.unsplash.com/photo-1553618551-fba689030290?auto=format&fit=crop&w=400&q=80" loading="lazy" alt="Dokumentasi King Lobster 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 </div>
-                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm" data-aos="zoom-in" data-aos-delay="100">
+                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in" data-aos="zoom-in" data-aos-delay="100" onclick="openZoomImage(this)">
                     <img src="https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=400&q=80" loading="lazy" alt="Dokumentasi King Lobster 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 </div>
-                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm" data-aos="zoom-in" data-aos-delay="150">
+                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in" data-aos="zoom-in" data-aos-delay="150" onclick="openZoomImage(this)">
                     <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?auto=format&fit=crop&w=400&q=80" loading="lazy" alt="Dokumentasi King Lobster 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 </div>
-                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm" data-aos="zoom-in" data-aos-delay="200">
+                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in" data-aos="zoom-in" data-aos-delay="200" onclick="openZoomImage(this)">
                     <img src="https://images.unsplash.com/photo-1551248429-40975aa4de74?auto=format&fit=crop&w=400&q=80" loading="lazy" alt="Dokumentasi King Lobster 5" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 </div>
-                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm" data-aos="zoom-in" data-aos-delay="250">
+                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in" data-aos="zoom-in" data-aos-delay="250" onclick="openZoomImage(this)">
                     <img src="https://images.unsplash.com/photo-1534080391025-0967e9bc1c0e?auto=format&fit=crop&w=400&q=80" loading="lazy" alt="Dokumentasi King Lobster 6" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 </div>
             </div>
@@ -277,7 +307,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/60" data-aos="zoom-in" data-aos-delay="100">
                     <div class="flex text-amber-400 mb-4 space-x-1">
-                        <i class="fa-solid fa-star                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -436,6 +467,11 @@
         </div>
     </div>
 
+    <div id="zoom-lightbox" class="fixed inset-0 bg-black/90 z-50 invisible opacity-0 transition-all duration-300 flex items-center justify-center p-4" onclick="closeZoomImage()">
+        <button class="absolute top-6 right-6 text-white text-3xl hover:text-orange-500 transition"><i class="fa-solid fa-xmark"></i></button>
+        <img id="lightbox-img" src="" alt="Zoom Image" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300">
+    </div>
+
     <div id="toast-container" class="fixed bottom-24 left-6 z-50 space-y-2 pointer-events-none"></div>
 
     <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20ingin%20tanya%20stok%20lobster%20hari%20ini." 
@@ -459,6 +495,15 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+        // PWA Service Worker Registration
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("service-worker.js")
+                    .then(reg => console.log("PWA Service Worker registered successfully:", reg.scope))
+                    .catch(err => console.error("PWA Service Worker registration failed:", err));
+            });
+        }
+
         const products = [
             {
                 id: "p1",
@@ -466,7 +511,9 @@
                 type: "Premium",
                 desc: "Raja segala lobster dengan daging yang sangat padat, manis alami, dan tekstur yang lembut sempurna.",
                 weightRange: "800g - 1kg / ekor",
-                price: 650000,
+                price: 599000,
+                oldPrice: 650000,
+                stock: 4,
                 image: "https://images.unsplash.com/photo-1553618551-fba689030290?auto=format&fit=crop&w=600&q=80",
                 badge: "Paling Dicari"
             },
@@ -477,6 +524,8 @@
                 desc: "Sangat cocok untuk olahan saus padang atau dibakar. Memiliki kulit yang lebih tipis dengan daging melimpah.",
                 weightRange: "300g - 500g / ekor",
                 price: 350000,
+                oldPrice: null,
+                stock: 12,
                 image: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?auto=format&fit=crop&w=600&q=80",
                 badge: ""
             },
@@ -486,7 +535,9 @@
                 type: "Premium",
                 desc: "Cita rasa gurih yang khas dengan cangkang bermotif unik. Menjadi favorit untuk hidangan sup seafood mewah.",
                 weightRange: "500g - 700g / ekor",
-                price: 420000,
+                price: 399000,
+                oldPrice: 420000,
+                stock: 3,
                 image: "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=600&q=80",
                 badge: "Best Value"
             }
@@ -502,7 +553,10 @@
             
             const filteredProducts = products.filter(p => {
                 const matchesCategory = currentCategory === 'All' || p.type === currentCategory;
-                const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+                const s = searchQuery.toLowerCase();
+                const matchesSearch = p.name.toLowerCase().includes(s) || 
+                                      p.type.toLowerCase().includes(s) || 
+                                      p.desc.toLowerCase().includes(s);
                 return matchesCategory && matchesSearch;
             });
 
@@ -512,7 +566,7 @@
             }
             
             container.innerHTML = filteredProducts.map(p => `
-                <div class="bg-white/80 backdrop-blur-md rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200/60 flex flex-col group" data-aos="fade-up">
+                <div class="bg-white/80 backdrop-blur-md rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200/60 flex flex-col group">
                     <div class="relative overflow-hidden aspect-[4/3]">
                         <img src="${p.image}" loading="lazy" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         ${p.badge ? `<div class="absolute top-4 left-4 bg-orange-500 text-white font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">${p.badge}</div>` : ''}
@@ -520,8 +574,17 @@
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">
                         <div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-1">${p.name}</h3>
-                            <p class="text-slate-500 text-xs mb-4">Kategori: <span class="font-semibold text-orange-500">${p.type}</span></p>
+                            <div class="flex items-center justify-between mb-1">
+                                <h3 class="text-xl font-bold text-slate-900">${p.name}</h3>
+                            </div>
+                            <p class="text-slate-500 text-xs mb-3">Kategori: <span class="font-semibold text-orange-500">${p.type}</span></p>
+                            
+                            ${p.stock <= 5 ? `
+                                <div class="mb-3 inline-flex items-center text-xs font-bold text-red-600 bg-red-50 px-2.5 py-1 rounded-lg border border-red-100">
+                                    <i class="fa-solid fa-fire-flame-curved mr-1.5 text-orange-500 animate-pulse"></i> Sisa ${p.stock} Kg Lagi!
+                                </div>
+                            ` : ''}
+
                             <p class="text-slate-600 text-sm mb-4 leading-relaxed">${p.desc}</p>
                             
                             <div class="mb-6">
@@ -537,9 +600,12 @@
                         <div class="flex items-center justify-between pt-4 border-t border-slate-100">
                             <div>
                                 <span class="text-xs text-slate-400 block font-semibold">Total Harga</span>
-                                <span id="price-view-${p.id}" class="text-xl font-extrabold text-slate-900">Rp ${p.price.toLocaleString('id-ID')}</span>
+                                <div class="flex flex-col">
+                                    ${p.oldPrice ? `<span class="text-xs text-slate-400 line-through font-medium" id="old-price-view-${p.id}">Rp ${p.oldPrice.toLocaleString('id-ID')}</span>` : ''}
+                                    <span id="price-view-${p.id}" class="text-xl font-extrabold text-slate-900">Rp ${p.price.toLocaleString('id-ID')}</span>
+                                </div>
                             </div>
-                            <button onclick="addCustomToCart('${p.id}')" class="bg-slate-900 hover:bg-orange-500 text-white font-bold p-3 rounded-xl transition-all duration-300 flex items-center space-x-2" aria-label="Tambah ke keranjang">
+                            <button onclick="addCustomToCart('${p.id}')" class="bg-slate-900 hover:bg-orange-500 text-white font-bold p-3 rounded-xl transition-all duration-300 flex items-center space-x-2">
                                 <i class="fa-solid fa-cart-plus"></i>
                                 <span class="text-sm px-1">Beli</span>
                             </button>
@@ -550,10 +616,16 @@
         }
 
         function updatePriceDisplay(id, basePrice) {
+            const product = products.find(p => p.id === id);
             const weight = document.getElementById(`weight-${id}`).value;
             const view = document.getElementById(`price-view-${id}`);
+            const oldView = document.getElementById(`old-price-view-${id}`);
+            
             if(view) {
                 view.textContent = 'Rp ' + (basePrice * weight).toLocaleString('id-ID');
+            }
+            if(oldView && product.oldPrice) {
+                oldView.textContent = 'Rp ' + (product.oldPrice * weight).toLocaleString('id-ID');
             }
         }
 
@@ -578,18 +650,40 @@
             renderProducts();
         }
 
+        function openZoomImage(element) {
+            const imgSrc = element.querySelector('img').src;
+            const lightbox = document.getElementById('zoom-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = imgSrc;
+            lightbox.classList.remove('invisible', 'opacity-0');
+            setTimeout(() => lightboxImg.classList.remove('scale-95'), 50);
+        }
+
+        function closeZoomImage() {
+            const lightbox = document.getElementById('zoom-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.classList.add('scale-95');
+            lightbox.classList.add('opacity-0');
+            setTimeout(() => {
+                lightbox.classList.add('invisible');
+                lightboxImg.src = "";
+            }, 300);
+        }
+
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             if (preloader) {
-                preloader.addEventListener('transitionend', () => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+                setTimeout(() => {
                     preloader.remove();
                     renderProducts();
                     AOS.init({ once: true, duration: 800 });
                     initCounters();
                     updateCartUI();
-                });
-                preloader.style.opacity = '0';
-                preloader.style.visibility = 'hidden';
+                }, 500);
             }
         });
 
@@ -648,7 +742,7 @@
             const container = document.getElementById('toast-container');
             if (!container) return;
             const toast = document.createElement('div');
-            toast.className = "bg-slate-900 text-white text-sm font-semibold px-4 py-3 rounded-xl shadow-xl flex items-center space-x-2 animate-bounce transform transition-all duration-300 opacity-0 translate-y-2 pointer-events-auto";
+            toast.className = "bg-slate-900 text-white text-sm font-semibold px-4 py-3 rounded-xl shadow-xl flex items-center space-x-2 transform transition-all duration-300 opacity-0 translate-y-2 pointer-events-auto";
             toast.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> <span>${message}</span>`;
             
             container.appendChild(toast);
