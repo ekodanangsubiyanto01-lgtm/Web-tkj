@@ -1,563 +1,1240 @@
-<!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>King Lobster Indonesia - Premium Wild Fresh Seafood</title>
-    <meta name="description" content="Supplier lobster laut premium Indonesia. Menyediakan Lobster Mutiara, Pasir, Bambu, Batik, Batu, dan Pakistan segar langsung dari nelayan Palabuhanratu.">
-    <link rel="icon" type="image/jpeg" href="lobster-1.jpg">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <style>
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-    </style>
-</head>
-<body class="bg-slate-50 text-slate-800 antialiased font-sans">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md text-white border-b border-slate-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-                <i class="fa-solid fa-shrimp text-orange-500 text-2xl"></i>
-                <span class="font-black text-lg tracking-wider uppercase">KING<span class="text-orange-500">LOBSTER</span></span>
-            </div>
-            <nav class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-wider">
-                <a href="#" class="text-orange-500 transition">Home</a>
-                <a href="#keunggulan" class="text-slate-300 hover:text-white transition">Keunggulan</a>
-                <a href="#produk" class="text-slate-300 hover:text-white transition">Produk</a>
-                <a href="#galeri" class="text-slate-300 hover:text-white transition">Galeri</a>
-                <a href="#faq" class="text-slate-300 hover:text-white transition">FAQ</a>
-            </nav>
-            <div class="flex items-center space-x-4">
-                <button onclick="toggleCartModal()" class="relative p-2 text-slate-300 hover:text-white transition">
-                    <i class="fa-solid fa-basket-shopping text-xl"></i>
-                    <span id="cart-count-badge" class="absolute -top-1 -right-1 bg-orange-500 text-white font-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
-                </button>
-            </div>
-        </div>
-    </header>
+<title>King Lobster Indonesia | Supplier Lobster Laut Premium</title>
 
-    <section class="relative bg-slate-900 text-white py-32 px-4 overflow-hidden bg-cover bg-center" style="background-image: url('lobster-7.jpg');">
-        <div class="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/80 to-slate-950/95"></div>
-        <div class="max-w-5xl mx-auto text-center relative z-10 space-y-6" data-aos="fade-up">
-            <span class="bg-orange-500/20 text-orange-400 font-bold text-xs px-4 py-1.5 rounded-full border border-orange-500/30 uppercase tracking-widest backdrop-blur-sm">Premium Wild Seafood</span>
-            <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight">Supplier Lobster Laut Lepas<br><span class="text-orange-500">Segar & Berkualitas</span></h1>
-            <p class="text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">Komoditas lobster premium dari nelayan lokal Palabuhanratu. Dijamin presisi, aman, dan menjaga kualitas kesegaran hingga ke dapur bisnis kuliner Anda.</p>
-            <div class="pt-4">
-                <a href="#produk" class="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-xl transition shadow-lg shadow-orange-500/30 inline-flex items-center space-x-2 text-sm">
-                    <span>Lihat Koleksi Tangkapan</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+<meta name="description" content="Supplier lobster laut premium Indonesia. Lobster Mutiara, Pasir, Bambu, Batik, Batu, Pakistan. Fresh langsung dari nelayan Palabuhanratu.">
 
-    <section id="keunggulan" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
-            <h2 class="text-3xl font-black text-slate-900 tracking-tight">Mengapa Memilih King Lobster?</h2>
-            <p class="text-slate-600 mt-2">Standar kualitas ketat demi menjaga cita rasa kemewahan hidangan laut Anda.</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm space-y-4" data-aos="fade-up" data-aos-delay="50">
-                <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg"><i class="fa-solid fa-snowflake"></i></div>
-                <h3 class="font-bold text-slate-900">Cold Chain</h3>
-                <p class="text-slate-500 text-xs leading-relaxed">Suhu dikontrol ketat sejak dari kapal nelayan hingga pengiriman akhir.</p>
-            </div>
-            <div class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm space-y-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg"><i class="fa-solid fa-truck-fast"></i></div>
-                <h3 class="font-bold text-slate-900">Pengiriman Cepat</h3>
-                <p class="text-slate-500 text-xs leading-relaxed">Kurir logistik khusus menjamin paket tiba tepat waktu dalam kondisi prima.</p>
-            </div>
-            <div class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm space-y-4" data-aos="fade-up" data-aos-delay="150">
-                <div class="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center text-lg"><i class="fa-solid fa-anchor"></i></div>
-                <h3 class="font-bold text-slate-900">Fresh From Fisherman</h3>
-                <p class="text-slate-500 text-xs leading-relaxed">Tangkapan liar harian asli dari nelayan Palabuhanratu, Sukabumi.</p>
-            </div>
-            <div class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm space-y-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg"><i class="fa-solid fa-shield-halved"></i></div>
-                <h3 class="font-bold text-slate-900">Garansi Kualitas</h3>
-                <p class="text-slate-500 text-xs leading-relaxed">Uang kembali atau retur jika kesegaran produk tidak sesuai standar utama.</p>
-            </div>
-        </div>
-    </section>
+<meta name="keywords" content="lobster, lobster laut, seafood, king lobster, lobster hidup, supplier lobster, lobster premium, jual lobster">
 
-    <section class="bg-slate-950 text-white py-16 border-t border-b border-slate-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-                <span class="block text-3xl font-black text-orange-500 mb-1"><span class="counter-value" data-target="1500">0</span>+</span>
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Pesanan Sukses</span>
-            </div>
-            <div>
-                <span class="block text-3xl font-black text-orange-500 mb-1"><span class="counter-value" data-target="98">0</span>%</span>
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Pelanggan Puas</span>
-            </div>
-            <div>
-                <span class="block text-3xl font-black text-orange-500 mb-1">24 Jam</span>
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Jaminan Segar</span>
-            </div>
-            <div>
-                <span class="block text-3xl font-black text-orange-500 mb-1">100%</span>
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Nelayan Lokal</span>
-            </div>
-        </div>
-    </section>
+<meta name="author" content="King Lobster Indonesia">
 
-    <section id="produk" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
-            <h2 class="text-3xl font-black text-slate-900 tracking-tight">Koleksi Tangkapan Terbaik</h2>
-            <p class="text-slate-600 mt-2">Pilih jenis lobster laut premium favorit Anda. Harga transparan berdasarkan standar kualitas mutu.</p>
-        </div>
+<meta name="robots" content="index, follow">
 
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8" data-aos="fade-up">
-            <div class="relative flex-1 max-w-md">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400 text-sm"></i>
-                <input type="text" id="search-input" onkeyup="filterAndSearchProducts()" placeholder="Cari berdasarkan nama atau jenis..." class="w-full bg-white border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition">
-            </div>
-            <div class="flex flex-wrap gap-2">
-                <button onclick="filterCategory(event, 'All')" class="category-btn bg-slate-900 text-white font-bold text-xs px-5 py-2.5 rounded-xl border border-slate-900 transition shadow-sm">Semua</button>
-                <button onclick="filterCategory(event, 'Premium')" class="category-btn bg-white text-slate-600 font-bold text-xs px-5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 transition">Premium</button>
-                <button onclick="filterCategory(event, 'Fresh')" class="category-btn bg-white text-slate-600 font-bold text-xs px-5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 transition">Fresh</button>
-            </div>
-        </div>
+<meta name="theme-color" content="#0f172a">
 
-        <div id="product-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" data-aos="fade-up">
-            </div>
-    </section>
+<link rel="canonical" href="https://kinglobster.id">
 
-    <section class="py-20 bg-slate-100 border-t border-b border-slate-200/50">
-        <div class="max-w-5xl mx-auto px-4 text-center space-y-8" data-aos="fade-up">
-            <i class="fa-solid fa-quote-left text-4xl text-orange-500/40"></i>
-            <div class="max-w-3xl mx-auto">
-                <p class="text-lg font-medium text-slate-800 italic leading-relaxed">"Lobsternya masih sangat segar saat sampai di lokasi tujuan. Berat timbangannya presisi dan kemasannya aman menggunakan standard box styrofoam tebal."</p>
-                <p class="text-sm font-bold text-slate-900 mt-4">&mdash; Owner Seafood Culinary Group, Bandung</p>
-            </div>
-        </div>
-    </section>
+<!-- Open Graph -->
 
-    <section id="galeri" class="py-20 bg-white border-t border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
-                <h2 class="text-3xl font-black text-slate-900 tracking-tight">Galeri & Dokumentasi Lobster</h2>
-                <p class="text-slate-600 mt-2">Koleksi real-time kualitas komoditas segar langsung dari penangkaran dan nelayan kami.</p>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="50" onclick="openZoomImage(this)">
-                    <img src="lobster-1.jpg" loading="eager" alt="Lobster Segar 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Lobster Premium</span>
-                </div>
-                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="100" onclick="openZoomImage(this)">
-                    <img src="lobster-2.jpg" loading="lazy" alt="Lobster Segar 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Tangkapan Segar</span>
-                </div>
-                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="150" onclick="openZoomImage(this)">
-                    <img src="lobster-3.jpg" loading="lazy" alt="Lobster Segar 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Kualitas Ekspor</span>
-                </div>
-                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="200" onclick="openZoomImage(this)">
-                    <img src="lobster-4.jpg" loading="lazy" alt="Lobster Segar 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Kondisi Hidup</span>
-                </div>
-                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="250" onclick="openZoomImage(this)">
-                    <img src="lobster-5.jpg" loading="lazy" alt="Kolam Budidaya Lobster" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Fasilitas Kolam</span>
-                </div>
-                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="300" onclick="openZoomImage(this)">
-                    <img src="lobster-6.jpg" loading="lazy" alt="Lobster Segar 6" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Sortir Ukuran</span>
-                </div>
-                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="350" onclick="openZoomImage(this)">
-                    <img src="lobster-7.jpg" loading="lazy" alt="Lobster Segar 7" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Stok Melimpah</span>
-                </div>
-                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="400" onclick="openZoomImage(this)">
-                    <img src="lobster-8.jpg" loading="lazy" alt="Lobster Segar 8" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Pengecekan Mutu</span>
-                </div>
-                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="450" onclick="openZoomImage(this)">
-                    <img src="lobster-9.jpg" loading="lazy" alt="Lobster Segar 9" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Siap Kirim</span>
-                </div>
-            </div>
-        </div>
-    </section>
+<meta property="og:type" content="website">
 
-    <section id="faq" class="py-20 bg-white border-t border-slate-100">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
-                <h2 class="text-3xl font-black text-slate-900 tracking-tight">Pertanyaan Umum (FAQ)</h2>
-            </div>
-            <div class="space-y-4">
-                <div class="border border-slate-200 rounded-xl overflow-hidden" data-aos="fade-up">
-                    <button class="w-full flex justify-between items-center p-5 font-bold text-left text-slate-900 bg-slate-50 hover:bg-slate-100/80 transition" onclick="toggleFaq(this)">
-                        <span>Bagaimana cara pengiriman ke luar kota?</span>
-                        <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-answer bg-white">
-                        <p class="p-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100">Kami menggunakan ekspedisi khusus kargo udara 1 hari sampai (*Same Day / Next Day Service*) yang dilengkapi fasilitas penyimpanan beku portabel atau kotak styrofoam dengan insulasi es khusus.</p>
-                    </div>
-                </div>
-                <div class="border border-slate-200 rounded-xl overflow-hidden" data-aos="fade-up">
-                    <button class="w-full flex justify-between items-center p-5 font-bold text-left text-slate-900 bg-slate-50 hover:bg-slate-100/80 transition" onclick="toggleFaq(this)">
-                        <span>Apakah produk dijamin halal dan legal?</span>
-                        <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-answer bg-white">
-                        <p class="p-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100">Ya, seluruh komoditas ditangkap secara legal mematuhi regulasi ukuran tangkap minimum dari KKP demi kelestarian alam lingkungan laut.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<meta property="og:title" content="King Lobster Indonesia">
 
-    <footer id="kontak" class="bg-slate-950 text-slate-400 pt-16 pb-8 border-t border-slate-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            <div class="md:col-span-1 space-y-4" data-aos="fade-up">
-                <div class="flex items-center space-x-2 text-white">
-                    <i class="fa-solid fa-shrimp text-orange-500 text-2xl"></i>
-                    <span class="font-black text-lg tracking-wider uppercase">KING<span class="text-orange-500">LOBSTER</span></span>
-                </div>
-                <p class="text-xs leading-relaxed">Penyedia komoditas lobster laut lepas segar premium di Indonesia. Berkomitmen tinggi menjaga integrasi suhu produk dari hulu ke hilir.</p>
-                
-                <div class="flex space-x-3 pt-2">
-                    <a href="#" class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-orange-500 hover:border-orange-500/50 flex items-center justify-center transition text-sm"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-orange-500 hover:border-orange-500/50 flex items-center justify-center transition text-sm"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-orange-500 hover:border-orange-500/50 flex items-center justify-center transition text-sm"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="mailto:info@kinglobster.id" class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-orange-500 hover:                </div>
-            </div>
-            
-            <div data-aos="fade-up" data-aos-delay="100">
-                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Hubungi & Jam Kerja</h4>
-                <ul class="space-y-3 text-xs">
-                    <li class="flex items-start">
-                        <i class="fa-solid fa-location-dot mt-0.5 mr-3 text-orange-500"></i>
-                        <span>Dermaga Sentra Nelayan Palabuhanratu, Sukabumi, Jawa Barat.</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fa-solid fa-clock mr-3 text-orange-500"></i>
-                        <span>Senin - Sabtu: 08:00 - 17:00 WIB</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fa-solid fa-phone mr-3 text-orange-500"></i>
-                        <a href="https://wa.me/6281532900269" target="_blank" class="hover:text-white transition">+62 815-3290-0269</a>
-                    </li>
-                </ul>
-            </div>
+<meta property="og:description" content="Supplier Lobster Laut Premium Indonesia">
 
-            <div data-aos="fade-up" data-aos-delay="200">
-                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Mitra Logistik Khusus</h4>
-                <p class="text-xs mb-3">Menggunakan kurir berpendingin & kargo udara cepat:</p>
+<meta property="og:image" content="lobster-1.jpg">
+
+<meta property="og:url" content="https://kinglobster.id">
+
+<!-- Twitter -->
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="King Lobster Indonesia">
+
+<meta name="twitter:description" content="Supplier Lobster Laut Premium">
+
+<meta name="twitter:image" content="lobster-1.jpg">
+
+<link rel="icon" href="lobster-1.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+
+tailwind.config={
+
+darkMode:'class',
+
+theme:{
+
+extend:{
+
+fontFamily:{
+
+sans:['Poppins','sans-serif']
+
+},
+
+colors:{
+
+primary:'#f97316'
+
+},
+
+boxShadow:{
+
+glow:'0 0 40px rgba(249,115,22,.35)'
+
+}
+
+}
+
+}
+
+}
+
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+
+<style>
+
+html{
+
+scroll-behavior:smooth;
+
+}
+
+body{
+
+font-family:'Poppins',sans-serif;
+
+}
+
+::-webkit-scrollbar{
+
+width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#f97316;
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#e5e7eb;
+
+}
+
+.dark{
+
+background:#020617;
+
+color:white;
+
+}
+
+.faq-answer{
+
+max-height:0;
+
+overflow:hidden;
+
+transition:max-height .35s ease;
+
+}
+
+.glass{
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(12px);
+
+border:1px solid rgba(255,255,255,.1);
+
+}
+
+.hero-overlay{
+
+background:linear-gradient(
+
+180deg,
+
+rgba(2,6,23,.75),
+
+rgba(2,6,23,.85),
+
+rgba(2,6,23,.95)
+
+);
+
+}
+
+.product-card{
+
+transition:.35s;
+
+}
+
+.product-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.zoom-img{
+
+transition:.45s;
+
+}
+
+.zoom-img:hover{
+
+transform:scale(1.08);
+
+}
+
+.toast{
+
+animation:slideUp .35s;
+
+}
+
+@keyframes slideUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+.counter{
+
+font-variant-numeric:tabular-nums;
+
+}
+
+</style>
+
+</head><a href="mailto:info@kinglobster.id"
+class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-orange-500 hover:border-orange-500/50 flex items-center justify-center transition text-sm">
+    <i class="fa-solid fa-envelope"></i>
+</a>
+</div>
+</div>
+
+<div data-aos="fade-up" data-aos-delay="100">
+    <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">
+        Hubungi & Jam Kerja
+    </h4>
+
+    <ul class="space-y-3 text-xs">
+        <li class="flex items-start">
+            <i class="fa-solid fa-location-dot mt-0.5 mr-3 text-orange-500"></i>
+            <span>Dermaga Sentra Nelayan Palabuhanratu, Sukabumi, Jawa Barat.</span>
+        </li>
+
+        <li class="flex items-center">
+            <i class="fa-solid fa-clock mr-3 text-orange-500"></i>
+            <span>Senin - Sabtu : 08.00 - 17.00 WIB</span>
+        </li>
+
+        <li class="flex items-center">
+            <i class="fa-solid fa-phone mr-3 text-orange-500"></i>
+            <a href="https://wa.me/6281532900269"
+               target="_blank"
+               class="hover:text-white transition">
+               +62 815-3290-0269
+            </a>
+        </li>
+
+        <li class="flex items-center">
+            <i class="fa-solid fa-envelope mr-3 text-orange-500"></i>
+            <a href="mailto:info@kinglobster.id"
+               class="hover:text-white transition">
+               info@kinglobster.id
+            </a>
+        </li>
+    </ul>
+</div>            <div data-aos="fade-up" data-aos-delay="200">
+                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">
+                    Mitra Logistik Khusus
+                </h4>
+
+                <p class="text-xs mb-3">
+                    Menggunakan kurir berpendingin & kargo udara cepat:
+                </p>
+
                 <div class="flex flex-wrap gap-2 text-[11px] font-semibold text-slate-300">
-                    <span class="bg-slate-900 px-2.5 py-1.5 rounded border border-slate-800">Garuda Cargo</span>
-                    <span class="bg-slate-900 px-2.5 py-1.5 rounded border border-slate-800">Paxel Cold Chain</span>
-                    <span class="bg-slate-900 px-2.5 py-1.5 rounded border border-slate-800">Lalamove Cold</span>
+
+                    <span class="bg-slate-900 px-3 py-2 rounded-lg border border-slate-800 hover:border-orange-500 transition">
+                        Garuda Cargo
+                    </span>
+
+                    <span class="bg-slate-900 px-3 py-2 rounded-lg border border-slate-800 hover:border-orange-500 transition">
+                        Paxel Cold Chain
+                    </span>
+
+                    <span class="bg-slate-900 px-3 py-2 rounded-lg border border-slate-800 hover:border-orange-500 transition">
+                        Lalamove Cold
+                    </span>
+
+                    <span class="bg-slate-900 px-3 py-2 rounded-lg border border-slate-800 hover:border-orange-500 transition">
+                        JNE Trucking
+                    </span>
+
                 </div>
+
             </div>
 
             <div data-aos="fade-up" data-aos-delay="300">
-                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Sertifikasi & Legalitas</h4>
-                <div class="space-y-2">
-                    <span class="block bg-slate-900 border border-slate-800 text-amber-400 font-bold text-[10px] px-2.5 py-2 rounded-md"><i class="fa-solid fa-circle-check mr-1"></i> Standar Mutu Prima-3</span>
-                    <span class="block bg-slate-900 border border-slate-800 text-emerald-400 font-bold text-[10px] px-2.5 py-2 rounded-md"><i class="fa-solid fa-file-shield mr-1"></i> Izin Usaha KKP Terverifikasi</span>
+
+                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">
+                    Sertifikasi & Legalitas
+                </h4>
+
+                <div class="space-y-3">
+
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-3">
+
+                        <div class="flex items-center">
+
+                            <i class="fa-solid fa-circle-check text-emerald-400 mr-2"></i>
+
+                            <span class="text-xs font-semibold">
+                                Standar Mutu Prima-3
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-3">
+
+                        <div class="flex items-center">
+
+                            <i class="fa-solid fa-file-shield text-orange-500 mr-2"></i>
+
+                            <span class="text-xs font-semibold">
+                                Izin Usaha KKP Terverifikasi
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-3">
+
+                        <div class="flex items-center">
+
+                            <i class="fa-solid fa-fish text-sky-400 mr-2"></i>
+
+                            <span class="text-xs font-semibold">
+                                Wild Fresh Seafood Indonesia
+                            </span>
+
+                        </div>
+
+                    </div>
+
                 </div>
+
             </div>
+
         </div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-slate-900 text-center text-[11px] text-slate-500">
-            <p>&copy; <span id="copyright-year"></span> King Lobster Indonesia. Seluruh hak cipta dilindungi undang-undang.</p>
+
+        <div class="border-t border-slate-900 mt-12 pt-8 text-center">
+
+            <p class="text-xs text-slate-500">
+                © <span id="copyright-year"></span>
+                King Lobster Indonesia.
+                Seluruh Hak Cipta Dilindungi.
+            </p>
+
+            <p class="text-[11px] text-slate-600 mt-2">
+                Designed with ❤️ using HTML, TailwindCSS & JavaScript.
+            </p>
+
         </div>
+
     </footer>
 
-    <div id="cart-modal" class="fixed inset-0 z-50 invisible opacity-0 transition-all duration-300 pointer-events-none">
-        <div class="absolute inset-0 bg-slate-950/40 backdrop-blur-sm pointer-events-auto" onclick="toggleCartModal()"></div>
-        <div class="absolute top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col pointer-events-auto transform translate-x-full transition-transform duration-300" id="cart-panel">
-            <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-900 text-white">
-                <h3 class="font-bold text-lg flex items-center"><i class="fa-solid fa-basket-shopping mr-2 text-orange-500"></i> Keranjang Pemesanan</h3>
-                <button onclick="toggleCartModal()" class="text-slate-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div id="cart-items" class="p-6 flex-1 overflow-y-auto space-y-4">
-                <p class="text-center text-slate-400 py-8 text-sm">Keranjang belanja Anda masih kosong.</p>
-            </div>
-            <div class="p-6 border-t border-slate-100 bg-slate-50 space-y-4">
-                <div class="flex justify-between items-center font-bold text-slate-900">
-                    <span>Estimasi Total:</span>
-                    <span id="cart-total-price">Rp 0</span>
-                </div>
-                <button onclick="checkoutWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center space-x-2 shadow-lg">
-                    <i class="fa-brands fa-whatsapp text-lg"></i>
-                    <span>Kirim Nota ke WhatsApp Admin</span>
-                </button>
-            </div>
+    <!-- ===================== -->
+    <!-- CART MODAL -->
+    <!-- ===================== -->
+
+    <div id="cart-modal"
+         class="fixed inset-0 z-50 invisible opacity-0 transition-all duration-300 pointer-events-none">
+
+        <div
+            class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onclick="toggleCartModal()">
         </div>
+
+        <div id="cart-panel"
+             class="absolute right-0 top-0 h-full w-full max-w-md bg-white flex flex-col shadow-2xl translate-x-full transition-transform duration-300">
+
+            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
+
+                <h3 class="font-bold text-lg flex items-center">
+
+                    <i class="fa-solid fa-cart-shopping text-orange-500 mr-2"></i>
+
+                    Keranjang Belanja
+
+                </h3>
+
+                <button onclick="toggleCartModal()">
+
+                    <i class="fa-solid fa-xmark text-xl"></i>
+
+                </button>
+
+            </div>
+
+            <div
+                id="cart-items"
+                class="flex-1 overflow-y-auto p-6 space-y-4">
+
+                <p class="text-center text-slate-400 py-10">
+
+                    Keranjang masih kosong.
+
+                </p>
+
+            </div>
+
+            <div class="border-t p-6 bg-slate-50">
+
+                <div class="flex justify-between font-bold mb-5">
+
+                    <span>Total</span>
+
+                    <span id="cart-total-price">
+                        Rp 0
+                    </span>
+
+                </div>
+
+                <button
+                    onclick="checkoutWhatsApp()"
+                    class="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl py-3 font-bold transition">
+
+                    <i class="fa-brands fa-whatsapp mr-2"></i>
+
+                    Checkout via WhatsApp
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>    <!-- ===================== -->
+    <!-- IMAGE LIGHTBOX -->
+    <!-- ===================== -->
+
+    <div id="zoom-lightbox"
+         class="fixed inset-0 bg-black/95 z-50 invisible opacity-0 transition-all duration-300 flex items-center justify-center p-4"
+         onclick="closeZoomImage()">
+
+        <button
+            class="absolute top-6 right-6 text-white text-3xl hover:text-orange-500 transition">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <img
+            id="lightbox-img"
+            src=""
+            alt="Preview"
+            class="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl scale-95 transition duration-300">
+
     </div>
 
-    <div id="zoom-lightbox" class="fixed inset-0 bg-black/95 z-50 invisible opacity-0 transition-all duration-300 flex items-center justify-center p-4" onclick="closeZoomImage()">
-        <button class="absolute top-6 right-6 text-white text-3xl hover:text-orange-500 transition"><i class="fa-solid fa-xmark"></i></button>
-        <img id="lightbox-img" src="" alt="Preview Gambar Besar" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-all duration-300">
+    <!-- ===================== -->
+    <!-- TOAST -->
+    <!-- ===================== -->
+
+    <div
+        id="toast-container"
+        class="fixed bottom-24 left-6 z-50 space-y-2 pointer-events-none">
     </div>
 
-    <div id="toast-container" class="fixed bottom-24 left-6 z-50 space-y-2 pointer-events-none"></div>
+    <!-- ===================== -->
+    <!-- BACK TO TOP -->
+    <!-- ===================== -->
 
-    <button id="back-to-top" class="fixed bottom-6 right-6 z-40 bg-slate-900 hover:bg-orange-500 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-xl opacity-0 invisible transition-all duration-300 transform translate-y-4">
+    <button
+        id="back-to-top"
+        class="fixed bottom-6 right-6 bg-slate-900 hover:bg-orange-500 text-white w-12 h-12 rounded-xl shadow-xl opacity-0 invisible transition-all duration-300">
+
         <i class="fa-solid fa-arrow-up"></i>
+
     </button>
 
+    <!-- ===================== -->
+    <!-- SCRIPT -->
+    <!-- ===================== -->
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
     <script>
-        const products = [
-            { id: "p1", name: "Lobster Mutiara Super", type: "Premium", desc: "Kasta tertinggi lobster laut. Daging tebal, manis alami, dan berukuran masif.", price: 599000, image: "lobster-1.jpg", badge: "🔥 Terlaris" },
-            { id: "p2", name: "Lobster Pasir Fresh", type: "Fresh", desc: "Tangkapan harian populer dengan cangkang tipis, menghasilkan volume daging bersih optimal.", price: 350000, image: "lobster-2.jpg", badge: "🟢 Fresh Hari Ini" },
-            { id: "p3", name: "Lobster Bambu Ekspor", type: "Premium", desc: "Cita rasa gurih pekat laut. Komoditas utama restoran bintang lima dan kuliner hotel mewah.", price: 399000, image: "lobster-3.jpg", badge: "⭐ Unggulan" },
-            { id: "p4", name: "Lobster Batu Hitam", type: "Fresh", desc: "Daging sangat padat dan kenyal, tahan lama dalam distribusi cold chain logistik.", price: 290000, image: "lobster-4.jpg", badge: null },
-            { id: "p5", name: "Lobster Budidaya Khusus", type: "Fresh", desc: "Hasil sortiran terbaik dari fasilitas penangkaran modern terpantau.", price: 320000, image: "lobster-5.jpg", badge: "💼 Stok Stabil" },
-            { id: "p6", name: "Lobster Pakistan Grid-A", type: "Premium", desc: "Corak eksotis dengan tekstur capit padat berisi, sangat favorit bagi penikmat seafood bakar.", price: 430000, image: "lobster-6.jpg", badge: "✨ Pilihan Chef" },
-            { id: "p7", name: "Lobster Batik Premium", type: "Premium", desc: "Langka dan bercita rasa premium manis lembut, komoditas premium musiman.", price: 480000, image: "lobster-7.jpg", badge: "💎 Rare Item" },
-            { id: "p8", name: "Lobster Bakau Pilihan", type: "Fresh", desc: "Hasil tangkapan segar pesisir bebatuan, rasa gurih original tanpa amis.", price: 310000, image: "lobster-8.jpg", badge: null },
-            { id: "p9", name: "Lobster Cargo Bulk Size", type: "Fresh", desc: "Paket ekonomis partai besar siap kirim antar pulau dalam keadaan hidup/beku prima.", price: 280000, image: "lobster-9.jpg", badge: "📦 Grosir" }
-        ];
 
-        let currentCategory = 'All';
-        let searchQuery = '';
-        let cart = JSON.parse(localStorage.getItem('king_lobster_cart')) || [];
+    const products = [
 
-        function renderProducts() {
-            const container = document.getElementById('product-container');
-            if (!container) return;
-            
-            const filteredProducts = products.filter(p => {
-                const matchesCategory = currentCategory === 'All' || p.type === currentCategory;
-                const s = searchQuery.toLowerCase();
-                return matchesCategory && (p.name.toLowerCase().includes(s) || p.desc.toLowerCase().includes(s));
-            });
+        {
+            id:"p1",
+            name:"Lobster Mutiara Super",
+            type:"Premium",
+            desc:"Lobster premium dengan daging tebal dan manis.",
+            price:599000,
+            image:"lobster-1.jpg",
+            badge:"🔥 Terlaris"
+        },
 
-            if (filteredProducts.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 text-sm">Varian lobster belum tersedia.</div>`;
-                return;
-            }
-            
-            container.innerHTML = filteredProducts.map(p => `
-                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 flex flex-col group hover:shadow-xl transition duration-300">
-                    <div class="relative overflow-hidden aspect-[4/3] bg-slate-900">
-                        <img src="${p.image}" loading="lazy" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        ${p.badge ? `<div class="absolute top-4 left-4 bg-orange-500 text-white font-black text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">${p.badge}</div>` : ''}
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-lg font-bold text-slate-900 mb-1">${p.name}</h3>
-                            <p class="text-slate-500 text-xs mb-3">Kategori: <span class="font-semibold text-orange-500">${p.type}</span></p>
-                            <p class="text-slate-600 text-xs mb-4 leading-relaxed">${p.desc}</p>
-                            
-                            <div class="mb-4">
-                                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Takaran Kiloan:</label>
-                                <select id="weight-${p.id}" onchange="updatePriceDisplay('${p.id}', ${p.price})" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-xs font-semibold text-slate-700 focus:ring-2 focus:ring-orange-500">
-                                    <option value="1" selected>1.0 Kg</option>
-                                    <option value="2">2.0 Kg</option>
-                                    <option value="5">5.0 Kg</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-                            <div>
-                                <span class="text-[10px] text-slate-400 block font-medium">Subtotal Harga</span>
-                                <span id="price-view-${p.id}" class="text-base font-black text-slate-900">Rp ${p.price.toLocaleString('id-ID')}</span>
-                            </div>
-                            <button onclick="addCustomToCart('${p.id}')" class="bg-slate-900 hover:bg-orange-500 text-white font-bold p-2.5 rounded-xl transition flex items-center space-x-1">
-                                <i class="fa-solid fa-cart-plus text-xs"></i>
-                                <span class="text-xs px-1">Pesan</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+        {
+            id:"p2",
+            name:"Lobster Pasir Fresh",
+            type:"Fresh",
+            desc:"Tangkapan harian kualitas terbaik.",
+            price:350000,
+            image:"lobster-2.jpg",
+            badge:"🟢 Fresh"
+        },
+
+        {
+            id:"p3",
+            name:"Lobster Bambu Ekspor",
+            type:"Premium",
+            desc:"Favorit restoran dan hotel berbintang.",
+            price:399000,
+            image:"lobster-3.jpg",
+            badge:"⭐ Unggulan"
+        },
+
+        {
+            id:"p4",
+            name:"Lobster Batu Hitam",
+            type:"Fresh",
+            desc:"Tekstur padat dan kenyal.",
+            price:290000,
+            image:"lobster-4.jpg",
+            badge:null
+        },
+
+        {
+            id:"p5",
+            name:"Lobster Budidaya",
+            type:"Fresh",
+            desc:"Budidaya modern dengan kualitas tinggi.",
+            price:320000,
+            image:"lobster-5.jpg",
+            badge:"💼 Stok"
+        },
+
+        {
+            id:"p6",
+            name:"Lobster Pakistan",
+            type:"Premium",
+            desc:"Pilihan chef seafood.",
+            price:430000,
+            image:"lobster-6.jpg",
+            badge:"✨ Chef"
+        },
+
+        {
+            id:"p7",
+            name:"Lobster Batik",
+            type:"Premium",
+            desc:"Jenis langka dengan rasa manis.",
+            price:480000,
+            image:"lobster-7.jpg",
+            badge:"💎 Rare"
+        },
+
+        {
+            id:"p8",
+            name:"Lobster Bakau",
+            type:"Fresh",
+            desc:"Segar langsung dari pesisir.",
+            price:310000,
+            image:"lobster-8.jpg",
+            badge:null
+        },
+
+        {
+            id:"p9",
+            name:"Lobster Cargo",
+            type:"Fresh",
+            desc:"Paket grosir ukuran besar.",
+            price:280000,
+            image:"lobster-9.jpg",
+            badge:"📦 Grosir"
         }
 
-        function updatePriceDisplay(id, basePrice) {
-            const weight = document.getElementById(`weight-${id}`).value;
-            const view = document.getElementById(`price-view-${id}`);
-            if(view) view.textContent = 'Rp ' + (basePrice * weight).toLocaleString('id-ID');
-        }
+    ];
 
-        function filterAndSearchProducts() {
-            searchQuery = document.getElementById('search-input').value;
-            renderProducts();
-        }
+    let currentCategory="All";
+    let searchQuery="";
+    let cart=JSON.parse(localStorage.getItem("king_lobster_cart"))||[];    function renderProducts(){
 
-        function filterCategory(event, category) {
-            currentCategory = category;
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('bg-slate-900', 'text-white', 'border-slate-900');
-                btn.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
-            });
-            event.currentTarget.classList.add('bg-slate-900', 'text-white', 'border-slate-900');
-            renderProducts();
-        }
+        const container=document.getElementById("product-container");
 
-        function openZoomImage(element) {
-            const lightbox = document.getElementById('zoom-lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            lightboxImg.src = element.querySelector('img').src;
-            lightbox.classList.remove('invisible', 'opacity-0');
-            
-            lightboxImg.classList.remove('scale-95');
-            lightboxImg.classList.add('scale-100');
-        }
+        if(!container) return;
 
-        function closeZoomImage() {
-            const lightbox = document.getElementById('zoom-lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            
-            lightboxImg.classList.remove('scale-100');
-            lightboxImg.classList.add('scale-95');
-            
-            lightbox.classList.add('opacity-0');
-            setTimeout(() => lightbox.classList.add('invisible'), 300);
-        }
+        const filtered=products.filter(product=>{
 
-        function toggleFaq(btn) {
-            const answer = btn.nextElementSibling;
-            btn.querySelector("i").classList.toggle("rotate-180");
-            answer.style.maxHeight = answer.style.maxHeight && answer.style.maxHeight !== '0px' ? '0px' : answer.scrollHeight + 'px';
-        }
+            const categoryMatch=currentCategory==="All" || product.type===currentCategory;
 
-        function toggleCartModal() {
-            const modal = document.getElementById('cart-modal');
-            const panel = document.getElementById('cart-panel');
-            if (modal.classList.contains('invisible')) {
-                modal.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
-                panel.classList.remove('translate-x-full');
-            } else {
-                modal.classList.add('opacity-0', 'pointer-events-none');
-                panel.classList.add('translate-x-full');
-                setTimeout(() => modal.classList.add('invisible'), 300);
-            }
-        }
+            const keyword=searchQuery.toLowerCase();
 
-        function addCustomToCart(id) {
-            const product = products.find(p => p.id === id);
-            const weight = parseFloat(document.getElementById(`weight-${id}`).value);
-            const exist = cart.find(item => item.id === id && item.selectedWeight === weight);
-            if(exist) {
-                exist.qty += 1;
-            } else {
-                cart.push({ id: product.id, name: product.name, price: product.price, selectedWeight: weight, qty: 1 });
-            }
-            saveAndRefreshCart();
-            showToast(`Dimasukkan ke keranjang belanja.`);
-        }
+            const searchMatch=
+                product.name.toLowerCase().includes(keyword) ||
+                product.desc.toLowerCase().includes(keyword);
 
-        function updateCustomQty(id, weight, amount) {
-            const item = cart.find(i => i.id === id && i.selectedWeight === weight);
-            if(item) {
-                item.qty += amount;
-                if(item.qty <= 0) cart = cart.filter(i => !(i.id === id && i.selectedWeight === weight));
-            }
-            saveAndRefreshCart();
-        }
+            return categoryMatch && searchMatch;
 
-        function saveAndRefreshCart() {
-            localStorage.setItem('king_lobster_cart', JSON.stringify(cart));
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const itemsContainer = document.getElementById('cart-items');
-            const totalEl = document.getElementById('cart-total-price');
-            const badge = document.getElementById('cart-count-badge');
-            
-            let totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-            let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.selectedWeight * item.qty), 0);
-            
-            totalEl.textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
-            
-            if(totalItems > 0) {
-                badge.textContent = totalItems;
-                badge.classList.remove('hidden');
-            } else {
-                badge.classList.add('hidden');
-            }
-
-            if(cart.length === 0) {
-                itemsContainer.innerHTML = `<p class="text-center text-slate-400 py-8 text-sm">Keranjang belanja Anda masih kosong.</p>`;
-                return;
-            }
-
-            itemsContainer.innerHTML = cart.map(item => `
-                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                    <div>
-                        <h4 class="font-bold text-slate-900 text-xs">${item.name}</h4>
-                        <p class="text-[10px] text-slate-400">Takaran: ${item.selectedWeight} Kg &times; ${item.qty}</p>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <button onclick="updateCustomQty('${item.id}', ${item.selectedWeight}, -1)" class="w-6 h-6 rounded bg-slate-100 text-slate-700 font-bold text-xs">-</button>
-                        <span class="text-xs font-semibold w-4 text-center">${item.qty}</span>
-                        <button onclick="updateCustomQty('${item.id}', ${item.selectedWeight}, 1)" class="w-6 h-6 rounded bg-slate-100 text-slate-700 font-bold text-xs">+</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function checkoutWhatsApp() {
-            if(cart.length === 0) return alert('Keranjang kosong.');
-            let text = 'Halo King Lobster, saya ingin memesan produk segar berikut:\n\n';
-            cart.forEach(item => {
-                text += `- ${item.name} (${item.selectedWeight} Kg): ${item.qty} Pack\n`;
-            });
-            window.open(`https://wa.me/6281532900269?text=${encodeURIComponent(text)}`, '_blank');
-        }
-
-        function showToast(msg) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = "bg-slate-900 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-xl opacity-0 translate-y-2 pointer-events-auto transition-all duration-300";
-            toast.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400 mr-2"></i>${msg}`;
-            container.appendChild(toast);
-            setTimeout(() => toast.classList.remove('opacity-0', 'translate-y-2'), 50);
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-2');
-                setTimeout(() => toast.remove(), 300);
-            }, 2000);
-        }
-
-        function initCounters() {
-            const counters = document.querySelectorAll('.counter-value');
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                let count = 0;
-                const speed = target / 50; 
-                
-                const update = () => {
-                    if(count < target) {
-                        count += Math.ceil(speed);
-                        if(count > target) count = target;
-                        counter.innerText = count;
-                        setTimeout(update, 30);
-                    }
-                };
-                update();
-            });
-        }
-
-        window.addEventListener('load', () => {
-            renderProducts();
-            updateCartUI();
-            initCounters();
-            AOS.init({ once: true, duration: 800 });
-            document.getElementById('copyright-year').textContent = new Date().getFullYear();
-            
-            const btt = document.getElementById('back-to-top');
-            window.addEventListener('scroll', () => {
-                if(window.scrollY > 400) {
-                    btt.classList.remove('opacity-0', 'invisible');
-                } else {
-                    btt.classList.add('opacity-0', 'invisible');
-                }
-            });
-            btt.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
         });
+
+        if(filtered.length===0){
+
+            container.innerHTML=`
+                <div class="col-span-full text-center py-20">
+
+                    <i class="fa-solid fa-box-open text-5xl text-slate-300 mb-4"></i>
+
+                    <h3 class="font-bold text-lg">
+                        Produk tidak ditemukan
+                    </h3>
+
+                    <p class="text-slate-500 text-sm mt-2">
+                        Coba gunakan kata kunci lain.
+                    </p>
+
+                </div>
+            `;
+
+            return;
+
+        }
+
+        container.innerHTML=filtered.map(product=>`
+
+        <div
+            class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition duration-300 flex flex-col">
+
+            <div class="relative aspect-[4/3] overflow-hidden">
+
+                <img
+                    src="${product.image}"
+                    class="w-full h-full object-cover hover:scale-105 transition duration-500">
+
+                ${product.badge?
+
+                `<div class="absolute top-4 left-4 bg-orange-500 text-white text-[10px] font-bold px-3 py-1 rounded-full">
+
+                    ${product.badge}
+
+                </div>`:""}
+
+            </div>
+
+            <div class="p-6 flex flex-col flex-1">
+
+                <h3 class="font-bold text-lg">
+
+                    ${product.name}
+
+                </h3>
+
+                <p class="text-orange-500 text-xs font-semibold mb-2">
+
+                    ${product.type}
+
+                </p>
+
+                <p class="text-slate-500 text-sm flex-1">
+
+                    ${product.desc}
+
+                </p>
+
+                <div class="mt-5">
+
+                    <label class="text-xs font-bold text-slate-400">
+
+                        Pilih Berat
+
+                    </label>
+
+                    <select
+                        id="weight-${product.id}"
+                        onchange="updatePriceDisplay('${product.id}',${product.price})"
+                        class="mt-2 w-full border rounded-xl p-3">
+
+                        <option value="1">
+                            1 Kg
+                        </option>
+
+                        <option value="2">
+                            2 Kg
+                        </option>
+
+                        <option value="5">
+                            5 Kg
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div
+                    class="flex justify-between items-center mt-6 pt-5 border-t">
+
+                    <div>
+
+                        <div class="text-xs text-slate-400">
+
+                            Harga
+
+                        </div>
+
+                        <div
+                            id="price-view-${product.id}"
+                            class="font-black text-lg">
+
+                            Rp ${product.price.toLocaleString("id-ID")}
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        onclick="addCustomToCart('${product.id}')"
+                        class="bg-slate-900 hover:bg-orange-500 text-white px-4 py-3 rounded-xl font-bold transition">
+
+                        <i class="fa-solid fa-cart-plus mr-2"></i>
+
+                        Pesan
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `).join("");
+
+    }
+
+    function updatePriceDisplay(id,basePrice){
+
+        const weight=document.getElementById("weight-"+id).value;
+
+        document.getElementById("price-view-"+id).innerHTML=
+
+        "Rp "+(basePrice*weight).toLocaleString("id-ID");
+
+    }
+
+    function filterAndSearchProducts(){
+
+        searchQuery=document.getElementById("search-input").value;
+
+        renderProducts();
+
+    }
+
+    function filterCategory(event,category){
+
+        currentCategory=category;
+
+        document.querySelectorAll(".category-btn").forEach(btn=>{
+
+            btn.classList.remove(
+                "bg-slate-900",
+                "text-white",
+                "border-slate-900"
+            );
+
+            btn.classList.add(
+                "bg-white",
+                "text-slate-600",
+                "border-slate-200"
+            );
+
+        });
+
+        event.currentTarget.classList.add(
+            "bg-slate-900",
+            "text-white",
+            "border-slate-900"
+        );
+
+        renderProducts();
+
+    }    function openZoomImage(element){
+
+        const lightbox=document.getElementById("zoom-lightbox");
+
+        const image=document.getElementById("lightbox-img");
+
+        image.src=element.querySelector("img").src;
+
+        lightbox.classList.remove(
+            "invisible",
+            "opacity-0"
+        );
+
+        image.classList.remove("scale-95");
+        image.classList.add("scale-100");
+
+    }
+
+    function closeZoomImage(){
+
+        const lightbox=document.getElementById("zoom-lightbox");
+
+        const image=document.getElementById("lightbox-img");
+
+        image.classList.remove("scale-100");
+        image.classList.add("scale-95");
+
+        lightbox.classList.add("opacity-0");
+
+        setTimeout(()=>{
+
+            lightbox.classList.add("invisible");
+
+        },300);
+
+    }
+
+    function toggleFaq(button){
+
+        const answer=button.nextElementSibling;
+
+        const icon=button.querySelector("i");
+
+        icon.classList.toggle("rotate-180");
+
+        if(answer.style.maxHeight){
+
+            answer.style.maxHeight=null;
+
+        }else{
+
+            answer.style.maxHeight=
+                answer.scrollHeight+"px";
+
+        }
+
+    }
+
+    function toggleCartModal(){
+
+        const modal=document.getElementById("cart-modal");
+
+        const panel=document.getElementById("cart-panel");
+
+        if(modal.classList.contains("invisible")){
+
+            modal.classList.remove(
+                "invisible",
+                "opacity-0",
+                "pointer-events-none"
+            );
+
+            panel.classList.remove("translate-x-full");
+
+        }else{
+
+            modal.classList.add(
+                "opacity-0",
+                "pointer-events-none"
+            );
+
+            panel.classList.add("translate-x-full");
+
+            setTimeout(()=>{
+
+                modal.classList.add("invisible");
+
+            },300);
+
+        }
+
+    }
+
+    function addCustomToCart(id){
+
+        const product=products.find(
+            p=>p.id===id
+        );
+
+        const weight=parseFloat(
+            document.getElementById(
+                "weight-"+id
+            ).value
+        );
+
+        const exist=cart.find(item=>
+
+            item.id===id &&
+            item.selectedWeight===weight
+
+        );
+
+        if(exist){
+
+            exist.qty++;
+
+        }else{
+
+            cart.push({
+
+                id:product.id,
+
+                name:product.name,
+
+                price:product.price,
+
+                selectedWeight:weight,
+
+                qty:1
+
+            });
+
+        }
+
+        saveAndRefreshCart();
+
+        showToast("Produk berhasil ditambahkan.");
+
+    }
+
+    function updateCustomQty(id,weight,change){
+
+        const item=cart.find(data=>
+
+            data.id===id &&
+            data.selectedWeight===weight
+
+        );
+
+        if(!item) return;
+
+        item.qty+=change;
+
+        if(item.qty<=0){
+
+            cart=cart.filter(data=>
+
+                !(data.id===id &&
+                  data.selectedWeight===weight)
+
+            );
+
+        }
+
+        saveAndRefreshCart();
+
+    }
+
+    function saveAndRefreshCart(){
+
+        localStorage.setItem(
+
+            "king_lobster_cart",
+
+            JSON.stringify(cart)
+
+        );
+
+        updateCartUI();
+
+    }    function updateCartUI(){
+
+        const items=document.getElementById("cart-items");
+        const total=document.getElementById("cart-total-price");
+        const badge=document.getElementById("cart-count-badge");
+
+        let totalItem=0;
+        let totalHarga=0;
+
+        cart.forEach(item=>{
+
+            totalItem+=item.qty;
+
+            totalHarga+=
+                item.price*
+                item.selectedWeight*
+                item.qty;
+
+        });
+
+        total.innerHTML=
+            "Rp "+
+            totalHarga.toLocaleString("id-ID");
+
+        if(totalItem>0){
+
+            badge.classList.remove("hidden");
+            badge.innerHTML=totalItem;
+
+        }else{
+
+            badge.classList.add("hidden");
+
+        }
+
+        if(cart.length===0){
+
+            items.innerHTML=`
+            <p class="text-center text-slate-400 py-10">
+                Keranjang masih kosong.
+            </p>`;
+
+            return;
+
+        }
+
+        items.innerHTML=cart.map(item=>`
+
+        <div class="border rounded-xl p-4">
+
+            <div class="flex justify-between">
+
+                <div>
+
+                    <h4 class="font-bold text-sm">
+
+                        ${item.name}
+
+                    </h4>
+
+                    <p class="text-xs text-slate-500">
+
+                        ${item.selectedWeight} Kg
+
+                    </p>
+
+                </div>
+
+                <div class="text-right">
+
+                    <div class="font-bold text-sm">
+
+                        Rp ${(item.price*item.selectedWeight).toLocaleString("id-ID")}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="flex items-center justify-between mt-4">
+
+                <div class="flex items-center gap-2">
+
+                    <button
+                    onclick="updateCustomQty('${item.id}',${item.selectedWeight},-1)"
+                    class="w-8 h-8 rounded bg-slate-200">
+
+                    -
+
+                    </button>
+
+                    <span class="font-bold">
+
+                        ${item.qty}
+
+                    </span>
+
+                    <button
+                    onclick="updateCustomQty('${item.id}',${item.selectedWeight},1)"
+                    class="w-8 h-8 rounded bg-slate-900 text-white">
+
+                    +
+
+                    </button>
+
+                </div>
+
+                <div class="font-bold text-orange-500">
+
+                    Rp ${(item.price*item.selectedWeight*item.qty).toLocaleString("id-ID")}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `).join("");
+
+    }
+
+    function checkoutWhatsApp(){
+
+        if(cart.length===0){
+
+            alert("Keranjang masih kosong.");
+
+            return;
+
+        }
+
+        let pesan=
+`Halo King Lobster, saya ingin memesan:
+
+`;
+
+        cart.forEach(item=>{
+
+            pesan+=
+`• ${item.name}
+Berat : ${item.selectedWeight} Kg
+Jumlah : ${item.qty}
+Subtotal : Rp ${(item.price*item.selectedWeight*item.qty).toLocaleString("id-ID")}
+
+`;
+
+        });
+
+        pesan+="Terima kasih.";
+
+        window.open(
+
+            "https://wa.me/6281532900269?text="+
+            encodeURIComponent(pesan),
+
+            "_blank"
+
+        );
+
+    }
+
+    function showToast(message){
+
+        const container=document.getElementById("toast-container");
+
+        const toast=document.createElement("div");
+
+        toast.className=
+        "bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl text-sm";
+
+        toast.innerHTML=
+        `<i class="fa-solid fa-circle-check text-green-400 mr-2"></i>${message}`;
+
+        container.appendChild(toast);
+
+        setTimeout(()=>{
+
+            toast.remove();
+
+        },2500);
+
+    }
+
+    function initCounters(){
+
+        document.querySelectorAll(".counter-value").forEach(counter=>{
+
+            const target=+counter.dataset.target;
+
+            let value=0;
+
+            const timer=setInterval(()=>{
+
+                value+=Math.ceil(target/40);
+
+                if(value>=target){
+
+                    value=target;
+
+                    clearInterval(timer);
+
+                }
+
+                counter.innerHTML=value;
+
+            },25);
+
+        });
+
+    }
+
+    window.addEventListener("load",()=>{
+
+        renderProducts();
+
+        updateCartUI();
+
+        initCounters();
+
+        AOS.init({
+
+            once:true,
+
+            duration:800
+
+        });
+
+        document.getElementById("copyright-year").innerHTML=
+        new Date().getFullYear();
+
+        const topBtn=document.getElementById("back-to-top");
+
+        window.addEventListener("scroll",()=>{
+
+            if(window.scrollY>400){
+
+                topBtn.classList.remove(
+                    "opacity-0",
+                    "invisible"
+                );
+
+            }else{
+
+                topBtn.classList.add(
+                    "opacity-0",
+                    "invisible"
+                );
+
+            }
+
+        });
+
+        topBtn.onclick=()=>{
+
+            window.scrollTo({
+
+                top:0,
+
+                behavior:"smooth"
+
+            });
+
+        };
+
+    });
+
     </script>
+
 </body>
 </html>
