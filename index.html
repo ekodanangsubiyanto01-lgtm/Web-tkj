@@ -3,19 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>King Lobster - Tangkapan Segar Langsung dari Nelayan</title>
+    
+    <title>King Lobster - Tangkapan Segar Premium Langsung dari Nelayan</title>
+    <meta name="description" content="Jual lobster laut segar premium langsung dari nelayan lokal. Garansi segar, kualitas bintang lima, siap kirim dengan rantai pasok dingin terjamin.">
+    <meta name="keywords" content="jual lobster segar, lobster laut premium, lobster mutiara, nelayan lobster, seafood fresh">
+    
+    <link rel="canonical" href="https://username.github.io/kinglobster">
+    
+    <meta property="og:title" content="King Lobster - Tangkapan Segar Premium Langsung dari Nelayan">
+    <meta property="og:description" content="Lobster laut segar premium langsung dari nelayan lokal dengan kualitas bintang lima.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1559742811-82410b451b9b?auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://username.github.io/kinglobster">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="King Lobster - Tangkapan Segar Premium">
+    <meta name="twitter:description" content="Lobster laut segar premium langsung dari nelayan lokal dengan kualitas bintang lima.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1559742811-82410b451b9b?auto=format&fit=crop&w=1200&q=80">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22 width=%2232%22 height=%2232%22><text y=%2226%22 font-size=%2226%22>🦞</text></svg>">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Style untuk Loading Spinner */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0f172a; /* bg-slate-900 */
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
     </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "King Lobster",
+      "image": "https://images.unsplash.com/photo-1559742811-82410b451b9b?auto=format&fit=crop&w=600&q=80",
+      "telephone": "+6281532900269",
+      "email": "ekodanangsubiyanto01@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Palabuhanratu",
+        "addressRegion": "Jawa Barat",
+        "addressCountry": "ID"
+      },
+      "priceRange": "$$"
+    }
+    </script>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden">
+
+    <div id="preloader">
+        <div class="flex flex-col items-center space-y-4">
+            <i class="fa-solid fa-shrimp text-orange-500 text-5xl animate-bounce"></i>
+            <div class="w-12 h-12 border-4 border-slate-700 border-t-orange-500 rounded-full animate-spin"></div>
+            <span class="text-white font-semibold tracking-wider text-sm uppercase">Memuat Kesegaran...</span>
+        </div>
+    </div>
 
     <nav class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md text-white border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,30 +91,37 @@
                 <div class="hidden md:flex space-x-8 font-semibold">
                     <a href="#" class="text-orange-500 transition">Home</a>
                     <a href="#produk" class="text-slate-300 hover:text-orange-500 transition">Produk</a>
-                    <a href="#tentang" class="text-slate-300 hover:text-orange-500 transition">Tentang Kami</a>
+                    <a href="#testimoni" class="text-slate-300 hover:text-orange-500 transition">Testimoni</a>
                     <a href="#kontak" class="text-slate-300 hover:text-orange-500 transition">Kontak</a>
                 </div>
 
                 <div class="flex items-center space-x-4">
                     <a href="#" class="relative p-2 text-slate-300 hover:text-orange-500 transition">
                         <i class="fa-solid fa-basket-shopping text-xl"></i>
-                        <span class="absolute top-0 right-0 bg-orange-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">3</span>
+                        <span class="absolute top-0 right-0 bg-slate-700 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
                     </a>
-                    <button class="md:hidden p-2 text-slate-300 hover:text-white focus:outline-none">
+                    <button id="menu-btn" class="md:hidden p-2 text-slate-300 hover:text-white focus:outline-none" aria-label="Toggle Menu">
                         <i class="fa-solid fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
         </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3 font-semibold">
+            <a href="#" class="block text-orange-500 py-2">Home</a>
+            <a href="#produk" class="block text-slate-300 hover:text-orange-500 py-2 transition">Produk</a>
+            <a href="#testimoni" class="block text-slate-300 hover:text-orange-500 py-2 transition">Testimoni</a>
+            <a href="#kontak" class="block text-slate-300 hover:text-orange-500 py-2 transition">Kontak</a>
+        </div>
     </nav>
 
     <header class="relative bg-slate-900 h-[85vh] flex items-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1559742811-82410b451b9b?auto=format&fit=crop&w=1920&q=80" alt="Ocean Background" class="w-full h-full object-cover opacity-40 scale-105 transform transition duration-1000">
+            <img src="https://images.unsplash.com/photo-1559742811-82410b451b9b?auto=format&fit=crop&w=1920&q=80" loading="lazy" alt="Ocean Background" class="w-full h-full object-cover opacity-40 scale-105 transform transition duration-1000">
             <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent"></div>
         </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full" data-aos="fade-right" data-aos-duration="1000">
             <div class="max-w-2xl">
                 <span class="inline-block bg-orange-500/10 text-orange-400 font-semibold text-sm px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-orange-500/30">
                     100% Fresh & Premium Quality
@@ -68,7 +138,7 @@
                         Pesan Sekarang
                         <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
                     </a>
-                    <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20tertarik%20untuk%20memesan%20lobster%20segar." target="_blank" class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-xl border border-emerald-500 backdrop-blur-sm transition">
+                    <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20tertarik%20untuk%20memesan%20lobster%20segar." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-xl border border-emerald-500 backdrop-blur-sm transition">
                         <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Chat Admin
                     </a>
                 </div>
@@ -77,16 +147,15 @@
     </header>
 
     <section id="produk" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
             <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">Koleksi Tangkapan Terbaik</h2>
-            <p class="text-slate-600">Pilih jenis lobster laut premium favorit Anda. Harga transparan berdasarkan berat dan kualitas terbaik standar restoran bintang lima.</p>
+            <p class="text-slate-600">Pilih jenis lobster laut premium favorit Anda. Harga transparan berdasarkan berat dan kualitas terbaik standar restoran.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-slate-100 flex flex-col group">
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-slate-100 flex flex-col group" data-aos="fade-up" data-aos-delay="100">
                 <div class="relative overflow-hidden aspect-[4/3]">
-                    <img src="https://images.unsplash.com/photo-1553618551-fba689030290?auto=format&fit=crop&w=600&q=80" alt="Lobster Mutiara" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <img src="https://images.unsplash.com/photo-1553618551-fba689030290?auto=format&fit=crop&w=600&q=80" loading="lazy" alt="Lobster Mutiara" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     <span class="absolute top-4 left-4 bg-emerald-500 text-white font-bold text-xs px-3 py-1 rounded-full uppercase">Paling Dicari</span>
                 </div>
                 <div class="p-6 flex-1 flex flex-col justify-between">
@@ -102,7 +171,7 @@
                             <span class="text-xs text-slate-400 block font-semibold">Harga / Kg</span>
                             <span class="text-xl font-extrabold text-slate-900">Rp 650.000</span>
                         </div>
-                        <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20mau%20pesan%20Lobster%20Mutiara%20Premium." target="_blank" class="bg-slate-900 hover:bg-orange-500 text-white font-bold p-3 rounded-xl transition flex items-center space-x-2">
+                        <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20mau%20pesan%20Lobster%20Mutiara%20Premium." target="_blank" rel="noopener noreferrer" class="bg-slate-900 hover:bg-orange-500 text-white font-bold p-3 rounded-xl transition flex items-center space-x-2">
                             <i class="fa-solid fa-cart-plus"></i>
                             <span class="text-sm px-1">Beli</span>
                         </a>
@@ -110,9 +179,9 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-slate-100 flex flex-col group">
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-slate-100 flex flex-col group" data-aos="fade-up" data-aos-delay="200">
                 <div class="relative overflow-hidden aspect-[4/3]">
-                    <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?auto=format&fit=crop&w=600&q=80" alt="Lobster Pasir" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?auto=format&fit=crop&w=600&q=80" loading="lazy" alt="Lobster Pasir" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 </div>
                 <div class="p-6 flex-1 flex flex-col justify-between">
                     <div>
@@ -127,7 +196,7 @@
                             <span class="text-xs text-slate-400 block font-semibold">Harga / Kg</span>
                             <span class="text-xl font-extrabold text-slate-900">Rp 350.000</span>
                         </div>
-                        <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20mau%20pesan%20Lobster%20Pasir%20Fresh." target="_blank" class="bg-slate-900 hover:bg-orange-500 text-white font-bold p-3 rounded-xl transition flex items-center space-x-2">
+                        <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20mau%20pesan%20Lobster%20Pasir%20Fresh." target="_blank" rel="noopener noreferrer" class="bg-slate-900 hover:bg-orange-500 text-white font-bold p-3 rounded-xl transition flex items-center space-x-2">
                             <i class="fa-solid fa-cart-plus"></i>
                             <span class="text-sm px-1">Beli</span>
                         </a>
@@ -135,9 +204,9 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-slate-100 flex flex-col group">
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-slate-100 flex flex-col group" data-aos="fade-up" data-aos-delay="300">
                 <div class="relative overflow-hidden aspect-[4/3]">
-                    <img src="https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=600&q=80" alt="Lobster Bambu" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <img src="https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=600&q=80" loading="lazy" alt="Lobster Bambu" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     <span class="absolute top-4 left-4 bg-orange-500 text-white font-bold text-xs px-3 py-1 rounded-full uppercase">Best Value</span>
                 </div>
                 <div class="p-6 flex-1 flex flex-col justify-between">
@@ -153,80 +222,173 @@
                             <span class="text-xs text-slate-400 block font-semibold">Harga / Kg</span>
                             <span class="text-xl font-extrabold text-slate-900">Rp 420.000</span>
                         </div>
-                        <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20mau%20pesan%20Lobster%20Bambu%20Super." target="_blank" class="bg-slate-900 hover:bg-orange-500 text-white font-bold p-3 rounded-xl transition flex items-center space-x-2">
+                        <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20mau%20pesan%20Lobster%20Bambu%20Super." target="_blank" rel="noopener noreferrer" class="bg-slate-900 hover:bg-orange-500 text-white font-bold p-3 rounded-xl transition flex items-center space-x-2">
                             <i class="fa-solid fa-cart-plus"></i>
                             <span class="text-sm px-1">Beli</span>
                         </a>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
+    <section id="testimoni" class="py-20 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-slate-900">Ulasan Mitra Kuliner Kami</h2>
+                <p class="text-slate-600 mt-2">Bukti nyata dedikasi kami menjaga rantai dingin demi komoditas kualitas restoran.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/60" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="flex text-amber-400 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <blockquote class="text-slate-700 italic mb-4">"Lobsternya masih sangat segar saat sampai di lokasi tujuan. Berat timbangannya presisi dan kemasannya aman menggunakan standard box styrofoam tebal."</blockquote>
+                    <p class="text-sm font-bold text-slate-900">&mdash; Pelanggan Restoran, Jakarta</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/60" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="flex text-amber-400 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <blockquote class="text-slate-700 italic mb-4">"Sangat terbantu untuk pasokan seafood mewah bulanan usaha kami. Tekstur daging lobster mutiaranya manis alami dan dikirim tepat waktu."</blockquote>
+                    <p class="text-sm font-bold text-slate-900">&mdash; Pengusaha Kuliner Seafood, Bandung</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <footer id="kontak" class="bg-slate-950 text-slate-400 pt-16 pb-8 border-t border-slate-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             
-            <div class="md:col-span-1">
+            <div class="md:col-span-1" data-aos="fade-up">
                 <div class="flex items-center space-x-2 text-white mb-4">
                     <i class="fa-solid fa-shrimp text-orange-500 text-2xl"></i>
                     <span class="font-extrabold text-lg tracking-wider uppercase">King<span class="text-orange-500">Lobster</span></span>
                 </div>
                 <p class="text-sm leading-relaxed mb-4">Penyedia lobster laut segar tangkapan tangan nelayan lokal. Berkomitmen menjaga mutu tinggi demi kepuasan kuliner Anda.</p>
+                <div class="space-y-2 mt-4 pt-4 border-t border-slate-900 text-xs text-slate-300 font-semibold">
+                    <div class="flex items-center"><i class="fa-solid fa-circle-check text-orange-500 mr-2"></i> Fresh Every Day</div>
+                    <div class="flex items-center"><i class="fa-solid fa-box text-orange-500 mr-2"></i> Packing Styrofoam Aman</div>
+                    <div class="flex items-center"><i class="fa-solid fa-truck-ramp-box text-orange-500 mr-2"></i> Pengiriman Seluruh Indonesia</div>
+                </div>
             </div>
 
-            <div>
+            <div data-aos="fade-up" data-aos-delay="100">
                 <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Perusahaan</h4>
                 <ul class="space-y-2.5 text-sm">
                     <li><a href="#" class="hover:text-white transition">Home</a></li>
                     <li><a href="#produk" class="hover:text-white transition">Produk</a></li>
-                    <li><a href="#" class="hover:text-white transition">Tentang Kami</a></li>
-                    <li><a href="#" class="hover:text-white transition">Nelayan Kami</a></li>
+                    <li><a href="#testimoni" class="hover:text-white transition">Testimoni</a></li>
                 </ul>
             </div>
 
-            <div>
+            <div data-aos="fade-up" data-aos-delay="200">
                 <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Hubungi Kami</h4>
                 <ul class="space-y-3 text-sm">
-                    <li class="flex items-start">
+                                  <li class="flex items-start">
                         <i class="fa-solid fa-location-dot mt-1 mr-3 text-orange-500"></i>
-                        <span>Jl. Dermaga Pantai Baru No. 45, Palabuhanratu, Indonesia</span>
+                        <span>Sentra Nelayan Palabuhanratu, Sukabumi, Jawa Barat. (Melayani Pengiriman Seluruh Indonesia)</span>
                     </li>
                     <li class="flex items-center">
                         <i class="fa-solid fa-phone mr-3 text-orange-500"></i>
-                        <a href="https://wa.me/6281532900269" target="_blank" class="hover:text-white transition">+62 815-3290-0269</a>
+                        <a href="https://wa.me/6281532900269" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">+62 815-3290-0269</a>
                     </li>
                     <li class="flex items-center">
                         <i class="fa-solid fa-envelope mr-3 text-orange-500"></i>
-                        <span>info@kinglobster.com</span>
+                        <a href="mailto:ekodanangsubiyanto01@gmail.com" class="hover:text-white transition break-all">ekodanangsubiyanto01@gmail.com</a>
                     </li>
                 </ul>
             </div>
 
-            <div>
-                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Ikuti Petualangan Kami</h4>
-                <p class="text-sm mb-4">Dapatkan info promosi harian dan dokumentasi langsung saat kapal merapat.</p>
+            <div data-aos="fade-up" data-aos-delay="300">
+                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Ikuti Kami</h4>
+                <p class="text-sm mb-4">Dapatkan info promosi harian dan dokumentasi langsung dari kapal nelayan.</p>
                 <div class="flex space-x-3">
-                    <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster" target="_blank" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-slate-300 hover:bg-emerald-600 hover:text-white transition">
+                    <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-slate-300 hover:bg-emerald-600 hover:text-white transition">
                         <i class="fa-brands fa-whatsapp text-lg"></i>
                     </a>
-                    <a href="https://www.tiktok.com/@ekodanang1986" target="_blank" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-slate-300 hover:bg-black hover:text-white transition">
+                    <a href="https://www.tiktok.com/@ekodanang1986" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-slate-300 hover:bg-black hover:text-white transition">
                         <i class="fa-brands fa-tiktok text-lg"></i>
-                    </a>
-                    <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-slate-300 hover:bg-orange-500 hover:text-white transition">
-                        <i class="fa-brands fa-instagram text-lg"></i>
-                    </a>
-                    <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-slate-300 hover:bg-orange-500 hover:text-white transition">
-                        <i class="fa-brands fa-facebook-f text-lg"></i>
                     </a>
                 </div>
             </div>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-slate-900 text-center text-xs">
-            <p>&copy; 2026 King Lobster. Seluruh hak cipta dilindungi undang-undang.</p>
+            <p>&copy; <span id="copyright-year"></span> King Lobster. Seluruh hak cipta dilindungi undang-undang.</p>
         </div>
     </footer>
 
+    <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20ingin%20tanya%20stok%20lobster%20hari%20ini." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="fixed bottom-6 right-6 z-40 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95 group"
+       title="Hubungi Kami Via WhatsApp">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+        <span class="absolute right-16 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none shadow-md">
+            Tanya Stok Hari Ini
+        </span>
+    </a>
+
+    <button id="back-to-top" 
+            class="fixed bottom-24 right-6 z-40 bg-slate-800 hover:bg-orange-500 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl opacity-0 invisible transition-all duration-300 transform translate-y-4 hover:scale-110"
+            title="Kembali ke Atas">
+        <i class="fa-solid fa-arrow-up text-xl"></i>
+    </button>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // 1. KONTROL SPINNER LOADING (PRELOADER)
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.visibility = 'hidden';
+                // Inisialisasi AOS setelah preloader selesai agar posisi scroll akurat
+                AOS.init({
+                    once: true, 
+                    duration: 800
+                });
+            }, 500);
+        });
+
+        // 2. INTERAKSI MENU MOBILE
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 3. LOGIKA TOMBOL KEMBALI KE ATAS (BACK TO TOP)
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
+                backToTopBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
+                backToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-4');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 4. GENERATE TAHUN OTOMATIS DI FOOTER
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
