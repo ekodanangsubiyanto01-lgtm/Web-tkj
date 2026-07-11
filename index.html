@@ -1,734 +1,232 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eko Danang Subiyanto — Cyber Portfolio &amp; Financial Analytics</title>
-
-<style>
-  /* ---------- MODERN DARK CYBER TEMA ---------- */
-  :root {
-    --bg-main: #0a0a0c;
-    --bg-sub: #111115;
-    --bg-card: #16161e;
-    --bg-input: #1f1f2e;
-    
-    --text-main: #f0f0f5;
-    --text-sub: #9499b3;
-    --cyber-green: #00ff66;
-    --cyber-glow: rgba(0, 255, 102, 0.15);
-    --border: #232330;
-    --border-focus: #444460;
-    --cyber-red: #ff3b30;
-    --gold: #ffd700;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  
-  body {
-    background: var(--bg-main);
-    color: var(--text-main);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  h1, h2, h3, h4 {
-    font-weight: 700;
-    color: var(--text-main);
-    letter-spacing: -0.5px;
-  }
-
-  a { color: inherit; text-decoration: none; }
-  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
-
-  /* ---------- NAVBAR PREMIUM ---------- */
-  .navbar {
-    background: rgba(10, 10, 12, 0.8);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    padding: 16px 0;
-  }
-  .navbar .wrap { display: flex; justify-content: space-between; align-items: center; }
-  .navbar .logo { font-weight: 800; font-size: 1.1rem; color: #fff; display: flex; align-items: center; gap: 8px; }
-  .navbar .logo::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--cyber-green); border-radius: 50%; box-shadow: 0 0 10px var(--cyber-green); }
-  .navbar nav a { font-size: 0.9rem; font-weight: 600; margin-left: 20px; color: var(--text-sub); transition: 0.2s; }
-  .navbar nav a:hover { color: var(--cyber-green); }
-
-  /* ---------- TICKER ATAS ---------- */
-  .ticker-bar { background: #000; border-bottom: 1px solid var(--border); font-family: monospace; font-size: 0.8rem; padding: 6px 0; color: var(--text-sub); }
-  .ticker-bar .wrap { display: flex; justify-content: space-between; align-items: center; }
-
-  /* ---------- HERO SECTION & UPLOAD STYLE ---------- */
-  .hero { padding: 80px 0 60px 0; background: linear-gradient(180deg, var(--bg-main) 0%, var(--bg-sub) 100%); }
-  .hero .tag-status { display: inline-block; background: rgba(0,255,102,0.1); border: 1px solid rgba(0,255,102,0.3); color: var(--cyber-green); padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.75rem; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
-  .hero h1 { font-size: 2.8rem; margin-bottom: 16px; line-height: 1.2; background: linear-gradient(120deg, #fff 40%, var(--text-sub)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .hero p { font-size: 1.1rem; color: var(--text-sub); max-width: 620px; margin-bottom: 30px; }
-  
-  .btn { display: inline-block; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-align: center; border: none; }
-  .btn-cyber { background: var(--cyber-green); color: #000; box-shadow: 0 4px 20px var(--cyber-glow); }
-  .btn-cyber:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0, 255, 102, 0.4); }
-  .btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
-  .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: var(--text-sub); transform: translateY(-1px); }
-  .hero-buttons { display: flex; gap: 16px; }
-
-  .profile-section { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; margin-top: 40px; }
-  
-  .photo-box { 
-    width: 150px; height: 150px; background: var(--bg-card); border: 3px solid var(--cyber-green); 
-    border-radius: 50%; overflow: hidden; box-shadow: 0 0 20px var(--cyber-glow); position: relative; cursor: pointer;
-  }
-  .photo-box img { width: 100%; height: 100%; object-fit: cover; }
-  .upload-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--cyber-green); font-weight: bold; opacity: 0; transition: 0.2s; text-align: center; padding: 10px; }
-  .photo-box:hover .upload-overlay { opacity: 1; }
-  
-  .input-galeri { display: none; }
-
-  /* ---------- SEKSI STATISTIK ---------- */
-  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 40px; }
-  .stats-card { background: linear-gradient(135deg, var(--bg-card) 0%, rgba(22,22,30,0.5) 100%); border: 1px solid var(--border); padding: 20px; border-radius: 12px; text-align: center; transition: 0.3s; }
-  .stats-card:hover { border-color: var(--cyber-green); box-shadow: 0 5px 15px rgba(0,255,102,0.05); }
-  .stats-number { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 4px; font-family: monospace; }
-  .stats-label { font-size: 0.8rem; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.5px; }
-
-  /* ---------- SECTIONS & GRID ---------- */
-  section { padding: 80px 0; border-top: 1px solid var(--border); }
-  section:nth-of-type(even) { background: var(--bg-sub); }
-  
-  .section-label { font-size: 0.75rem; font-weight: 800; color: var(--cyber-green); margin-bottom: 12px; display: block; text-transform: uppercase; letter-spacing: 1.5px; }
-  section h2 { font-size: 2rem; margin-bottom: 40px; }
-
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-  .grid-12 { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
-  .card-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-  
-  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s; }
-  .card:hover { border-color: var(--border-focus); transform: translateY(-5px); }
-  .card h3 { font-size: 1.2rem; margin-bottom: 10px; color: #fff; }
-  .card p { font-size: 0.95rem; color: var(--text-sub); }
-
-  .timeline { border-left: 2px solid var(--border); padding-left: 24px; margin-top: 20px; }
-  .timeline-item { margin-bottom: 28px; position: relative; }
-  .timeline-item::before { content: ''; position: absolute; left: -29px; top: 6px; width: 8px; height: 8px; background: var(--bg-main); border: 2px solid var(--cyber-green); border-radius: 50%; }
-  .timeline-year { font-weight: 800; font-size: 0.8rem; color: var(--cyber-green); text-transform: uppercase; margin-bottom: 4px; }
-  .timeline-title { font-size: 1.1rem; font-weight: 700; color: #fff; }
-  .timeline-desc { font-size: 0.9rem; color: var(--text-sub); }
-
-  .info-table { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--bg-card); }
-  .info-row { display: flex; justify-content: space-between; padding: 16px 24px; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
-  .info-row:last-child { border-bottom: none; }
-  .info-row span:first-child { font-weight: 700; color: var(--text-sub); }
-  .info-row span:last-child { color: #fff; font-weight: 500; }
-
-  /* ---------- APP LAYOUTS GENERAL ---------- */
-  .app-panel { background: #0e0e12; border: 1px solid var(--border); border-radius: 24px; padding: 36px; margin: 40px 0; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
-  .app-header { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding-bottom: 24px; margin-bottom: 36px; flex-wrap: wrap; gap: 16px; }
-  
-  .calc-box { background: var(--bg-card); padding: 24px; border-radius: 16px; margin-bottom: 20px; border: 1px solid var(--border); }
-  .form-group { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
-  .form-group .field { flex: 1; min-width: 160px; }
-  .form-group label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--text-sub); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-  
-  .form-group input, .form-group select {
-    width: 100%; padding: 12px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 8px; color: #fff; font-size: 0.95rem; transition: 0.2s; outline: none;
-  }
-  .form-group input:focus, .form-group select:focus { border-color: var(--cyber-green); box-shadow: 0 0 10px rgba(0,255,102,0.1); }
-  
-  .hasil-container { background: #050507; padding: 24px; border-radius: 12px; border-left: 4px solid var(--cyber-green); margin-top: 24px; display: none; box-shadow: inset 0 2px 8px rgba(0,0,0,0.8); animation: fadeIn 0.4s ease; }
-  .hasil-container.tampil { display: block; }
-  .hasil-container .angka { font-size: 2.2rem; font-weight: 800; color: var(--cyber-green); text-shadow: 0 0 15px var(--cyber-glow); }
-
-  /* SENTIMEN METER VISUAL */
-  .sentiment-wrapper { background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 16px; margin-bottom: 20px; }
-  .sentiment-bar-container { display: flex; height: 24px; border-radius: 6px; overflow: hidden; margin: 12px 0; background: #222; }
-  .bar-short { background: var(--cyber-red); width: 65%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; color: #fff; transition: width 0.6s ease; }
-  .bar-long { background: var(--cyber-green); width: 35%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; color: #000; transition: width 0.6s ease; }
-
-  /* DATA RINCIAN LOGISTIK */
-  .rincian-logistik { margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(255,255,255,0.1); font-size: 0.85rem; color: var(--text-sub); }
-  .rincian-logistik li { list-style: none; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-  .rincian-logistik li::before { content: '→'; color: var(--cyber-green); font-weight: bold; }
-
-  /* TKJ CYBER TERMINAL BOX */
-  .cyber-terminal { background: #050507; border: 1px solid var(--border); border-radius: 12px; padding: 16px; font-family: monospace; font-size: 0.8rem; color: #a4a9c6; margin-bottom: 40px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.8); }
-  .terminal-header { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--cyber-green); border-bottom: 1px solid rgba(0,255,102,0.1); padding-bottom: 8px; margin-bottom: 10px; font-weight: bold; }
-  .terminal-line { margin-bottom: 4px; line-height: 1.4; }
-
-  /* GRIDS PRODUK LELE */
-  .lele-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
-  .lele-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
-  .lele-card:hover { border-color: rgba(0,255,102,0.3); transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.4); }
-  .lele-photo { width: 100%; height: 160px; border-radius: 10px; margin-bottom: 16px; overflow: hidden; background: #222; position: relative; cursor: pointer; }
-  .lele-photo img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
-  .price { font-size: 1.3rem; font-weight: 800; color: var(--cyber-green); margin: 16px 0; text-shadow: 0 0 10px var(--cyber-glow); }
-  .btn-buy { display: block; text-align: center; background: #fff; color: #000; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 700; transition: 0.2s; }
-  .btn-buy:hover { background: var(--cyber-green); box-shadow: 0 0 15px var(--cyber-glow); }
-
-  /* TRADINGVIEW INTEGRATION BOX */
-  .chart-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; height: 450px; overflow: hidden; margin-bottom: 24px; }
-
-  /* TESTIMONI */
-  .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 20px; }
-  .testimonial-card { background: var(--bg-sub); border-left: 3px solid var(--cyber-green); padding: 24px; border-radius: 0 16px 16px 0; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .testimonial-text { font-style: italic; color: var(--text-main); font-size: 0.95rem; margin-bottom: 16px; line-height: 1.5; }
-  .testimonial-user { font-size: 0.85rem; font-weight: 700; color: var(--cyber-green); display: flex; align-items: center; gap: 8px; }
-  .testimonial-user::before { content: '■'; font-size: 0.6rem; }
-
-  .contact-box { background: linear-gradient(135deg, var(--bg-card) 0%, #0e0e12 100%); border: 1px solid var(--border); text-align: center; padding: 60px 40px; border-radius: 20px; margin-top: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
-  .contact-box h2 { color: #fff; margin-bottom: 16px; font-size: 2rem; }
-  
-  footer { text-align: center; padding: 40px 0; color: var(--text-sub); font-size: 0.85rem; border-top: 1px solid var(--border); background: var(--bg-main); }
-  .wa-floating { position: fixed; right: 24px; bottom: 24px; background: var(--cyber-green); color: #000; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 8px 24px rgba(0, 255, 102, 0.3); z-index: 200; font-weight: bold; transition: 0.2s; }
-  .wa-floating:hover { transform: scale(1.1); }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (max-width: 992px) {
-    .grid-12 { display: flex; flex-direction: column; }
-    .hero h1 { font-size: 2.2rem; }
-    .profile-section { flex-direction: column; align-items: center; text-align: center; gap: 24px; }
-    .navbar nav { display: none; }
-    .app-panel { padding: 24px; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>King Lobster - Tangkapan Segar Langsung dari Nelayan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 antialiased">
 
-<div class="ticker-bar">
-  <div class="wrap">
-    <span>[SYSTEM_STATUS: ACTIVE] NODE_MIGRATION_LINK_OK</span>
-    <span style="color: var(--cyber-green);" id="top-countdown">USD NEWS COUNTDOWN: CPI Rilis dlm 12m 40s</span>
-  </div>
-</div>
+    <nav class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md text-white border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 flex items-center space-x-2">
+                    <i class="fa-solid fa-shrimp text-orange-500 text-3xl"></i>
+                    <span class="font-extrabold text-xl tracking-wider uppercase">King<span class="text-orange-500">Lobster</span></span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8 font-semibold">
+                    <a href="#" class="text-orange-500 transition">Home</a>
+                    <a href="#produk" class="text-slate-300 hover:text-orange-500 transition">Produk</a>
+                    <a href="#tentang" class="text-slate-300 hover:text-orange-500 transition">Tentang Kami</a>
+                    <a href="#kontak" class="text-slate-300 hover:text-orange-500 transition">Kontak</a>
+                </div>
 
-<div class="navbar">
-  <div class="wrap">
-    <div class="logo">Eko Danang S.</div>
-    <nav>
-      <a href="#tentang">Tentang</a>
-      <a href="#skill">Skill</a>
-      <a href="#proyek">Proyek Portal</a>
-      <a href="#xauanalytics">XAU.Analytics</a>
-      <a href="#ekolele">Eko Lele</a>
-      <a href="#testimoni">Testimoni</a>
-      <a href="#kontak">Kontak</a>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="relative p-2 text-slate-300 hover:text-orange-500 transition">
+                        <i class="fa-solid fa-basket-shopping text-xl"></i>
+                        <span class="absolute top-0 right-0 bg-orange-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">3</span>
+                    </a>
+                    <button class="md:hidden p-2 text-slate-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </nav>
-  </div>
-</div>
 
-<header class="hero">
-  <div class="wrap">
-    <span class="tag-status">● CORE_TKJ_FULLSTACK_ENGINEER</span>
-    <h1>Eko Danang Subiyanto</h1>
-    <div class="profile-section">
-      
-      <div class="photo-box" onclick="bukaGaleri('input-profil')">
-        <img id="img-profil" src="wallpaper-lele.jpg" alt="Foto Profil">
-        <div class="upload-overlay">GANTI FOTO PROFIL</div>
-      </div>
-      <input type="file" id="input-profil" class="input-galeri" accept="image/*" onchange="prosesFoto(this, 'img-profil', 'save-profil')">
-
-      <div>
-        <p>Siswa Teknik Komputer &amp; Jaringan yang mendalami ekosistem Full-Stack Web Architecture. Berfokus pada sistem optimasi data real-time, alat bantu finansial komoditas, dan infrastruktur sistem modular terdistribusi.</p>
-        <div class="hero-buttons">
-          <a class="btn btn-cyber" href="#proyek">Lihat Portofolio Kerja</a>
-          <a class="btn btn-outline" href="#kontak">Hubungi Dev</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="stats-grid">
-      <div class="stats-card">
-        <div class="stats-number">150+</div>
-        <div class="stats-label">Jam Belajar Coding</div>
-      </div>
-      <div class="stats-card">
-        <div class="stats-number">20+</div>
-        <div class="stats-label">Sistem Repositori</div>
-      </div>
-      <div class="stats-card">
-        <div class="stats-number">2</div>
-        <div class="stats-label">Aplikasi Aktif</div>
-      </div>
-      <div class="stats-card">
-        <div class="stats-number">&lt; 15ms</div>
-        <div class="stats-label">Optimasi Latensi</div>
-      </div>
-    </div>
-
-  </div>
-</header>
-
-<section id="tentang">
-  <div class="wrap">
-    <span class="section-label">Arsitektur Berpikir</span>
-    <h2>Tentang Saya</h2>
-    <div class="grid-2">
-      <div>
-        <p style="color: var(--text-sub); margin-bottom: 24px;">Memanfaatkan logika topologi jaringan komputer untuk membangun struktur aplikasi perangkat lunak. Saya merancang sistem fungsional yang berfokus penuh pada kecepatan pemrosesan latensi rendah dan pengalaman intuitif bebas hambatan.</p>
-        
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-year">Infrastruktur</div>
-            <div class="timeline-title">Setup Environment Kerja Portabel</div>
-            <div class="timeline-desc">Konfigurasi penuh Linux Environment di dalam perangkat Android (Termux Core) untuk pengerjaan project fleksibel.</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-year">Sekarang</div>
-            <div class="timeline-title">Sistem &amp; Agregasi Finansial</div>
-            <div class="timeline-desc">Mengkombinasikan UI/UX interaktif dengan kalkulator manajemen risiko logistik dan pasar finansial makro.</div>
-          </div>
-        </div>
-      </div>
-      
-      <div>
-        <div class="info-table">
-          <div class="info-row"><span>Spesialisasi</span><span>Full-Stack Web &amp; Jaringan</span></div>
-          <div class="info-row"><span>Arsitektur DB</span><span>PostgreSQL Relational / Redis Cache</span></div>
-          <div class="info-row"><span>Bahasa Pemrograman</span><span>JavaScript ES6 / Node.js</span></div>
-          <div class="info-row"><span>Metrik UX</span><span>Zero-Click Dashboards</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="skill">
-  <div class="wrap">
-    <span class="section-label">Spesifikasi Engine</span>
-    <h2>Kemampuan Teknis</h2>
-    <div class="card-list">
-      <div class="card">
-        <h3>Front-End UI Design</h3>
-        <p>Implementasi CSS Grid/Flexbox semantik modern untuk menghasilkan visual super lancar di gawai seluler.</p>
-      </div>
-      <div class="card">
-        <h3>Logic &amp; API Integration</h3>
-        <p>Integrasi stream data dinamis WebSocket, manipulasi struktur matematika kompleks, dan efisiensi lokal storage.</p>
-      </div>
-      <div class="card">
-        <h3>Network &amp; Subnetting</h3>
-        <p>Dasar TKJ kuat: Alokasi tabel IP Address, manajemen skema routing komputer, dan pemantauan latensi jaringan.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="proyek">
-  <div class="wrap">
-    <span class="section-label">Katalog Aplikasi</span>
-    <h2>Proyek Sistem Terintegrasi</h2>
-    <div class="card-list">
-      <div class="card">
-        <span style="color:var(--cyber-green); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">PROYEK FINANSIAL</span>
-        <h3 style="margin-top:6px;">XAU.Analytics Terminal</h3>
-        <p>Website analisis instrumen emas (XAU/USD) dilengkapi chart TradingView, kalkulator lot trading, sentimen ritel, dan kalender makro ekonomi AS.</p>
-        <div style="margin-top: 20px;"><a href="#xauanalytics" style="color: var(--cyber-green); font-weight: 700; font-size: 0.9rem;">Buka Terminal Analisis Emas →</a></div>
-      </div>
-      <div class="card">
-        <span style="color:var(--cyber-green); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">PROYEK LOGISTIK UMKM</span>
-        <h3 style="margin-top:6px;">Eko Lele Dashboard</h3>
-        <p>Aplikasi otomasi kalkulasi porsi logistik harian, inventarisasi pasokan stok kolam, dan integrasi pesanan instan untuk pedagang kuliner pecel lele.</p>
-        <div style="margin-top: 20px;"><a href="#ekolele" style="color: var(--cyber-green); font-weight: 700; font-size: 0.9rem;"        <div style="margin-top: 20px;"><a href="#ekolele" style="color: var(--cyber-green); font-weight: 700; font-size: 0.9rem;">Buka Sistem Eko Lele →</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="wrap" id="xauanalytics">
-  <div class="app-panel" style="border-color: rgba(255,215,0,0.2);">
-    <div class="app-header">
-      <div>
-        <h1 style="color:#fff;">XAU.Analytics Terminal <span style="font-size: 0.8rem; color: #ffd700; font-family: monospace;">[GOLD_EDITION v1.5]</span></h1>
-        <p class="sub" style="font-size: 0.85rem; text-transform: uppercase; margin-top: 4px; color: #ffd700; font-weight: 700; letter-spacing: 0.5px;">100% Dedicated Gold Trading Tactical Hub</p>
-      </div>
-      <div style="font-size: 0.85rem; text-align: right; color: var(--text-sub); font-family: monospace;">
-        MARKET: <span style="color:#00ff66; font-weight: bold;">LIVE TRACKING</span><br>
-        INSTRUMEN: <span style="color:#fff;">XAU/USD (SPOT GOLD)</span>
-      </div>
-    </div>
-
-    <div class="grid-12">
-      <div style="grid-column: span 4;">
-        <div class="sentiment-wrapper">
-          <h4 style="font-size:0.85rem; text-transform: uppercase; color: var(--text-main);">XAU/USD Sentiment Meter</h4>
-          <p class="sub" style="font-size:0.75rem; color: var(--text-sub);">Rasio Posisi Ritel Broker Besar</p>
-          <div class="sentiment-bar-container">
-            <div class="bar-short" id="bar-short">Short 68%</div>
-            <div class="bar-long" id="bar-long">Long 32%</div>
-          </div>
-          <p id="sentiment-bias" style="font-size: 0.75rem; color: var(--cyber-green); font-family: monospace; text-align: center;">BIAS: BULLISH CONTRARIAN SIGNAL</p>
+    <header class="relative bg-slate-900 h-[85vh] flex items-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1559742811-82410b451b9b?auto=format&fit=crop&w=1920&q=80" alt="Ocean Background" class="w-full h-full object-cover opacity-40 scale-105 transform transition duration-1000">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent"></div>
         </div>
 
-        <div class="calc-box">
-          <h3 style="margin-bottom: 16px; font-size: 1.1rem; color: #fff;">Manajemen Risiko Lot (Emas)</h3>
-          <div class="form-group" style="display: flex; flex-direction: column; gap: 12px;">
-            <div class="field">
-              <label>Saldo Akun (USD)</label>
-              <input type="number" id="gold-balance" value="1000" min="1">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-2xl">
+                <span class="inline-block bg-orange-500/10 text-orange-400 font-semibold text-sm px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-orange-500/30">
+                    100% Fresh & Premium Quality
+                </span>
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
+                    Lobster Laut Segar, <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-400">Langsung dari Nelayan</span>
+                </h1>
+                <p class="text-lg text-slate-300 mb-8 leading-relaxed">
+                    Nikmati kelezatan lobster premium tangkapan liar hari ini. Kami menjaga rantai pasok tetap dingin demi menjamin kesegaran maksimal sampai di dapur Anda.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#produk" class="inline-flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-orange-500/20 transition transform hover:-translate-y-0.5">
+                        Pesan Sekarang
+                        <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                    <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20tertarik%20untuk%20memesan%20lobster%20segar." target="_blank" class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-xl border border-emerald-500 backdrop-blur-sm transition">
+                        <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Chat Admin
+                    </a>
+                </div>
             </div>
-            <div class="field">
-              <label>Risiko Diinginkan (%)</label>
-              <input type="number" id="gold-risk" value="2" min="1" max="100">
+        </div>
+    </header>
+
+    <section id="produk" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">Koleksi Tangkapan Terbaik</h2>
+            <p class="text-slate-600">Pilih jenis lobster laut premium favorit Anda. Harga transparan berdasarkan berat dan kualitas terbaik standar restoran bintang lima.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-slate-100 flex flex-col group">
+                <div class="relative overflow-hidden aspect-[4/3]">
+                    <img src="https://images.unsplash.com/photo-1553618551-fba689030290?auto=format&fit=crop&w=600&q=80" alt="Lobster Mutiara" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-4 left-4 bg-emerald-500 text-white font-bold text-xs px-3 py-1 rounded-full uppercase">Paling Dicari</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Lobster Mutiara (Premium)</h3>
+                        <p class="text-slate-500 text-sm mb-4">Raja segala lobster dengan daging yang sangat padat, manis alami, dan tekstur yang lembut sempurna.</p>
+                        <div class="flex items-center space-x-4 mb-6 bg-slate-50 p-3 rounded-lg text-sm text-slate-600">
+                            <span><i class="fa-solid fa-scale-balanced text-orange-500 mr-1.5"></i> 800g - 1kg / ekor</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <div>
+                            <span class="text-xs text-slate-400 block font-semibold">Harga / Kg</span>
+                            <span class="text-xl font-extrabold text-slate-900">Rp 650.000</span>
+                        </div>
+                        <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20mau%20pesan%20Lobster%20Mutiara%20Premium." target="_blank" class="bg-slate-900 hover:bg-orange-500 text-white font-bold p-3 rounded-xl transition flex items-center space-x-2">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <span class="text-sm px-1">Beli</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="field">
-              <label>Jarak Stop-Loss (Pips)</label>
-              <input type="number" id="gold-sl" value="50" min="1" placeholder="Contoh: 50 pips">
+
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-slate-100 flex flex-col group">
+                <div class="relative overflow-hidden aspect-[4/3]">
+                    <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?auto=format&fit=crop&w=600&q=80" alt="Lobster Pasir" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Lobster Pasir (Fresh)</h3>
+                        <p class="text-slate-500 text-sm mb-4">Sangat cocok untuk olahan saus padang atau dibakar. Memiliki kulit yang lebih tipis dengan daging melimpah.</p>
+                        <div class="flex items-center space-x-4 mb-6 bg-slate-50 p-3 rounded-lg text-sm text-slate-600">
+                            <span><i class="fa-solid fa-scale-balanced text-orange-500 mr-1.5"></i> 300g - 500g / ekor</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <div>
+                            <span class="text-xs text-slate-400 block font-semibold">Harga / Kg</span>
+                            <span class="text-xl font-extrabold text-slate-900">Rp 350.000</span>
+                        </div>
+                        <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20mau%20pesan%20Lobster%20Pasir%20Fresh." target="_blank" class="bg-slate-900 hover:bg-orange-500 text-white font-bold p-3 rounded-xl transition flex items-center space-x-2">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <span class="text-sm px-1">Beli</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <button class="btn btn-cyber" id="hitung-gold-btn" style="width:100%; background:#ffd700; color:#000; margin-top:12px;">Hitung Ukuran Lot Maksimal</button>
 
-          <div class="hasil-container" id="hasil-gold-box" style="border-left-color: #ffd700;">
-            <div class="angka" id="gold-lot" style="color: #ffd700; text-shadow: 0 0 15px rgba(255,215,0,0.3);">— Lots</div>
-            <p class="sub" id="gold-risk-usd" style="font-size: 0.9rem; margin-top: 8px; color: var(--text-sub);"></p>
-            <div class="rincian-logistik" style="font-size:0.8rem;">
-              <li>Nilai Pip per Lot Standar Komoditas Emas = $10 per 1 Pip</li>
-              <li>Pastikan pengaturan margin akun broker Anda mendukung.</li>
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-slate-100 flex flex-col group">
+                <div class="relative overflow-hidden aspect-[4/3]">
+                    <img src="https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=600&q=80" alt="Lobster Bambu" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-4 left-4 bg-orange-500 text-white font-bold text-xs px-3 py-1 rounded-full uppercase">Best Value</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Lobster Bambu (Super)</h3>
+                        <p class="text-slate-500 text-sm mb-4">Cita rasa gurih yang khas dengan cangkang bermotif unik. Menjadi favorit untuk hidangan sup seafood mewah.</p>
+                        <div class="flex items-center space-x-4 mb-6 bg-slate-50 p-3 rounded-lg text-sm text-slate-600">
+                            <span><i class="fa-solid fa-scale-balanced text-orange-500 mr-1.5"></i> 500g - 700g / ekor</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <div>
+                            <span class="text-xs text-slate-400 block font-semibold">Harga / Kg</span>
+                            <span class="text-xl font-extrabold text-slate-900">Rp 420.000</span>
+                        </div>
+                        <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20mau%20pesan%20Lobster%20Bambu%20Super." target="_blank" class="bg-slate-900 hover:bg-orange-500 text-white font-bold p-3 rounded-xl transition flex items-center space-x-2">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <span class="text-sm px-1">Beli</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-          </div>
+
         </div>
-      </div>
+    </section>
 
-      <div style="grid-column: span 8;">
-        <div class="chart-container">
-          <div class="tradingview-widget-container" style="height:100%;width:100%;">
-            <div id="tradingview_xau" style="height:100%;width:100%;"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-            <script type="text/javascript">
-            new TradingView.widget({
-              "autosize": true,
-              "symbol": "OANDA:XAUUSD",
-              "interval": "60",
-              "timezone": "Asia/Jakarta",
-              "theme": "dark",
-              "style": "1",
-              "locale": "id",
-              "enable_publishing": false,
-              "hide_side_toolbar": false,
-              "allow_symbol_change": false,
-              "container_id": "tradingview_xau"
-            });
-            </script>
-          </div>
+    <footer id="kontak" class="bg-slate-950 text-slate-400 pt-16 pb-8 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            
+            <div class="md:col-span-1">
+                <div class="flex items-center space-x-2 text-white mb-4">
+                    <i class="fa-solid fa-shrimp text-orange-500 text-2xl"></i>
+                    <span class="font-extrabold text-lg tracking-wider uppercase">King<span class="text-orange-500">Lobster</span></span>
+                </div>
+                <p class="text-sm leading-relaxed mb-4">Penyedia lobster laut segar tangkapan tangan nelayan lokal. Berkomitmen menjaga mutu tinggi demi kepuasan kuliner Anda.</p>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Perusahaan</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="#" class="hover:text-white transition">Home</a></li>
+                    <li><a href="#produk" class="hover:text-white transition">Produk</a></li>
+                    <li><a href="#" class="hover:text-white transition">Tentang Kami</a></li>
+                    <li><a href="#" class="hover:text-white transition">Nelayan Kami</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Hubungi Kami</h4>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-location-dot mt-1 mr-3 text-orange-500"></i>
+                        <span>Jl. Dermaga Pantai Baru No. 45, Palabuhanratu, Indonesia</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa-solid fa-phone mr-3 text-orange-500"></i>
+                        <a href="https://wa.me/6281532900269" target="_blank" class="hover:text-white transition">+62 815-3290-0269</a>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa-solid fa-envelope mr-3 text-orange-500"></i>
+                        <span>info@kinglobster.com</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Ikuti Petualangan Kami</h4>
+                <p class="text-sm mb-4">Dapatkan info promosi harian dan dokumentasi langsung saat kapal merapat.</p>
+                <div class="flex space-x-3">
+                    <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster" target="_blank" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-slate-300 hover:bg-emerald-600 hover:text-white transition">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@ekodanang1986" target="_blank" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-slate-300 hover:bg-black hover:text-white transition">
+                        <i class="fa-brands fa-tiktok text-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-slate-300 hover:bg-orange-500 hover:text-white transition">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-slate-300 hover:bg-orange-500 hover:text-white transition">
+                        <i class="fa-brands fa-facebook-f text-lg"></i>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<div class="wrap" id="ekolele">
-  <div class="lele-app" style="background: var(--bg-main); padding: 24px 0;">
-    <div class="app-header">
-      <div>
-        <h1 style="letter-spacing: -0.5px;">Eko Lele Sistem</h1>
-        <p class="sub" style="font-size: 0.85rem; text-transform: uppercase; margin-top: 4px; color: var(--cyber-green); font-weight: 700; letter-spacing: 0.5px;">Pemasok Lele Hidup Berkualitas &amp; Olahan Segar</p>
-      </div>
-      <div style="font-size: 0.85rem; text-align: right; color: var(--text-sub); font-family: monospace;">
-        ID NOTA: <span id="nomor-nota" style="color:#fff;">—</span><br>
-        TANGGAL: <span id="tanggal-nota" style="color:#fff;">—</span>
-      </div>
-    </div>
-
-    <div style="margin-bottom: 40px;">
-      <h3 id="stok-keterangan" style="font-size: 1.1rem;">● SYSTEM_CHECKING</h3>
-    </div>
-
-    <div class="calc-box">
-      <h3 style="margin-bottom: 20px; font-size: 1.2rem; color: #fff;">Kalkulator Kebutuhan Porsi</h3>
-      <div class="form-group">
-        <div class="field">
-          <label>Target Jumlah Porsi</label>
-          <input type="number" id="porsi" placeholder="Contoh: 60" min="1">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-slate-900 text-center text-xs">
+            <p>&copy; 2026 King Lobster. Seluruh hak cipta dilindungi undang-undang.</p>
         </div>
-        <div class="field">
-          <label>Klasifikasi Kiloan</label>
-          <select id="ukuran">
-            <option value="6">6–7 ekor / kg (Besar)</option>
-            <option value="9" selected>8–10 ekor / kg (Standar Pecel Lele)</option>
-            <option value="13">12–14 ekor / kg (Sedang)</option>
-          </select>
-        </div>
-      </div>
-      <button class="btn btn-cyber" id="hitung-btn" style="width:100%; color:#000;">Proses Data Kiloan</button>
-
-      <div class="hasil-container" id="hasil-box">
-        <div class="angka" id="hasil-kg">— kg</div>
-        <p class="sub" id="hasil-ket" style="font-size: 0.9rem; margin-top: 8px;"></p>
-        
-        <div class="rincian-logistik">
-          <li id="logistik-ekor">Estimasi kebutuhan fisik: — ekor</li>
-          <li id="logistik-packing">Rekomendasi kemasan: —</li>
-        </div>
-      </div>
-    </div>
-
-    <div class="cyber-terminal">
-      <div class="terminal-header">
-        <span>[NODE_CONNECTION_MONITOR]</span>
-        <span>STATUS: ONLINE</span>
-      </div>
-      <div class="terminal-line" style="color: var(--cyber-green);">ekodanang@cyber-client:~# systemctl status eko-lele-dashboard</div>
-      <div class="terminal-line">• pool_node_01.service - Pool Logistical Link System</div>
-      <div class="terminal-line">&nbsp;&nbsp; Active: active (running) since localized boot system</div>
-      <div class="terminal-line" id="terminal-ping">&nbsp;&nbsp; Latency to local database node: checking...</div>
-      <div class="terminal-line">&nbsp;&nbsp; Environment: Mobile Linux Core (Termux-Android Environment)</div>
-    </div>
-
-    <h3 style="margin-bottom: 4px; font-size: 1.3rem;">Daftar Produk Unggulan</h3>
-    <p class="sub" style="font-size: 0.8rem; margin-bottom: 24px; color: var(--cyber-green);">💡 Tip: Klik gambar produk untuk menggantinya langsung dari galeri HP &amp; otomatis tersimpan permanen!</p>
-    
-    <div class="lele-grid">
-      <div class="lele-card">
-        <div class="lele-photo" onclick="bukaGaleri('input-produk1')">
-          <img id="img-produk1" src="lele-segar.jpg" alt="Lele Hidup Standar" loading="lazy">
-          <div class="upload-overlay">KLIK UNTUK UBAH FOTO</div>
-        </div>
-        <input type="file" id="input-produk1" class="input-galeri" accept="image/*" onchange="prosesFoto(this, 'img-produk1', 'save-prod1')">
-        <div>
-          <h4>Lele Hidup Standar</h4>
-          <p class="sub" style="font-size: 0.85rem; margin-top: 4px;">Isi 8–10 ekor/kg. Pilihan utama bisnis kuliner.</p>
-        </div>
-        <div>
-          <div class="price">Rp 24.000<span style="font-size:0.85rem; color:var(--text-sub);">/kg</span></div>
-          <a class="btn-buy" href="https://wa.me/6281532900269?text=Halo%20Eko%20Lele,%20saya%20mau%20pesan%20Lele%20Hidup%20Standar%208-10%20ekor/kg" target="_blank" rel="noopener">Pesan Sekarang</a>
-        </div>
-      </div>
-
-      <div class="lele-card">
-        <div class="lele-photo" onclick="bukaGaleri('input-produk2')">
-          <img id="img-produk2" src="lele-besar.jpg" alt="Lele Hidup Besar" loading="lazy">
-          <div class="upload-overlay">KLIK UNTUK UBAH FOTO</div>
-        </div>
-        <input type="file" id="input-produk2" class="input-galeri" accept="image/*" onchange="prosesFoto(this, 'img-produk2', 'save-prod2')">
-        <div>
-          <h4>Lele Hidup Besar</h4>
-          <p class="sub" style="font-size: 0.85rem; margin-top: 4px;">Isi 6–7 ekor/kg. Daging tebal memuaskan.</p>
-        </div>
-        <div>
-          <div class="price">Rp 27.000<span style="font-size:0.85rem; color:var(--text-sub);">/kg</span></div>
-          <a class="btn-buy" href="https://wa.me/6281532900269?text=Halo%20Eko%20Lele,%20saya%20mau%20pesan%20Lele%20Hidup%20Besar%206-7%20ekor/kg" target="_blank" rel="noopener">Pesan Sekarang</a>
-        </div>
-      </div>
-
-      <div class="lele-card">
-        <div class="lele-photo" onclick="bukaGaleri('input-produk3')">
-          <img id="img-produk3" src="lele-bumbu.jpg" alt="Lele Bumbu Kuning" loading="lazy">
-          <div class="upload-overlay">KLIK UNTUK UBAH FOTO</div>
-        </div>
-        <input type="file" id="input-produk3" class="input-galeri" accept="image/*" onchange="prosesFoto(this, 'img-produk3', 'save-prod3')">
-        <div>
-          <h4>Lele Bumbu Kuning</h4>
-          <p class="sub" style="font-size: 0.85rem; margin-top: 4px;">Siap goreng, bumbu marinasi resep khusus.</p>
-        </div>
-        <div>
-          <div class="price">Rp 30.000<span style="font-size:0.85rem; color:var(--text-sub);">/kg</span></div>
-          <a class="btn-buy" href="https://wa.me/6281532900269?text=Halo%20Eko%20Lele,%20saya%20mau%20pesan%20Lele%20Bumbu%20Kuning%20Frozen" target="_blank" rel="noopener">Pesan Sekarang</a>
-        </div>
-      </div>
-    </div> 
-    
-    <div style="margin-top: 40px; text-align: center; border-top: 1px dashed var(--border); padding-top: 32px;">
-      <p class="sub" style="margin-bottom: 16px;">Membutuhkan pasokan rutin terjadwal skala warung atau restoran?</p>
-      <a class="btn btn-outline" id="wa-langganan" href="#" target="_blank" rel="noopener" style="border-color: var(--cyber-green); color: var(--cyber-green);">Kemitraan Grosir Via WA</a>
-    </div>
-  </div>
-</div>
-
-<section id="testimoni">
-  <div class="wrap">
-    <span class="section-label">Validasi Sistem</span>
-    <h2>Ulasan Pengguna &amp; Mitra</h2>
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Kalkulator logistik porsi di dasbor Eko sangat akurat membantu warung kami meminimalkan sisa bahan baku lele hidup setiap harinya. Kemasan oksigennya aman!"</p>
-        <div class="testimonial-user">Pemilik Pecel Lele Lamongan Jaya</div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Terminal XAU.Analytics sangat praktis untuk cek bias sentimen pasar secara kilat lewat HP saat di luar rumah. Fitur hitung lot-nya menghindari over-margin."</p>
-        <div class="testimonial-user">Trader Ritel Komoditas Komunitas Local-Gold</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="kontak" style="border-top: none;">
-  <div class="wrap">
-    <div class="contact-box">
-      <h2>Hubungi Pengembang</h2>
-      <p>Terbuka untuk kolaborasi project manajemen infrastruktur jaringan internal, rekayasa fullstack website, atau integrasi logika automasi analitik UMKM.</p>
-      <a class="btn btn-cyber" href="https://wa.me/6281532900269" target="_blank" rel="noopener">Kirim Pesan WhatsApp</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <p>© 2026 Eko Danang Subiyanto. Mobile Cyber Enterprise Architecture.</p>
-  </div>
-</footer>
-
-<a class="wa-floating" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Chat">✉</a>
-
-<script>
-  function bukaGaleri(inputId) {
-    document.getElementById(inputId).click();
-  }
-
-  function prosesFoto(input, imgId, storageKey) {
-    if (input.files && input.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const img = new Image();
-        img.onload = function() {
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-          const max_width = 400; 
-          const scale = max_width / img.width;
-          canvas.width = max_width;
-          canvas.height = img.height * scale;
-          
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
-          
-          document.getElementById(imgId).src = compressedBase64;
-          try {
-            localStorage.setItem(storageKey, compressedBase64);
-          } catch (error) {
-            console.log("Storage penuh, gagal menyimpan.");
-          }
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  // ---------- WINDOW ONLOAD DATA INTERNAL ----------
-  window.addEventListener('DOMContentLoaded', () => {
-    const keys = [
-      { key: 'save-profil', id: 'img-profil' },
-      { key: 'save-prod1', id: 'img-produk1' },
-      { key: 'save-prod2', id: 'img-produk2' },
-      { key: 'save-prod3', id: 'img-produk3' }
-    ];
-    keys.forEach(item => {
-      const savedImg = localStorage.getItem(item.key);
-      if (savedImg) document.getElementById(item.id).src = savedImg;
-    });
-
-    const pings = [11, 14, 12, 15, 9, 13];
-    const randomPing = pings[Math.floor(Math.random() * pings.length)];
-    document.getElementById('terminal-ping').innerHTML = `&nbsp;&nbsp; Latency to local database node: <span style="color: var(--cyber-green); font-weight: bold;">${randomPing}ms (Excellent)</span>`;
-
-    let menit = 12; let detik = 40;
-    setInterval(() => {
-      detik--;
-      if (detik < 0) { detik = 59; menit--; }
-      if (menit < 0) { menit = 59; }
-      document.getElementById('top-countdown').textContent = `USD NEWS COUNTDOWN: CPI Rilis dlm ${menit}m ${detik}s`;
-    }, 1000);
-
-    const shortRatio = Math.floor(Math.random() * (75 - 60 + 1)) + 60;
-    const longRatio = 100 - shortRatio;
-    document.getElementById('bar-short').style.width = shortRatio + '%';
-    document.getElementById('bar-short').textContent = `Short ${shortRatio}%`;
-    document.getElementById('bar-long').style.width = longRatio + '%';
-    document.getElementById('bar-long').textContent = `Long ${longRatio}%`;
-  });
-
-  // ---------- LOGIKA LOGISTIK EKO LELE ----------
-  const tgl = new Date();
-  document.getElementById('nomor-nota').textContent =
-    tgl.getFullYear().toString().slice(2) + String(tgl.getMonth()+1).padStart(2,'0') + String(tgl.getDate()).padStart(2,'0') +
-    '-' + String(Math.floor(tgl.getHours()*60+tgl.getMinutes())).padStart(4,'0');
-  
-  document.getElementById('tanggal-nota').textContent = tgl.toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
-
-  const HP_EKO = '6281532900269';
-
-  document.getElementById('hitung-btn').addEventListener('click', function() {
-    let porsiVal = parseFloat(document.getElementById('porsi').value);
-    const isiVal = parseFloat(document.getElementById('ukuran').value);
-    const boxHasil = document.getElementById('hasil-box');
-
-    if (porsiVal < 0) { porsiVal = Math.abs(porsiVal); document.getElementById('porsi').value = porsiVal; }
-
-    if (!porsiVal || porsiVal <= 0) {
-      boxHasil.classList.add('tampil');
-      document.getElementById('hasil-kg').textContent = '—';
-      document.getElementById('hasil-ket').textContent = 'Masukkan nilai target porsi lele yang valid.';
-      return;
-    }
-
-    this.textContent = "Menganalisis Data...";
-    setTimeout(() => {
-      this.textContent = "Proses Data Kiloan";
-      const hitungKg = porsiVal / isiVal;
-      const bulatkanKg = Math.ceil(hitungKg * 2) / 2;
-      let totalEkor = Math.round(bulatkanKg * isiVal);
-      let kantongPacking = Math.ceil(bulatkanKg / 5);
-
-      boxHasil.classList.add('tampil');
-      document.getElementById('hasil-kg').textContent = bulatkanKg.toFixed(1) + ' kg';
-      document.getElementById('hasil-ket').textContent = `Estimasi alokasi bahan baku untuk suplai harian sebanyak ± ${porsiVal} porsi konsumsi.`;
-      document.getElementById('logistik-ekor').textContent = `Estimasi kebutuhan fisik: ± ${totalEkor} ekor lele hidup.`;
-      document.getElementById('logistik-packing').textContent = `Rekomendasi kemasan: ${kantongPacking} Kantong Plastik Oksigen.`;
-
-      const spekText = document.getElementById('ukuran').options[document.getElementById('ukuran').selectedIndex].text;
-      const pesanWA = `Halo Mas Eko Lele, saya butuh suplai untuk target ${porsiVal} porsi dengan spek ${spekText}. Estimasi kebutuhan sekitar ${bulatkanKg.toFixed(1)} kg (± ${totalEkor} ekor).`;
-      document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent(pesanWA);
-    }, 400);
-  });
-
-  // ---------- LOGIKA KALKULATOR LOT TRADING EMAS ----------
-  document.getElementById('hitung-gold-btn').addEventListener('click', function() {
-    let balance = parseFloat(document.getElementById('gold-balance').value);
-    let riskPercent = parseFloat(document.getElementById('gold-risk').value);
-    let stopLossPips = parseFloat(document.getElementById('gold-sl').value);
-    const boxHasilGold = document.getElementById('hasil-gold-box');
-
-    if(balance < 0) balance = Math.abs(balance);
-    if(riskPercent < 0) riskPercent = Math.abs(riskPercent);
-    if(stopLossPips < 0) stopLossPips = Math.abs(stopLossPips);
-
-    if(!balance || !riskPercent || !stopLossPips) {
-      boxHasilGold.classList.add('tampil');
-      document.getElementById('gold-lot').textContent = '— Lots';
-      document.getElementById('gold-risk-usd').textContent = 'Isi data kalkulator risiko dengan benar.';
-      return;
-    }
-
-    this.textContent = "Menghitung Batas Margin Lot...";
-    setTimeout(() => {
-      this.textContent = "Hitung Ukuran Lot Maksimal";
-      const riskUsd = balance * (riskPercent / 100);
-      const calculatedLot = riskUsd / (stopLossPips * 10);
-
-      boxHasilGold.classList.add('tampil');
-      document.getElementById('gold-lot').textContent = calculatedLot.toFixed(2) + ' Lots';
-      document.getElementById('gold-risk-usd').textContent = `Risiko Maksimal Kehilangan Uang: $${riskUsd.toFixed(2)} USD jika menyentuh level Stop-Loss.`;
-    }, 400);
-  });
-
-  document.getElementById('wa-langganan').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Lele, saya pemilik rumah makan ingin bertanya kerja sama suplai lele.');
-  document.getElementById('wa-float').href = `https://wa.me/${HP_EKO}?text=` + encodeURIComponent('Halo Mas Eko Danang, saya melihat full portofolio sistem Anda dan tertarik bekerja sama.');
-
-  const statusStok = document.getElementById('stok-keterangan');
-  const jamSekarang = tgl.getHours();
-  if (jamSekarang >= 21 || jamSekarang < 5) {
-    statusStok.innerHTML = `<span style="color: #ff3b30; font-weight: 800;">● RESTOCK_PROCESS</span> — Pemesanan malam dialokasikan untuk pengiriman subuh besok.`;
-  } else {
-    statusStok.innerHTML = `<span style="color: var(--cyber-green); font-weight: 800;">● LIVE_STOK_READY</span> — Kolam produksi siap panen harian skala warung kuliner.`;
-  }
-</script>
+    </footer>
 
 </body>
-            </html>
-  
+</html>
