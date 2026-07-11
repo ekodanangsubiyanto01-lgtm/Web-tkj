@@ -26,39 +26,73 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-    <header class="relative bg-slate-900 min-h-[85vh] py-12 md:py-20 flex items-center overflow-hidden">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md shadow-lg border-b border-slate-800/50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-3 group">
+                    <div class="bg-gradient-to-br from-orange-500 to-amber-500 p-2.5 rounded-xl shadow-md transform group-hover:rotate-12 transition">
+                        <i class="fa-solid fa-shrimp text-white text-xl"></i>
+                    </div>
+                    <span class="font-black text-xl tracking-wider text-white uppercase">KING<span class="text-orange-500">LOBSTER</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8 text-sm font-bold text-slate-300">
+                    <a href="#" class="hover:text-orange-400 transition">Beranda</a>
+                    <a href="#keunggulan" class="hover:text-orange-400 transition">Keunggulan</a>
+                    <a href="#produk" class="hover:text-orange-400 transition">Koleksi Produk</a>
+                    <a href="#galeri" class="hover:text-orange-400 transition">Dokumentasi</a>
+                    <a href="#faq" class="hover:text-orange-400 transition">FAQ</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleCartModal()" class="relative p-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl transition shadow-inner">
+                        <i class="fa-solid fa-basket-shopping text-lg"></i>
+                        <span id="cart-count-badge" class="absolute -top-1 -right-1 bg-orange-500 text-white font-black text-[10px] w-5 h-5 rounded-full flex items-center justify-center border-2 border-slate-900 hidden">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative bg-slate-950 min-h-screen pt-24 pb-12 flex items-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-slate-950"></div>
-            <img src="https://images.unsplash.com/photo-1559742811-82410b451b9b?auto=format&fit=crop&w=1920&q=80" alt="Latar Belakang Laut King Lobster Premium" class="w-full h-full object-cover opacity-25 scale-105 transform transition duration-1000" loading="eager">
-            <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/95 to-slate-900/50 backdrop-blur-[2px]"></div>
+            <img src="https://images.unsplash.com/photo-1551248429-40975aa4de74?auto=format&fit=crop&w=1920&q=80" alt="Latar Belakang Laut Premium" class="w-full h-full object-cover opacity-20 scale-105 transform transition duration-1000" loading="eager">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/85 to-transparent"></div>
         </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center" data-aos="fade-right" data-aos-duration="1000">
-            <div class="max-w-2xl lg:col-span-7">
-                <span class="inline-block bg-orange-500/10 text-orange-400 font-semibold text-sm px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-orange-500/30">
-                    100% Fresh & Premium Quality
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="max-w-2xl lg:col-span-7 space-y-6" data-aos="fade-right" data-aos-duration="1000">
+                <span class="inline-flex bg-orange-500/10 text-orange-400 font-bold text-xs px-4 py-2 rounded-full uppercase tracking-widest border border-orange-500/20">
+                    <i class="fa-solid fa-award mr-2 animate-bounce"></i> 100% Fresh Tangkapan Liar Laut Dalam
                 </span>
-                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
-                    Lobster Laut Segar, <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-400">Langsung dari Nelayan</span>
+                <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-none">
+                    Cita Rasa Mewah <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-400">Lobster Laut Segar</span>
                 </h1>
-                <p class="text-lg text-slate-300 mb-8 leading-relaxed">
-                    Nikmati kelezatan lobster premium tangkapan liar hari ini. Kami menjaga rantai pasok tetap dingin demi menjamin kesegaran maksimal sampai di dapur Anda.
+                <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
+                    Menyuplai kebutuhan restoran bintang lima dan pecinta kuliner nusantara langsung dari tangan nelayan lokal. Menggunakan sistem rantai dingin (*Cold Chain System*) konstan demi menjaga kelembutan serta rasa manis alami daging lobster.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#produk" class="inline-flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-orange-500/20 transition transform hover:-translate-y-0.5">
-                        Pesan Sekarang
-                        <i class="fa-solid fa-arrow-right ml-2 text-sm" aria-hidden="true"></i>
+                <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                    <a href="#produk" class="inline-flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white font-extrabold px-8 py-4 rounded-xl shadow-xl shadow-orange-500/20 transition transform hover:-translate-y-0.5">
+                        Lihat Varian Lobster
+                        <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
                     </a>
-                    <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20tertarik%20untuk%20memesan%20lobster%20segar." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-xl border border-emerald-500/50 backdrop-blur-sm transition">
-                        <i class="fa-brands fa-whatsapp mr-2 text-lg" aria-hidden="true"></i> Chat Admin
+                    <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20tertarik%20memesan%20lobster%20segar%20kualitas%20premium." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-white font-bold px-8 py-4 rounded-xl border border-slate-700/60 backdrop-blur-sm transition">
+                        <i class="fa-brands fa-whatsapp mr-2 text-lg text-emerald-400"></i> Hubungi Admin
                     </a>
                 </div>
             </div>
             
-            <div class="hidden lg:block lg:col-span-5 relative group">
-                <div class="absolute inset-0 bg-gradient-to-tr from-orange-500/10 to-transparent rounded-full blur-2xl transform scale-75 group-hover:scale-100 transition duration-700"></div>
-                <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?auto=format&fit=crop&w=600&q=80" alt="Premium Lobster Display" class="w-full max-w-[450px] mx-auto object-cover rounded-2xl shadow-2xl border-2 border-slate-800 drop-shadow-2xl rotate-2 group-hover:rotate-0 transition duration-500">
+            <div class="hidden lg:block lg:col-span-5 relative" data-aos="fade-left" data-aos-duration="1000">
+                <div class="absolute inset-0 bg-gradient-to-tr from-orange-500/20 to-amber-500/10 rounded-3xl blur-3xl transform scale-90"></div>
+                <div class="relative bg-slate-900/40 p-3 rounded-3xl border border-slate-800/80 backdrop-blur-md shadow-2xl shadow-orange-950/20 transform rotate-1 hover:rotate-0 transition duration-500">
+                    <img src="https://images.unsplash.com/photo-1553618551-fba689030290?auto=format&fit=crop&w=700&q=80" alt="Visual Lobster Laut Premium King Lobster" class="w-full aspect-[4/3] object-cover rounded-2xl shadow-md border border-slate-800">
+                    <div class="absolute -bottom-4 -left-4 bg-slate-900 border border-slate-800 p-4 rounded-xl shadow-xl flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-orange-500/10 rounded-lg flex items-center justify-center text-orange-400"><i class="fa-solid fa-anchor"></i></div>
+                        <div>
+                            <span class="text-xs text-slate-400 block font-semibold">Tangkapan Harian</span>
+                            <span class="text-sm font-bold text-white">Palabuhanratu, ID</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -66,29 +100,29 @@
     <section id="keunggulan" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
-                <h2 class="text-3xl font-bold text-slate-900">Mengapa Memilih King Lobster?</h2>
-                <p class="text-slate-600 mt-2">Standar kualitas ketat demi menjaga cita rasa kemewahan hidangan laut Anda.</p>
+                <h2 class="text-3xl font-black text-slate-900 tracking-tight">Standardisasi Mutu Tinggi Kami</h2>
+                <div class="h-1 w-12 bg-orange-500 mx-auto mt-3 rounded-full"></div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100" data-aos="fade-up" data-aos-delay="50">
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:shadow-md transition" data-aos="fade-up" data-aos-delay="50">
                     <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-snowflake"></i></div>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2">Cold Chain</h3>
-                    <p class="text-sm text-slate-600">Suhu dikontrol ketat sejak dari kapal hingga pengiriman akhir.</p>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2">Cold Chain Control</h3>
+                    <p class="text-sm text-slate-600">Suhu dikontrol super ketat dari kapal hingga ke depan pintu rumah Anda.</p>
                 </div>
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100" data-aos="fade-up" data-aos-delay="100">
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:shadow-md transition" data-aos="fade-up" data-aos-delay="100">
                     <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-truck-fast"></i></div>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2">Pengiriman Cepat</h3>
-                    <p class="text-sm text-slate-600">Kurir logistik khusus menjamin paket tiba tepat waktu.</p>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2">Pengiriman Ekspres</h3>
+                    <p class="text-sm text-slate-600">Armada logistik berpendingin menjamin kesegaran produk tanpa penurunan kualitas.</p>
                 </div>
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100" data-aos="fade-up" data-aos-delay="150">
-                    <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-anchor"></i></div>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2">Fresh From Fisherman</h3>
-                    <p class="text-sm text-slate-600">Tangkapan liar harian asli dari nelayan Palabuhanratu.</p>
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:shadow-md transition" data-aos="fade-up" data-aos-delay="150">
+                    <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-ship"></i></div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2">100% Tangkapan Alam</h3>
+                    <p class="text-sm text-slate-600">Bukan hasil budidaya, melainkan lobster liar pilihan dengan nutrisi alami terbaik.</p>
                 </div>
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-shield-check"></i></div>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2">Garansi Kualitas</h3>
-                    <p class="text-sm text-slate-600">Uang kembali atau retur jika kesegaran tidak sesuai standar.</p>
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:shadow-md transition" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-shield-heart"></i></div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2">Jaminan Kualitas Uang Kembali</h3>
+                    <p class="text-sm text-slate-600">Garansi penuh ganti rugi atau retur barang baru jika terbukti tidak segar.</p>
                 </div>
             </div>
         </div>
@@ -97,28 +131,28 @@
     <section class="bg-slate-900 text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-                <div class="text-3xl md:text-4xl font-extrabold text-orange-500 mb-2"><span class="counter-value" data-target="1500">0</span>+</div>
-                <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Pesanan Sukses</p>
+                <div class="text-3xl md:text-4xl font-black text-orange-500 mb-1"><span class="counter-value" data-target="1500">0</span>+</div>
+                <p class="text-xs uppercase tracking-widest text-slate-400 font-bold">Pesanan Sukses</p>
             </div>
             <div>
-                <div class="text-3xl md:text-4xl font-extrabold text-orange-500 mb-2"><span class="counter-value" data-target="98">0</span>%</div>
-                <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Pelanggan Puas</p>
+                <div class="text-3xl md:text-4xl font-black text-orange-500 mb-1"><span class="counter-value" data-target="98">0</span>%</div>
+                <p class="text-xs uppercase tracking-widest text-slate-400 font-bold">Kepuasan Mitra</p>
             </div>
             <div>
-                <div class="text-3xl md:text-4xl font-extrabold text-orange-500 mb-2">24 Jam</div>
-                <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Jaminan Segar</p>
+                <div class="text-3xl md:text-4xl font-black text-orange-500 mb-1">24 Jam</div>
+                <p class="text-xs uppercase tracking-widest text-slate-400 font-bold">Rantai Pasok Dingin</p>
             </div>
             <div>
-                <div class="text-3xl md:text-4xl font-extrabold text-orange-500 mb-2">100%</div>
-                <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Nelayan Lokal</p>
+                <div class="text-3xl md:text-4xl font-black text-orange-500 mb-1">100%</div>
+                <p class="text-xs uppercase tracking-widest text-slate-400 font-bold">Hasil Nelayan Lokal</p>
             </div>
         </div>
     </section>
 
     <section id="produk" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">Koleksi Tangkapan Terbaik</h2>
-            <p class="text-slate-600">Pilih jenis lobster laut premium favorit Anda. Harga transparan berdasarkan berat dan kualitas terbaik standar restoran.</p>
+            <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Katalog Komoditas Pilihan</h2>
+            <p class="text-slate-600 mt-2">Harga transparan mengikuti berat timbangan presisi standar industri horeka.</p>
         </div>
 
         <div class="flex flex-col md:flex-row gap-4 mb-10 items-center justify-between" data-aos="fade-up">
@@ -126,13 +160,13 @@
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </span>
-                <input type="text" id="search-input" oninput="filterAndSearchProducts()" placeholder="Cari berdasarkan nama, jenis, deskripsi..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm transition shadow-sm">
+                <input type="text" id="search-input" oninput="filterAndSearchProducts()" placeholder="Cari varian lobster laut..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm transition shadow-sm">
             </div>
             
             <div class="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
-                <button onclick="filterCategory(event, 'All')" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold border transition whitespace-nowrap bg-slate-900 text-white border-slate-900">Semua</button>
-                <button onclick="filterCategory(event, 'Premium')" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 transition whitespace-nowrap">Premium</button>
-                <button onclick="filterCategory(event, 'Fresh')" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 transition whitespace-nowrap">Fresh</button>
+                <button onclick="filterCategory(event, 'All')" class="category-btn px-4 py-2 rounded-xl text-sm font-bold border transition whitespace-nowrap bg-slate-900 text-white border-slate-900">Semua</button>
+                <button onclick="filterCategory(event, 'Premium')" class="category-btn px-4 py-2 rounded-xl text-sm font-bold border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 transition whitespace-nowrap">Premium</button>
+                <button onclick="filterCategory(event, 'Fresh')" class="category-btn px-4 py-2 rounded-xl text-sm font-bold border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 transition whitespace-nowrap">Fresh</button>
             </div>
         </div>
 
@@ -149,28 +183,34 @@
     <section id="galeri" class="py-20 bg-white border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
-                <h2 class="text-3xl font-bold text-slate-900">Dokumentasi Hasil Tangkapan</h2>
-                <p class="text-slate-600 mt-2">Galeri real-time kualitas komoditas segar langsung dari kapal nelayan lokal kami.</p>
+                <h2 class="text-3xl font-black text-slate-900 tracking-tight">Dokumentasi Rantai Pasok</h2>
+                <p class="text-slate-600 mt-2">Kondisi riil penanganan komoditas dari kapal nelayan hingga proses pengepakan.</p>
             </div>
             
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in" data-aos="zoom-in" data-aos-delay="50" onclick="openZoomImage(this)">
-                    <img src="https://images.unsplash.com/photo-1553618551-fba689030290?auto=format&fit=crop&w=500&q=80" loading="lazy" alt="Dokumentasi King Lobster 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="50" onclick="openZoomImage(this)">
+                    <img src="https://images.unsplash.com/photo-1553618551-fba689030290?auto=format&fit=crop&w=500&q=80" loading="lazy" alt="Tangkapan Lobster Mutiara Segar Di Atas Kapal" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Tangkapan Liar</span>
                 </div>
-                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in" data-aos="zoom-in" data-aos-delay="100" onclick="openZoomImage(this)">
-                    <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=500&q=80" loading="lazy" alt="Dokumentasi King Lobster 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="100" onclick="openZoomImage(this)">
+                    <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=500&q=80" loading="lazy" alt="Lobster Pasir Segar dalam Media Air" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Media Air Oksigen</span>
                 </div>
-                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in" data-aos="zoom-in" data-aos-delay="150" onclick="openZoomImage(this)">
-                    <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?auto=format&fit=crop&w=500&q=80" loading="lazy" alt="Dokumentasi King Lobster 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="150" onclick="openZoomImage(this)">
+                    <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?auto=format&fit=crop&w=500&q=80" loading="lazy" alt="Proses Sortir Ukuran Lobster Laut" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Fasilitas Sortir</span>
                 </div>
-                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in" data-aos="zoom-in" data-aos-delay="200" onclick="openZoomImage(this)">
-                    <img src="https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=500&q=80" loading="lazy" alt="Dokumentasi King Lobster 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="200" onclick="openZoomImage(this)">
+                    <img src="https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=500&q=80" loading="lazy" alt="Packing Aman Styrofoam Box dengan Es Batu" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Standard Packing</span>
                 </div>
-                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in" data-aos="zoom-in" data-aos-delay="250" onclick="openZoomImage(this)">
-                    <img src="https://images.unsplash.com/photo-1551248429-40975aa4de74?auto=format&fit=crop&w=500&q=80" loading="lazy" alt="Dokumentasi King Lobster 5" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="250" onclick="openZoomImage(this)">
+                    <img src="https://images.unsplash.com/photo-1551248429-40975aa4de74?auto=format&fit=crop&w=500&q=80" loading="lazy" alt="Distribusi Lobster Menuju Cargo Udara" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Pengiriman Cargo</span>
                 </div>
-                <div class="overflow-hidden rounded-xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in" data-aos="zoom-in" data-aos-delay="300" onclick="openZoomImage(this)">
-                    <img src="https://images.unsplash.com/photo-1534080391025-0967e9bc1c0e?auto=format&fit=crop&w=500&q=80" loading="lazy" alt="Dokumentasi King Lobster 6" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="overflow-hidden rounded-2xl aspect-square bg-slate-100 group shadow-sm cursor-zoom-in relative" data-aos="zoom-in" data-aos-delay="300" onclick="openZoomImage(this)">
+                    <img src="https://images.unsplash.com/photo-1534080391025-0967e9bc1c0e?auto=format&fit=crop&w=500&q=80" loading="lazy" alt="Sajian Menu Lobster Premium di Restoran" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute bottom-3 left-3 bg-slate-950/70 backdrop-blur-sm text-white font-semibold text-[10px] px-2 py-0.5 rounded">Sajian Mitra</span>
                 </div>
             </div>
         </div>
@@ -179,23 +219,23 @@
     <section id="testimoni" class="py-20 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
-                <h2 class="text-3xl font-bold text-slate-900">Ulasan Mitra Kuliner Kami</h2>
-                <p class="text-slate-600 mt-2">Bukti nyata dedikasi kami menjaga rantai dingin demi komoditas kualitas restoran.</p>
+                <h2 class="text-3xl font-black text-slate-900 tracking-tight">Kemitraan & Kepercayaan</h2>
+                <p class="text-slate-600 mt-2">Apa kata para pemilik usaha kuliner seafood dan koki profesional tentang pasokan kami.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/60" data-aos="zoom-in" data-aos-delay="100">
                     <div class="flex text-amber-400 mb-4 space-x-1">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                     </div>
-                    <blockquote class="text-slate-700 italic mb-4">"Lobsternya masih sangat segar saat sampai di lokasi tujuan. Berat timbangannya presisi dan kemasannya aman menggunakan standard box styrofoam tebal."</blockquote>
-                    <p class="text-sm font-bold text-slate-900">&mdash; Pelanggan Restoran, Jakarta</p>
+                    <blockquote class="text-slate-700 italic mb-4">"Lobsternya sangat segar saat tiba di dapur restoran kami. Struktur dagingnya padat dan manis alami, sangat memuaskan para tamu premium kami."</blockquote>
+                    <p class="text-sm font-bold text-slate-900">&mdash; Executive Chef Restoran Bintang 5, Jakarta</p>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/60" data-aos="zoom-in" data-aos-delay="200">
                     <div class="flex text-amber-400 mb-4 space-x-1">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                     </div>
-                    <blockquote class="text-slate-700 italic mb-4">"Sangat terbantu untuk pasokan seafood mewah bulanan usaha kami. Tekstur daging lobster mutiaranya manis alami dan dikirim tepat waktu."</blockquote>
-                    <p class="text-sm font-bold text-slate-900">&mdash; Pengusaha Kuliner Seafood, Bandung</p>
+                    <blockquote class="text-slate-700 italic mb-4">"Kontinutas pasokan kami sangat terjaga. Sistem rantai dingin yang transparan membuat kami tidak khawatir akan masalah penurunan bobot atau pembusukan."</blockquote>
+                    <p class="text-sm font-bold text-slate-900">&mdash; Owner Seafood Culinary Group, Bandung</p>
                 </div>
             </div>
         </div>
@@ -204,35 +244,25 @@
     <section id="faq" class="py-20 bg-white border-t border-slate-100">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
-                <h2 class="text-3xl font-bold text-slate-900">Pertanyaan yang Sering Diajukan</h2>
-                <p class="text-slate-500 mt-2">Segala informasi dasar terkait pemesanan dan kebijakan penanganan kualitas.</p>
+                <h2 class="text-3xl font-black text-slate-900 tracking-tight">Pertanyaan Umum (FAQ)</h2>
             </div>
             <div class="space-y-4">
                 <div class="border border-slate-200 rounded-xl overflow-hidden" data-aos="fade-up">
                     <button class="w-full flex justify-between items-center p-5 font-bold text-left text-slate-900 bg-slate-50 hover:bg-slate-100/80 transition" onclick="toggleFaq(this)">
-                        <span>Berapa lama proses pengirimannya?</span>
+                        <span>Bagaimana cara pengiriman ke luar kota?</span>
                         <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
                     </button>
                     <div class="faq-answer bg-white">
-                        <p class="p-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100">Untuk wilayah Jabodetabek dan Bandung, pengiriman memakan waktu 1 hari (Next Day) menggunakan armada pengiriman berpendingin khusus agar kualitas kesegaran tetap terjaga utuh.</p>
+                        <p class="p-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100">Kami menggunakan ekspedisi khusus kargo udara 1 hari sampai (*Same Day / Next Day Service*) yang dilengkapi fasilitas penyimpanan beku portabel atau kotak styrofoam dengan insulasi es khusus.</p>
                     </div>
                 </div>
                 <div class="border border-slate-200 rounded-xl overflow-hidden" data-aos="fade-up">
                     <button class="w-full flex justify-between items-center p-5 font-bold text-left text-slate-900 bg-slate-50 hover:bg-slate-100/80 transition" onclick="toggleFaq(this)">
-                        <span>Apakah lobster dikirim dalam kondisi hidup?</span>
+                        <span>Apakah produk dijamin halal dan legal?</span>
                         <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
                     </button>
                     <div class="faq-answer bg-white">
-                        <p class="p-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100">Kami menyediakan opsi pengiriman lobster hidup (menggunakan media oksigen khusus) maupun kondisi beku segar sesaat setelah ditangkap untuk efisiensi pengiriman jarak jauh.</p>
-                    </div>
-                </div>
-                <div class="border border-slate-200 rounded-xl overflow-hidden" data-aos="fade-up">
-                    <button class="w-full flex justify-between items-center p-5 font-bold text-left text-slate-900 bg-slate-50 hover:bg-slate-100/80 transition" onclick="toggleFaq(this)">
-                        <span>Apakah ada batas minimal pembelian?</span>
-                        <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-answer bg-white">
-                        <p class="p-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100">Minimal pembelian adalah sebesar 1 Kilogram (Kg) untuk seluruh varian komoditas jenis lobster laut yang tersedia.</p>
+                        <p class="p-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100">Ya, seluruh komoditas ditangkap secara legal mematuhi regulasi ukuran tangkap minimum dari KKP demi kelestarian alam lingkungan laut.</p>
                     </div>
                 </div>
             </div>
@@ -241,62 +271,58 @@
 
     <footer id="kontak" class="bg-slate-950 text-slate-400 pt-16 pb-8 border-t border-slate-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            <div class="md:col-span-1" data-aos="fade-up">
-                <div class="flex items-center space-x-2 text-white mb-4">
+            <div class="md:col-span-1 space-y-4" data-aos="fade-up">
+                <div class="flex items-center space-x-2 text-white">
                     <i class="fa-solid fa-shrimp text-orange-500 text-2xl"></i>
-                    <span class="font-extrabold text-lg tracking-wider uppercase">King<span class="text-orange-500">Lobster</span></span>
+                    <span class="font-black text-lg tracking-wider uppercase">KING<span class="text-orange-500">LOBSTER</span></span>
                 </div>
-                <p class="text-sm leading-relaxed mb-4">Penyedia lobster laut segar tangkapan tangan nelayan lokal. Berkomitmen menjaga mutu tinggi demi kepuasan kuliner Anda.</p>
-                <div class="space-y-2 mt-4 pt-4 border-t border-slate-900 text-xs text-slate-300 font-semibold">
-                    <div class="flex items-center"><i class="fa-solid fa-circle-check text-orange-500 mr-2" aria-hidden="true"></i> Fresh Every Day</div>
-                    <div class="flex items-center"><i class="fa-solid fa-box text-orange-500 mr-2" aria-hidden="true"></i> Packing Styrofoam Aman</div>
-                    <div class="flex items-center"><i class="fa-solid fa-truck-ramp-box text-orange-500 mr-2" aria-hidden="true"></i> Pengiriman Seluruh Indonesia</div>
+                <p class="text-xs leading-relaxed">Penyedia komoditas lobster laut lepas segar premium di Indonesia. Berkomitmen tinggi menjaga integrasi suhu produk dari hulu ke hilir.</p>
+                <div class="pt-2">
+                    <span class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Sertifikat Kualitas:</span>
+                    <span class="inline-block bg-slate-900 border border-slate-800 text-amber-400 font-bold text-[10px] px-2.5 py-1 rounded-md"><i class="fa-solid fa-circle-check mr-1"></i> Standar Mutu Prima-3</span>
                 </div>
             </div>
-
+            
             <div data-aos="fade-up" data-aos-delay="100">
-                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Perusahaan</h4>
-                <ul class="space-y-2.5 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Home</a></li>
-                    <li><a href="#produk" class="hover:text-white transition">Produk</a></li>
-                    <li><a href="#testimoni" class="hover:text-white transition">Testimoni</a></li>
+                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Hubungi & Jam Kerja</h4>
+                <ul class="space-y-3 text-xs">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-location-dot mt-0.5 mr-3 text-orange-500"></i>
+                        <span>Dermaga Sentra Nelayan Palabuhanratu, Sukabumi, Jawa Barat.</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa-solid fa-clock mr-3 text-orange-500"></i>
+                        <span>Senin - Sabtu: 08:00 - 17:00 WIB</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa-solid fa-phone mr-3 text-orange-500"></i>
+                        <a href="https://wa.me/6281532900269" target="_blank" class="hover:text-white transition">+62 815-3290-0269</a>
+                    </li>
                 </ul>
             </div>
 
             <div data-aos="fade-up" data-aos-delay="200">
-                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Hubungi Kami</h4>
-                <ul class="space-y-3 text-sm">
-                    <li class="flex items-start">
-                        <i class="fa-solid fa-location-dot mt-1 mr-3 text-orange-500" aria-hidden="true"></i>
-                        <span>Sentra Nelayan Palabuhanratu, Sukabumi, Jawa Barat. (Melayani Pengiriman Seluruh Indonesia)</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fa-solid fa-phone mr-3 text-orange-500" aria-hidden="true"></i>
-                        <a href="https://wa.me/6281532900269" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">+62 815-3290-0269</a>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fa-solid fa-envelope mr-3 text-orange-500" aria-hidden="true"></i>
-                        <a href="mailto:ekodanangsubiyanto01@gmail.com" class="hover:text-white transition break-all">ekodanangsubiyanto01@gmail.com</a>
-                    </li>
-                </ul>
+                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Mitra Logistik Khusus</h4>
+                <p class="text-xs mb-3">Menggunakan kurir berpendingin & kargo udara cepat:</p>
+                <div class="flex flex-wrap gap-2 text-[11px] font-semibold text-slate-300">
+                    <span class="bg-slate-900 px-2.5 py-1.5 rounded border border-slate-800">Garuda Cargo</span>
+                    <span class="bg-slate-900 px-2.5 py-1.5 rounded border border-slate-800">Paxel Cold Chain</span>
+                    <span class="bg-slate-900 px-2.5 py-1.5 rounded border border-slate-800">Lalamove Cold</span>
+                </div>
             </div>
 
             <div data-aos="fade-up" data-aos-delay="300">
-                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Ikuti Kami</h4>
-                <p class="text-sm mb-4">Dapatkan info promosi harian dan dokumentasi langsung dari kapal nelayan.</p>
-                <div class="flex space-x-3">
-                    <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-slate-300 hover:bg-emerald-600 hover:text-white transition" aria-label="Ikuti King Lobster di WhatsApp Channel">
-                        <i class="fa-brands fa-whatsapp text-lg" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@ekodanang1986" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-slate-300 hover:bg-black hover:text-white transition" aria-label="Ikuti dokumentasi nelayan King Lobster di TikTok">
-                        <i class="fa-brands fa-tiktok text-lg" aria-hidden="true"></i>
-                    </a>
+                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Metode Pembayaran Aman</h4>
+                <p class="text-xs mb-3">Mendukung kelancaran transaksi bisnis aman:</p>
+                <div class="flex flex-wrap gap-2 text-[10px] font-bold text-slate-400">
+                    <span class="bg-slate-900 px-2.5 py-1 rounded border border-slate-800"><i class="fa-solid fa-building-columns mr-1"></i> Transfer Bank (BCA/Mandiri)</span>
+                    <span class="bg-slate-900 px-2.5 py-1 rounded border border-slate-800"><i class="fa-solid fa-handshake mr-1"></i> Rekening Bersama Perusahaan</span>
                 </div>
             </div>
         </div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-slate-900 text-center text-xs">
-            <p>&copy; <span id="copyright-year"></span> King Lobster. Seluruh hak cipta dilindungi undang-undang.</p>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-slate-900 text-center text-[11px] text-slate-500">
+            <p>&copy; <span id="copyright-year"></span> King Lobster Indonesia. Seluruh hak cipta dilindungi undang-undang. Dirancang secara profesional demi kepuasan kuliner bermutu tinggi.</p>
         </div>
     </footer>
 
@@ -304,8 +330,8 @@
         <div class="absolute inset-0 bg-slate-950/40 backdrop-blur-sm pointer-events-auto" onclick="toggleCartModal()"></div>
         <div class="absolute top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col pointer-events-auto transform translate-x-full transition-transform duration-300" id="cart-panel">
             <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-900 text-white">
-                <h3 class="font-bold text-lg flex items-center"><i class="fa-solid fa-basket-shopping mr-2 text-orange-500"></i> Keranjang Anda</h3>
-                <button onclick="toggleCartModal()" class="text-slate-400 hover:text-white text-xl" aria-label="Tutup Keranjang"><i class="fa-solid fa-xmark"></i></button>
+                <h3 class="font-bold text-lg flex items-center"><i class="fa-solid fa-basket-shopping mr-2 text-orange-500"></i> Keranjang Pemesanan</h3>
+                <button onclick="toggleCartModal()" class="text-slate-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div id="cart-items" class="p-6 flex-1 overflow-y-auto space-y-4">
                 <p class="text-center text-slate-400 py-8 text-sm">Keranjang belanja Anda masih kosong.</p>
@@ -315,79 +341,60 @@
                     <span>Estimasi Total:</span>
                     <span id="cart-total-price">Rp 0</span>
                 </div>
-                <button onclick="checkoutWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center space-x-2 shadow-lg shadow-emerald-600/10">
+                <button onclick="checkoutWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center space-x-2 shadow-lg">
                     <i class="fa-brands fa-whatsapp text-lg"></i>
-                    <span>Kirim Pesanan Ke WhatsApp</span>
+                    <span>Kirim Nota ke WhatsApp Admin</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <div id="zoom-lightbox" class="fixed inset-0 bg-black/90 z-50 invisible opacity-0 transition-all duration-300 flex items-center justify-center p-4" onclick="closeZoomImage()">
+    <div id="zoom-lightbox" class="fixed inset-0 bg-black/95 z-50 invisible opacity-0 transition-all duration-300 flex items-center justify-center p-4" onclick="closeZoomImage()">
         <button class="absolute top-6 right-6 text-white text-3xl hover:text-orange-500 transition"><i class="fa-solid fa-xmark"></i></button>
-        <img id="lightbox-img" src="" alt="Zoom Image" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300">
+        <img id="lightbox-img" src="" alt="Preview Gambar Besar" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300">
     </div>
 
     <div id="toast-container" class="fixed bottom-24 left-6 z-50 space-y-2 pointer-events-none"></div>
 
-    <a href="https://wa.me/6281532900269?text=Halo%20King%20Lobster%2C%20saya%20ingin%20tanya%20stok%20lobster%20hari%20ini." 
-       target="_blank" 
-       rel="noopener noreferrer" 
-       class="fixed bottom-6 right-6 z-40 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95 group"
-       title="Hubungi Kami Via WhatsApp"
-       aria-label="Tanya ketersediaan stok lobster hari ini lewat WhatsApp">
-        <i class="fa-brands fa-whatsapp text-3xl" aria-hidden="true"></i>
-        <span class="absolute right-16 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none shadow-md">
-            Tanya Stok Hari Ini
-        </span>
-    </a>
-
-    <button id="back-to-top" 
-            class="fixed bottom-24 right-6 z-40 bg-slate-800 hover:bg-orange-500 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl opacity-0 invisible transition-all duration-300 transform translate-y-4 hover:scale-110"
-            title="Kembali ke Atas"
-            aria-label="Kembali ke bagian atas halaman">
-        <i class="fa-solid fa-arrow-up text-xl" aria-hidden="true"></i>
+    <button id="back-to-top" class="fixed bottom-6 right-6 z-40 bg-slate-900 hover:bg-orange-500 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-xl opacity-0 invisible transition-all duration-300 transform translate-y-4">
+        <i class="fa-solid fa-arrow-up"></i>
     </button>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // Data Objek Varian Produk Komoditas
         const products = [
             {
                 id: "p1",
-                name: "Lobster Mutiara (Premium)",
+                name: "Lobster Mutiara (Premium Wild)",
                 type: "Premium",
-                desc: "Raja segala lobster dengan daging yang sangat padat, manis alami, dan tekstur yang lembut sempurna.",
-                weightRange: "800g - 1kg / ekor",
+                desc: "Kasta tertinggi lobster laut. Memiliki tekstur daging yang sangat tebal, berserat lembut, manis alami alami, dan berukuran besar.",
                 price: 599000,
                 oldPrice: 650000,
                 stock: 4,
                 image: "https://images.unsplash.com/photo-1553618551-fba689030290?auto=format&fit=crop&w=600&q=80",
-                badge: "Paling Dicari"
+                badge: "🔥 Terlaris"
             },
             {
                 id: "p2",
-                name: "Lobster Pasir (Fresh)",
+                name: "Lobster Pasir (Fresh Catch)",
                 type: "Fresh",
-                desc: "Sangat cocok untuk olahan saus padang atau dibakar. Memiliki kulit yang lebih tipis dengan daging melimpah.",
-                weightRange: "300g - 500g / ekor",
+                desc: "Tangkapan harian populer dengan cangkang relatif tipis, membuat persentase volume daging bersih menjadi optimal.",
                 price: 350000,
                 oldPrice: null,
                 stock: 12,
                 image: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?auto=format&fit=crop&w=600&q=80",
-                badge: ""
+                badge: "🟢 Fresh Hari Ini"
             },
             {
                 id: "p3",
-                name: "Lobster Bambu (Super)",
+                name: "Lobster Bambu (Super Quality)",
                 type: "Premium",
-                desc: "Cita rasa gurih yang khas dengan cangkang bermotif unik. Menjadi favorit untuk hidangan sup seafood mewah.",
-                weightRange: "500g - 700g / ekor",
+                desc: "Cita rasa gurih gurih asin khas laut yang sangat pekat. Komoditas unggulan restoran dan hotel kelas atas.",
                 price: 399000,
                 oldPrice: 420000,
                 stock: 3,
                 image: "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=600&q=80",
-                badge: "Best Value"
+                badge: "⭐ Premium"
             }
         ];
 
@@ -395,7 +402,6 @@
         let searchQuery = '';
         let cart = JSON.parse(localStorage.getItem('king_lobster_cart')) || [];
 
-        // Fungsi Render Card Produk Dinamis
         function renderProducts() {
             const container = document.getElementById('product-container');
             if (!container) return;
@@ -403,55 +409,43 @@
             const filteredProducts = products.filter(p => {
                 const matchesCategory = currentCategory === 'All' || p.type === currentCategory;
                 const s = searchQuery.toLowerCase();
-                return matchesCategory && (p.name.toLowerCase().includes(s) || p.type.toLowerCase().includes(s) || p.desc.toLowerCase().includes(s));
+                return matchesCategory && (p.name.toLowerCase().includes(s) || p.desc.toLowerCase().includes(s));
             });
 
             if (filteredProducts.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 text-sm">Produk tidak ditemukan.</div>`;
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 text-sm">Varian lobster belum tersedia.</div>`;
                 return;
             }
             
             container.innerHTML = filteredProducts.map(p => `
-                <div class="bg-white/80 backdrop-blur-md rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200/60 flex flex-col group">
-                    <div class="relative overflow-hidden aspect-[4/3]">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 flex flex-col group hover:shadow-xl transition duration-300">
+                    <div class="relative overflow-hidden aspect-[4/3] bg-slate-900">
                         <img src="${p.image}" loading="lazy" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        ${p.badge ? `<div class="absolute top-4 left-4 bg-orange-500 text-white font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">${p.badge}</div>` : ''}
-                        <div class="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-sm text-white font-semibold text-xs px-2.5 py-1 rounded-md">Ready Stock</div>
+                        ${p.badge ? `<div class="absolute top-4 left-4 bg-orange-500 text-white font-black text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">${p.badge}</div>` : ''}
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">
                         <div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-1">${p.name}</h3>
+                            <h3 class="text-lg font-bold text-slate-900 mb-1">${p.name}</h3>
                             <p class="text-slate-500 text-xs mb-3">Kategori: <span class="font-semibold text-orange-500">${p.type}</span></p>
+                            <p class="text-slate-600 text-xs mb-4 leading-relaxed">${p.desc}</p>
                             
-                            ${p.stock <= 5 ? `
-                                <div class="mb-3 inline-flex items-center text-xs font-bold text-red-600 bg-red-50 px-2.5 py-1 rounded-lg border border-red-100">
-                                    <i class="fa-solid fa-fire-flame-curved mr-1.5 text-orange-500 animate-pulse"></i> Sisa ${p.stock} Kg Lagi!
-                                </div>
-                            ` : ''}
-
-                            <p class="text-slate-600 text-sm mb-4 leading-relaxed">${p.desc}</p>
-                            
-                            <div class="mb-6">
-                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Pilih Ukuran Pesanan:</label>
-                                <select id="weight-${p.id}" onchange="updatePriceDisplay('${p.id}', ${p.price})" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                                    <option value="0.5">0.5 Kg (Setengah Kilo)</option>
-                                    <option value="1" selected>1.0 Kg (Rekomendasi)</option>
-                                    <option value="2">2.0 Kg (Paket Keluarga)</option>
+                            <div class="mb-4">
+                                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Takaran Kiloan:</label>
+                                <select id="weight-${p.id}" onchange="updatePriceDisplay('${p.id}', ${p.price})" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-xs font-semibold text-slate-700 focus:ring-2 focus:ring-orange-500">
+                                    <option value="1" selected>1.0 Kg</option>
+                                    <option value="2">2.0 Kg</option>
+                                    <option value="5">5.0 Kg</option>
                                 </select>
                             </div>
                         </div>
-                        
                         <div class="flex items-center justify-between pt-4 border-t border-slate-100">
                             <div>
-                                <span class="text-xs text-slate-400 block font-semibold">Total Harga</span>
-                                <div class="flex flex-col">
-                                    ${p.oldPrice ? `<span class="text-xs text-slate-400 line-through font-medium" id="old-price-view-${p.id}">Rp ${p.oldPrice.toLocaleString('id-ID')}</span>` : ''}
-                                    <span id="price-view-${p.id}" class="text-xl font-extrabold text-slate-900">Rp ${p.price.toLocaleString('id-ID')}</span>
-                                </div>
+                                <span class="text-[10px] text-slate-400 block font-medium">Subtotal Harga</span>
+                                <span id="price-view-${p.id}" class="text-base font-black text-slate-900">Rp ${p.price.toLocaleString('id-ID')}</span>
                             </div>
-                            <button onclick="addCustomToCart('${p.id}')" class="bg-slate-900 hover:bg-orange-500 text-white font-bold p-3 rounded-xl transition-all duration-300 flex items-center space-x-2">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span class="text-sm px-1">Beli</span>
+                            <button onclick="addCustomToCart('${p.id}')" class="bg-slate-900 hover:bg-orange-500 text-white font-bold p-2.5 rounded-xl transition flex items-center space-x-1">
+                                <i class="fa-solid fa-cart-plus text-xs"></i>
+                                <span class="text-xs px-1">Pesan</span>
                             </button>
                         </div>
                     </div>
@@ -460,13 +454,9 @@
         }
 
         function updatePriceDisplay(id, basePrice) {
-            const product = products.find(p => p.id === id);
             const weight = document.getElementById(`weight-${id}`).value;
             const view = document.getElementById(`price-view-${id}`);
-            const oldView = document.getElementById(`old-price-view-${id}`);
-            
             if(view) view.textContent = 'Rp ' + (basePrice * weight).toLocaleString('id-ID');
-            if(oldView && product.oldPrice) oldView.textContent = 'Rp ' + (product.oldPrice * weight).toLocaleString('id-ID');
         }
 
         function filterAndSearchProducts() {
@@ -480,89 +470,31 @@
                 btn.classList.remove('bg-slate-900', 'text-white', 'border-slate-900');
                 btn.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
             });
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
-                event.currentTarget.classList.add('bg-slate-900', 'text-white', 'border-slate-900');
-            }
+            event.currentTarget.classList.add('bg-slate-900', 'text-white', 'border-slate-900');
             renderProducts();
         }
 
-        // Fitur Zoom Lightbox Galeri
         function openZoomImage(element) {
             const lightbox = document.getElementById('zoom-lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             lightboxImg.src = element.querySelector('img').src;
             lightbox.classList.remove('invisible', 'opacity-0');
-            setTimeout(() => lightboxImg.classList.remove('scale-95'), 50);
         }
 
         function closeZoomImage() {
             const lightbox = document.getElementById('zoom-lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            lightboxImg.classList.add('scale-95');
             lightbox.classList.add('opacity-0');
-            setTimeout(() => {
-                lightbox.classList.add('invisible');
-                lightboxImg.src = "";
-            }, 300);
-        }
-
-        // Counter Angka Statistik
-        function initCounters() {
-            const counters = document.querySelectorAll('.counter-value');
-            const speed = 40;
-            counters.forEach(counter => {
-                const runCounter = () => {
-                    const target = +counter.getAttribute('data-target');
-                    const count = +counter.innerText;
-                    const inc = target / speed;
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count + inc);
-                        setTimeout(runCounter, 30);
-                    } else {
-                        counter.innerText = target;
-                    }
-                };
-                const observer = new IntersectionObserver((entries) => {
-                    if(entries[0].isIntersecting) {
-                        runCounter();
-                        observer.unobserve(counter);
-                    }
-                }, { threshold: 0.5 });
-                observer.observe(counter);
-            });
+            setTimeout(() => lightbox.classList.add('invisible'), 300);
         }
 
         function toggleFaq(btn) {
             const answer = btn.nextElementSibling;
-            const icon = btn.querySelector('i');
-            if (answer.style.maxHeight && answer.style.maxHeight !== '0px') {
-                answer.style.maxHeight = '0px';
-                icon.style.transform = 'rotate(0deg)';
-            } else {
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-                icon.style.transform = 'rotate(180deg)';
-            }
-        }
-
-        function showToast(message) {
-            const container = document.getElementById('toast-container');
-            if (!container) return;
-            const toast = document.createElement('div');
-            toast.className = "bg-slate-900 text-white text-sm font-semibold px-4 py-3 rounded-xl shadow-xl flex items-center space-x-2 transform transition-all duration-300 opacity-0 translate-y-2 pointer-events-auto";
-            toast.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> <span>${message}</span>`;
-            container.appendChild(toast);
-            setTimeout(() => toast.classList.remove('opacity-0', 'translate-y-2'), 50);
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-2');
-                setTimeout(() => toast.remove(), 300);
-            }, 2500);
+            answer.style.maxHeight = answer.style.maxHeight && answer.style.maxHeight !== '0px' ? '0px' : answer.scrollHeight + 'px';
         }
 
         function toggleCartModal() {
             const modal = document.getElementById('cart-modal');
             const panel = document.getElementById('cart-panel');
-            if (!modal || !panel) return;
             if (modal.classList.contains('invisible')) {
                 modal.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
                 panel.classList.remove('translate-x-full');
@@ -573,13 +505,9 @@
             }
         }
 
-        // Sistem Keranjang Belanja & Logika WhatsApp Checkout
         function addCustomToCart(id) {
             const product = products.find(p => p.id === id);
-            const weightSelect = document.getElementById(`weight-${id}`);
-            if (!product || !weightSelect) return;
-            const weight = parseFloat(weightSelect.value);
-
+            const weight = parseFloat(document.getElementById(`weight-${id}`).value);
             const exist = cart.find(item => item.id === id && item.selectedWeight === weight);
             if(exist) {
                 exist.qty += 1;
@@ -587,7 +515,7 @@
                 cart.push({ id: product.id, name: product.name, price: product.price, selectedWeight: weight, qty: 1 });
             }
             saveAndRefreshCart();
-            showToast(`✔ ${product.name} (${weight} Kg) masuk keranjang`);
+            showToast(`Dimasukkan ke keranjang belanja.`);
         }
 
         function updateCustomQty(id, weight, amount) {
@@ -607,10 +535,19 @@
         function updateCartUI() {
             const itemsContainer = document.getElementById('cart-items');
             const totalEl = document.getElementById('cart-total-price');
-            if (!itemsContainer || !totalEl) return;
+            const badge = document.getElementById('cart-count-badge');
             
+            let totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
             let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.selectedWeight * item.qty), 0);
+            
             totalEl.textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
+            
+            if(totalItems > 0) {
+                badge.textContent = totalItems;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
 
             if(cart.length === 0) {
                 itemsContainer.innerHTML = `<p class="text-center text-slate-400 py-8 text-sm">Keranjang belanja Anda masih kosong.</p>`;
@@ -620,55 +557,72 @@
             itemsContainer.innerHTML = cart.map(item => `
                 <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                     <div>
-                        <h4 class="font-bold text-slate-900 text-sm">${item.name}</h4>
-                        <p class="text-xs text-slate-400">Porsi: ${item.selectedWeight} Kg &times; ${item.qty} Pack</p>
-                        <p class="text-xs font-bold text-slate-700">Rp ${(item.price * item.selectedWeight * item.qty).toLocaleString('id-ID')}</p>
+                        <h4 class="font-bold text-slate-900 text-xs">${item.name}</h4>
+                        <p class="text-[10px] text-slate-400">Takaran: ${item.selectedWeight} Kg &times; ${item.qty}</p>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <button onclick="updateCustomQty('${item.id}', ${item.selectedWeight}, -1)" class="w-7 h-7 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm">-</button>
-                        <span class="text-sm font-semibold w-6 text-center">${item.qty}</span>
-                        <button onclick="updateCustomQty('${item.id}', ${item.selectedWeight}, 1)" class="w-7 h-7 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm">+</button>
+                        <button onclick="updateCustomQty('${item.id}', ${item.selectedWeight}, -1)" class="w-6 h-6 rounded bg-slate-100 text-slate-700 font-bold text-xs">-</button>
+                        <span class="text-xs font-semibold w-4 textext-center">${item.qty}</span>
+                        <button onclick="updateCustomQty('${item.id}', ${item.selectedWeight}, 1)" class="w-6 h-6 rounded bg-slate-100 text-slate-700 font-bold text-xs">+</button>
                     </div>
                 </div>
             `).join('');
         }
 
         function checkoutWhatsApp() {
-            if(cart.length === 0) {
-                alert('Keranjang belanja kosong! Silakan pilih produk terlebih dahulu.');
-                return;
-            }
-            let text = 'Halo King Lobster, saya ingin memesan:\n\n';
+            if(cart.length === 0) return alert('Keranjang kosong.');
+            let text = 'Halo King Lobster, saya ingin memesan produk segar berikut:\n\n';
             cart.forEach(item => {
-                text += `- ${item.name} (${item.selectedWeight} Kg): ${item.qty} Pack -> Rp ${(item.price * item.selectedWeight * item.qty).toLocaleString('id-ID')}\n`;
+                text += `- ${item.name} (${item.selectedWeight} Kg): ${item.qty} Pack\n`;
             });
-            let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.selectedWeight * item.qty), 0);
-            text += `\n*Total Estimasi: Rp ${totalPrice.toLocaleString('id-ID')}*\n\nMohon informasi kelanjutan proses pengiriman dan instruksi pembayaran. Terima kasih!`;
             window.open(`https://wa.me/6281532900269?text=${encodeURIComponent(text)}`, '_blank');
         }
 
-        // Inisialisasi Sistem Global Saat Windows Load
+        function showToast(msg) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "bg-slate-900 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-xl opacity-0 translate-y-2 pointer-events-auto transition-all duration-300";
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400 mr-2"></i>${msg}`;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('opacity-0', 'translate-y-2'), 50);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 2000);
+        }
+
+        function initCounters() {
+            const counters = document.querySelectorAll('.counter-value');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const update = () => {
+                    if(count < target) {
+                        count += Math.ceil(target / 20);
+                        counter.innerText = count > target ? target : count;
+                        setTimeout(update, 40);
+                    }
+                };
+                update();
+            });
+        }
+
         window.addEventListener('load', () => {
             renderProducts();
             updateCartUI();
             initCounters();
             AOS.init({ once: true, duration: 800 });
             document.getElementById('copyright-year').textContent = new Date().getFullYear();
-
-            // Atur Scroll tombol Back To Top
-            const backToTopBtn = document.getElementById('back-to-top');
-            if (backToTopBtn) {
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 300) {
-                        backToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
-                        backToTopBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
-                    } else {
-                        backToTopBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
-                        backToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-4');
-                    }
-                });
-                backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-            }
+            
+            const btt = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if(window.scrollY > 400) {
+                    btt.classList.remove('opacity-0', 'invisible');
+                } else {
+                    btt.classList.add('opacity-0', 'invisible');
+                }
+            });
+            btt.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
         });
     </script>
 </body>
