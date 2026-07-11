@@ -11,7 +11,7 @@
     <meta property="og:image" content="lobster-1.jpg">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://kinglobster.id">
+    <link class="canonical" href="https://kinglobster.id">
     <link rel="icon" type="image/jpeg" href="lobster-1.jpg">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,6 +19,37 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     
     <style>
+        /* Smooth Global Image Transition */
+        img {
+            transition: .35s;
+        }
+
+        /* Custom Scrollbar Premium */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 999px;
+        }
+
+        /* Selection Color */
+        ::selection {
+            background: #f97316;
+            color: white;
+        }
+
+        /* Product Card Custom Hover Effect */
+        .product-card {
+            transition: .35s;
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+        }
+
         .faq-answer {
             max-height: 0;
             overflow: hidden;
@@ -60,7 +91,7 @@
 
     <section class="relative bg-slate-900 text-white py-32 px-4 overflow-hidden">
         <div class="absolute inset-0 z-0 overflow-hidden">
-            <img src="lobster-7.jpg" alt="Hero Background" class="w-full h-full object-cover animate-kenburns opacity-40">
+            <img src="lobster-7.jpg" loading="eager" fetchpriority="high" alt="King Lobster Indonesia" class="w-full h-full object-cover animate-kenburns opacity-40">
         </div>
         <div class="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/80 to-slate-950/95 z-10"></div>
         <div class="max-w-5xl mx-auto text-center relative z-20 space-y-6" data-aos="fade-up">
@@ -257,7 +288,7 @@
         </div>
     </section>
 
-    <footer i    <footer id="kontak" class="bg-slate-950 text-slate-400 pt-16 pb-8 border-t border-slate-900">
+    <footer id="kontak" class="bg-slate-950 text-slate-400 pt-16 pb-8 border-t border-slate-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             <div class="space-y-4" data-aos="fade-up">
                 <div class="flex items-center space-x-2 text-white">
@@ -362,13 +393,16 @@
 
     <div id="toast-container" class="fixed bottom-24 left-6 z-50 space-y-2 pointer-events-none"></div>
 
-    <button id="back-to-top" class="fixed bottom-6 right-6 z-40 bg-slate-900 hover:bg-orange-500 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-xl opacity-0 invisible transition-all duration-300 transform translate-y-4">
+    <button id="back-to-top" class="fixed bottom-6 right-24 z-40 bg-slate-900 hover:bg-orange-500 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-xl opacity-0 invisible transition-all duration-300 transform translate-y-4">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
+    <a href="https://wa.me/6281532900269" target="_blank" aria-label="Hubungi Admin Via WhatsApp" class="fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-xl hover:scale-110 transition">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </a>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // Centralized Product Data
         const products = [
             { id: "p1", name: "Lobster Mutiara Super", type: "Premium", desc: "Kasta tertinggi lobster laut. Daging tebal, manis alami, dan berukuran masif.", price: 599000, image: "lobster-1.jpg", badge: "🔥 Terlaris", rating: 4.9, reviewCount: 142 },
             { id: "p2", name: "Lobster Pasir Fresh", type: "Fresh", desc: "Tangkapan harian populer dengan cangkang tipis, menghasilkan volume daging bersih optimal.", price: 350000, image: "lobster-2.jpg", badge: "🟢 Fresh Hari Ini", rating: 4.8, reviewCount: 96 },
@@ -389,7 +423,6 @@
             const priceFilter = document.getElementById('filter-price').value;
             const sortType = document.getElementById('sort-products').value;
             
-            // 1. Filtering Logic
             let filtered = products.filter(p => {
                 const matchesCategory = currentCategory === 'All' || p.type === currentCategory;
                 const matchesSearch = p.name.toLowerCase().includes(searchInput) || p.desc.toLowerCase().includes(searchInput);
@@ -402,14 +435,12 @@
                 return matchesCategory && matchesSearch && matchesPrice;
             });
 
-            // 2. Sorting Logic
             if (sortType === 'price-asc') {
                 filtered.sort((a, b) => a.price - b.price);
             } else if (sortType === 'price-desc') {
                 filtered.sort((a, b) => b.price - a.price);
             }
 
-            // 3. Render Empty State UI
             if (filtered.length === 0) {
                 container.innerHTML = `
                     <div class="col-span-full text-center py-16 space-y-3">
@@ -420,9 +451,8 @@
                 return;
             }
             
-            // 4. Dom Generation
             container.innerHTML = filtered.map(p => `
-                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 flex flex-col group hover:shadow-xl transition duration-300">
+                <div class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 flex flex-col group hover:shadow-xl">
                     <div class="relative overflow-hidden aspect-[4/3] bg-slate-900">
                         <img src="${p.image}" loading="lazy" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         ${p.badge ? `<div class="absolute top-4 left-4 bg-orange-500 text-white font-black text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">${p.badge}</div>` : ''}
@@ -486,9 +516,7 @@
             const lightbox = document.getElementById('zoom-lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             lightboxImg.src = element.querySelector('img').src;
-            
             lightboxImg.onclick = e => e.stopPropagation();
-
             lightbox.classList.remove('invisible', 'opacity-0');
             lightboxImg.classList.remove('scale-95');
             lightboxImg.classList.add('scale-100');
@@ -539,7 +567,7 @@
             const item = cart.find(i => i.id === id && i.selectedWeight === weight);
             if(item) {
                 item.qty += amount;
-                if(item.qty <= 0) cart = cart.filter(i => !(i.id === id && i.selectedWeight === weight));
+                if(item.qty <= 0) cart = cart.filter(i =>!(i.id === id && i.selectedWeight === weight));
             }
             saveAndRefreshCart();
         }
@@ -566,16 +594,16 @@
             let totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
             let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.selectedWeight * item.qty), 0);
             
-            totalEl.textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
+            if(totalEl) totalEl.textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
             
-            if (badge) {
+            if(badge) {
                 badge.classList.toggle('hidden', totalItems === 0);
                 if (totalItems > 0) badge.textContent = totalItems;
             }
 
             if (!itemsContainer) return;
 
-            if (cart.length === 0) {
+            if(cart.length === 0) {
                 itemsContainer.innerHTML = `<p class="text-center text-slate-400 py-8 text-sm">Keranjang belanja Anda masih kosong.</p>`;
                 return;
             }
@@ -597,12 +625,12 @@
         }
 
         function checkoutWhatsApp() {
-            if (cart.length === 0) return alert('Keranjang belanja Anda kosong.');
+            if(cart.length === 0) return alert('Keranjang belanja Anda kosong.');
             
             const buyerName = document.getElementById('buyer-name').value.trim();
             const buyerAddress = document.getElementById('buyer-address').value.trim();
             
-            if (!buyerName || !buyerAddress) {
+            if(!buyerName || !buyerAddress) {
                 return alert('Mohon lengkapi Nama Pembeli dan Alamat Pengiriman terlebih dahulu.');
             }
 
@@ -633,7 +661,7 @@
 
         function showToast(msg) {
             const container = document.getElementById('toast-container');
-            if (!container) return;
+            if(!container) return;
             const toast = document.createElement('div');
             toast.className = "bg-slate-900 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-xl opacity-0 translate-y-2 pointer-events-auto transition-all duration-300";
             toast.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400 mr-2"></i>${msg}`;
@@ -647,11 +675,11 @@
 
         function setupCounterObserver() {
             const targetSection = document.getElementById('stats-counter');
-            if (!targetSection) return;
+            if(!targetSection) return;
 
             const observer = new IntersectionObserver((entries, observerInstance) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
+                    if(entry.isIntersecting) {
                         const counters = entry.target.querySelectorAll('.counter-value');
                         counters.forEach(counter => {
                             const target = +counter.getAttribute('data-target');
@@ -659,9 +687,9 @@
                             const speed = target / 40; 
                             
                             const update = () => {
-                                if (count < target) {
+                                if(count < target) {
                                     count += Math.ceil(speed);
-                                    if (count > target) count = target;
+                                    if(count > target) count = target;
                                     counter.innerText = count;
                                     setTimeout(update, 35);
                                 }
@@ -689,7 +717,7 @@
             const btt = document.getElementById('back-to-top');
             if (btt) {
                 window.addEventListener('scroll', () => {
-                    if (window.scrollY > 400) {
+                    if(window.scrollY > 400) {
                         btt.classList.remove('opacity-0', 'invisible', 'translate-y-4');
                     } else {
                         btt.classList.add('opacity-0', 'invisible', 'translate-y-4');
