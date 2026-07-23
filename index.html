@@ -1,1520 +1,325 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LobsterHub - Marketplace Lobster Air Tawar</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    /* CSS Variables & Reset */
-    :root {
-      --primary: #00ff88;
-      --primary-dark: #00cc6a;
-      --bg-dark: #0a0f1d;
-      --bg-card: #111827;
-      --text-main: #f3f4f6;
-      --text-muted: #9ca3af;
-      --border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-      transition: color 0.3s ease;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Header & Navigation */
-    header {
-      background: rgba(10, 15, 29, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-color);
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 80px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 20px;
-      font-weight: 700;
-    }
-
-    .logo-box {
-      font-size: 24px;
-    }
-
-    nav {
-      display: flex;
-      gap: 32px;
-    }
-
-    nav a {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
-
-    nav a:hover {
-      color: var(--primary);
-    }
-
-    .right-menu {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .search-box {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .search-box i {
-      position: absolute;
-      left: 12px;
-      color: var(--text-muted);
-    }
-
-    .search-box input {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
-      padding: 10px 16px 10px 38px;
-      border-radius: 30px;
-      color: var(--text-main);
-      font-size: 14px;
-      width: 200px;
-      transition: width 0.3s ease;
-    }
-
-    .search-box input:focus {
-      outline: none;
-      width: 260px;
-      border-color: var(--primary);
-    }
-
-    .icon-btn {
-      position: relative;
-      cursor: pointer;
-      font-size: 20px;
-      color: var(--text-muted);
-      transition: color 0.3s;
-    }
-
-    .icon-btn:hover {
-      color: var(--text-main);
-    }
-
-    .icon-btn .badge {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: var(--primary);
-      color: #000;
-      font-size: 11px;
-      font-weight: 700;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 160px 0 80px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .hero small {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(0, 255, 136, 0.1);
-      color: var(--primary);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 24px;
-    }
-
-    .live-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--primary);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--primary);
-    }
-
-    .hero h1 {
-      font-size: 48px;
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-      color: var(--primary);
-    }
-
-    .hero p {
-      font-size: 16px;
-      color: var(--text-muted);
-      margin-bottom: 32px;
-      max-width: 540px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 40px;
-    }
-
-    .btn {
-      padding: 14px 28px;
-      border-radius: 30px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #000;
-      border: none;
-    }
-
-    .btn-primary:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: var(--text-muted);
-    }
-
-    /* Live Monitor */
-    .live-monitor {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .monitor-header {
-      background: rgba(255, 255, 255, 0.04);
-      padding: 10px 16px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
-
-    .monitor-body {
-      padding: 14px 16px;
-      white-space: nowrap;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .monitor-text {
-      display: inline-block;
-      animation: marquee 25s linear infinite;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    @keyframes marquee {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-
-    /* Hero Card (Statistik) */
-    .hero-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      padding: 32px;
-    }
-
-    .hero-card h3 {
-      font-size: 18px;
-      margin-bottom: 24px;
-    }
-
-    .stat {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border-color);
-      font-size: 14px;
-    }
-
-    .stat:last-child {
-      border-bottom: none;
-    }
-
-    .stat span {
-      color: var(--text-muted);
-    }
-
-    .stat b {
-      color: var(--text-main);
-    }
-
-    /* Feature Bar */
-    .feature-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      margin-top: 80px;
-    }
-
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 24px;
-    }
-
-    .feature-icon {
-      font-size: 24px;
-      color: var(--primary);
-      margin-bottom: 16px;
-    }
-
-    .feature-card h4 {
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
-
-    .feature-card p {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    /* Sections Shared Styling */
-    section {
-      padding: 100px 0;
-    }
-
-    .section-title {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 60px;
-    }
-
-    .section-title small {
-      color: var(--primary);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      display: block;
-      margin-bottom: 12px;
-    }
-
-    .section-title h2 {
-      font-size: 32px;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    .section-title p {
-      font-size: 15px;
-      color: var(--text-muted);
-    }
-
-    /* Category Grid */
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-
-    .category {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 32px;
-      text-align: center;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .category:hover {
-      border-color: var(--primary);
-      transform: translateY(-4px);
-    }
-
-    .category i {
-      font-size: 36px;
-      color: var(--primary);
-      margin-bottom: 20px;
-    }
-
-    .category h3 {
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
-
-    .category span {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    /* Product Grid & Cards */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-
-    .product {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .product:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    }
-
-    .product-image {
-      height: 200px;
-      background: rgba(255, 255, 255, 0.02);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 64px;
-      position: relative;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .sale {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      background: #ef4444;
-      color: white;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 20px;
-    }
-
-    .favorite {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 32px;
-      height: 32px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .favorite:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .product-body {
-      padding: 20px;
-    }
-
-    .product-title {
-      font-size: 15px;
-      font-weight: 600;
-      height: 44px;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      margin-bottom: 12px;
-    }
-
-    .product-info {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-
-    .price {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 16px;
-    }
-
-    .buy-row {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 8px;
-    }
-
-    .buy-row button {
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all 0.3s;
-    }
-
-    .buy-row .cart {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-main);
-      border: 1px solid var(--border-color);
-    }
-
-    .buy-row .cart:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .buy-row .buy {
-      background: var(--primary);
-      color: #000;
-    }
-
-    .buy-row .buy:hover {
-      background: var(--primary-dark);
-    }
-
-    /* Seller Grid */
-    .seller-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .seller {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 24px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .avatar {
-      width: 64px;
-      height: 64px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 28px;
-    }
-
-    .seller h3 {
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    .verify {
-      font-size: 10px;
-      color: var(--primary);
-      font-weight: 700;
-      background: rgba(0, 255, 136, 0.1);
-      padding: 2px 8px;
-      border-radius: 10px;
-    }
-
-    /* Promo Section */
-    .promo-section {
-      background: rgba(255, 255, 255, 0.01);
-    }
-
-    .promo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .promo-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 32px;
-      position: relative;
-    }
-
-    .promo-badge {
-      background: var(--primary);
-      color: #000;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 20px;
-      display: inline-block;
-      margin-bottom: 20px;
-    }
-
-    .promo-card h3 {
-      font-size: 20px;
-      margin-bottom: 12px;
-    }
-
-    .promo-card p {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
-
-    .promo-card button {
-      background: transparent;
-      border: 1px solid var(--primary);
-      color: var(--primary);
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .promo-card button:hover {
-      background: var(--primary);
-      color: #000;
-    }
-
-    /* Article Grid */
-    .article-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .article {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-
-    .article-image {
-      height: 180px;
-      background: rgba(255, 255, 255, 0.02);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 48px;
-    }
-
-    .article-body {
-      padding: 24px;
-    }
-
-    .article-date {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .article-title {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      line-height: 1.4;
-    }
-
-    .article-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
-
-    .read-more {
-      font-size: 13px;
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    /* Testimonial Section */
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .testimonial {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 32px;
-    }
-
-    .stars {
-      color: #fbbf24;
-      font-size: 14px;
-      margin-bottom: 16px;
-    }
-
-    .quote {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-      font-style: italic;
-    }
-
-    .customer {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .customer-avatar {
-      width: 44px;
-      height: 44px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .customer h4 {
-      font-size: 14px;
-      margin-bottom: 2px;
-    }
-
-    .customer span {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    /* Newsletter Box */
-    .newsletter {
-      background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(11, 24, 43, 0.5));
-      border: 1px solid var(--border-color);
-      border-radius: 24px;
-      padding: 60px;
-      text-align: center;
-    }
-
-    .newsletter h2 {
-      font-size: 28px;
-      margin-bottom: 12px;
-    }
-
-    .newsletter p {
-      font-size: 14px;
-      color: var(--text-muted);
-      max-width: 500px;
-      margin: 0 auto 32px;
-    }
-
-    .news-form {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .news-form input {
-      flex: 1;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
-      padding: 14px 20px;
-      border-radius: 30px;
-      color: var(--text-main);
-      font-size: 14px;
-    }
-
-    .news-form input:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    .news-form button {
-      background: var(--primary);
-      color: #000;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    /* Footer */
-    footer {
-      background: #060913;
-      border-top: 1px solid var(--border-color);
-      padding: 80px 0 30px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.5fr repeat(3, 1fr);
-      gap: 40px;
-      margin-bottom: 60px;
-    }
-
-    .footer-brand h2 {
-      font-size: 22px;
-      margin-bottom: 16px;
-    }
-
-    .footer-brand p {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-      max-width: 320px;
-    }
-
-    .social {
-      display: flex;
-      gap: 12px;
-    }
-
-    .social a {
-      width: 36px;
-      height: 36px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 14px;
-    }
-
-    .social a:hover {
-      background: var(--primary);
-      color: #000;
-    }
-
-    .footer-links h3 {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-
-    .footer-links ul {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin-bottom: 12px;
-    }
-
-    .footer-links a {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    .footer-links a:hover {
-      color: var(--primary);
-    }
-
-    .footer-bottom {
-      border-top: 1px solid var(--border-color);
-      padding-top: 30px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    /* Floating Buttons - Diperhalus & Tidak Mencolok */
-    .whatsapp {
-      position: fixed;
-      right: 28px;
-      bottom: 28px;
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      background: #25D366;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      z-index: 999;
-      transition: all .3s ease-in-out;
-    }
-
-    .whatsapp:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
-    }
-
-    .backtop {
-      position: fixed;
-      left: 28px;
-      bottom: 28px;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--border-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 16px;
-      color: var(--text-main);
-      cursor: pointer;
-      opacity: 0;
-      visibility: hidden;
-      transition: all .3s ease-in-out;
-      z-index: 999;
-    }
-
-    .backtop.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .backtop:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-4px);
-    }
-
-    /* Responsive Breakpoints */
-    @media(max-width: 1200px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .product-grid { grid-template-columns: repeat(3, 1fr); }
-      .category-grid { grid-template-columns: repeat(2, 1fr); }
-      .seller-grid { grid-template-columns: repeat(2, 1fr); }
-      .article-grid { grid-template-columns: repeat(2, 1fr); }
-      .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media(max-width: 768px) {
-      nav, .search-box { display: none; }
-      .hero h1 { font-size: 38px; }
-      .feature-bar, .category-grid, .product-grid, .seller-grid, .article-grid, .testimonial-grid, .promo-grid, .footer-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EKO — Futuristic Developer Portfolio</title>
+    <style>
+        /* 1. Global & Accessibility Optimizations */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: default;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #060911;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Custom Neon Cursor Glow */
+        .cursor-glow {
+            width: 25px;
+            height: 25px;
+            background: rgba(0, 210, 255, 0.4);
+            border: 1px solid rgba(0, 210, 255, 0.8);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background 0.2s;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+        }
+
+        .cursor-hover {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 51, 102, 0.2);
+            border-color: rgba(255, 51, 102, 0.8);
+            box-shadow: 0 0 20px rgba(255, 51, 102, 0.6);
+        }
+
+        /* 2. Loading Screen */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #060911;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        .loader-eagle {
+            width: 80px;
+            height: 80px;
+            animation: loaderPulse 1.2s infinite alternate ease-in-out;
+        }
+
+        @keyframes loaderPulse {
+            0% { transform: scale(0.9); opacity: 0.4; }
+            100% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 15px #00d2ff); }
+        }
+
+        /* 3. Hero Section & Aurora Background */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: radial-gradient(circle at 50% 50%, #0d1726 0%, #060911 100%);
+            overflow: hidden;
+        }
+
+        .hero::before, .hero::after {
+            content: '';
+            position: absolute;
+            width: 40vw;
+            height: 40vw;
+            max-width: 450px;
+            max-height: 450px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.22;
+            z-index: 0;
+            pointer-events: none;
+            animation: floatGlow 12s infinite alternate ease-in-out;
+        }
+
+        .hero::before { background: #00d2ff; top: 10%; left: 10%; }
+        .hero::after { background: #ff3366; bottom: 10%; right: 10%; animation-delay: -6s; }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 30px) scale(1.15); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 4. Staggered Animations */
+        .fade-element {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 5. Eagle SVG Graphic */
+        .eagle-container {
+            width: clamp(200px, 25vw, 280px);
+            height: clamp(200px, 25vw, 280px);
+            margin-bottom: 1.5rem;
+            position: relative;
+            filter: drop-shadow(0 0 25px rgba(0, 210, 255, 0.35));
+            transition: transform 0.1s ease-out, filter 0.4s ease;
+            cursor: pointer;
+        }
+
+        .eagle-container:hover {
+            filter: drop-shadow(0 0 40px rgba(0, 210, 255, 0.7));
+        }
+
+        .eagle-svg { width: 100%; height: 100%; }
+
+        .eagle-eye {
+            fill: #00f0ff;
+            filter: drop-shadow(0 0 8px #00f0ff);
+            animation: pulseEye 2s infinite alternate;
+        }
+
+        @keyframes pulseEye {
+            0% { fill: #00f0ff; filter: drop-shadow(0 0 4px #00f0ff); }
+            100% { fill: #ff3366; filter: drop-shadow(0 0 15px #ff3366); }
+        }
+
+        /* 6. Typography with Responsive Clamp */
+        .hero-title {
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ffffff 30%, #00d2ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 210, 255, 0.25);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(0.95rem, 2vw, 1.2rem);
+            color: #a0aec0;
+            max-width: 620px;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            padding: 0 1rem;
+        }
+
+        /* 7. CTA Button with Glassmorphism & Accessibility Focus */
+        .btn-explore {
+            padding: 0.9rem 2.8rem;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #ffffff;
+            background: rgba(0, 210, 255, 0.12);
+            border: 1px solid rgba(0, 210, 255, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.15);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-explore:hover {
+            background: rgba(0, 210, 255, 1);
+            color: #060911;
+            box-shadow: 0 0 35px rgba(0, 210, 255, 0.8);
+            transform: translateY(-3px);
+        }
+
+        .btn-explore:focus-visible {
+            outline: 3px solid #00d2ff;
+            outline-offset: 5px;
+        }
+
+        /* 8. Scroll Indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 25px;
+            z-index: 2;
+            color: #00d2ff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
+            transition: color 0.3s ease;
+        }
+
+        .scroll-down:hover { color: #ffffff; }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Section Target Dummy */
+        #portfolio {
+            min-height: 100vh;
+            background-color: #04060c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <div class="container">
-      <div class="navbar">
-        <a href="#" class="logo">
-          <div class="logo-box">🦞</div>
-          <span>LobsterHub</span>
-        </a>
+    <div class="cursor-glow" id="cursor"></div>
 
-        <nav>
-          <a href="#">Beranda</a>
-          <a href="#category">Kategori</a>
-          <a href="#product">Produk</a>
-          <a href="#seller">Peternak</a>
-          <a href="#article">Artikel</a>
-          <a href="#contact">Kontak</a>
-        </nav>
-
-        <div class="right-menu">
-          <div class="search-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Cari lobster...">
-          </div>
-          <div class="icon-btn">
-            <i class="fa-regular fa-heart"></i>
-          </div>
-          <div class="icon-btn">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <div class="badge">2</div>
-          </div>
-          <div class="icon-btn">
-            <i class="fa-regular fa-user"></i>
-          </div>
-        </div>
-      </div>
+    <div id="loader">
+        <svg class="loader-eagle" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="100,30 140,80 100,160 60,80" fill="none" stroke="#00d2ff" stroke-width="3"/>
+            <polygon points="100,50 120,80 100,120 80,80" fill="#00d2ff"/>
+        </svg>
     </div>
-  </header>
 
-  <section class="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div>
-          <small>
-            <div class="live-dot"></div>
-            LIVE MARKETPLACE
-          </small>
-          <h1>Marketplace <span>Lobster Air Tawar</span> Indonesia</h1>
-          <p>
-            Tempat jual beli bibit, indukan, lobster konsumsi, pakan, dan perlengkapan budidaya dengan sistem transaksi aman, escrow, serta peternak yang telah terverifikasi.
-          </p>
-          <div class="hero-buttons">
-            <button class="btn btn-primary">Belanja Sekarang</button>
-            <button class="btn btn-outline">Jadi Penjual</button>
-          </div>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="eagle-container fade-element delay-1" id="eagle">
+                <svg class="eagle-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 20 120 L 60 70 L 100 95 L 140 70 L 180 120 L 100 150 Z" fill="none" stroke="rgba(0, 210, 255, 0.25)" stroke-width="1.5"/>
+                    <path d="M 40 100 L 75 60 L 100 80 L 125 60 L 160 100" fill="none" stroke="rgba(0, 210, 255, 0.4)" stroke-width="1"/>
+                    
+                    <polygon points="100,20 155,50 165,95 145,130 100,145 55,130 35,95 45,50" fill="#0b1320" stroke="#00d2ff" stroke-width="2"/>
+                    
+                    <polygon points="140,85 188,98 140,112 135,98" fill="#ffb703" stroke="#ffa000" stroke-width="1"/>
+                    
+                    <polyline points="105,62 142,72 120,74" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+                    
+                    <polygon points="115,75 138,78 122,86" class="eagle-eye"/>
+                </svg>
+            </div>
 
-          <div class="live-monitor">
-            <div class="monitor-header">
-              <span>🛰 LIVE MARKET MONITOR</span>
-              <span>ONLINE</span>
-            </div>
-            <div class="monitor-body">
-              <div class="monitor-text">
-                🟢 Order #23891 berhasil • 🦞 Bibit Red Claw terjual 200 ekor • 📦 Packing selesai • 🚚 J&T Pickup • 💰 Escrow aktif • ⭐ Seller Malang rating 4.9 • 🌡 Suhu Air 26.3°C • 💧 pH 7.2 • 📈 Harga Red Claw naik 4% minggu ini • 🟢 Marketplace berjalan normal •
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="hero-card">
-            <h3>📊 Statistik Marketplace</h3>
-            <div class="stat">
-              <span>Total Peternak</span>
-              <b>1.248</b>
-            </div>
-            <div class="stat">
-              <span>Total Produk</span>
-              <b>8.642</b>
-            </div>
-            <div class="stat">
-              <span>Transaksi Bulan Ini</span>
-              <b>24.198</b>
-            </div>
-            <div class="stat">
-              <span>Pengguna Aktif</span>
-              <b>56.231</b>
-            </div>
-            <div class="stat">
-              <span>Rating Marketplace</span>
-              <b>⭐ 4.9/5</b>
-            </div>
-            <div class="stat">
-              <span>Kota Terjangkau</span>
-              <b>212</b>
-            </div>
-            <div class="stat">
-              <span>Garansi DOA</span>
-              <b>100%</b>
-            </div>
-            <div class="stat">
-              <span>Escrow Protection</span>
-              <b>Aktif</b>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="feature-bar">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fa-solid fa-shield-halved"></i>
-          </div>
-          <h4>Escrow Aman</h4>
-          <p>Dana pembeli ditahan sementara sampai lobster diterima dengan baik.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fa-solid fa-truck-fast"></i>
-          </div>
-          <h4>Pengiriman Cepat</h4>
-          <p>Pengiriman hewan hidup menggunakan packing oksigen dan garansi.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fa-solid fa-medal"></i>
-          </div>
-          <h4>Seller Terverifikasi</h4>
-          <p>Semua peternak melewati proses verifikasi identitas dan kualitas.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fa-solid fa-headset"></i>
-          </div>
-          <h4>Support 24 Jam</h4>
-          <p>Customer service siap membantu transaksi kapan saja.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="category">
-    <div class="container">
-      <div class="section-title">
-        <small>KATEGORI PRODUK</small>
-        <h2>Temukan Semua Kebutuhan Budidaya</h2>
-        <p>Marketplace khusus lobster air tawar dengan kategori lengkap mulai bibit hingga perlengkapan budidaya.</p>
-      </div>
-
-      <div class="category-grid">
-        <div class="category">
-          <i class="fa-solid fa-fish"></i>
-          <h3>Bibit Lobster</h3>
-          <span>3.582 Produk</span>
-        </div>
-
-        <div class="category">
-          <i class="fa-solid fa-crown"></i>
-          <h3>Indukan Premium</h3>
-          <span>1.286 Produk</span>
-        </div>
-
-        <div class="category">
-          <i class="fa-solid fa-utensils"></i>
-          <h3>Lobster Konsumsi</h3>
-          <span>2.194 Produk</span>
-        </div>
-
-        <div class="category">
-          <i class="fa-solid fa-seedling"></i>
-          <h3>Pakan & Peralatan</h3>
-          <span>4.781 Produk</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="product">
-    <div class="container">
-      <div class="section-title">
-        <small>PRODUK TERLARIS</small>
-        <h2>Rekomendasi Minggu Ini</h2>
-        <p>Dipilih berdasarkan penjualan, rating, dan kepuasan pelanggan.</p>
-      </div>
-
-      <div class="product-grid">
-        <div class="product">
-          <div class="product-image">
-            <div class="sale">HOT</div>
-            <div class="favorite">
-              <i class="fa-regular fa-heart"></i>
-            </div>
-            🦞
-          </div>
-          <div class="product-body">
-            <div class="product-title">Bibit Red Claw Super 3–5 cm (Isi 20 Ekor)</div>
-            <div class="product-info">
-              <span>📍 Malang</span>
-              <span>⭐ 4.9</span>
-            </div>
-            <div class="price">Rp 85.000</div>
-            <div class="buy-row">
-              <button class="cart"><i class="fa-solid fa-cart-shopping"></i> Keranjang</button>
-              <button class="buy">Beli</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="product-image">
-            <div class="sale">BEST</div>
-            <div class="favorite">
-              <i class="fa-regular fa-heart"></i>
-            </div>
-            👑
-          </div>
-          <div class="product-body">
-            <div class="product-title">Indukan Blue Yabby Premium Sepasang</div>
-            <div class="product-info">
-              <span>📍 Bandung</span>
-              <span>⭐ 5.0</span>
-            </div>
-            <div class="price">Rp 325.000</div>
-            <div class="buy-row">
-              <button class="cart"><i class="fa-solid fa-cart-shopping"></i> Keranjang</button>
-              <button class="buy">Beli</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="product-image">
-            <div class="favorite">
-              <i class="fa-regular fa-heart"></i>
-            </div>
-            🍽️
-          </div>
-          <div class="product-body">
-            <div class="product-title">Lobster Konsumsi Grade A 1 Kg</div>
-            <div class="product-info">
-              <span>📍 Surabaya</span>
-              <span>⭐ 4.8</span>
-            </div>
-            <div class="price">Rp 175.000</div>
-            <div class="buy-row">
-              <button class="cart"><i class="fa-solid fa-cart-shopping"></i> Keranjang</button>
-              <button class="buy">Beli</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="product-image">
-            <div class="favorite">
-              <i class="fa-regular fa-heart"></i>
-            </div>
-            🌾
-          </div>
-          <div class="product-body">
-            <div class="product-title">Pelet Premium Protein 42% 1 Kg</div>
-            <div class="product-info">
-              <span>📍 Jakarta</span>
-              <span>⭐ 4.9</span>
-            </div>
-            <div class="price">Rp 58.000</div>
-            <div class="buy-row">
-              <button class="cart"><i class="fa-solid fa-cart-shopping"></i> Keranjang</button>
-              <button class="buy">Beli</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div style="text-align:center; margin-top:55px;">
-        <button class="btn btn-primary">Lihat Semua Produk</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="seller">
-    <div class="container">
-      <div class="section-title">
-        <small>SELLER VERIFIED</small>
-        <h2>Peternak Terpercaya</h2>
-        <p>Semua seller telah melalui proses verifikasi identitas, kualitas budidaya, serta memiliki riwayat transaksi yang baik.</p>
-      </div>
-
-      <div class="seller-grid">
-        <div class="seller">
-          <div class="avatar">🦞</div>
-          <div>
-            <h3>Sumber Lobster Jaya</h3>
-            <span class="verify">✔ VERIFIED</span>
-            <p style="margin-top:12px; color:var(--text-muted); font-size:13px; line-height:1.8;">
-              📍 Malang <br>
-              ⭐ Rating 4.9 <br>
-              📦 12.850 Produk Terjual
+            <h1 class="hero-title fade-element delay-2">Selamat Datang</h1>
+            <p class="hero-subtitle fade-element delay-3">
+                Website Portofolio Eko — Menghadirkan solusi digital modern dengan presisi tinggi, performa optimal, dan visi masa depan.
             </p>
-          </div>
+            
+            <a href="#portfolio" class="btn-explore fade-element delay-4 interactive">Jelajahi Karya</a>
         </div>
 
-        <div class="seller">
-          <div class="avatar">👑</div>
-          <div>
-            <h3>Blue Yabby Farm</h3>
-            <span class="verify">✔ VERIFIED</span>
-            <p style="margin-top:12px; color:var(--text-muted); font-size:13px; line-height:1.8;">
-              📍 Bandung <br>
-              ⭐ Rating 5.0 <br>
-              📦 8.240 Produk Terjual
-            </p>
-          </div>
-        </div>
+        <a href="#portfolio" class="scroll-down fade-element delay-4 interactive" title="Scroll ke bawah">&#9660;</a>
+    </section>
 
-        <div class="seller">
-          <div class="avatar">🌿</div>
-          <div>
-            <h3>Green Aquatic Farm</h3>
-            <span class="verify">✔ VERIFIED</span>
-            <p style="margin-top:12px; color:var(--text-muted); font-size:13px; line-height:1.8;">
-              📍 Surabaya <br>
-              ⭐ Rating 4.8 <br>
-              📦 15.640 Produk Terjual
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <section id="portfolio">
+        <h2 style="color: #a0aec0; font-weight: 400;">— Bagian Portofolio —</h2>
+    </section>
 
-  <section class="promo-section">
-    <div class="container">
-      <div class="section-title">
-        <small>PROMO TERBATAS</small>
-        <h2>Promo Minggu Ini</h2>
-        <p>Nikmati berbagai promo menarik khusus pengguna LobsterHub.</p>
-      </div>
+    <script>
+        // 1. Loading Screen Controller
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+            }, 1200);
+        });
 
-      <div class="promo-grid">
-        <div class="promo-card">
-          <div class="promo-badge">FLASH SALE</div>
-          <h3>Diskon Hingga 40%</h3>
-          <p>Bibit Red Claw pilihan dengan harga spesial hanya hari ini.</p>
-          <button>Belanja Sekarang</button>
-        </div>
+        // 2. Cursor Glow & Hover Scale Effect
+        const cursor = document.getElementById('cursor');
+        const interactiveElements = document.querySelectorAll('.interactive, .eagle-container');
 
-        <div class="promo-card">
-          <div class="promo-badge">GRATIS ONGKIR</div>
-          <h3>Seluruh Pulau Jawa</h3>
-          <p>Gratis ongkir untuk transaksi minimal Rp250.000.</p>
-          <button>Ambil Promo</button>
-        </div>
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
 
-        <div class="promo-card">
-          <div class="promo-badge">MEMBER</div>
-          <h3>Cashback 10%</h3>
-          <p>Khusus pengguna Premium Member LobsterHub.</p>
-          <button>Gabung Sekarang</button>
-        </div>
-      </div>
-    </div>
-  </section>
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+        });
 
-  <section id="article">
-    <div class="container">
-      <div class="section-title">
-        <small>ARTIKEL TERBARU</small>
-        <h2>Edukasi Budidaya</h2>
-        <p>Pelajari tips, trik, dan panduan lengkap seputar dunia lobster air tawar langsung dari pakarnya.</p>
-      </div>
-
-      <div class="article-grid">
-        <div class="article">
-          <div class="article-image">📖</div>
-          <div class="article-body">
-            <div class="article-date">12 Juli 2026</div>
-            <div class="article-title">Panduan Sukses Budidaya Lobster di Rumah</div>
-            <div class="article-desc">Memulai budidaya lobster di lahan sempit dengan modal minim tapi hasil maksimal.</div>
-            <a href="#" class="read-more">Baca Selengkapnya →</a>
-          </div>
-        </div>
-
-        <div class="article">
-          <div class="article-image">🌡️</div>
-          <div class="article-body">
-            <div class="article-date">08 Juli 2026</div>
-            <div class="article-title">Pentingnya Menjaga Parameter Air Kolam</div>
-            <div class="article-desc">Bagaimana cara mengontrol pH, suhu, dan oksigen terlarut agar lobster cepat tumbuh besar.</div>
-            <a href="#" class="read-more">Baca Selengkapnya →</a>
-          </div>
-        </div>
-
-        <div class="article">
-          <div class="article-image">🍎</div>
-          <div class="article-body">
-            <div class="article-date">01 Juli 2026</div>
-            <div class="article-title">Pakan Alami Mempercepat Molting</div>
-            <div class="article-desc">Rekomendasi jenis pakan alami dengan nutrisi tinggi yang merangsang proses molting lobster.</div>
-            <a href="#" class="read-more">Baca Selengkapnya →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="testimonial">
-    <div class="container">
-      <div class="section-title">
-        <small>TESTIMONIAL</small>
-        <h2>Apa Kata Mereka?</h2>
-        <p>Kepuasan pelanggan dan kesuksesan pembudidaya adalah kebahagiaan terbesar kami.</p>
-      </div>
-
-      <div class="testimonial-grid">
-        <div class="testimonial">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <p class="quote">"Bibit lobster datang dengan selamat, semuanya sehat dan lincah. Escrow-nya bikin saya tidak takut ditipu seller nakal lagi!"</p>
-          <div class="customer">
-            <div class="customer-avatar">AH</div>
-            <div>
-              <h4>Agus Hermawan</h4>
-              <span>Pembudidaya - Solo</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <p class="quote">"Sangat terbantu jualan indukan di sini. Verifikasi sellernya mudah dan pelayanannya premium. Pembayaran ditarik sangat cepat!"</p>
-          <div class="customer">
-            <div class="customer-avatar">SD</div>
-            <div>
-              <h4>Siti Dahlia</h4>
-              <span>Bandung Crawfish</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <p class="quote">"Peralatan aerator dan pakan di sini terlengkap. Selalu dapat promo free ongkir juga. Sangat menghemat biaya operasional."</p>
-          <div class="customer">
-            <div class="customer-avatar">BN</div>
-            <div>
-              <h4>Budi Nugroho</h4>
-              <span>Peternak - Tangerang</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="container" id="contact" style="padding: 45px 0;">
-    <div class="newsletter">
-      <h2>Dapatkan Informasi Terbaru</h2>
-      <p>Daftarkan email Anda untuk berlangganan info promo mingguan, diskon peternak, serta rilis artikel budidaya eksklusif dari kami.</p>
-      <form class="news-form" onsubmit="event.preventDefault(); alert('Terima kasih telah berlangganan!');">
-        <input type="email" placeholder="Masukkan alamat email Anda..." required>
-        <button type="submit">Langganan</button>
-      </form>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h2>LobsterHub</h2>
-          <p>Platform marketplace terintegrasi pertama di Indonesia yang mempertemukan peternak, penghobi, dan konsumen lobster secara aman.</p>
-          <div class="social">
-            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.tiktok.com/@ekodanang1986" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-          </div>
-        </div>
-
-        <div class="footer-links">
-          <h3>Jelajahi</h3>
-          <ul>
-            <li><a href="#">Beranda</a></li>
-            <li><a href="#category">Kategori</a></li>
-            <li><a href="#product">Produk Terlaris</a></li>
-            <li><a href="#seller">Peternak Terpercaya</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-links">
-          <h3>Bantuan</h3>
-          <ul>
-            <li><a href="#">Cara Membeli</a></li>
-            <li><a href="#">Cara Menjual</a></li>
-            <li><a href="#">Sistem Escrow</a></li>
-            <li><a href="#">Syarat Ketentuan</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-links">
-          <h3>Kontak Kami</h3>
-          <ul>
-            <li><a href="#"><i class="fa-solid fa-envelope"></i> support@lobsterhub.id</a></li>
-            <li><a href="https://wa.me/6281532900269" target="_blank"><i class="fa-solid fa-phone"></i> +62 815-3290-0269</a></li>
-            <li><a href="#"><i class="fa-solid fa-location-dot"></i> Jakarta, Indonesia</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p>&copy; 2026 LobsterHub Indonesia. All rights reserved.</p>
-        <p>Made with 🔥 for Lobster Breeders.</p>
-      </div>
-    </div>
-  </footer>
-
-  <div class="whatsapp" onclick="window.open('https://wa.me/6281532900269', '_blank')">
-    <i class="fa-brands fa-whatsapp"></i>
-  </div>
-
-  <div class="backtop" id="backtopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
-    <i class="fa-solid fa-arrow-up"></i>
-  </div>
-
-  <script>
-    // Back to top button visibility toggle
-    window.addEventListener('scroll', function() {
-      const backtop = document.getElementById('backtopBtn');
-      if (window.pageYOffset > 400) {
-        backtop.classList.add('show');
-      } else {
-        backtop.classList.remove('show');
-      }
-    });
-  </script>
-
+        // 3. Mouse Parallax Effect for Eagle SVG
+        const eagle = document.getElementById('eagle');
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.clientX) / 35;
+            const yAxis = (window.innerHeight / 2 - e.clientY) / 35;
+            eagle.style.transform = `translate(${xAxis}px, ${yAxis}px) rotate(${xAxis * 0.1}deg)`;
+        });
+    </script>
 </body>
-                                     </html>
-              
+</html>
