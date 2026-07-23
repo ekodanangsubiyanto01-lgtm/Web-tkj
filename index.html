@@ -3,484 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EKO — Future Network Engineer</title>
-    <style>
-        /* 1. Global & Accessibility Optimizations */
-        html {
-            scroll-behavior: smooth;
-        }
+    <title>EKO DANANG — Network Engineer & Cyber Security Specialist</title>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <style>
+        /* 1. Global Reset & Performance Layering */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: default;
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: #03060d;
+            background-color: #020408;
             color: #ffffff;
             overflow-x: hidden;
-            position: relative;
-        }
-
-        /* 7. Subtle Noise Overlay (Apple / Tesla Style) */
-        .noise-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
             width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 900;
-            opacity: 0.035;
-            mix-blend-mode: overlay;
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
-        /* Accessibility: Reduced Motion */
-        @media (hover: none) {
-            .cursor-glow {
-                display: none !important;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, .hero::before, .hero::after, .eagle-eye-glow, .scroll-down, .loader-eagle, .eagle-wrapper {
-                animation: none !important;
-                transition: none !important;
-            }
-            html {
-                scroll-behavior: auto;
-            }
-            .fade-element, .reveal-card {
-                opacity: 1 !important;
-                transform: none !important;
-            }
-            #loader {
-                display: none !important;
-            }
-        }
-
-        /* 1. Custom Cursor GPU Accelerated (translate3d) */
-        .cursor-glow {
-            width: 22px;
-            height: 22px;
-            background: rgba(0, 210, 255, 0.4);
-            border: 1px solid #00d2ff;
-            border-radius: 50%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 9999;
-            box-shadow: 0 0 18px #00d2ff;
-            transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-            will-change: transform;
-        }
-
-        .cursor-hover {
-            width: 55px;
-            height: 55px;
-            background: rgba(255, 51, 102, 0.2);
-            border-color: #ff3366;
-            box-shadow: 0 0 35px #ff3366;
-        }
-
-        /* 8. Glassmorphism Navbar */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 8%;
-            z-index: 980;
-            background: rgba(3, 6, 13, 0.35);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 210, 255, 0.12);
-        }
-
-        .nav-logo {
-            font-size: 1.25rem;
-            font-weight: 900;
-            letter-spacing: 3px;
-            color: #ffffff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-logo span {
-            color: #00d2ff;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #00d2ff;
-            text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
-        }
-
-        /* Loader */
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: #03060d;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease, visibility 0.8s;
-        }
-
-        .loader-eagle {
-            width: 90px;
-            height: 90px;
-            animation: loaderPulse 1.2s infinite alternate ease-in-out;
-        }
-
-        @keyframes loaderPulse {
-            0% { transform: scale(0.85); opacity: 0.3; }
-            100% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 25px #00d2ff); }
-        }
-
-        /* Hero Section */
-        .hero {
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 6rem 1rem 2rem;
-            position: relative;
-            background: radial-gradient(circle at 50% 35%, #0a1526 0%, #03060d 100%);
+        }
+
+        /* Lock Body Scroll During Intro */
+        body.intro-active {
             overflow: hidden;
         }
 
-        #particle-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .gpu-accelerated {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            will-change: transform, opacity, filter;
+        }
+
+        /* 2. Overlays & Grain Canvas */
+        #grain-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 950;
+            pointer-events: none;
+            opacity: 0.04;
+            mix-blend-mode: overlay;
+        }
+
+        .overlay-black {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: #020408;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .overlay-flash {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle, #ffffff 0%, rgba(0, 240, 255, 0.85) 45%, #020408 100%);
+            z-index: 9998;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .cinematic-vignette {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle, transparent 35%, rgba(2, 4, 8, 0.96) 100%);
+            box-shadow: inset 0 0 150px rgba(0, 210, 255, 0.12);
+            pointer-events: none;
+            z-index: 900;
+        }
+
+        /* 3. Particle Canvas Layers */
+        .particle-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+        }
+        #bg-particles { z-index: 2; opacity: 0.4; }
+        #mid-particles { z-index: 4; opacity: 0.75; }
+
+        /* 4. Camera & Eagle Rig */
+        .hero-viewport-wrapper {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .camera-rig {
             width: 100%;
             height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .hero::before, .hero::after {
-            content: '';
-            position: absolute;
-            width: 45vw;
-            height: 45vw;
-            max-width: 500px;
-            max-height: 500px;
-            border-radius: 50%;
-            filter: blur(130px);
-            opacity: 0.28;
-            z-index: 0;
-            pointer-events: none;
-            animation: floatGlow 10s infinite alternate ease-in-out;
-        }
-
-        .hero::before { background: #00d2ff; top: 2%; left: 10%; }
-        .hero::after { background: #ff3366; bottom: 5%; right: 10%; animation-delay: -5s; }
-
-        @keyframes floatGlow {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(60px, 40px) scale(1.2); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            position: absolute;
+            perspective: 1200px;
+            z-index: 10;
+        }
+
+        .camera-viewport {
             width: 100%;
-            max-width: 950px;
-        }
-
-        /* Stagger Fade-Up */
-        .fade-element {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        .delay-4 { animation-delay: 0.8s; }
-
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 5. Combined Eagle Wrapper (Parallax + Gentle Float) */
-        .eagle-wrapper {
-            animation: floatEagle 6s ease-in-out infinite;
-            will-change: transform;
-        }
-
-        @keyframes floatEagle {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            transform-origin: 50% 32%;
+            transform-style: preserve-3d;
         }
 
         .eagle-container {
-            width: clamp(320px, 52vw, 620px);
+            width: clamp(340px, 55vw, 680px);
             height: auto;
-            margin-bottom: 0.5rem;
             position: relative;
-            filter: drop-shadow(0 0 35px rgba(0, 210, 255, 0.45));
-            transition: filter 0.4s ease;
-            cursor: pointer;
-            will-change: transform;
+            filter: drop-shadow(0 0 30px rgba(0, 210, 255, 0.2));
         }
 
-        .eagle-container:hover {
-            filter: drop-shadow(0 0 65px rgba(0, 210, 255, 0.85)) drop-shadow(0 0 25px rgba(255, 51, 102, 0.5));
-        }
-
-        .eagle-svg { 
-            width: 100%; 
-            height: 100%; 
+        .eagle-svg {
+            width: 100%;
+            height: 100%;
             overflow: visible;
         }
 
-        /* 4. Mata Elang Berkedip Periodik */
-        .eagle-eye-glow {
-            fill: #00f0ff;
-            filter: drop-shadow(0 0 12px #00f0ff);
-            transform-origin: center;
-            animation: pulseEye 2.2s infinite alternate ease-in-out, blinkEye 7s infinite;
-        }
-
-        @keyframes pulseEye {
-            0% { fill: #00f0ff; filter: drop-shadow(0 0 6px #00f0ff); }
-            100% { fill: #ff3366; filter: drop-shadow(0 0 22px #ff3366); }
-        }
-
-        @keyframes blinkEye {
-            0%, 96%, 100% { transform: scaleY(1); opacity: 1; }
-            98% { transform: scaleY(0.05); opacity: 0.1; }
-        }
-
-        .eye-scanline {
-            animation: scanLine 2.5s infinite ease-in-out;
-        }
-
-        @keyframes scanLine {
-            0%, 100% { transform: translateY(-3px); opacity: 0.2; }
-            50% { transform: translateY(3px); opacity: 0.9; }
-        }
-
-        /* 6. Hero Text Cyber Scan / Clip Reveal */
-        .hero-title {
-            font-size: clamp(2.3rem, 5.8vw, 4.2rem);
-            font-weight: 900;
-            letter-spacing: 5px;
-            margin-bottom: 0.3rem;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, #ffffff 20%, #00d2ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(0, 210, 255, 0.35);
-            position: relative;
-            display: inline-block;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1rem, 2.2vw, 1.35rem);
-            color: #00d2ff;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 0.8rem;
-        }
-
-        .hero-desc {
-            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-            color: #94a3b8;
-            max-width: 600px;
-            margin-bottom: 2.2rem;
-            line-height: 1.6;
-        }
-
-        /* CTA Glassmorphism */
-        .btn-explore {
-            padding: 0.95rem 3rem;
-            font-size: 1.05rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            color: #ffffff;
-            background: rgba(0, 210, 255, 0.12);
-            border: 1px solid rgba(0, 210, 255, 0.55);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.25);
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-explore:hover {
-            background: rgba(0, 210, 255, 1);
-            color: #03060d;
-            box-shadow: 0 0 45px rgba(0, 210, 255, 0.95);
-            transform: translateY(-3px);
-        }
-
-        .scroll-down {
+        /* 5. HUD Telemetry Terminal */
+        .hud-terminal {
             position: absolute;
-            bottom: 20px;
-            z-index: 2;
-            color: #00d2ff;
-            font-size: 1.4rem;
-            text-decoration: none;
-            opacity: 0.8;
-            animation: bounce 2s infinite;
+            top: 18%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: #00f0ff;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.9);
+            letter-spacing: 2px;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 20;
+            background: rgba(2, 4, 8, 0.85);
+            padding: 8px 16px;
+            border-left: 2px solid #00f0ff;
+            backdrop-filter: blur(8px);
+            border-radius: 0 6px 6px 0;
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        /* 9. Portfolio Section & Scroll Reveal Cards */
-        #portfolio {
-            min-height: 100vh;
-            background-color: #02050b;
-            padding: 6rem 8%;
+        /* 6. Typography & Hero Overlay */
+        .hero-content {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
-            z-index: 2;
+            text-align: center;
+            z-index: 105;
+            width: 90%;
+            max-width: 900px;
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4.8rem);
+            font-weight: 900;
+            letter-spacing: 6px;
+            background: linear-gradient(135deg, #ffffff 20%, #00d2ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            text-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(0.85rem, 2vw, 1.15rem);
+            color: #00d2ff;
+            letter-spacing: 3px;
+            margin-top: 0.8rem;
+            opacity: 0;
+            transform: translateY(20px);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .hero-btn {
+            margin-top: 2rem;
+            padding: 0.9rem 2.8rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #ffffff;
+            background: rgba(0, 210, 255, 0.12);
+            border: 1px solid rgba(0, 210, 255, 0.6);
+            backdrop-filter: blur(12px);
+            border-radius: 50px;
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+            cursor: pointer;
+        }
+
+        .hero-btn:hover {
+            background: rgba(0, 210, 255, 1);
+            color: #020408;
+            box-shadow: 0 0 40px rgba(0, 210, 255, 0.9);
+            transform: translateY(-3px);
+        }
+
+        /* 7. Portfolio Main Sections Layout */
+        .main-content {
+            position: relative;
+            z-index: 100;
+            background: #020408;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 24px;
         }
 
         .section-title {
             font-size: 2.2rem;
-            color: #00d2ff;
-            letter-spacing: 3px;
-            margin-bottom: 0.5rem;
+            color: #00f0ff;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
         }
 
-        .section-subtitle {
-            color: #64748b;
-            font-size: 1rem;
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px; left: 0;
+            width: 60%; height: 2px;
+            background: #00f0ff;
+            box-shadow: 0 0 10px #00f0ff;
         }
 
-        .grid-container {
+        .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            width: 100%;
-            max-width: 1100px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
 
-        /* Glassmorphism Card dengan Staggered Observer Reveal */
-        .reveal-card {
-            background: rgba(10, 21, 38, 0.6);
-            border: 1px solid rgba(0, 210, 255, 0.15);
-            border-radius: 16px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        .card {
+            background: rgba(8, 18, 33, 0.6);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            border-radius: 12px;
+            padding: 28px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
         }
 
-        .reveal-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .reveal-card:hover {
-            border-color: rgba(0, 210, 255, 0.6);
-            box-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
+        .card:hover {
+            border-color: rgba(0, 210, 255, 0.8);
             transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.2);
         }
 
-        .card-icon {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-        }
+        .card h3 { color: #ffffff; margin-bottom: 10px; font-size: 1.25rem; }
+        .card p { color: #94a3b8; line-height: 1.6; font-size: 0.95rem; }
 
-        .card-title {
-            font-size: 1.3rem;
-            color: #ffffff;
-            margin-bottom: 0.8rem;
-        }
-
-        .card-desc {
-            color: #94a3b8;
-            font-size: 0.95rem;
-            line-height: 1.6;
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(0, 210, 255, 0.15);
+            color: #64748b;
+            font-size: 0.85rem;
         }
     </style>
 </head>
-<body>
+<body class="intro-active">
 
-    <div class="noise-overlay"></div>
+    <canvas id="grain-canvas"></canvas>
+    <div class="overlay-black" id="blackScreen"></div>
+    <div class="overlay-flash" id="flashScreen"></div>
+    <div class="cinematic-vignette"></div>
 
-    <div class="cursor-glow" id="cursor"></div>
+    <canvas id="bg-particles" class="particle-canvas"></canvas>
+    <canvas id="mid-particles" class="particle-canvas"></canvas>
 
-    <nav class="navbar">
-        <a href="#" class="nav-logo">EKO<span>.NET</span></a>
-        <ul class="nav-links">
-            <li><a href="#" class="interactive">Home</a></li>
-            <li><a href="#portfolio" class="interactive">Portfolio</a></li>
-            <li><a href="#portfolio" class="interactive">Skills</a></li>
-            <li><a href="#portfolio" class="interactive">Projects</a></li>
-            <li><a href="#portfolio" class="interactive">Contact</a></li>
-        </ul>
-    </nav>
-
-    <div id="loader">
-        <svg class="loader-eagle" viewBox="0 0 100 100">
-            <polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="#00d2ff" stroke-width="2"/>
-            <polygon points="50,25 75,50 50,75 25,50" fill="#00d2ff"/>
-        </svg>
+    <div class="hud-terminal" id="hudTerminal">
+        <div>> TARGET: AQUILA_CYBER_CORE</div>
+        <div>> SYSTEM: AWWARDS_ENGINE_ACTIVE</div>
+        <div>> LINK_STATUS: 100%_OPTIMIZED</div>
     </div>
 
-    <section class="hero">
-        <canvas id="particle-canvas"></canvas>
-
-        <div class="hero-content">
-            
-            <div class="eagle-wrapper">
-                <div class="eagle-container fade-element delay-1" id="eagle">
+    <div class="hero-viewport-wrapper">
+        <div class="camera-rig gpu-accelerated" id="cameraRig">
+            <div class="camera-viewport gpu-accelerated" id="cameraViewport">
+                
+                <div class="eagle-container gpu-accelerated" id="eagleContainer">
                     <svg class="eagle-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -499,239 +316,282 @@
                                 <stop offset="100%" stop-color="#cc5500" />
                             </linearGradient>
 
-                            <filter id="neonGlow">
-                                <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#00d2ff" flood-opacity="0.9"/>
+                            <filter id="wingBlur">
+                                <feGaussianBlur stdDeviation="0" id="wingBlurFeat"/>
                             </filter>
                         </defs>
 
-                        <polygon points="300,20 520,80 470,310 300,390 130,310 80,80" fill="rgba(8, 18, 33, 0.5)" stroke="#00d2ff" stroke-width="1.5" stroke-dasharray="10 5"/>
+                        <polygon points="300,20 520,80 470,310 300,390 130,310 80,80" fill="rgba(8, 18, 33, 0.6)" stroke="#00d2ff" stroke-width="1.5" stroke-dasharray="10 5"/>
 
-                        <g id="wing-left">
-                            <path d="M 220 170 C 180 130, 90 60, 10 70 C 40 120, 100 150, 150 175 C 90 180, 30 160, 0 140 C 40 190, 110 210, 180 210 C 130 225, 70 220, 30 200 C 80 240, 160 245, 210 225 Z" 
-                                  fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="3.5" stroke-linejoin="round"/>
-                            <path d="M 180 150 Q 110 100 30 90 M 160 180 Q 90 140 20 130 M 170 200 Q 110 170 40 165" fill="none" stroke="#00f0ff" stroke-width="0.8" opacity="0.6"/>
-                            <path d="M 180 175 L 80 125 L 120 165 L 50 145 L 110 200 Z" fill="url(#cyanGrad)" opacity="0.75"/>
-                            <path d="M 100 190 L 30 140 M 80 240 L 30 200" stroke="#ff3366" stroke-width="2.5" stroke-linecap="round"/>
+                        <g id="wingsGroup" filter="url(#wingBlur)">
+                            <g id="wingLeft" class="gpu-accelerated">
+                                <path class="feather" d="M 220 170 C 180 130, 90 60, 10 70 C 40 120, 100 150, 150 175 Z" fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="2.5"/>
+                                <path class="feather" d="M 150 175 C 90 180, 30 160, 0 140 C 40 190, 110 210, 180 210 Z" fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="2.5"/>
+                            </g>
+                            <g id="wingRight" class="gpu-accelerated">
+                                <path class="feather" d="M 380 170 C 420 130, 510 60, 590 70 C 560 120, 500 150, 450 175 Z" fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="2.5"/>
+                                <path class="feather" d="M 450 175 C 510 180, 570 160, 600 140 C 560 190, 490 210, 420 210 Z" fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="2.5"/>
+                            </g>
                         </g>
 
-                        <g id="wing-right">
-                            <path d="M 380 170 C 420 130, 510 60, 590 70 C 560 120, 500 150, 450 175 C 510 180, 570 160, 600 140 C 560 190, 490 210, 420 210 C 470 225, 530 220, 570 200 C 520 240, 440 245, 390 225 Z" 
-                                  fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="3.5" stroke-linejoin="round"/>
-                            <path d="M 420 150 Q 490 100 570 90 M 440 180 Q 510 140 580 130 M 430 200 Q 490 170 560 165" fill="none" stroke="#00f0ff" stroke-width="0.8" opacity="0.6"/>
-                            <path d="M 420 175 L 520 125 L 480 165 L 550 145 L 490 200 Z" fill="url(#cyanGrad)" opacity="0.75"/>
-                            <path d="M 500 190 L 570 140 M 520 240 L 570 200" stroke="#ff3366" stroke-width="2.5" stroke-linecap="round"/>
-                        </g>
+                        <path id="eagleBody" d="M 230 220 L 300 170 L 370 220 L 390 310 L 300 370 L 210 310 Z" fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="3"/>
 
-                        <path d="M 230 220 L 300 170 L 370 220 L 390 310 L 300 370 L 210 310 Z" fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="3"/>
-                        <path d="M 245 240 L 300 295 L 355 240" fill="none" stroke="#00f0ff" stroke-width="2.5" stroke-linecap="round" filter="url(#neonGlow)"/>
-
-                        <g id="eagle-head-enlarged" transform="translate(0, -10) scale(1.18)" transform-origin="300 110">
+                        <g id="eagleHead" class="gpu-accelerated" transform="translate(0, -10) scale(1.18)" transform-origin="300 110">
                             <path d="M 235 125 L 205 70 L 250 85 L 225 35 L 275 60 L 300 15 L 325 60 L 375 35 L 350 85 L 395 70 L 365 125 Z" fill="#ffffff" stroke="#00d2ff" stroke-width="2.5" stroke-linejoin="round"/>
                             <path d="M 245 110 L 300 155 L 355 110 L 335 65 L 300 48 L 265 65 Z" fill="#081426" stroke="#00d2ff" stroke-width="1.5"/>
+                            <path id="beak" d="M 270 115 C 270 115, 300 110, 300 140 C 300 175, 332 188, 338 188 C 325 200, 295 200, 265 150 Z" fill="url(#beakGrad)" stroke="#995500" stroke-width="2"/>
 
-                            <path d="M 270 115 C 270 115, 300 110, 300 140 C 300 175, 332 188, 338 188 C 325 200, 295 200, 265 150 Z" fill="url(#beakGrad)" stroke="#995500" stroke-width="2" stroke-linejoin="round"/>
-                            <path d="M 275 122 Q 295 120 298 142 Q 298 160 320 180" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
-
-                            <path d="M 250 92 L 286 108 L 278 112 Z" fill="#ffffff" stroke="#00d2ff" stroke-width="1.5"/>
-                            <path d="M 350 92 L 314 108 L 322 112 Z" fill="#ffffff" stroke="#00d2ff" stroke-width="1.5"/>
-
-                            <g id="eyes-group">
-                                <polygon points="258,100 280,109 264,114" class="eagle-eye-glow"/>
-                                <polygon points="342,100 320,109 336,114" class="eagle-eye-glow"/>
-                                <line x1="256" y1="107" x2="282" y2="107" stroke="#ffffff" stroke-width="1" class="eye-scanline"/>
-                                <line x1="318" y1="107" x2="344" y2="107" stroke="#ffffff" stroke-width="1" class="eye-scanline"/>
+                            <g id="eyesContainer">
+                                <polygon points="258,100 280,109 264,114" fill="#ff0055" id="eyeLeft" opacity="0"/>
+                                <polygon points="342,100 320,109 336,114" fill="#ff0055" id="eyeRight" opacity="0"/>
+                                <circle cx="330" cy="108" r="2.2" fill="#020408" id="pupilRight" opacity="0"/>
+                                <circle cx="332" cy="106" r="1.2" fill="#ffffff" id="glossRight" opacity="0"/>
                             </g>
-
-                            <path d="M 300 48 L 300 110" stroke="#00f0ff" stroke-width="1.5" opacity="0.7"/>
                         </g>
                     </svg>
                 </div>
-            </div>
 
-            <h1 class="hero-title fade-element delay-2">SELAMAT DATANG</h1>
-            <p class="hero-subtitlefade-element delay-3">Website Resmi Eko</p>
-            <p class="hero-desc fade-element delay-3">
-                Future Network Engineer — Membangun infrastruktur jaringan masa depan dengan presisi, topologi andal, dan visi tajam.
-            </p>
-            
-            <a href="#portfolio" class="btn-explore fade-element delay-4 interactive">Jelajahi Portfolio</a>
-        </div>
+                <div class="hero-content">
+                    <h1 class="hero-title" id="heroTitle">EKO DANANG</h1>
+                    <p class="hero-subtitle" id="heroSubtitle">NETWORK ENGINEER • CYBER SECURITY • FIBER OPTIC • MIKROTIK SPECIALIST</p>
+                    <a href="#about" class="hero-btn" id="heroBtn" onclick="unlockScroll()">EXPLORE PORTFOLIO</a>
+                </div>
 
-        <a href="#portfolio" class="scroll-down fade-element delay-4 interactive" title="Scroll ke bawah">&#9660;</a>
-    </section>
-
-    <section id="portfolio">
-        <div class="section-header">
-            <h2 class="section-title">Keahlian Utama</h2>
-            <p class="section-subtitle">Spesialisasi Infrastruktur & Jaringan Komputer</p>
-        </div>
-
-        <div class="grid-container">
-            <div class="reveal-card interactive">
-                <div class="card-icon">🌐</div>
-                <h3 class="card-title">Network Architecture</h3>
-                <p class="card-desc">Merancang topologi LAN/WAN skala luas dengan efisiensi tinggi, redundansi andal, dan throughput optimal.</p>
-            </div>
-            <div class="reveal-card interactive">
-                <div class="card-icon">🔒</div>
-                <h3 class="card-title">Cyber Security & Firewall</h3>
-                <p class="card-desc">Implementasi aturan Firewall, VPN Tunneling, IDS/IPS, serta proteksi lalu lintas data dari ancaman cyber.</p>
-            </div>
-            <div class="reveal-card interactive">
-                <div class="card-icon">⚡</div>
-                <h3 class="card-title">Routing & Switching</h3>
-                <p class="card-desc">Konfigurasi protokol routing dinamik (OSPF, BGP) dan manajemen VLAN/STP enterprise pada perangkat industri.</p>
             </div>
         </div>
-    </section>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        
+        <section class="section" id="about">
+            <h2 class="section-title">ABOUT ME</h2>
+            <div class="card">
+                <p>Halo, saya <strong>Eko Danang</strong>. Seorang Network Engineer dan Cyber Security Specialist yang berfokus pada perancangan infrastruktur jaringan berskala besar, sistem proteksi data, serta penggelaran jaringan Fiber Optic berkepadatan tinggi dengan reliabilitas puncak.</p>
+            </div>
+        </section>
+
+        <section class="section" id="skills">
+            <h2 class="section-title">SPECIALIZATIONS</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Enterprise Networking</h3>
+                    <p>Merancang routing BGP/OSPF, VLAN, Spanning Tree, dan otomasi jaringan Mikrotik & Cisco.</p>
+                </div>
+                <div class="card">
+                    <h3>Cyber Security</h3>
+                    <p>Proteksi infrastruktur kritis, penanganan DDoS, analisa malware, serta manajemen firewall terpusat.</p>
+                </div>
+                <div class="card">
+                    <h3>Fiber Optic Engineering</h3>
+                    <p>Perencanaan jalur FTTH/FTTX, OTDR Testing, Fusion Splicing, dan manajemen redaman optik.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="projects">
+            <h2 class="section-title">FEATURED PROJECTS</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Data Center Infrastructure</h3>
+                    <p>Redundansi jaringan core data center dengan uptime 99.99% dan otomatisasi failover.</p>
+                </div>
+                <div class="card">
+                    <h3>ISP Backbone Deployment</h3>
+                    <p>Penggelaran serat optik jaringan backbone sepanjang 45km dengan arsitektur ring.</p>
+                </div>
+                <div class="card">
+                    <h3>Zero Trust Security Model</h3>
+                    <p>Implementasi segmentasi jaringan dan autentikasi terpusat berbasis Radius/TACACS+.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <h2 class="section-title">GET IN TOUCH</h2>
+            <div class="card">
+                <p>Siap berkolaborasi untuk proyek infrastruktur jaringan dan keamanan siber berskala enterprise?</p>
+                <p style="margin-top: 15px; color: #00f0ff;"><strong>Email:</strong> contact@eko.net</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 EKO DANANG — All Rights Reserved. Built with AAA Web Engine.</p>
+        </footer>
+    </div>
 
     <script>
-        // 1. Loader Controller
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                loader.style.visibility = 'hidden';
-            }, 800);
-        });
+        // Master GSAP Engine
+        const masterTL = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
-        // 1. GPU Accelerated Cursor & Parallax via translate3d
-        let mouseX = 0, mouseY = 0;
-        let isTicking = false;
+        // 1. Procedural Film Grain Canvas
+        const grainCanvas = document.getElementById('grain-canvas');
+        const grainCtx = grainCanvas.getContext('2d');
+        function resizeGrain() {
+            grainCanvas.width = window.innerWidth;
+            grainCanvas.height = window.innerHeight;
+        }
+        resizeGrain();
+        window.addEventListener('resize', resizeGrain);
 
-        const cursor = document.getElementById('cursor');
-        const eagle = document.getElementById('eagle');
-        const interactiveElements = document.querySelectorAll('.interactive, .eagle-container');
+        function generateGrain() {
+            const w = grainCanvas.width, h = grainCanvas.height;
+            const imgData = grainCtx.createImageData(w, h);
+            const buffer = new Uint32Array(imgData.data.buffer);
+            for (let i = 0; i < buffer.length; i++) {
+                if (Math.random() < 0.08) buffer[i] = 0xffffffff;
+            }
+            grainCtx.putImageData(imgData, 0, 0);
+            requestAnimationFrame(generateGrain);
+        }
+        generateGrain();
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
+        // 2. Web Audio Synthesizer (No external MP3 files needed)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playCyberSound(freq, duration, type="sine") {
+            try {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
+        }
 
-            if (!isTicking) {
-                window.requestAnimationFrame(() => {
-                    // GPU Accelerated Cursor Position
-                    cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+        // 3. Adaptive Mobile-Friendly Particles (Targeting 30-60 FPS)
+        const isMobile = window.innerWidth < 768;
+        const particleMultiplier = isMobile ? 0.4 : 1.0;
 
-                    // Mouse Parallax pada Elang
-                    const xAxis = (window.innerWidth / 2 - mouseX) / 45;
-                    const yAxis = (window.innerHeight / 2 - mouseY) / 45;
-                    eagle.style.transform = `translate3d(${xAxis}px, ${yAxis}px, 0) rotate(${xAxis * 0.04}deg)`;
+        function createAdaptiveLayer(id, count, speedFactor, sizeRange) {
+            const canvas = document.getElementById(id);
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
 
-                    isTicking = false;
+            let pts = Array.from({ length: Math.floor(count * particleMultiplier) }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * (sizeRange[1] - sizeRange[0]) + sizeRange[0],
+                vy: -(Math.random() * speedFactor + 0.2),
+                vx: (Math.random() - 0.5) * 0.3
+            }));
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(0, 240, 255, 0.7)';
+                pts.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.y < 0) p.y = canvas.height;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fill();
                 });
-                isTicking = true;
+                requestAnimationFrame(draw);
             }
-        });
-
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
-        });
-
-        // 2, 3, & 10. Interactive Canvas, Network Topology Lines & Retina DPI Scale
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            // 10. Canvas Retina Optimization (devicePixelRatio)
-            const dpr = window.devicePixelRatio || 1;
-            canvas.width = window.innerWidth * dpr;
-            canvas.height = window.innerHeight * dpr;
-            canvas.style.width = `${window.innerWidth}px`;
-            canvas.style.height = `${window.innerHeight}px`;
-            ctx.scale(dpr, dpr);
+            draw();
         }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+        createAdaptiveLayer('bg-particles', 35, 0.3, [0.5, 1.2]);
+        createAdaptiveLayer('mid-particles', 25, 0.6, [1.2, 2.2]);
 
-        const particles = [];
-        const particleCount = 50;
+        // 4. Feather Waves & Feather Movement
+        gsap.to(".feather", {
+            rotation: () => gsap.utils.random(-2.5, 2.5),
+            skewX: () => gsap.utils.random(-1.5, 1.5),
+            duration: () => gsap.utils.random(1.2, 2.4),
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
 
-        for (let i = 0; i < particleCount; i++) {
-            particles.push({
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-                radius: Math.random() * 1.8 + 0.6,
-                color: Math.random() > 0.4 ? 'rgba(0, 210, 255, ' : 'rgba(255, 51, 102, ',
-                alpha: Math.random() * 0.6 + 0.3,
-                speedY: -(Math.random() * 0.4 + 0.15),
-                speedX: (Math.random() - 0.5) * 0.3
+        // 5. In        // 5. Interactive Mouse Parallax Track
+        document.addEventListener("mousemove", (e) => {
+            const xNorm = (e.clientX / window.innerWidth - 0.5) * 2;
+            const yNorm = (e.clientY / window.innerHeight - 0.5) * 2;
+
+            gsap.to("#eagleHead", {
+                rotation: xNorm * 4,
+                x: xNorm * 5,
+                y: yNorm * 3,
+                duration: 0.6,
+                ease: "power1.out"
             });
-        }
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
-            for (let i = 0; i < particles.length; i++) {
-                let p = particles[i];
-
-                // 2. Partikel Terdorong Saat Mouse Mendekat
-                const dxMouse = mouseX - p.x;
-                const dyMouse = mouseY - p.y;
-                const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
-
-                if (distMouse < 110) {
-                    p.x -= dxMouse * 0.025;
-                    p.y -= dyMouse * 0.025;
-                }
-
-                p.y += p.speedY;
-                p.x += p.speedX;
-
-                if (p.y < 0) {
-                    p.y = window.innerHeight;
-                    p.x = Math.random() * window.innerWidth;
-                }
-
-                // Gambar Partikel
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = p.color + p.alpha + ')';
-                ctx.shadowBlur = 8;
-                ctx.shadowColor = p.color + '1)';
-                ctx.fill();
-
-                // 3. Garis Koneksi Antar-Partikel (Kesan Topologi Jaringan)
-                for (let j = i + 1; j < particles.length; j++) {
-                    let p2 = particles[j];
-                    const dx = p.x - p2.x;
-                    const dy = p.y - p2.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 95) {
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.strokeStyle = `rgba(0, 210, 255, ${0.25 * (1 - dist / 95)})`;
-                        ctx.lineWidth = 0.6;
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-
-        // 9. Intersection Observer untuk Scroll Reveal Cards
-        const observerOptions = {
-            threshold: 0.15
-        };
-
-        const revealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 150); // Staggered Animation
-                    observer.unobserve(entry.target);
-                }
+            gsap.to(["#pupilRight", "#glossRight"], {
+                x: xNorm * 4,
+                y: yNorm * 2.5,
+                duration: 0.3,
+                ease: "power1.out"
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal-card').forEach(card => {
-            revealObserver.observe(card);
         });
+
+        // Unlock Scroll Functionality
+        function unlockScroll() {
+            document.body.classList.remove('intro-active');
+        }
+
+        // 🎬 MASTER AWWWARDS TIMELINE SEQUENCE
+        masterTL
+        // Step 1: Opening Rack Focus (Blur -> Sharp)
+        .set("#cameraViewport", { filter: "blur(25px)", scale: 0.85 })
+        .to("#blackScreen", { opacity: 0.8, duration: 1.2, onStart: () => playCyberSound(80, 1.2, "sawtooth") })
+        .to("#cameraViewport", { filter: "blur(0px)", scale: 1, duration: 2.8, ease: "power4.out" }, "-=0.6")
+
+        // Step 2: Cyber Eyes Ignition
+        .to(["#eyeLeft", "#eyeRight", "#pupilRight", "#glossRight"], { opacity: 1, duration: 0.6 })
+        .to(["#eyeLeft", "#eyeRight"], { 
+            fill: "#00f0ff", 
+            duration: 0.8, 
+            onStart: () => playCyberSound(880, 0.4, "sine") 
+        })
+
+        // Step 3: Dolly Zoom to Pupil + HUD Telemetry
+        .to("#cameraViewport", { 
+            scale: 5.8, 
+            transformOrigin: "55% 28%", 
+            duration: 3.2, 
+            ease: "power3.inOut" 
+        }, "-=0.2")
+        .to("#wingBlurFeat", { stdDeviation: "6", duration: 2.0 }, "-=3.0")
+        .to("#hudTerminal", { opacity: 1, duration: 0.3 }, "-=0.8")
+
+        // Step 4: Iris Pass-Through Transition
+        .to("#cameraViewport", { 
+            scale: 45, 
+            filter: "blur(4px)",
+            transformOrigin: "55.1% 27.8%", 
+            duration: 1.1, 
+            ease: "expo.in",
+            onStart: () => playCyberSound(120, 0.8, "triangle")
+        })
+        .to("#blackScreen", { opacity: 1, duration: 0.3 }, "-=0.3")
+
+        // Step 5: Dolly Back & Full Reveal Setup
+        .set("#hudTerminal", { opacity: 0 })
+        .set("#wingBlurFeat", { stdDeviation: "0" })
+        .set("#cameraViewport", { scale: 1, filter: "blur(0px)", transformOrigin: "50% 50%" })
+        .to("#flashScreen", { opacity: 1, duration: 0.15 })
+        .to("#blackScreen", { opacity: 0, duration: 0.2 })
+        .to("#flashScreen", { opacity: 0, duration: 1.0, ease: "power2.out" })
+
+        // Step 6: Wing Activation Opening
+        .to("#wingLeft", { x: -12, rotation: -4, transformOrigin: "right center", duration: 0.8, ease: "back.out(1.5)" }, "-=0.8")
+        .to("#wingRight", { x: 12, rotation: 4, transformOrigin: "left center", duration: 0.8, ease: "back.out(1.5)" }, "-=0.8")
+
+        // Step 7: Typography Fade-In & Unlock Portfolio Viewport
+        .to("#heroTitle", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
+        .to("#heroSubtitle", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.5")
+        .to("#heroBtn", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
+        .to("#mainContent", { 
+            visibility: "visible", 
+            opacity: 1, 
+            duration: 0.8 
+        }, "-=0.2");
     </script>
 </body>
 </html>
