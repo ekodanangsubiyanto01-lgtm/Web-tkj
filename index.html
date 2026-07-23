@@ -1,523 +1,200 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EKO DANANG — Cyber Networking & WebGL Experience</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Eagle - Hybrid Ultimate</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html { width: 100%; height: 100%; overflow: hidden; background-color: #020408; font-family: sans-serif; }
+    #webgl { width: 100%; height: 100%; display: block; }
+    #loading {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: #020408; color: #00ffff; display: flex; justify-content: center;
+      align-items: center; font-size: 1.2rem; letter-spacing: 4px; z-index: 9999;
+      transition: opacity 0.8s ease;
+    }
+  </style>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-            cursor: none;
-        }
-
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: #020408;
-            color: #ffffff;
-            overflow-x: hidden;
-            width: 100vw;
-            min-height: 100vh;
-        }
-
-        body.intro-active {
-            overflow: hidden;
-        }
-
-        /* Custom Interactive Cyber Cursor */
-        #custom-cursor {
-            position: fixed;
-            top: 0; left: 0;
-            width: 12px; height: 12px;
-            background: #00f0ff;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 10000;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff;
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-        }
-
-        #custom-cursor-follower {
-            position: fixed;
-            top: 0; left: 0;
-            width: 36px; height: 36px;
-            border: 1px solid rgba(0, 240, 255, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-        }
-
-        .cursor-hover #custom-cursor {
-            width: 22px; height: 22px;
-            background: #ff0055;
-            box-shadow: 0 0 20px #ff0055;
-        }
-
-        /* Canvas Fullscreen WebGL Viewport */
-        #webgl-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .cinematic-vignette {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle, transparent 30%, rgba(2, 4, 8, 0.92) 100%);
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        /* Hero Content & UI Layer */
-        .hero-viewport-wrapper {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-        }
-
-        .hud-terminal {
-            position: absolute;
-            top: 10%; left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Courier New', monospace;
-            font-size: 11px; color: #00f0ff;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.9);
-            letter-spacing: 2px;
-            pointer-events: none;
-            background: rgba(2, 4, 8, 0.85);
-            padding: 8px 16px;
-            border-left: 2px solid #00f0ff;
-            backdrop-filter: blur(8px);
-            border-radius: 0 6px 6px 0;
-        }
-
-        .hero-content {
-            position: absolute;
-            top: 60%; left: 50%;
-            transform: translateX(-50%);
-            display: flex; flex-direction: column; align-items: center;
-            text-align: center;
-            width: 90%; max-width: 900px;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 240, 255, 0.08);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: #00f0ff;
-            letter-spacing: 1.5px;
-            margin-bottom: 1rem;
-        }
-
-        .status-dot {
-            width: 8px; height: 8px;
-            background: #00f0ff;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #00f0ff;
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 6vw, 4.8rem);
-            font-weight: 900;
-            letter-spacing: 6px;
-            background: linear-gradient(135deg, #ffffff 20%, #00d2ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
-        }
-
-        .hero-subtitle {
-            font-size: clamp(0.85rem, 2vw, 1.1rem);
-            color: #94a3b8;
-            letter-spacing: 3px;
-            margin-top: 0.5rem;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .hero-btn {
-            margin-top: 2rem;
-            padding: 0.9rem 2.8rem;
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #ffffff;
-            background: rgba(0, 210, 255, 0.12);
-            border: 1px solid rgba(0, 210, 255, 0.6);
-            backdrop-filter: blur(12px);
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
-        }
-
-        .hero-btn:hover {
-            background: rgba(0, 210, 255, 1);
-            color: #020408;
-            box-shadow: 0 0 40px rgba(0, 210, 255, 0.9);
-            transform: translateY(-3px);
-        }
-
-        /* Portfolio Main Content */
-        .main-content {
-            position: relative;
-            z-index: 100;
-            background: #020408;
-        }
-
-        .section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 24px;
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            color: #00f0ff;
-            margin-bottom: 2rem;
-            letter-spacing: 2px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px; left: 0;
-            width: 60%; height: 2px;
-            background: #00f0ff;
-            box-shadow: 0 0 10px #00f0ff;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: rgba(8, 18, 33, 0.6);
-            border: 1px solid rgba(0, 210, 255, 0.2);
-            border-radius: 12px;
-            padding: 28px;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(0, 210, 255, 0.8);
-            transform: translateY(-6px);
-            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.2);
-        }
-
-        .card h3 { color: #ffffff; margin-bottom: 10px; font-size: 1.25rem; }
-        .card p { color: #94a3b8; line-height: 1.6; font-size: 0.95rem; }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid rgba(0, 210, 255, 0.15);
-            color: #64748b;
-            font-size: 0.85rem;
-        }
-    </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
 </head>
-<body class="intro-active">
+<body>
 
-    <div id="custom-cursor"></div>
-    <div id="custom-cursor-follower"></div>
+  <div id="loading">INITIALIZING CYBER HYBRID...</div>
+  <canvas id="webgl"></canvas>
 
-    <canvas id="webgl-canvas"></canvas>
-    <div class="cinematic-vignette"></div>
+  <script>
+    // ===================================
+    // 1. SETUP SCENE & RENDERER
+    // ===================================
+    const canvas = document.getElementById("webgl");
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x020408);
+    scene.fog = new THREE.FogExp2(0x020408, 0.015);
 
-    <div class="hud-terminal">
-        <div>> TARGET: THREEJS_3D_CYBER_BIRD</div>
-        <div>> ENGINE: THREE.JS_R128_WEBGL</div>
-        <div>> VOLUMETRIC_LIGHTING: ACTIVE</div>
-    </div>
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 2, 20);
 
-    <div class="hero-viewport-wrapper">
-        <div class="hero-content">
-            <div class="status-badge">
-                <span class="status-dot"></span> AVAILABLE FOR INTERNSHIP / PROJECTS
-            </div>
-            <h1 class="hero-title">EKO DANANG</h1>
-            <p class="hero-subtitle">SMK STUDENT • ASPIRING NETWORK ENGINEER & WEBGL EXPERIENCES</p>
-            <a href="#about" class="hero-btn" id="heroBtn" onclick="initAudioAndScroll()">EXPLORE PORTFOLIO</a>
-        </div>
-    </div>
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.4;
 
-    <div class="main-content" id="mainContent">
-        <section class="section" id="about">
-            <h2 class="section-title">ABOUT ME</h2>
-            <div class="card">
-                <p>Halo! Saya <strong>Eko Danang</strong>, siswa kelas XI SMK jurusan Teknik Komputer dan Jaringan (TKJ). Menggabungkan keahlian infrastruktur jaringan, Cisco/MikroTik, Fiber Optic splicing, dengan kreasi pengalaman visual WebGL 3D interaktif.</p>
-            </div>
-        </section>
+    // ===================================
+    // 2. BLOOM EFFECT (POST-PROCESSING)
+    // ===================================
+    const renderScene = new THREE.RenderPass(scene, camera);
+    const bloomPass = new THREE.UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      2.0,  // Bloom Strength (Intensitas Cahaya Menyala)
+      0.5,  // Radius
+      0.15  // Threshold
+    );
 
-        <section class="section" id="skills">
-            <h2 class="section-title">SKILLS & COMPETENCIES</h2>
-            <div class="grid-3">
-                <div class="card">
-                    <h3>MikroTik & Routing</h3>
-                    <p>Konfigurasi RouterOS, Static Routing, Bandwidth Management, Firewall Filter, & Setup Hotspot/VLAN.</p>
-                </div>
-                <div class="card">
-                    <h3>Fiber Optic Infrastructure</h3>
-                    <p>Praktik Fusion Splicing (penyambungan serat optik), pengukuran redaman OPM, & analisis jalur OTDR.</p>
-                </div>
-                <div class="card">
-                    <h3>3D WebGL & Interactive UI</h3>
-                    <p>Implementasi Three.js, GSAP ScrollTrigger, Volumetric Lighting, & Custom Shader visual interaktif.</p>
-                </div>
-            </div>
-        </section>
+    const composer = new THREE.EffectComposer(renderer);
+    composer.addPass(renderScene);
+    composer.addPass(bloomPass);
 
-        <footer>
-            <p>© 2026 EKO DANANG — Three.js WebGL & Web Audio API Engine.</p>
-        </footer>
-    </div>
+    // ===================================
+    // 3. LIGHTING
+    // ===================================
+    scene.add(new THREE.AmbientLight(0x335577, 1.5));
 
-    <script>
-        gsap.registerPlugin(ScrollTrigger);
+    const keyLight = new THREE.DirectionalLight(0xffffff, 3);
+    keyLight.position.set(10, 15, 10);
+    scene.add(keyLight);
 
-        // 1. Custom Interactive Cursor
-        const cursor = document.getElementById('custom-cursor');
-        const follower = document.getElementById('custom-cursor-follower');
-        let mouseX = 0, mouseY = 0;
+    const rimLight = new THREE.PointLight(0x00ffff, 5, 30);
+    rimLight.position.set(-12, 8, -10);
+    scene.add(rimLight);
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursor.style.left = mouseX + 'px';
-            cursor.style.top = mouseY + 'px';
-            
-            gsap.to(follower, {
-                x: mouseX,
-                y: mouseY,
-                duration: 0.15,
-                ease: 'power2.out'
-            });
-        });
+    // ===================================
+    // 4. MATERIALS & MESH (ELANG RAKITAN)
+    // ===================================
+    const armorMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0x081421, metalness: 0.9, roughness: 0.2, clearcoat: 1
+    });
 
-        document.querySelectorAll('a, .card, .hero-btn').forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-        });
+    const cyanMaterial = new THREE.MeshStandardMaterial({
+      color: 0x00ffff, emissive: 0x00ffff, emissiveIntensity: 4
+    });
 
-        // 2. Three.js WebGL Scene Setup (Cyber Bird & Volumetric Fog Engine)
-        const canvas = document.getElementById('webgl-canvas');
-        const scene = new THREE.Scene();
-        
-        // Volumetric Fog effect
-        scene.fog = new THREE.FogExp2(0x020408, 0.025);
+    const eyeMaterial = new THREE.MeshStandardMaterial({
+      color: 0xff0033, emissive: 0xff0033, emissiveIntensity: 6
+    });
 
-        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, 0, 18);
+    const birdGroup = new THREE.Group();
+    scene.add(birdGroup);
 
-        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // Chest & Energy Core
+    const chest = new THREE.Mesh(new THREE.SphereGeometry(2, 32, 32), armorMaterial);
+    chest.scale.set(1, 1.3, 1.4);
+    birdGroup.add(chest);
 
-        // 3. Lighting Setup (God Rays / Spotlights)
-        const ambientLight = new THREE.AmbientLight(0x051525, 1.5);
-        scene.add(ambientLight);
+    const core = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 4, 16), cyanMaterial);
+    core.position.z = 1.1;
+    birdGroup.add(core);
 
-        // Cyan Main God Rays Spotlight
-        const godRayLight = new THREE.SpotLight(0x00f0ff, 8);
-        godRayLight.position.set(0, 15, 10);
-        godRayLight.angle = Math.PI / 4;
-        godRayLight.penumbra = 0.8;
-        godRayLight.decay = 2;
-        godRayLight.distance = 50;
-        scene.add(godRayLight);
+    // Head
+    const headGroup = new THREE.Group();
+    headGroup.position.set(0, 2.5, 0.5);
+    birdGroup.add(headGroup);
 
-        // Pink/Red Accent Eye Glow Light
-        const eyeLight = new THREE.PointLight(0xff0055, 3, 10);
-        eyeLight.position.set(0, 1.5, 2);
-        scene.add(eyeLight);
+    const skull = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32), armorMaterial);
+    skull.scale.set(1, 0.9, 1.3);
+    headGroup.add(skull);
 
-        // 4. Procedural 3D Cyber Bird Construct
-        const birdGroup = new THREE.Group();
+    const beak = new THREE.Mesh(new THREE.ConeGeometry(0.4, 1.8, 4), armorMaterial);
+    beak.rotation.x = -Math.PI / 2;
+    beak.position.set(0, -0.2, 1.4);
+    headGroup.add(beak);
 
-        // Metallic Armor Material
-        const armorMaterial = new THREE.MeshStandardMaterial({
-            color: 0x08182b,
-            metalness: 0.85,
-            roughness: 0.2,
-            wireframe: false
-        });
+    const eyeGeo = new THREE.SphereGeometry(0.15, 16, 16);
+    const leftEye = new THREE.Mesh(eyeGeo, eyeMaterial);
+    leftEye.position.set(-0.4, 0.2, 0.9);
+    headGroup.add(leftEye);
 
-        const wireMaterial = new THREE.MeshBasicMaterial({
-            color: 0x00f0ff,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.25
-        });
+    const rightEye = new THREE.Mesh(eyeGeo, eyeMaterial);
+    rightEye.position.set(0.4, 0.2, 0.9);
+    headGroup.add(rightEye);
 
-        // Bird Body Armor Core
-        const bodyGeo = new THREE.ConeGeometry(2, 6, 5);
-        const bodyMesh = new THREE.Mesh(bodyGeo, armorMaterial);
-        bodyMesh.rotation.x = Math.PI;
-        bodyGroup.add(bodyMesh);
+    // Wings
+    const leftWing = new THREE.Group();
+    leftWing.position.set(-1.8, 1, 0);
+    birdGroup.add(leftWing);
 
-        // Bird Head
-        const headGeo = new THREE.DodecahedronGeometry(1.2, 1);
-        const headMesh = new THREE.Mesh(headGeo, armorMaterial);
-        headMesh.position.set(0, 2.8, 0.5);
-        bodyGroup.add(headMesh);
+    const rightWing = new THREE.Group();
+    rightWing.position.set(1.8, 1, 0);
+    birdGroup.add(rightWing);
 
-        // Cyber Eyes (Glowing Crimson)
-        const eyeGeo = new THREE.SphereGeometry(0.2, 16, 16);
-        const eyeMat = new THREE.MeshBasicMaterial({ color: 0xff0055 });
-        const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
-        leftEye.position.set(-0.5, 3.0, 1.4);
-        const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
-        rightEye.position.set(0.5, 3.0, 1.4);
-        bodyGroup.add(leftEye);
-        bodyGroup.add(rightEye);
+    for (let i = 0; i < 12; i++) {
+      const fLeft = new THREE.Mesh(new THREE.BoxGeometry(0.15, 3.5 - i * 0.1, 0.05), armorMaterial);
+      fLeft.position.set(-i * 0.3, -i * 0.1, 0);
+      fLeft.rotation.z = 0.6 + i * 0.03;
+      leftWing.add(fLeft);
 
-        // Cyber Wings Wingtip Feathers Structure
-        const leftWingGroup = new THREE.Group();
-        const rightWingGroup = new THREE.Group();
+      const fRight = new THREE.Mesh(new THREE.BoxGeometry(0.15, 3.5 - i * 0.1, 0.05), armorMaterial);
+      fRight.position.set(i * 0.3, -i * 0.1, 0);
+      fRight.rotation.z = -0.6 - i * 0.03;
+      rightWing.add(fRight);
+    }
 
-        for (let i = 0; i < 12; i++) {
-            const featherGeo = new THREE.BoxGeometry(0.3, 3 - i * 0.15, 0.1);
-            
-            // Left Feather
-            const featherLeft = new THREE.Mesh(featherGeo, armorMaterial);
-            featherLeft.position.set(-1.2 - i * 0.4, 1.5 - i * 0.2, -i * 0.1);
-            featherLeft.rotation.z = 0.4 + i * 0.08;
-            leftWingGroup.add(featherLeft);
+    // Particles Atmosphere
+    const pGeo = new THREE.BufferGeometry();
+    const pCount = 1200;
+    const pos = new Float32Array(pCount * 3);
+    for (let i = 0; i < pCount * 3; i++) pos[i] = (Math.random() - 0.5) * 50;
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ size: 0.05, color: 0x00ffff }));
+    scene.add(particles);
 
-            // Right Feather
-            const featherRight = new THREE.Mesh(featherGeo, armorMaterial);
-            featherRight.position.set(1.2 + i * 0.4, 1.5 - i * 0.2, -i * 0.1);
-            featherRight.rotation.z = -0.4 - i * 0.08;
-            rightWingGroup.add(featherRight);
-        }
+    // ===================================
+    // 5. ANIMATION & RENDER LOOP
+    // ===================================
+    const clock = new THREE.Clock();
 
-        // Add Wireframe Overlay for Cyber Aesthetic
-        const bodyWire = new THREE.Mesh(bodyGeo, wireMaterial);
-        bodyWire.rotation.x = Math.PI;
-        bodyWire.scale.set(1.02, 1.02, 1.02);
-        bodyGroup.add(bodyWire);
+    // Intro Animation via GSAP
+    gsap.to('#loading', { opacity: 0, duration: 1, delay: 0.5, onComplete: () => document.getElementById('loading').remove() });
 
-        birdGroup.add(leftWingGroup);
-        birdGroup.add(rightWingGroup);
-        scene.add(birdGroup);
+    function animate() {
+      requestAnimationFrame(animate);
+      const t = clock.getElapsedTime();
 
-        // 5. Ambient Cyber Particle Dust System
-        const particleCount = 250;
-        const particleGeo = new THREE.BufferGeometry();
-        const positions = new Float32Array(particleCount * 3);
+      // Wing Flap Motion
+      leftWing.rotation.z = Math.sin(t * 3) * 0.3 + 0.2;
+      rightWing.rotation.z = -Math.sin(t * 3) * 0.3 - 0.2;
 
-        for (let i = 0; i < particleCount * 3; i += 3) {
-            positions[i] = (Math.random() - 0.5) * 40;
-            positions[i + 1] = (Math.random() - 0.5) * 40;
-            positions[i + 2] = (Math.random() - 0.5) * 30;
-        }
+      // Floating Body
+      birdGroup.position.y = Math.sin(t * 1.5) * 0.4;
 
-        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const particleMat = new THREE.PointsMaterial({
-            color: 0x00f0ff,
-            size: 0.12,
-            transparent: true,
-            opacity: 0.6
-        });
-        const particleSystem = new THREE.Points(particleGeo, particleMat);
-        scene.add(particleSystem);
+      // Cinematic Camera Orbit
+      camera.position.x = Math.sin(t * 0.2) * 16;
+      camera.position.z = Math.cos(t * 0.2) * 16;
+      camera.position.y = 2 + Math.sin(t * 0.3) * 2;
+      camera.lookAt(birdGroup.position);
 
-        // 6. Main Render Loop with Mouse Tracking & Flapping Wings
-        let clock = new THREE.Clock();
+      particles.rotation.y = t * 0.01;
 
-        function animate() {
-            requestAnimationFrame(animate);
+      // Render Post-Processing Composer (Bloom)
+      composer.render();
+    }
 
-            const elapsedTime = clock.getElapsedTime();
+    animate();
 
-            // Wing Flapping Animation
-            leftWingGroup.rotation.z = Math.sin(elapsedTime * 2.5) * 0.2;
-            rightWingGroup.rotation.z = -Math.sin(elapsedTime * 2.5) * 0.2;
-
-            // Smooth Hover Floating Effect
-            birdGroup.position.y = Math.sin(elapsedTime * 1.5) * 0.4;
-
-            // Interactive Mouse Follow (Head & Body Rotation)
-            const targetX = (mouseX / window.innerWidth - 0.5) * 1.2;
-            const targetY = -(mouseY / window.innerHeight - 0.5) * 1.2;
-
-            birdGroup.rotation.y += (targetX - birdGroup.rotation.y) * 0.05;
-            birdGroup.rotation.x += (targetY - birdGroup.rotation.x) * 0.05;
-
-            // Slowly Rotate Particles
-            particleSystem.rotation.y = elapsedTime * 0.03;
-
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        // 7. Web Audio API Engine Integration
-        let audioCtx;
-        function initAudioAndScroll() {
-            document.body.classList.remove('intro-active');
-
-            try {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                if (audioCtx.state === 'suspended') audioCtx.resume();
-
-                // Play Web Audio Cyber Activation Synth Sound
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-
-                osc.type = "sawtooth";
-                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.8);
-
-                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
-
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.8);
-            } catch(e) {}
-
-            // GSAP Camera Transition Effect on Click
-            gsap.to(camera.position, {
-                z: 8,
-                duration: 1.5,
-                ease: 'power3.inOut'
-            });
-        }
-
-        // Window Resize Responsiveness
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-    </script>
+    window.addEventListener("resize", () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      composer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
 </body>
 </html>
