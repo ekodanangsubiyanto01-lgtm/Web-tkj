@@ -1,195 +1,552 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cyber Eagle - Hybrid Ultimate</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EKO DANANG — Cyber Eagle Portfolio</title>  
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, html { width: 100%; height: 100%; overflow: hidden; background-color: #020408; font-family: sans-serif; }
-    #webgl { width: 100%; height: 100%; display: block; }
-    #loading {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: #020408; color: #00ffff; display: flex; justify-content: center;
-      align-items: center; font-size: 1.2rem; letter-spacing: 4px; z-index: 9999;
-      transition: opacity 0.8s ease;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    body, html {
+      width: 100%;
+      min-height: 500vh; /* Poin 4: Dynamic extended scroll depth */
+      background-color: #020408;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    #webgl-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Boot Screen & Scanlines */
+    #boot-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #020408;
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #boot-screen::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      z-index: 2;
+      background-size: 100% 2px, 3px 100%;
+      pointer-events: none;
+    }
+
+    .glitch-title {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 12px;
+      color: #00ffff;
+      text-shadow: 0 0 20px #00ffff, 2px 2px #ff0033;
+      margin-bottom: 10px;
+    }
+
+    /* Upgrade 1: Loading Progress Visualizer */
+    .loading-bar-container {
+      width: 280px;
+      height: 8px;
+      background: rgba(0, 255, 255, 0.1);
+      border: 1px solid #00ffff;
+      margin: 15px 0;
+      position: relative;
+    }
+
+    .loading-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: #00ffff;
+      box-shadow: 0 0 10px #00ffff;
+      transition: width 0.2s ease;
+    }
+
+    #loading-status {
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      color: #88aaaa;
+    }
+
+    .start-btn {
+      display: none; /* Muncul setelah loading 100% */
+      padding: 14px 36px;
+      border: 1px solid #00ffff;
+      background: rgba(0, 255, 255, 0.05);
+      color: #00ffff;
+      font-size: 1rem;
+      letter-spacing: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      pointer-events: auto;
+      z-index: 3;
+      margin-top: 15px;
+    }
+
+    .start-btn:hover {
+      background: #00ffff;
+      color: #020408;
+      box-shadow: 0 0 30px #00ffff;
+    }
+
+    #ui-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .hero-title {
+      opacity: 0;
+      transform: translateY(30px);
+      text-align: center;
+    }
+
+    .hero-title h1 {
+      font-size: 4.5rem;
+      letter-spacing: 12px;
+      background: linear-gradient(180deg, #ffffff 0%, #00ffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+    }
+
+    .hero-title p {
+      font-size: 1.1rem;
+      letter-spacing: 6px;
+      color: #88aaaa;
+      margin-top: 10px;
+    }
+
+    /* Upgrade 3: Section Portfolio TKJ & Network Engineering */
+    .content-section {
+      position: absolute;
+      top: 120vh;
+      left: 8%;
+      width: 84%;
+      z-index: 5;
+    }
+
+    .card {
+      background: rgba(8, 20, 33, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      padding: 35px;
+      margin-bottom: 120vh; /* Jarak antar-card agar scroll cinematic terasa */
+      border-radius: 8px;
+      max-width: 600px;
+    }
+
+    .card h2 {
+      color: #00ffff;
+      font-size: 1.5rem;
+      letter-spacing: 4px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      padding-bottom: 8px;
+    }
+
+    .card ul {
+      list-style: none;
+      color: #ccc;
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .card ul li::before {
+      content: "► ";
+      color: #00ffff;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title h1 { font-size: 2.8rem; letter-spacing: 6px; }
+      .hero-title p { font-size: 0.85rem; letter-spacing: 3px; }
+      .card { max-width: 100%; padding: 25px; }
     }
   </style>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
-  <div id="loading">INITIALIZING CYBER HYBRID...</div>
-  <canvas id="webgl"></canvas>
+  <audio id="sfx-boot" src="audio/boot.mp3" preload="auto"></audio>
+  <audio id="sfx-scream" src="audio/eagle_scream.mp3" preload="auto"></audio>
+
+  <div id="boot-screen">
+    <div class="glitch-title">CYBER EAGLE</div>
+    <div class="loading-bar-container">
+      <div class="loading-bar-fill" id="progress-bar"></div>
+    </div>
+    <div id="loading-status">INITIALIZING SYSTEM... 0%</div>
+    <button class="start-btn" id="start-btn" onclick="startExperience()">INITIALIZE SYSTEM</button>
+  </div>
+
+  <div id="ui-layer">
+    <div class="hero-title" id="hero-text">
+      <h1>EKO DANANG</h1>
+      <p>NETWORK ENGINEER & WEBGL DEVELOPER</p>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="card">
+      <h2>01. NETWORK ENGINEERING</h2>
+      <ul>
+        <li>MikroTik RouterOS & Routing Protocol (OSPF, BGP)</li>
+        <li>Cisco Switching, VLANs & Trunking</li>
+        <li>Fiber Optic Network Deployment & Architecture</li>
+        <li>Firewall Filtering, NAT & Network Security</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>02. FIBER OPTIC LAB</h2>
+      <ul>
+        <li>Core Fusion Splicing & Fiber Precision Cleaving</li>
+        <li>OTDR (Optical Time-Domain Reflectometer) Tracing</li>
+        <li>OPM Power Loss Measurement</li>
+        <li>ODP & FTTH Distribution Installation</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>03. FEATURED PROJECTS</h2>
+      <ul>
+        <li>Eko Lele — IoT Smart Aquaculture System</li>
+        <li>LobsterHub — Automated Crustacean Farming</li>
+        <li>OmniAI — Multi-Engine AI Integration Platform</li>
+        <li>Cyber Eagle — 3D WebGL Portfolio Architecture</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="webgl-container"></div>
 
   <script>
-    // ===================================
-    // 1. SETUP SCENE & RENDERER
-    // ===================================
-    const canvas = document.getElementById("webgl");
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Upgrade 2: GPU / Mobile Device Detection
+    const isMobile = window.innerWidth < 768;
+
+    // ===============================================
+    // 1. SCENE, CAMERA & RENDERER SETUP
+    // ===============================================
+    const container = document.getElementById('webgl-container');
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x020408);
-    scene.fog = new THREE.FogExp2(0x020408, 0.015);
+    scene.fog = new THREE.FogExp2(0x020408, 0.012);
 
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 2, 20);
+    const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 35, 60);
 
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
+    const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, powerPreference: "high-performance" });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.4;
+    renderer.toneMappingExposure = 1.3;
+    renderer.outputEncoding = THREE.sRGBEncoding;
 
-    // ===================================
-    // 2. BLOOM EFFECT (POST-PROCESSING)
-    // ===================================
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+    container.appendChild(renderer.domElement);
+
+    // ===============================================
+    // 2. UNREAL BLOOM PIPELINE (Optimized per Device)
+    // ===============================================
     const renderScene = new THREE.RenderPass(scene, camera);
     const bloomPass = new THREE.UnrealBloomPass(
       new THREE.Vector2(window.innerWidth, window.innerHeight),
-      2.0,  // Bloom Strength (Intensitas Cahaya Menyala)
-      0.5,  // Radius
-      0.15  // Threshold
+      isMobile ? 0.8 : 1.4, // Bloom lebih rendah untuk HP
+      0.4,
+      0.2
     );
 
     const composer = new THREE.EffectComposer(renderer);
     composer.addPass(renderScene);
     composer.addPass(bloomPass);
 
-    // ===================================
-    // 3. LIGHTING
-    // ===================================
-    scene.add(new THREE.AmbientLight(0x335577, 1.5));
+    // ===============================================
+    // 3. LIGHTING PIPELINE
+    // ===============================================
+    new THREE.RGBELoader().load('hdr/studio.hdr', function (texture) {
+      texture.mapping = THREE.EquirectangularReflectionMapping;
+      scene.environment = texture;
+    });
 
-    const keyLight = new THREE.DirectionalLight(0xffffff, 3);
-    keyLight.position.set(10, 15, 10);
-    scene.add(keyLight);
+    const headSpotlight = new THREE.SpotLight(0xffffff, 8);
+    headSpotlight.position.set(0, 15, 10);
+    headSpotlight.angle = Math.PI / 6;
+    headSpotlight.penumbra = 0.8;
+    headSpotlight.castShadow = true;
+    
+    // Poin 3: Res-Map diturunkan dari 2048 ke 1024 demi stabilitas FPS HP
+    headSpotlight.shadow.mapSize.width = isMobile ? 512 : 1024;
+    headSpotlight.shadow.mapSize.height = isMobile ? 512 : 1024;
+    scene.add(headSpotlight);
 
-    const rimLight = new THREE.PointLight(0x00ffff, 5, 30);
-    rimLight.position.set(-12, 8, -10);
+    const rimLight = new THREE.DirectionalLight(0x00ffff, 2);
+    rimLight.position.set(-10, 8, -10);
     scene.add(rimLight);
 
-    // ===================================
-    // 4. MATERIALS & MESH (ELANG RAKITAN)
-    // ===================================
-    const armorMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x081421, metalness: 0.9, roughness: 0.2, clearcoat: 1
-    });
+    const eyeLight = new THREE.PointLight(0xff0033, 5, 15);
+    eyeLight.position.set(0, 2, 3);
+    scene.add(eyeLight);
 
-    const cyanMaterial = new THREE.MeshStandardMaterial({
-      color: 0x00ffff, emissive: 0x00ffff, emissiveIntensity: 4
-    });
-
-    const eyeMaterial = new THREE.MeshStandardMaterial({
-      color: 0xff0033, emissive: 0xff0033, emissiveIntensity: 6
-    });
-
-    const birdGroup = new THREE.Group();
-    scene.add(birdGroup);
-
-    // Chest & Energy Core
-    const chest = new THREE.Mesh(new THREE.SphereGeometry(2, 32, 32), armorMaterial);
-    chest.scale.set(1, 1.3, 1.4);
-    birdGroup.add(chest);
-
-    const core = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 4, 16), cyanMaterial);
-    core.position.z = 1.1;
-    birdGroup.add(core);
-
-    // Head
-    const headGroup = new THREE.Group();
-    headGroup.position.set(0, 2.5, 0.5);
-    birdGroup.add(headGroup);
-
-    const skull = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32), armorMaterial);
-    skull.scale.set(1, 0.9, 1.3);
-    headGroup.add(skull);
-
-    const beak = new THREE.Mesh(new THREE.ConeGeometry(0.4, 1.8, 4), armorMaterial);
-    beak.rotation.x = -Math.PI / 2;
-    beak.position.set(0, -0.2, 1.4);
-    headGroup.add(beak);
-
-    const eyeGeo = new THREE.SphereGeometry(0.15, 16, 16);
-    const leftEye = new THREE.Mesh(eyeGeo, eyeMaterial);
-    leftEye.position.set(-0.4, 0.2, 0.9);
-    headGroup.add(leftEye);
-
-    const rightEye = new THREE.Mesh(eyeGeo, eyeMaterial);
-    rightEye.position.set(0.4, 0.2, 0.9);
-    headGroup.add(rightEye);
-
-    // Wings
-    const leftWing = new THREE.Group();
-    leftWing.position.set(-1.8, 1, 0);
-    birdGroup.add(leftWing);
-
-    const rightWing = new THREE.Group();
-    rightWing.position.set(1.8, 1, 0);
-    birdGroup.add(rightWing);
-
-    for (let i = 0; i < 12; i++) {
-      const fLeft = new THREE.Mesh(new THREE.BoxGeometry(0.15, 3.5 - i * 0.1, 0.05), armorMaterial);
-      fLeft.position.set(-i * 0.3, -i * 0.1, 0);
-      fLeft.rotation.z = 0.6 + i * 0.03;
-      leftWing.add(fLeft);
-
-      const fRight = new THREE.Mesh(new THREE.BoxGeometry(0.15, 3.5 - i * 0.1, 0.05), armorMaterial);
-      fRight.position.set(i * 0.3, -i * 0.1, 0);
-      fRight.rotation.z = -0.6 - i * 0.03;
-      rightWing.add(fRight);
-    }
+    const shadowFloor = new THREE.Mesh(
+      new THREE.PlaneGeometry(100, 100),
+      new THREE.ShadowMaterial({ opacity: 0.3 })
+    );
+    shadowFloor.rotation.x = -Math.PI / 2;
+    shadowFloor.position.y = -5;
+    shadowFloor.receiveShadow = true;
+    scene.add(shadowFloor);
 
     // Particles Atmosphere
     const pGeo = new THREE.BufferGeometry();
-    const pCount = 1200;
+    const pCount = isMobile ? 800 : 2000;
     const pos = new Float32Array(pCount * 3);
-    for (let i = 0; i < pCount * 3; i++) pos[i] = (Math.random() - 0.5) * 50;
+    for (let i = 0; i < pCount * 3; i++) pos[i] = (Math.random() - 0.5) * 80;
     pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ size: 0.05, color: 0x00ffff }));
-    scene.add(particles);
+    const dust = new THREE.Points(pGeo, new THREE.PointsMaterial({ size: 0.05, color: 0x00ffff, transparent: true, opacity: 0.4 }));
+    scene.add(dust);
 
-    // ===================================
-    // 5. ANIMATION & RENDER LOOP
-    // ===================================
+    // Shockwave Ring
+    const shockwaveGeo = new THREE.RingGeometry(0.1, 0.5, 32);
+    const shockwaveMat = new THREE.MeshBasicMaterial({ color: 0x00ffff, side: THREE.DoubleSide, transparent: true, opacity: 0 });
+    const shockwave = new THREE.Mesh(shockwaveGeo, shockwaveMat);
+    shockwave.rotation.x = Math.PI / 2;
+    shockwave.position.set(0, -2, 0);
+    scene.add(shockwave);
+
+    function triggerShockwave() {
+      shockwave.scale.set(1, 1, 1);
+      shockwaveMat.opacity = 1;
+      gsap.to(shockwave.scale, { x: 30, y: 30, z: 30, duration: 1.2, ease: "power2.out" });
+      gsap.to(shockwaveMat, { opacity: 0, duration: 1.2, ease: "power2.out" });
+    }
+
+    // ===============================================
+    // 4. GLTF LOADER WITH REAL-TIME PROGRESS
+    // ===============================================
+    let eagle, mixer, actions = {};
+    let headNode, chestBone;
+    let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+
+    const loadingManager = new THREE.LoadingManager();
+    const progressBar = document.getElementById('progress-bar');
+    const loadingStatus = document.getElementById('loading-status');
+    const startBtn = document.getElementById('start-btn');
+
+    loadingManager.onProgress = function (item, loaded, total) {
+      const percent = Math.round((loaded / total) * 100);
+      progressBar.style.width = percent + '%';
+      loadingStatus.innerText = `LOADING SYSTEM ASSETS... ${percent}%`;
+    };
+
+    loadingManager.onLoad = function () {
+      loadingStatus.innerText = "SYSTEM 100% READY";
+      setTimeout(() => {
+        document.querySelector('.loading-bar-container').style.display = 'none';
+        loadingStatus.style.display = 'none';
+        startBtn.style.display = 'inline-block';
+      }, 500);
+    };
+
+    const loader = new THREE.GLTFLoader(loadingManager);
+    loader.load('model/eagle.glb', (gltf) => {
+      eagle = gltf.scene;
+      eagle.scale.set(4, 4, 4);
+      eagle.position.set(0, -2, 0);
+
+      eagle.traverse((obj) => {
+        if (obj.isMesh) {
+          obj.castShadow = true;
+          obj.receiveShadow = true;
+        }
+        if (obj.name.toLowerCase().includes('head')) headNode = obj;
+        if (obj.name.toLowerCase().includes('chest') || obj.name.toLowerCase().includes('spine')) chestBone = obj;
+      });
+
+      scene.add(eagle);
+
+      if (gltf.animations && gltf.animations.length) {
+        mixer = new THREE.AnimationMixer(eagle);
+        gltf.animations.forEach((clip) => {
+          actions[clip.name] = mixer.clipAction(clip);
+        });
+        const defaultClip = gltf.animations[0];
+        actions[defaultClip.name].play();
+      }
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    // ===============================================
+    // 5. INTRO & SCROLL SEQUENCER
+    // ===============================================
+    function startExperience() {
+      // Poin 2: Safe Audio Volume Control
+      const bootSfx = document.getElementById('sfx-boot');
+      const screamSfx = document.getElementById('sfx-scream');
+      bootSfx.volume = 0.4;
+      screamSfx.volume = 0.5;
+
+      bootSfx.play().catch(() => {});
+
+      gsap.to('#boot-screen', {
+        opacity: 0,
+        duration: 1,
+        onComplete: () => document.getElementById('boot-screen').remove()
+      });
+
+      const tl = gsap.timeline();
+
+      tl.to(camera.position, {
+        x: 0,
+        y: 2,
+        z: 14,
+        duration: 3,
+        ease: "power3.inOut"
+      })
+      .to('#hero-text', {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+        ease: "power2.out"
+      }, "-=1.0")
+      .call(() => {
+        screamSfx.play().catch(() => {});
+        triggerShockwave();
+
+        // Camera Shake
+        gsap.to(camera.position, {
+          x: "+=0.25",
+          y: "+=0.15",
+          repeat: 10,
+          yoyo: true,
+          duration: 0.04,
+          ease: "sine.inOut"
+        });
+
+        initScrollAnimations();
+      });
+    }
+
+    function initScrollAnimations() {
+      gsap.to(camera.position, {
+        scrollTrigger: {
+          trigger: "body",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1.5
+        },
+        y: -10,
+        z: 25,
+        x: 10
+      });
+
+      if (eagle) {
+        gsap.to(eagle.rotation, {
+          scrollTrigger: {
+            trigger: "body",
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1
+          },
+          y: Math.PI * 0.4,
+          x: 0.15
+        });
+      }
+    }
+
+    // ===============================================
+    // 6. ANIMATION & RENDER LOOP
+    // ===============================================
     const clock = new THREE.Clock();
-
-    // Intro Animation via GSAP
-    gsap.to('#loading', { opacity: 0, duration: 1, delay: 0.5, onComplete: () => document.getElementById('loading').remove() });
 
     function animate() {
       requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
 
-      // Wing Flap Motion
-      leftWing.rotation.z = Math.sin(t * 3) * 0.3 + 0.2;
-      rightWing.rotation.z = -Math.sin(t * 3) * 0.3 - 0.2;
+      const delta = clock.getDelta();
+      const time = clock.getElapsedTime();
 
-      // Floating Body
-      birdGroup.position.y = Math.sin(t * 1.5) * 0.4;
+      if (mixer) mixer.update(delta);
 
-      // Cinematic Camera Orbit
-      camera.position.x = Math.sin(t * 0.2) * 16;
-      camera.position.z = Math.cos(t * 0.2) * 16;
-      camera.position.y = 2 + Math.sin(t * 0.3) * 2;
-      camera.lookAt(birdGroup.position);
+      mouse.x += (mouse.targetX - mouse.x) * 0.05;
+      mouse.y += (mouse.targetY - mouse.y) * 0.05;
 
-      particles.rotation.y = t * 0.01;
+      const noiseX = Math.sin(time * 7) * 0.015;
+      const noiseY = Math.cos(time * 8) * 0.01;
 
-      // Render Post-Processing Composer (Bloom)
+      if (eagle) {
+        eagle.position.y = -2 + Math.sin(time * 1.3) * 0.3;
+        eagle.rotation.y = mouse.x * 0.2 + noiseX;
+        eagle.rotation.x = -mouse.y * 0.1 + noiseY;
+
+        if (headNode) {
+          headNode.rotation.y = mouse.x * 0.4;
+          headNode.rotation.x = -mouse.y * 0.2;
+        }
+
+        if (chestBone) {
+          chestBone.scale.x = 1 + Math.sin(time * 2) * 0.02;
+          chestBone.scale.z = 1 + Math.sin(time * 2) * 0.02;
+        }
+      }
+
+      eyeLight.intensity = 5 + Math.sin(time * 8) * 2;
+      dust.rotation.y = time * 0.02;
+
       composer.render();
     }
 
     animate();
 
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
