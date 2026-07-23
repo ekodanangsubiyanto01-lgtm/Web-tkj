@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EKO DANANG — Network Engineer & Cyber Security Specialist</title>
+    <title>EKO DANANG — Cyber Networking & WebGL Experience</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
-        /* 1. Global Reset & Performance Layering */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             scroll-behavior: smooth;
+            cursor: none;
         }
 
         body {
@@ -25,63 +27,59 @@
             min-height: 100vh;
         }
 
-        /* Lock Body Scroll During Intro */
         body.intro-active {
             overflow: hidden;
         }
 
-        .gpu-accelerated {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-            will-change: transform, opacity, filter;
-        }
-
-        /* 2. Overlays & Grain Canvas */
-        #grain-canvas {
+        /* Custom Interactive Cyber Cursor */
+        #custom-cursor {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 950;
+            top: 0; left: 0;
+            width: 12px; height: 12px;
+            background: #00f0ff;
+            border-radius: 50%;
             pointer-events: none;
-            opacity: 0.04;
-            mix-blend-mode: overlay;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff;
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
         }
 
-        .overlay-black {
+        #custom-cursor-follower {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-color: #020408;
+            top: 0; left: 0;
+            width: 36px; height: 36px;
+            border: 1px solid rgba(0, 240, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
             z-index: 9999;
-            pointer-events: none;
+            transform: translate(-50%, -50%);
         }
 
-        .overlay-flash {
+        .cursor-hover #custom-cursor {
+            width: 22px; height: 22px;
+            background: #ff0055;
+            box-shadow: 0 0 20px #ff0055;
+        }
+
+        /* Canvas Fullscreen WebGL Viewport */
+        #webgl-canvas {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle, #ffffff 0%, rgba(0, 240, 255, 0.85) 45%, #020408 100%);
-            z-index: 9998;
-            opacity: 0;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 1;
             pointer-events: none;
         }
 
         .cinematic-vignette {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle, transparent 35%, rgba(2, 4, 8, 0.96) 100%);
-            box-shadow: inset 0 0 150px rgba(0, 210, 255, 0.12);
+            background: radial-gradient(circle, transparent 30%, rgba(2, 4, 8, 0.92) 100%);
             pointer-events: none;
-            z-index: 900;
+            z-index: 2;
         }
 
-        /* 3. Particle Canvas Layers */
-        .particle-canvas {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-        }
-        #bg-particles { z-index: 2; opacity: 0.4; }
-        #mid-particles { z-index: 4; opacity: 0.75; }
-
-        /* 4. Camera & Eagle Rig */
+        /* Hero Content & UI Layer */
         .hero-viewport-wrapper {
             position: relative;
             width: 100vw;
@@ -89,57 +87,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        .camera-rig {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            perspective: 1200px;
             z-index: 10;
         }
 
-        .camera-viewport {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            transform-origin: 50% 32%;
-            transform-style: preserve-3d;
-        }
-
-        .eagle-container {
-            width: clamp(340px, 55vw, 680px);
-            height: auto;
-            position: relative;
-            filter: drop-shadow(0 0 30px rgba(0, 210, 255, 0.2));
-        }
-
-        .eagle-svg {
-            width: 100%;
-            height: 100%;
-            overflow: visible;
-        }
-
-        /* 5. HUD Telemetry Terminal */
         .hud-terminal {
             position: absolute;
-            top: 18%;
-            left: 50%;
+            top: 10%; left: 50%;
             transform: translateX(-50%);
             font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: #00f0ff;
+            font-size: 11px; color: #00f0ff;
             text-shadow: 0 0 10px rgba(0, 240, 255, 0.9);
             letter-spacing: 2px;
             pointer-events: none;
-            opacity: 0;
-            z-index: 20;
             background: rgba(2, 4, 8, 0.85);
             padding: 8px 16px;
             border-left: 2px solid #00f0ff;
@@ -147,19 +106,34 @@
             border-radius: 0 6px 6px 0;
         }
 
-        /* 6. Typography & Hero Overlay */
         .hero-content {
             position: absolute;
-            top: 60%;
-            left: 50%;
+            top: 60%; left: 50%;
             transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; flex-direction: column; align-items: center;
             text-align: center;
-            z-index: 105;
-            width: 90%;
-            max-width: 900px;
+            width: 90%; max-width: 900px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #00f0ff;
+            letter-spacing: 1.5px;
+            margin-bottom: 1rem;
+        }
+
+        .status-dot {
+            width: 8px; height: 8px;
+            background: #00f0ff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00f0ff;
         }
 
         .hero-title {
@@ -169,20 +143,16 @@
             background: linear-gradient(135deg, #ffffff 20%, #00d2ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            opacity: 0;
-            transform: translateY(30px);
             text-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
         }
 
         .hero-subtitle {
-            font-size: clamp(0.85rem, 2vw, 1.15rem);
-            color: #00d2ff;
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            color: #94a3b8;
             letter-spacing: 3px;
-            margin-top: 0.8rem;
-            opacity: 0;
-            transform: translateY(20px);
+            margin-top: 0.5rem;
             text-transform: uppercase;
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .hero-btn {
@@ -197,11 +167,8 @@
             backdrop-filter: blur(12px);
             border-radius: 50px;
             text-decoration: none;
-            opacity: 0;
-            transform: translateY(20px);
             transition: all 0.3s ease;
             box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
-            cursor: pointer;
         }
 
         .hero-btn:hover {
@@ -211,13 +178,11 @@
             transform: translateY(-3px);
         }
 
-        /* 7. Portfolio Main Sections Layout */
+        /* Portfolio Main Content */
         .main-content {
             position: relative;
             z-index: 100;
             background: #020408;
-            opacity: 0;
-            visibility: hidden;
         }
 
         .section {
@@ -279,319 +244,280 @@
 </head>
 <body class="intro-active">
 
-    <canvas id="grain-canvas"></canvas>
-    <div class="overlay-black" id="blackScreen"></div>
-    <div class="overlay-flash" id="flashScreen"></div>
+    <div id="custom-cursor"></div>
+    <div id="custom-cursor-follower"></div>
+
+    <canvas id="webgl-canvas"></canvas>
     <div class="cinematic-vignette"></div>
 
-    <canvas id="bg-particles" class="particle-canvas"></canvas>
-    <canvas id="mid-particles" class="particle-canvas"></canvas>
-
-    <div class="hud-terminal" id="hudTerminal">
-        <div>> TARGET: AQUILA_CYBER_CORE</div>
-        <div>> SYSTEM: AWWARDS_ENGINE_ACTIVE</div>
-        <div>> LINK_STATUS: 100%_OPTIMIZED</div>
+    <div class="hud-terminal">
+        <div>> TARGET: THREEJS_3D_CYBER_BIRD</div>
+        <div>> ENGINE: THREE.JS_R128_WEBGL</div>
+        <div>> VOLUMETRIC_LIGHTING: ACTIVE</div>
     </div>
 
     <div class="hero-viewport-wrapper">
-        <div class="camera-rig gpu-accelerated" id="cameraRig">
-            <div class="camera-viewport gpu-accelerated" id="cameraViewport">
-                
-                <div class="eagle-container gpu-accelerated" id="eagleContainer">
-                    <svg class="eagle-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#00f0ff" />
-                                <stop offset="100%" stop-color="#005580" />
-                            </linearGradient>
-
-                            <linearGradient id="darkArmor" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stop-color="#182c48" />
-                                <stop offset="100%" stop-color="#050a12" />
-                            </linearGradient>
-
-                            <linearGradient id="beakGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#ffea00" />
-                                <stop offset="50%" stop-color="#ff9900" />
-                                <stop offset="100%" stop-color="#cc5500" />
-                            </linearGradient>
-
-                            <filter id="wingBlur">
-                                <feGaussianBlur stdDeviation="0" id="wingBlurFeat"/>
-                            </filter>
-                        </defs>
-
-                        <polygon points="300,20 520,80 470,310 300,390 130,310 80,80" fill="rgba(8, 18, 33, 0.6)" stroke="#00d2ff" stroke-width="1.5" stroke-dasharray="10 5"/>
-
-                        <g id="wingsGroup" filter="url(#wingBlur)">
-                            <g id="wingLeft" class="gpu-accelerated">
-                                <path class="feather" d="M 220 170 C 180 130, 90 60, 10 70 C 40 120, 100 150, 150 175 Z" fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="2.5"/>
-                                <path class="feather" d="M 150 175 C 90 180, 30 160, 0 140 C 40 190, 110 210, 180 210 Z" fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="2.5"/>
-                            </g>
-                            <g id="wingRight" class="gpu-accelerated">
-                                <path class="feather" d="M 380 170 C 420 130, 510 60, 590 70 C 560 120, 500 150, 450 175 Z" fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="2.5"/>
-                                <path class="feather" d="M 450 175 C 510 180, 570 160, 600 140 C 560 190, 490 210, 420 210 Z" fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="2.5"/>
-                            </g>
-                        </g>
-
-                        <path id="eagleBody" d="M 230 220 L 300 170 L 370 220 L 390 310 L 300 370 L 210 310 Z" fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="3"/>
-
-                        <g id="eagleHead" class="gpu-accelerated" transform="translate(0, -10) scale(1.18)" transform-origin="300 110">
-                            <path d="M 235 125 L 205 70 L 250 85 L 225 35 L 275 60 L 300 15 L 325 60 L 375 35 L 350 85 L 395 70 L 365 125 Z" fill="#ffffff" stroke="#00d2ff" stroke-width="2.5" stroke-linejoin="round"/>
-                            <path d="M 245 110 L 300 155 L 355 110 L 335 65 L 300 48 L 265 65 Z" fill="#081426" stroke="#00d2ff" stroke-width="1.5"/>
-                            <path id="beak" d="M 270 115 C 270 115, 300 110, 300 140 C 300 175, 332 188, 338 188 C 325 200, 295 200, 265 150 Z" fill="url(#beakGrad)" stroke="#995500" stroke-width="2"/>
-
-                            <g id="eyesContainer">
-                                <polygon points="258,100 280,109 264,114" fill="#ff0055" id="eyeLeft" opacity="0"/>
-                                <polygon points="342,100 320,109 336,114" fill="#ff0055" id="eyeRight" opacity="0"/>
-                                <circle cx="330" cy="108" r="2.2" fill="#020408" id="pupilRight" opacity="0"/>
-                                <circle cx="332" cy="106" r="1.2" fill="#ffffff" id="glossRight" opacity="0"/>
-                            </g>
-                        </g>
-                    </svg>
-                </div>
-
-                <div class="hero-content">
-                    <h1 class="hero-title" id="heroTitle">EKO DANANG</h1>
-                    <p class="hero-subtitle" id="heroSubtitle">NETWORK ENGINEER • CYBER SECURITY • FIBER OPTIC • MIKROTIK SPECIALIST</p>
-                    <a href="#about" class="hero-btn" id="heroBtn" onclick="unlockScroll()">EXPLORE PORTFOLIO</a>
-                </div>
-
+        <div class="hero-content">
+            <div class="status-badge">
+                <span class="status-dot"></span> AVAILABLE FOR INTERNSHIP / PROJECTS
             </div>
+            <h1 class="hero-title">EKO DANANG</h1>
+            <p class="hero-subtitle">SMK STUDENT • ASPIRING NETWORK ENGINEER & WEBGL EXPERIENCES</p>
+            <a href="#about" class="hero-btn" id="heroBtn" onclick="initAudioAndScroll()">EXPLORE PORTFOLIO</a>
         </div>
     </div>
 
     <div class="main-content" id="mainContent">
-        
         <section class="section" id="about">
             <h2 class="section-title">ABOUT ME</h2>
             <div class="card">
-                <p>Halo, saya <strong>Eko Danang</strong>. Seorang Network Engineer dan Cyber Security Specialist yang berfokus pada perancangan infrastruktur jaringan berskala besar, sistem proteksi data, serta penggelaran jaringan Fiber Optic berkepadatan tinggi dengan reliabilitas puncak.</p>
+                <p>Halo! Saya <strong>Eko Danang</strong>, siswa kelas XI SMK jurusan Teknik Komputer dan Jaringan (TKJ). Menggabungkan keahlian infrastruktur jaringan, Cisco/MikroTik, Fiber Optic splicing, dengan kreasi pengalaman visual WebGL 3D interaktif.</p>
             </div>
         </section>
 
         <section class="section" id="skills">
-            <h2 class="section-title">SPECIALIZATIONS</h2>
+            <h2 class="section-title">SKILLS & COMPETENCIES</h2>
             <div class="grid-3">
                 <div class="card">
-                    <h3>Enterprise Networking</h3>
-                    <p>Merancang routing BGP/OSPF, VLAN, Spanning Tree, dan otomasi jaringan Mikrotik & Cisco.</p>
+                    <h3>MikroTik & Routing</h3>
+                    <p>Konfigurasi RouterOS, Static Routing, Bandwidth Management, Firewall Filter, & Setup Hotspot/VLAN.</p>
                 </div>
                 <div class="card">
-                    <h3>Cyber Security</h3>
-                    <p>Proteksi infrastruktur kritis, penanganan DDoS, analisa malware, serta manajemen firewall terpusat.</p>
+                    <h3>Fiber Optic Infrastructure</h3>
+                    <p>Praktik Fusion Splicing (penyambungan serat optik), pengukuran redaman OPM, & analisis jalur OTDR.</p>
                 </div>
                 <div class="card">
-                    <h3>Fiber Optic Engineering</h3>
-                    <p>Perencanaan jalur FTTH/FTTX, OTDR Testing, Fusion Splicing, dan manajemen redaman optik.</p>
+                    <h3>3D WebGL & Interactive UI</h3>
+                    <p>Implementasi Three.js, GSAP ScrollTrigger, Volumetric Lighting, & Custom Shader visual interaktif.</p>
                 </div>
-            </div>
-        </section>
-
-        <section class="section" id="projects">
-            <h2 class="section-title">FEATURED PROJECTS</h2>
-            <div class="grid-3">
-                <div class="card">
-                    <h3>Data Center Infrastructure</h3>
-                    <p>Redundansi jaringan core data center dengan uptime 99.99% dan otomatisasi failover.</p>
-                </div>
-                <div class="card">
-                    <h3>ISP Backbone Deployment</h3>
-                    <p>Penggelaran serat optik jaringan backbone sepanjang 45km dengan arsitektur ring.</p>
-                </div>
-                <div class="card">
-                    <h3>Zero Trust Security Model</h3>
-                    <p>Implementasi segmentasi jaringan dan autentikasi terpusat berbasis Radius/TACACS+.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="contact">
-            <h2 class="section-title">GET IN TOUCH</h2>
-            <div class="card">
-                <p>Siap berkolaborasi untuk proyek infrastruktur jaringan dan keamanan siber berskala enterprise?</p>
-                <p style="margin-top: 15px; color: #00f0ff;"><strong>Email:</strong> contact@eko.net</p>
             </div>
         </section>
 
         <footer>
-            <p>© 2026 EKO DANANG — All Rights Reserved. Built with AAA Web Engine.</p>
+            <p>© 2026 EKO DANANG — Three.js WebGL & Web Audio API Engine.</p>
         </footer>
     </div>
 
     <script>
-        // Master GSAP Engine
-        const masterTL = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+        gsap.registerPlugin(ScrollTrigger);
 
-        // 1. Procedural Film Grain Canvas
-        const grainCanvas = document.getElementById('grain-canvas');
-        const grainCtx = grainCanvas.getContext('2d');
-        function resizeGrain() {
-            grainCanvas.width = window.innerWidth;
-            grainCanvas.height = window.innerHeight;
+        // 1. Custom Interactive Cursor
+        const cursor = document.getElementById('custom-cursor');
+        const follower = document.getElementById('custom-cursor-follower');
+        let mouseX = 0, mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+            
+            gsap.to(follower, {
+                x: mouseX,
+                y: mouseY,
+                duration: 0.15,
+                ease: 'power2.out'
+            });
+        });
+
+        document.querySelectorAll('a, .card, .hero-btn').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+
+        // 2. Three.js WebGL Scene Setup (Cyber Bird & Volumetric Fog Engine)
+        const canvas = document.getElementById('webgl-canvas');
+        const scene = new THREE.Scene();
+        
+        // Volumetric Fog effect
+        scene.fog = new THREE.FogExp2(0x020408, 0.025);
+
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 18);
+
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // 3. Lighting Setup (God Rays / Spotlights)
+        const ambientLight = new THREE.AmbientLight(0x051525, 1.5);
+        scene.add(ambientLight);
+
+        // Cyan Main God Rays Spotlight
+        const godRayLight = new THREE.SpotLight(0x00f0ff, 8);
+        godRayLight.position.set(0, 15, 10);
+        godRayLight.angle = Math.PI / 4;
+        godRayLight.penumbra = 0.8;
+        godRayLight.decay = 2;
+        godRayLight.distance = 50;
+        scene.add(godRayLight);
+
+        // Pink/Red Accent Eye Glow Light
+        const eyeLight = new THREE.PointLight(0xff0055, 3, 10);
+        eyeLight.position.set(0, 1.5, 2);
+        scene.add(eyeLight);
+
+        // 4. Procedural 3D Cyber Bird Construct
+        const birdGroup = new THREE.Group();
+
+        // Metallic Armor Material
+        const armorMaterial = new THREE.MeshStandardMaterial({
+            color: 0x08182b,
+            metalness: 0.85,
+            roughness: 0.2,
+            wireframe: false
+        });
+
+        const wireMaterial = new THREE.MeshBasicMaterial({
+            color: 0x00f0ff,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.25
+        });
+
+        // Bird Body Armor Core
+        const bodyGeo = new THREE.ConeGeometry(2, 6, 5);
+        const bodyMesh = new THREE.Mesh(bodyGeo, armorMaterial);
+        bodyMesh.rotation.x = Math.PI;
+        bodyGroup.add(bodyMesh);
+
+        // Bird Head
+        const headGeo = new THREE.DodecahedronGeometry(1.2, 1);
+        const headMesh = new THREE.Mesh(headGeo, armorMaterial);
+        headMesh.position.set(0, 2.8, 0.5);
+        bodyGroup.add(headMesh);
+
+        // Cyber Eyes (Glowing Crimson)
+        const eyeGeo = new THREE.SphereGeometry(0.2, 16, 16);
+        const eyeMat = new THREE.MeshBasicMaterial({ color: 0xff0055 });
+        const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
+        leftEye.position.set(-0.5, 3.0, 1.4);
+        const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
+        rightEye.position.set(0.5, 3.0, 1.4);
+        bodyGroup.add(leftEye);
+        bodyGroup.add(rightEye);
+
+        // Cyber Wings Wingtip Feathers Structure
+        const leftWingGroup = new THREE.Group();
+        const rightWingGroup = new THREE.Group();
+
+        for (let i = 0; i < 12; i++) {
+            const featherGeo = new THREE.BoxGeometry(0.3, 3 - i * 0.15, 0.1);
+            
+            // Left Feather
+            const featherLeft = new THREE.Mesh(featherGeo, armorMaterial);
+            featherLeft.position.set(-1.2 - i * 0.4, 1.5 - i * 0.2, -i * 0.1);
+            featherLeft.rotation.z = 0.4 + i * 0.08;
+            leftWingGroup.add(featherLeft);
+
+            // Right Feather
+            const featherRight = new THREE.Mesh(featherGeo, armorMaterial);
+            featherRight.position.set(1.2 + i * 0.4, 1.5 - i * 0.2, -i * 0.1);
+            featherRight.rotation.z = -0.4 - i * 0.08;
+            rightWingGroup.add(featherRight);
         }
-        resizeGrain();
-        window.addEventListener('resize', resizeGrain);
 
-        function generateGrain() {
-            const w = grainCanvas.width, h = grainCanvas.height;
-            const imgData = grainCtx.createImageData(w, h);
-            const buffer = new Uint32Array(imgData.data.buffer);
-            for (let i = 0; i < buffer.length; i++) {
-                if (Math.random() < 0.08) buffer[i] = 0xffffffff;
-            }
-            grainCtx.putImageData(imgData, 0, 0);
-            requestAnimationFrame(generateGrain);
+        // Add Wireframe Overlay for Cyber Aesthetic
+        const bodyWire = new THREE.Mesh(bodyGeo, wireMaterial);
+        bodyWire.rotation.x = Math.PI;
+        bodyWire.scale.set(1.02, 1.02, 1.02);
+        bodyGroup.add(bodyWire);
+
+        birdGroup.add(leftWingGroup);
+        birdGroup.add(rightWingGroup);
+        scene.add(birdGroup);
+
+        // 5. Ambient Cyber Particle Dust System
+        const particleCount = 250;
+        const particleGeo = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 40;
+            positions[i + 1] = (Math.random() - 0.5) * 40;
+            positions[i + 2] = (Math.random() - 0.5) * 30;
         }
-        generateGrain();
 
-        // 2. Web Audio Synthesizer (No external MP3 files needed)
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function playCyberSound(freq, duration, type="sine") {
+        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleMat = new THREE.PointsMaterial({
+            color: 0x00f0ff,
+            size: 0.12,
+            transparent: true,
+            opacity: 0.6
+        });
+        const particleSystem = new THREE.Points(particleGeo, particleMat);
+        scene.add(particleSystem);
+
+        // 6. Main Render Loop with Mouse Tracking & Flapping Wings
+        let clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const elapsedTime = clock.getElapsedTime();
+
+            // Wing Flapping Animation
+            leftWingGroup.rotation.z = Math.sin(elapsedTime * 2.5) * 0.2;
+            rightWingGroup.rotation.z = -Math.sin(elapsedTime * 2.5) * 0.2;
+
+            // Smooth Hover Floating Effect
+            birdGroup.position.y = Math.sin(elapsedTime * 1.5) * 0.4;
+
+            // Interactive Mouse Follow (Head & Body Rotation)
+            const targetX = (mouseX / window.innerWidth - 0.5) * 1.2;
+            const targetY = -(mouseY / window.innerHeight - 0.5) * 1.2;
+
+            birdGroup.rotation.y += (targetX - birdGroup.rotation.y) * 0.05;
+            birdGroup.rotation.x += (targetY - birdGroup.rotation.x) * 0.05;
+
+            // Slowly Rotate Particles
+            particleSystem.rotation.y = elapsedTime * 0.03;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // 7. Web Audio API Engine Integration
+        let audioCtx;
+        function initAudioAndScroll() {
+            document.body.classList.remove('intro-active');
+
             try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                // Play Web Audio Cyber Activation Synth Sound
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
-                osc.type = type;
-                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+                osc.type = "sawtooth";
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.8);
+
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
+
                 osc.start();
-                osc.stop(audioCtx.currentTime + duration);
+                osc.stop(audioCtx.currentTime + 0.8);
             } catch(e) {}
-        }
 
-        // 3. Adaptive Mobile-Friendly Particles (Targeting 30-60 FPS)
-        const isMobile = window.innerWidth < 768;
-        const particleMultiplier = isMobile ? 0.4 : 1.0;
-
-        function createAdaptiveLayer(id, count, speedFactor, sizeRange) {
-            const canvas = document.getElementById(id);
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            let pts = Array.from({ length: Math.floor(count * particleMultiplier) }, () => ({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                r: Math.random() * (sizeRange[1] - sizeRange[0]) + sizeRange[0],
-                vy: -(Math.random() * speedFactor + 0.2),
-                vx: (Math.random() - 0.5) * 0.3
-            }));
-
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = 'rgba(0, 240, 255, 0.7)';
-                pts.forEach(p => {
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    if (p.y < 0) p.y = canvas.height;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-                requestAnimationFrame(draw);
-            }
-            draw();
-        }
-        createAdaptiveLayer('bg-particles', 35, 0.3, [0.5, 1.2]);
-        createAdaptiveLayer('mid-particles', 25, 0.6, [1.2, 2.2]);
-
-        // 4. Feather Waves & Feather Movement
-        gsap.to(".feather", {
-            rotation: () => gsap.utils.random(-2.5, 2.5),
-            skewX: () => gsap.utils.random(-1.5, 1.5),
-            duration: () => gsap.utils.random(1.2, 2.4),
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut"
-        });
-
-        // 5. In        // 5. Interactive Mouse Parallax Track
-        document.addEventListener("mousemove", (e) => {
-            const xNorm = (e.clientX / window.innerWidth - 0.5) * 2;
-            const yNorm = (e.clientY / window.innerHeight - 0.5) * 2;
-
-            gsap.to("#eagleHead", {
-                rotation: xNorm * 4,
-                x: xNorm * 5,
-                y: yNorm * 3,
-                duration: 0.6,
-                ease: "power1.out"
+            // GSAP Camera Transition Effect on Click
+            gsap.to(camera.position, {
+                z: 8,
+                duration: 1.5,
+                ease: 'power3.inOut'
             });
-
-            gsap.to(["#pupilRight", "#glossRight"], {
-                x: xNorm * 4,
-                y: yNorm * 2.5,
-                duration: 0.3,
-                ease: "power1.out"
-            });
-        });
-
-        // Unlock Scroll Functionality
-        function unlockScroll() {
-            document.body.classList.remove('intro-active');
         }
 
-        // 🎬 MASTER AWWWARDS TIMELINE SEQUENCE
-        masterTL
-        // Step 1: Opening Rack Focus (Blur -> Sharp)
-        .set("#cameraViewport", { filter: "blur(25px)", scale: 0.85 })
-        .to("#blackScreen", { opacity: 0.8, duration: 1.2, onStart: () => playCyberSound(80, 1.2, "sawtooth") })
-        .to("#cameraViewport", { filter: "blur(0px)", scale: 1, duration: 2.8, ease: "power4.out" }, "-=0.6")
-
-        // Step 2: Cyber Eyes Ignition
-        .to(["#eyeLeft", "#eyeRight", "#pupilRight", "#glossRight"], { opacity: 1, duration: 0.6 })
-        .to(["#eyeLeft", "#eyeRight"], { 
-            fill: "#00f0ff", 
-            duration: 0.8, 
-            onStart: () => playCyberSound(880, 0.4, "sine") 
-        })
-
-        // Step 3: Dolly Zoom to Pupil + HUD Telemetry
-        .to("#cameraViewport", { 
-            scale: 5.8, 
-            transformOrigin: "55% 28%", 
-            duration: 3.2, 
-            ease: "power3.inOut" 
-        }, "-=0.2")
-        .to("#wingBlurFeat", { stdDeviation: "6", duration: 2.0 }, "-=3.0")
-        .to("#hudTerminal", { opacity: 1, duration: 0.3 }, "-=0.8")
-
-        // Step 4: Iris Pass-Through Transition
-        .to("#cameraViewport", { 
-            scale: 45, 
-            filter: "blur(4px)",
-            transformOrigin: "55.1% 27.8%", 
-            duration: 1.1, 
-            ease: "expo.in",
-            onStart: () => playCyberSound(120, 0.8, "triangle")
-        })
-        .to("#blackScreen", { opacity: 1, duration: 0.3 }, "-=0.3")
-
-        // Step 5: Dolly Back & Full Reveal Setup
-        .set("#hudTerminal", { opacity: 0 })
-        .set("#wingBlurFeat", { stdDeviation: "0" })
-        .set("#cameraViewport", { scale: 1, filter: "blur(0px)", transformOrigin: "50% 50%" })
-        .to("#flashScreen", { opacity: 1, duration: 0.15 })
-        .to("#blackScreen", { opacity: 0, duration: 0.2 })
-        .to("#flashScreen", { opacity: 0, duration: 1.0, ease: "power2.out" })
-
-        // Step 6: Wing Activation Opening
-        .to("#wingLeft", { x: -12, rotation: -4, transformOrigin: "right center", duration: 0.8, ease: "back.out(1.5)" }, "-=0.8")
-        .to("#wingRight", { x: 12, rotation: 4, transformOrigin: "left center", duration: 0.8, ease: "back.out(1.5)" }, "-=0.8")
-
-        // Step 7: Typography Fade-In & Unlock Portfolio Viewport
-        .to("#heroTitle", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
-        .to("#heroSubtitle", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.5")
-        .to("#heroBtn", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
-        .to("#mainContent", { 
-            visibility: "visible", 
-            opacity: 1, 
-            duration: 0.8 
-        }, "-=0.2");
+        // Window Resize Responsiveness
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
     </script>
 </body>
 </html>
