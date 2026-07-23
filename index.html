@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EKO — Futuristic Developer Portfolio</title>
+    <title>EKO — Future Network Engineer</title>
     <style>
         /* 1. Global & Accessibility Optimizations */
         html {
@@ -19,62 +19,154 @@
 
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: #060911;
+            background-color: #03060d;
             color: #ffffff;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Custom Neon Cursor Glow */
+        /* 7. Subtle Noise Overlay (Apple / Tesla Style) */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 900;
+            opacity: 0.035;
+            mix-blend-mode: overlay;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Accessibility: Reduced Motion */
+        @media (hover: none) {
+            .cursor-glow {
+                display: none !important;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, .hero::before, .hero::after, .eagle-eye-glow, .scroll-down, .loader-eagle, .eagle-wrapper {
+                animation: none !important;
+                transition: none !important;
+            }
+            html {
+                scroll-behavior: auto;
+            }
+            .fade-element, .reveal-card {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            #loader {
+                display: none !important;
+            }
+        }
+
+        /* 1. Custom Cursor GPU Accelerated (translate3d) */
         .cursor-glow {
-            width: 25px;
-            height: 25px;
+            width: 22px;
+            height: 22px;
             background: rgba(0, 210, 255, 0.4);
-            border: 1px solid rgba(0, 210, 255, 0.8);
+            border: 1px solid #00d2ff;
             border-radius: 50%;
             position: fixed;
+            top: 0;
+            left: 0;
             pointer-events: none;
             z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, background 0.2s;
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+            box-shadow: 0 0 18px #00d2ff;
+            transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+            will-change: transform;
         }
 
         .cursor-hover {
-            width: 45px;
-            height: 45px;
+            width: 55px;
+            height: 55px;
             background: rgba(255, 51, 102, 0.2);
-            border-color: rgba(255, 51, 102, 0.8);
-            box-shadow: 0 0 20px rgba(255, 51, 102, 0.6);
+            border-color: #ff3366;
+            box-shadow: 0 0 35px #ff3366;
         }
 
-        /* 2. Loading Screen */
+        /* 8. Glassmorphism Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 8%;
+            z-index: 980;
+            background: rgba(3, 6, 13, 0.35);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 210, 255, 0.12);
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-logo span {
+            color: #00d2ff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #00d2ff;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+        }
+
+        /* Loader */
         #loader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background-color: #060911;
+            background-color: #03060d;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 999;
+            z-index: 9999;
             transition: opacity 0.8s ease, visibility 0.8s;
         }
 
         .loader-eagle {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             animation: loaderPulse 1.2s infinite alternate ease-in-out;
         }
 
         @keyframes loaderPulse {
-            0% { transform: scale(0.9); opacity: 0.4; }
-            100% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 15px #00d2ff); }
+            0% { transform: scale(0.85); opacity: 0.3; }
+            100% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 25px #00d2ff); }
         }
 
-        /* 3. Hero Section & Aurora Background */
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -82,33 +174,43 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 2rem;
+            padding: 6rem 1rem 2rem;
             position: relative;
-            background: radial-gradient(circle at 50% 50%, #0d1726 0%, #060911 100%);
+            background: radial-gradient(circle at 50% 35%, #0a1526 0%, #03060d 100%);
             overflow: hidden;
+        }
+
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
         }
 
         .hero::before, .hero::after {
             content: '';
             position: absolute;
-            width: 40vw;
-            height: 40vw;
-            max-width: 450px;
-            max-height: 450px;
+            width: 45vw;
+            height: 45vw;
+            max-width: 500px;
+            max-height: 500px;
             border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.22;
+            filter: blur(130px);
+            opacity: 0.28;
             z-index: 0;
             pointer-events: none;
-            animation: floatGlow 12s infinite alternate ease-in-out;
+            animation: floatGlow 10s infinite alternate ease-in-out;
         }
 
-        .hero::before { background: #00d2ff; top: 10%; left: 10%; }
-        .hero::after { background: #ff3366; bottom: 10%; right: 10%; animation-delay: -6s; }
+        .hero::before { background: #00d2ff; top: 2%; left: 10%; }
+        .hero::after { background: #ff3366; bottom: 5%; right: 10%; animation-delay: -5s; }
 
         @keyframes floatGlow {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(40px, 30px) scale(1.15); }
+            100% { transform: translate(60px, 40px) scale(1.2); }
         }
 
         .hero-content {
@@ -117,9 +219,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%;
+            max-width: 950px;
         }
 
-        /* 4. Staggered Animations */
+        /* Stagger Fade-Up */
         .fade-element {
             opacity: 0;
             transform: translateY(30px);
@@ -135,100 +239,132 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 5. Eagle SVG Graphic */
+        /* 5. Combined Eagle Wrapper (Parallax + Gentle Float) */
+        .eagle-wrapper {
+            animation: floatEagle 6s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        @keyframes floatEagle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
         .eagle-container {
-            width: clamp(200px, 25vw, 280px);
-            height: clamp(200px, 25vw, 280px);
-            margin-bottom: 1.5rem;
+            width: clamp(320px, 52vw, 620px);
+            height: auto;
+            margin-bottom: 0.5rem;
             position: relative;
-            filter: drop-shadow(0 0 25px rgba(0, 210, 255, 0.35));
-            transition: transform 0.1s ease-out, filter 0.4s ease;
+            filter: drop-shadow(0 0 35px rgba(0, 210, 255, 0.45));
+            transition: filter 0.4s ease;
             cursor: pointer;
+            will-change: transform;
         }
 
         .eagle-container:hover {
-            filter: drop-shadow(0 0 40px rgba(0, 210, 255, 0.7));
+            filter: drop-shadow(0 0 65px rgba(0, 210, 255, 0.85)) drop-shadow(0 0 25px rgba(255, 51, 102, 0.5));
         }
 
-        .eagle-svg { width: 100%; height: 100%; }
+        .eagle-svg { 
+            width: 100%; 
+            height: 100%; 
+            overflow: visible;
+        }
 
-        .eagle-eye {
+        /* 4. Mata Elang Berkedip Periodik */
+        .eagle-eye-glow {
             fill: #00f0ff;
-            filter: drop-shadow(0 0 8px #00f0ff);
-            animation: pulseEye 2s infinite alternate;
+            filter: drop-shadow(0 0 12px #00f0ff);
+            transform-origin: center;
+            animation: pulseEye 2.2s infinite alternate ease-in-out, blinkEye 7s infinite;
         }
 
         @keyframes pulseEye {
-            0% { fill: #00f0ff; filter: drop-shadow(0 0 4px #00f0ff); }
-            100% { fill: #ff3366; filter: drop-shadow(0 0 15px #ff3366); }
+            0% { fill: #00f0ff; filter: drop-shadow(0 0 6px #00f0ff); }
+            100% { fill: #ff3366; filter: drop-shadow(0 0 22px #ff3366); }
         }
 
-        /* 6. Typography with Responsive Clamp */
+        @keyframes blinkEye {
+            0%, 96%, 100% { transform: scaleY(1); opacity: 1; }
+            98% { transform: scaleY(0.05); opacity: 0.1; }
+        }
+
+        .eye-scanline {
+            animation: scanLine 2.5s infinite ease-in-out;
+        }
+
+        @keyframes scanLine {
+            0%, 100% { transform: translateY(-3px); opacity: 0.2; }
+            50% { transform: translateY(3px); opacity: 0.9; }
+        }
+
+        /* 6. Hero Text Cyber Scan / Clip Reveal */
         .hero-title {
-            font-size: clamp(2.2rem, 6vw, 3.8rem);
-            font-weight: 800;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
+            font-size: clamp(2.3rem, 5.8vw, 4.2rem);
+            font-weight: 900;
+            letter-spacing: 5px;
+            margin-bottom: 0.3rem;
             text-transform: uppercase;
-            background: linear-gradient(135deg, #ffffff 30%, #00d2ff 100%);
+            background: linear-gradient(135deg, #ffffff 20%, #00d2ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(0, 210, 255, 0.25);
+            text-shadow: 0 0 30px rgba(0, 210, 255, 0.35);
+            position: relative;
+            display: inline-block;
         }
 
         .hero-subtitle {
-            font-size: clamp(0.95rem, 2vw, 1.2rem);
-            color: #a0aec0;
-            max-width: 620px;
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-            padding: 0 1rem;
+            font-size: clamp(1rem, 2.2vw, 1.35rem);
+            color: #00d2ff;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
         }
 
-        /* 7. CTA Button with Glassmorphism & Accessibility Focus */
+        .hero-desc {
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            color: #94a3b8;
+            max-width: 600px;
+            margin-bottom: 2.2rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Glassmorphism */
         .btn-explore {
-            padding: 0.9rem 2.8rem;
-            font-size: 1rem;
+            padding: 0.95rem 3rem;
+            font-size: 1.05rem;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             color: #ffffff;
             background: rgba(0, 210, 255, 0.12);
-            border: 1px solid rgba(0, 210, 255, 0.5);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 210, 255, 0.55);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border-radius: 50px;
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.15);
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.25);
             text-decoration: none;
             display: inline-block;
         }
 
         .btn-explore:hover {
             background: rgba(0, 210, 255, 1);
-            color: #060911;
-            box-shadow: 0 0 35px rgba(0, 210, 255, 0.8);
+            color: #03060d;
+            box-shadow: 0 0 45px rgba(0, 210, 255, 0.95);
             transform: translateY(-3px);
         }
 
-        .btn-explore:focus-visible {
-            outline: 3px solid #00d2ff;
-            outline-offset: 5px;
-        }
-
-        /* 8. Scroll Indicator */
         .scroll-down {
             position: absolute;
-            bottom: 25px;
+            bottom: 20px;
             z-index: 2;
             color: #00d2ff;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             text-decoration: none;
             opacity: 0.8;
             animation: bounce 2s infinite;
-            transition: color 0.3s ease;
         }
-
-        .scroll-down:hover { color: #ffffff; }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
@@ -236,76 +372,255 @@
             60% { transform: translateY(-5px); }
         }
 
-        /* Section Target Dummy */
+        /* 9. Portfolio Section & Scroll Reveal Cards */
         #portfolio {
             min-height: 100vh;
-            background-color: #04060c;
+            background-color: #02050b;
+            padding: 6rem 8%;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: #00d2ff;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        /* Glassmorphism Card dengan Staggered Observer Reveal */
+        .reveal-card {
+            background: rgba(10, 21, 38, 0.6);
+            border: 1px solid rgba(0, 210, 255, 0.15);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .reveal-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-card:hover {
+            border-color: rgba(0, 210, 255, 0.6);
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
+            transform: translateY(-6px);
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-desc {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
 
+    <div class="noise-overlay"></div>
+
     <div class="cursor-glow" id="cursor"></div>
 
+    <nav class="navbar">
+        <a href="#" class="nav-logo">EKO<span>.NET</span></a>
+        <ul class="nav-links">
+            <li><a href="#" class="interactive">Home</a></li>
+            <li><a href="#portfolio" class="interactive">Portfolio</a></li>
+            <li><a href="#portfolio" class="interactive">Skills</a></li>
+            <li><a href="#portfolio" class="interactive">Projects</a></li>
+            <li><a href="#portfolio" class="interactive">Contact</a></li>
+        </ul>
+    </nav>
+
     <div id="loader">
-        <svg class="loader-eagle" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="100,30 140,80 100,160 60,80" fill="none" stroke="#00d2ff" stroke-width="3"/>
-            <polygon points="100,50 120,80 100,120 80,80" fill="#00d2ff"/>
+        <svg class="loader-eagle" viewBox="0 0 100 100">
+            <polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="#00d2ff" stroke-width="2"/>
+            <polygon points="50,25 75,50 50,75 25,50" fill="#00d2ff"/>
         </svg>
     </div>
 
     <section class="hero">
+        <canvas id="particle-canvas"></canvas>
+
         <div class="hero-content">
-            <div class="eagle-container fade-element delay-1" id="eagle">
-                <svg class="eagle-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M 20 120 L 60 70 L 100 95 L 140 70 L 180 120 L 100 150 Z" fill="none" stroke="rgba(0, 210, 255, 0.25)" stroke-width="1.5"/>
-                    <path d="M 40 100 L 75 60 L 100 80 L 125 60 L 160 100" fill="none" stroke="rgba(0, 210, 255, 0.4)" stroke-width="1"/>
-                    
-                    <polygon points="100,20 155,50 165,95 145,130 100,145 55,130 35,95 45,50" fill="#0b1320" stroke="#00d2ff" stroke-width="2"/>
-                    
-                    <polygon points="140,85 188,98 140,112 135,98" fill="#ffb703" stroke="#ffa000" stroke-width="1"/>
-                    
-                    <polyline points="105,62 142,72 120,74" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-                    
-                    <polygon points="115,75 138,78 122,86" class="eagle-eye"/>
-                </svg>
+            
+            <div class="eagle-wrapper">
+                <div class="eagle-container fade-element delay-1" id="eagle">
+                    <svg class="eagle-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f0ff" />
+                                <stop offset="100%" stop-color="#005580" />
+                            </linearGradient>
+
+                            <linearGradient id="darkArmor" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#182c48" />
+                                <stop offset="100%" stop-color="#050a12" />
+                            </linearGradient>
+
+                            <linearGradient id="beakGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ffea00" />
+                                <stop offset="50%" stop-color="#ff9900" />
+                                <stop offset="100%" stop-color="#cc5500" />
+                            </linearGradient>
+
+                            <filter id="neonGlow">
+                                <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#00d2ff" flood-opacity="0.9"/>
+                            </filter>
+                        </defs>
+
+                        <polygon points="300,20 520,80 470,310 300,390 130,310 80,80" fill="rgba(8, 18, 33, 0.5)" stroke="#00d2ff" stroke-width="1.5" stroke-dasharray="10 5"/>
+
+                        <g id="wing-left">
+                            <path d="M 220 170 C 180 130, 90 60, 10 70 C 40 120, 100 150, 150 175 C 90 180, 30 160, 0 140 C 40 190, 110 210, 180 210 C 130 225, 70 220, 30 200 C 80 240, 160 245, 210 225 Z" 
+                                  fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="3.5" stroke-linejoin="round"/>
+                            <path d="M 180 150 Q 110 100 30 90 M 160 180 Q 90 140 20 130 M 170 200 Q 110 170 40 165" fill="none" stroke="#00f0ff" stroke-width="0.8" opacity="0.6"/>
+                            <path d="M 180 175 L 80 125 L 120 165 L 50 145 L 110 200 Z" fill="url(#cyanGrad)" opacity="0.75"/>
+                            <path d="M 100 190 L 30 140 M 80 240 L 30 200" stroke="#ff3366" stroke-width="2.5" stroke-linecap="round"/>
+                        </g>
+
+                        <g id="wing-right">
+                            <path d="M 380 170 C 420 130, 510 60, 590 70 C 560 120, 500 150, 450 175 C 510 180, 570 160, 600 140 C 560 190, 490 210, 420 210 C 470 225, 530 220, 570 200 C 520 240, 440 245, 390 225 Z" 
+                                  fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="3.5" stroke-linejoin="round"/>
+                            <path d="M 420 150 Q 490 100 570 90 M 440 180 Q 510 140 580 130 M 430 200 Q 490 170 560 165" fill="none" stroke="#00f0ff" stroke-width="0.8" opacity="0.6"/>
+                            <path d="M 420 175 L 520 125 L 480 165 L 550 145 L 490 200 Z" fill="url(#cyanGrad)" opacity="0.75"/>
+                            <path d="M 500 190 L 570 140 M 520 240 L 570 200" stroke="#ff3366" stroke-width="2.5" stroke-linecap="round"/>
+                        </g>
+
+                        <path d="M 230 220 L 300 170 L 370 220 L 390 310 L 300 370 L 210 310 Z" fill="url(#darkArmor)" stroke="#00d2ff" stroke-width="3"/>
+                        <path d="M 245 240 L 300 295 L 355 240" fill="none" stroke="#00f0ff" stroke-width="2.5" stroke-linecap="round" filter="url(#neonGlow)"/>
+
+                        <g id="eagle-head-enlarged" transform="translate(0, -10) scale(1.18)" transform-origin="300 110">
+                            <path d="M 235 125 L 205 70 L 250 85 L 225 35 L 275 60 L 300 15 L 325 60 L 375 35 L 350 85 L 395 70 L 365 125 Z" fill="#ffffff" stroke="#00d2ff" stroke-width="2.5" stroke-linejoin="round"/>
+                            <path d="M 245 110 L 300 155 L 355 110 L 335 65 L 300 48 L 265 65 Z" fill="#081426" stroke="#00d2ff" stroke-width="1.5"/>
+
+                            <path d="M 270 115 C 270 115, 300 110, 300 140 C 300 175, 332 188, 338 188 C 325 200, 295 200, 265 150 Z" fill="url(#beakGrad)" stroke="#995500" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M 275 122 Q 295 120 298 142 Q 298 160 320 180" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+
+                            <path d="M 250 92 L 286 108 L 278 112 Z" fill="#ffffff" stroke="#00d2ff" stroke-width="1.5"/>
+                            <path d="M 350 92 L 314 108 L 322 112 Z" fill="#ffffff" stroke="#00d2ff" stroke-width="1.5"/>
+
+                            <g id="eyes-group">
+                                <polygon points="258,100 280,109 264,114" class="eagle-eye-glow"/>
+                                <polygon points="342,100 320,109 336,114" class="eagle-eye-glow"/>
+                                <line x1="256" y1="107" x2="282" y2="107" stroke="#ffffff" stroke-width="1" class="eye-scanline"/>
+                                <line x1="318" y1="107" x2="344" y2="107" stroke="#ffffff" stroke-width="1" class="eye-scanline"/>
+                            </g>
+
+                            <path d="M 300 48 L 300 110" stroke="#00f0ff" stroke-width="1.5" opacity="0.7"/>
+                        </g>
+                    </svg>
+                </div>
             </div>
 
-            <h1 class="hero-title fade-element delay-2">Selamat Datang</h1>
-            <p class="hero-subtitle fade-element delay-3">
-                Website Portofolio Eko — Menghadirkan solusi digital modern dengan presisi tinggi, performa optimal, dan visi masa depan.
+            <h1 class="hero-title fade-element delay-2">SELAMAT DATANG</h1>
+            <p class="hero-subtitlefade-element delay-3">Website Resmi Eko</p>
+            <p class="hero-desc fade-element delay-3">
+                Future Network Engineer — Membangun infrastruktur jaringan masa depan dengan presisi, topologi andal, dan visi tajam.
             </p>
             
-            <a href="#portfolio" class="btn-explore fade-element delay-4 interactive">Jelajahi Karya</a>
+            <a href="#portfolio" class="btn-explore fade-element delay-4 interactive">Jelajahi Portfolio</a>
         </div>
 
         <a href="#portfolio" class="scroll-down fade-element delay-4 interactive" title="Scroll ke bawah">&#9660;</a>
     </section>
 
     <section id="portfolio">
-        <h2 style="color: #a0aec0; font-weight: 400;">— Bagian Portofolio —</h2>
+        <div class="section-header">
+            <h2 class="section-title">Keahlian Utama</h2>
+            <p class="section-subtitle">Spesialisasi Infrastruktur & Jaringan Komputer</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="reveal-card interactive">
+                <div class="card-icon">🌐</div>
+                <h3 class="card-title">Network Architecture</h3>
+                <p class="card-desc">Merancang topologi LAN/WAN skala luas dengan efisiensi tinggi, redundansi andal, dan throughput optimal.</p>
+            </div>
+            <div class="reveal-card interactive">
+                <div class="card-icon">🔒</div>
+                <h3 class="card-title">Cyber Security & Firewall</h3>
+                <p class="card-desc">Implementasi aturan Firewall, VPN Tunneling, IDS/IPS, serta proteksi lalu lintas data dari ancaman cyber.</p>
+            </div>
+            <div class="reveal-card interactive">
+                <div class="card-icon">⚡</div>
+                <h3 class="card-title">Routing & Switching</h3>
+                <p class="card-desc">Konfigurasi protokol routing dinamik (OSPF, BGP) dan manajemen VLAN/STP enterprise pada perangkat industri.</p>
+            </div>
+        </div>
     </section>
 
     <script>
-        // 1. Loading Screen Controller
+        // 1. Loader Controller
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
             setTimeout(() => {
                 loader.style.opacity = '0';
                 loader.style.visibility = 'hidden';
-            }, 1200);
+            }, 800);
         });
 
-        // 2. Cursor Glow & Hover Scale Effect
+        // 1. GPU Accelerated Cursor & Parallax via translate3d
+        let mouseX = 0, mouseY = 0;
+        let isTicking = false;
+
         const cursor = document.getElementById('cursor');
+        const eagle = document.getElementById('eagle');
         const interactiveElements = document.querySelectorAll('.interactive, .eagle-container');
 
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = `${e.clientX}px`;
-            cursor.style.top = `${e.clientY}px`;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            if (!isTicking) {
+                window.requestAnimationFrame(() => {
+                    // GPU Accelerated Cursor Position
+                    cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+
+                    // Mouse Parallax pada Elang
+                    const xAxis = (window.innerWidth / 2 - mouseX) / 45;
+                    const yAxis = (window.innerHeight / 2 - mouseY) / 45;
+                    eagle.style.transform = `translate3d(${xAxis}px, ${yAxis}px, 0) rotate(${xAxis * 0.04}deg)`;
+
+                    isTicking = false;
+                });
+                isTicking = true;
+            }
         });
 
         interactiveElements.forEach(el => {
@@ -313,12 +628,109 @@
             el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
         });
 
-        // 3. Mouse Parallax Effect for Eagle SVG
-        const eagle = document.getElementById('eagle');
-        document.addEventListener('mousemove', (e) => {
-            const xAxis = (window.innerWidth / 2 - e.clientX) / 35;
-            const yAxis = (window.innerHeight / 2 - e.clientY) / 35;
-            eagle.style.transform = `translate(${xAxis}px, ${yAxis}px) rotate(${xAxis * 0.1}deg)`;
+        // 2, 3, & 10. Interactive Canvas, Network Topology Lines & Retina DPI Scale
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            // 10. Canvas Retina Optimization (devicePixelRatio)
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            canvas.style.width = `${window.innerWidth}px`;
+            canvas.style.height = `${window.innerHeight}px`;
+            ctx.scale(dpr, dpr);
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const particles = [];
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                radius: Math.random() * 1.8 + 0.6,
+                color: Math.random() > 0.4 ? 'rgba(0, 210, 255, ' : 'rgba(255, 51, 102, ',
+                alpha: Math.random() * 0.6 + 0.3,
+                speedY: -(Math.random() * 0.4 + 0.15),
+                speedX: (Math.random() - 0.5) * 0.3
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+
+                // 2. Partikel Terdorong Saat Mouse Mendekat
+                const dxMouse = mouseX - p.x;
+                const dyMouse = mouseY - p.y;
+                const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+
+                if (distMouse < 110) {
+                    p.x -= dxMouse * 0.025;
+                    p.y -= dyMouse * 0.025;
+                }
+
+                p.y += p.speedY;
+                p.x += p.speedX;
+
+                if (p.y < 0) {
+                    p.y = window.innerHeight;
+                    p.x = Math.random() * window.innerWidth;
+                }
+
+                // Gambar Partikel
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color + p.alpha + ')';
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = p.color + '1)';
+                ctx.fill();
+
+                // 3. Garis Koneksi Antar-Partikel (Kesan Topologi Jaringan)
+                for (let j = i + 1; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    const dx = p.x - p2.x;
+                    const dy = p.y - p2.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 95) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(0, 210, 255, ${0.25 * (1 - dist / 95)})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // 9. Intersection Observer untuk Scroll Reveal Cards
+        const observerOptions = {
+            threshold: 0.15
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 150); // Staggered Animation
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-card').forEach(card => {
+            revealObserver.observe(card);
         });
     </script>
 </body>
