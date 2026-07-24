@@ -3,25 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EKO DANANG — Cyber Eagle Portfolio</title>  
+  <title>Eko Danang — Production-Grade Cyber Eagle Portfolio</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      user-select: none;
     }
 
-    body, html {
-      width: 100%;
-      min-height: 500vh; /* Poin 4: Dynamic extended scroll depth */
-      background-color: #020408;
-      font-family: 'Segoe UI', Roboto, sans-serif;
-      color: #fff;
+    body {
+      background-color: #05070a;
+      color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      height: 1200vh;
       overflow-x: hidden;
     }
 
-    #webgl-container {
+    #webgl-canvas {
       position: fixed;
       top: 0;
       left: 0;
@@ -29,55 +27,43 @@
       height: 100vh;
       z-index: 1;
       pointer-events: none;
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
-    /* Boot Screen & Scanlines */
-    #boot-screen {
+    /* ----------------------------------
+       0. LOADING SCREEN (Poin 5)
+    ---------------------------------- */
+    #loading-screen {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #020408;
-      z-index: 99;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: #05070a;
+      z-index: 999;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      transition: opacity 0.8s ease;
     }
 
-    #boot-screen::before {
-      content: " ";
-      display: block;
-      position: absolute;
-      top: 0; left: 0; bottom: 0; right: 0;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-      z-index: 2;
-      background-size: 100% 2px, 3px 100%;
-      pointer-events: none;
-    }
-
-    .glitch-title {
-      font-size: 3rem;
-      font-weight: 900;
-      letter-spacing: 12px;
+    .loader-title {
+      font-size: 1.8rem;
+      letter-spacing: 8px;
       color: #00ffff;
-      text-shadow: 0 0 20px #00ffff, 2px 2px #ff0033;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    .progress-bar-wrap {
+      width: 300px;
+      height: 4px;
+      background: rgba(0, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
       margin-bottom: 10px;
     }
 
-    /* Upgrade 1: Loading Progress Visualizer */
-    .loading-bar-container {
-      width: 280px;
-      height: 8px;
-      background: rgba(0, 255, 255, 0.1);
-      border: 1px solid #00ffff;
-      margin: 15px 0;
-      position: relative;
-    }
-
-    .loading-bar-fill {
+    .progress-bar-fill {
       width: 0%;
       height: 100%;
       background: #00ffff;
@@ -87,110 +73,115 @@
 
     #loading-status {
       font-size: 0.85rem;
-      letter-spacing: 3px;
       color: #88aaaa;
+      letter-spacing: 3px;
     }
 
-    .start-btn {
-      display: none; /* Muncul setelah loading 100% */
-      padding: 14px 36px;
-      border: 1px solid #00ffff;
-      background: rgba(0, 255, 255, 0.05);
-      color: #00ffff;
-      font-size: 1rem;
-      letter-spacing: 4px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      pointer-events: auto;
-      z-index: 3;
-      margin-top: 15px;
-    }
-
-    .start-btn:hover {
-      background: #00ffff;
-      color: #020408;
-      box-shadow: 0 0 30px #00ffff;
-    }
-
-    #ui-layer {
+    /* ----------------------------------
+       CINEMATIC OVERLAY TEXTS
+    ---------------------------------- */
+    .ui-layer {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 10;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 2;
       display: flex;
       justify-content: center;
       align-items: center;
       pointer-events: none;
-    }
-
-    .hero-title {
-      opacity: 0;
-      transform: translateY(30px);
       text-align: center;
     }
 
-    .hero-title h1 {
-      font-size: 4.5rem;
-      letter-spacing: 12px;
-      background: linear-gradient(180deg, #ffffff 0%, #00ffff 100%);
+    .scene-text {
+      position: absolute;
+      opacity: 0;
+      transform: translateY(40px);
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .scene-text h1 {
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #ffffff 30%, #00ffff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
     }
 
-    .hero-title p {
-      font-size: 1.1rem;
-      letter-spacing: 6px;
+    .scene-text p {
+      font-size: clamp(1rem, 2vw, 1.4rem);
       color: #88aaaa;
-      margin-top: 10px;
+      margin-top: 15px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
     }
 
-    /* Upgrade 3: Section Portfolio TKJ & Network Engineering */
-    .content-section {
+    .highlight {
+      color: #00ffff;
+      -webkit-text-fill-color: #00ffff;
+    }
+
+    /* ----------------------------------
+       PORTFOLIO CONTENT & CARDS (Poin 6)
+    ---------------------------------- */
+    .portfolio-container {
       position: absolute;
-      top: 120vh;
-      left: 8%;
-      width: 84%;
+      top: 600vh;
+      left: 0;
+      width: 100%;
       z-index: 5;
+      padding: 100px 8%;
+      box-sizing: border-box;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      color: #00ffff;
+      letter-spacing: 6px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+      padding-bottom: 15px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 120px;
     }
 
     .card {
-      background: rgba(8, 20, 33, 0.7);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(0, 255, 255, 0.2);
+      background: rgba(8, 16, 26, 0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 255, 255, 0.15);
+      border-radius: 12px;
       padding: 35px;
-      margin-bottom: 120vh; /* Jarak antar-card agar scroll cinematic terasa */
-      border-radius: 8px;
-      max-width: 600px;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
     }
 
-    .card h2 {
-      color: #00ffff;
-      font-size: 1.5rem;
-      letter-spacing: 4px;
+    .card:hover {
+      border-color: #00ffff;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.25);
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+      color: #fff;
       margin-bottom: 15px;
-      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-      padding-bottom: 8px;
     }
 
     .card ul {
       list-style: none;
-      color: #ccc;
+      color: #aaa;
       line-height: 1.8;
-      font-size: 0.95rem;
     }
 
     .card ul li::before {
       content: "► ";
       color: #00ffff;
-    }
-
-    @media (max-width: 768px) {
-      .hero-title h1 { font-size: 2.8rem; letter-spacing: 6px; }
-      .hero-title p { font-size: 0.85rem; letter-spacing: 3px; }
-      .card { max-width: 100%; padding: 25px; }
     }
   </style>
 
@@ -210,347 +201,317 @@
 </head>
 <body>
 
-  <audio id="sfx-boot" src="audio/boot.mp3" preload="auto"></audio>
-  <audio id="sfx-scream" src="audio/eagle_scream.mp3" preload="auto"></audio>
-
-  <div id="boot-screen">
-    <div class="glitch-title">CYBER EAGLE</div>
-    <div class="loading-bar-container">
-      <div class="loading-bar-fill" id="progress-bar"></div>
+  <div id="loading-screen">
+    <div class="loader-title">CYBER EAGLE SYSTEM</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill"></div>
     </div>
-    <div id="loading-status">INITIALIZING SYSTEM... 0%</div>
-    <button class="start-btn" id="start-btn" onclick="startExperience()">INITIALIZE SYSTEM</button>
+    <div id="loading-status">LOADING SYSTEM ASSETS... 0%</div>
   </div>
 
-  <div id="ui-layer">
-    <div class="hero-title" id="hero-text">
+  <canvas id="webgl-canvas"></canvas>
+
+  <div class="ui-layer">
+    <div class="scene-text" id="scene-1">
       <h1>EKO DANANG</h1>
-      <p>NETWORK ENGINEER & WEBGL DEVELOPER</p>
+      <p>Network Engineer & Cyber Architecture</p>
+    </div>
+
+    <div class="scene-text" id="scene-2">
+      <h1>ENTERPRISE<br><span class="highlight">NETWORKING</span></h1>
+      <p>MikroTik • Cisco • Firewall Security</p>
+    </div>
+
+    <div class="scene-text" id="scene-3">
+      <h1>FIBER OPTIC<br><span class="highlight">PRECISION</span></h1>
+      <p>Fusion Splicing • OTDR • FTTH Design</p>
+    </div>
+
+    <div class="scene-text" id="scene-4">
+      <h1>WELCOME TO THE<br><span class="highlight">CYBER REALM</span></h1>
+      <p>Scroll down to explore full portfolio</p>
     </div>
   </div>
 
-  <div class="content-section">
-    <div class="card">
-      <h2>01. NETWORK ENGINEERING</h2>
-      <ul>
-        <li>MikroTik RouterOS & Routing Protocol (OSPF, BGP)</li>
-        <li>Cisco Switching, VLANs & Trunking</li>
-        <li>Fiber Optic Network Deployment & Architecture</li>
-        <li>Firewall Filtering, NAT & Network Security</li>
-      </ul>
+  <div class="portfolio-container">
+    <h2 class="section-title">01 // SKILLS & ARCHITECTURE</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Network Engineering</h3>
+        <ul>
+          <li>MikroTik RouterOS Routing (OSPF, BGP)</li>
+          <li>Cisco Switching & VLAN Segmentation</li>
+          <li>Network Firewalling & Traffic Control</li>
+          <li>VPN Tunnels & Site-to-Site Encryptions</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Fiber Optic Infrastructure</h3>
+        <ul>
+          <li>Precision Core Fusion Splicing</li>
+          <li>OTDR Trace Analysis & Loss Measurement</li>
+          <li>ODP & FTTH Distribution Design</li>
+          <li>Power Budget Calculation & Optimization</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="card">
-      <h2>02. FIBER OPTIC LAB</h2>
-      <ul>
-        <li>Core Fusion Splicing & Fiber Precision Cleaving</li>
-        <li>OTDR (Optical Time-Domain Reflectometer) Tracing</li>
-        <li>OPM Power Loss Measurement</li>
-        <li>ODP & FTTH Distribution Installation</li>
-      </ul>
-    </div>
+    <h2 class="section-title">02 // FEATURED PROJECTS</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Eko Lele Smart Aquaculture</h3>
+        <p style="color:#aaa; line-height:1.6;">Sistem otomatisasi tambak berbasis IoT dan sensor monitoring kualitas air secara real-time.</p>
+      </div>
 
-    <div class="card">
-      <h2>03. FEATURED PROJECTS</h2>
-      <ul>
-        <li>Eko Lele — IoT Smart Aquaculture System</li>
-        <li>LobsterHub — Automated Crustacean Farming</li>
-        <li>OmniAI — Multi-Engine AI Integration Platform</li>
-        <li>Cyber Eagle — 3D WebGL Portfolio Architecture</li>
-      </ul>
+      <div class="card">
+        <h3>LobsterHub Farming Automation</h3>
+        <p style="color:#aaa; line-height:1.6;">Platform kontrol pemberian pakan dan pengaturan sirkulasi air otomatis untuk budidaya lobster.</p>
+      </div>
     </div>
   </div>
-
-  <div id="webgl-container"></div>
 
   <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    // Upgrade 2: GPU / Mobile Device Detection
+    // ===============================================
+    // Poin 7: ADAPTIVE MOBILE OPTIMIZATION
+    // ===============================================
     const isMobile = window.innerWidth < 768;
 
     // ===============================================
-    // 1. SCENE, CAMERA & RENDERER SETUP
+    // 1. SCENE & CAMERA RIG SYSTEM (Poin 1)
     // ===============================================
-    const container = document.getElementById('webgl-container');
+    const canvas = document.querySelector('#webgl-canvas');
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x020408, 0.012);
+    scene.background = new THREE.Color('#05070a');
+    scene.fog = new THREE.FogExp2('#05070a', 0.03);
 
-    const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 35, 60);
+    // Camera Rig memisahkan kontrol GSAP & Parallax Mouse
+    const cameraRig = new THREE.Group();
+    scene.add(cameraRig);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, powerPreference: "high-performance" });
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0, 14); // Offset kamera di dalam Rig
+    cameraRig.add(camera);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: !isMobile, powerPreference: "high-performance" });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.3;
-    renderer.outputEncoding = THREE.sRGBEncoding;
-
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-    container.appendChild(renderer.domElement);
+    renderer.toneMappingExposure = 1.2;
 
     // ===============================================
-    // 2. UNREAL BLOOM PIPELINE (Optimized per Device)
+    // 2. RENDERING PIPELINE & RESIZE FIX (Poin 4)
     // ===============================================
-    const renderScene = new THREE.RenderPass(scene, camera);
+    const renderPass = new THREE.RenderPass(scene, camera);
     const bloomPass = new THREE.UnrealBloomPass(
       new THREE.Vector2(window.innerWidth, window.innerHeight),
-      isMobile ? 0.8 : 1.4, // Bloom lebih rendah untuk HP
+      isMobile ? 0.6 : 1.2, // Adaptive Bloom Strength
       0.4,
-      0.2
+      0.25
     );
 
     const composer = new THREE.EffectComposer(renderer);
-    composer.addPass(renderScene);
+    composer.addPass(renderPass);
     composer.addPass(bloomPass);
 
-    // ===============================================
-    // 3. LIGHTING PIPELINE
-    // ===============================================
-    new THREE.RGBELoader().load('hdr/studio.hdr', function (texture) {
-      texture.mapping = THREE.EquirectangularReflectionMapping;
-      scene.environment = texture;
-    });
+    // Poin 3: HDR Loader dengan Fallback Error Handler
+    new THREE.RGBELoader().load(
+      'hdr/studio.hdr',
+      function (texture) {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        scene.environment = texture;
+      },
+      undefined,
+      function (err) {
+        console.warn('HDR Loading failed, using directional lights fallback.');
+      }
+    );
 
-    const headSpotlight = new THREE.SpotLight(0xffffff, 8);
-    headSpotlight.position.set(0, 15, 10);
-    headSpotlight.angle = Math.PI / 6;
-    headSpotlight.penumbra = 0.8;
-    headSpotlight.castShadow = true;
-    
-    // Poin 3: Res-Map diturunkan dari 2048 ke 1024 demi stabilitas FPS HP
-    headSpotlight.shadow.mapSize.width = isMobile ? 512 : 1024;
-    headSpotlight.shadow.mapSize.height = isMobile ? 512 : 1024;
-    scene.add(headSpotlight);
+    // LIGHTING PIPELINE
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    scene.add(ambientLight);
 
-    const rimLight = new THREE.DirectionalLight(0x00ffff, 2);
-    rimLight.position.set(-10, 8, -10);
+    const mainLight = new THREE.DirectionalLight(0xffffff, 2.5);
+    mainLight.position.set(5, 10, 7);
+    scene.add(mainLight);
+
+    const rimLight = new THREE.DirectionalLight(0x00ffff, 3.5);
+    rimLight.position.set(-8, 5, -6);
     scene.add(rimLight);
 
-    const eyeLight = new THREE.PointLight(0xff0033, 5, 15);
-    eyeLight.position.set(0, 2, 3);
-    scene.add(eyeLight);
-
-    const shadowFloor = new THREE.Mesh(
-      new THREE.PlaneGeometry(100, 100),
-      new THREE.ShadowMaterial({ opacity: 0.3 })
-    );
-    shadowFloor.rotation.x = -Math.PI / 2;
-    shadowFloor.position.y = -5;
-    shadowFloor.receiveShadow = true;
-    scene.add(shadowFloor);
-
-    // Particles Atmosphere
+    // ===============================================
+    // 3. ADAPTIVE PARTICLES SYSTEM
+    // ===============================================
     const pGeo = new THREE.BufferGeometry();
-    const pCount = isMobile ? 800 : 2000;
+    const pCount = isMobile ? 600 : 1500; // Adaptive Particles
     const pos = new Float32Array(pCount * 3);
-    for (let i = 0; i < pCount * 3; i++) pos[i] = (Math.random() - 0.5) * 80;
-    pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    const dust = new THREE.Points(pGeo, new THREE.PointsMaterial({ size: 0.05, color: 0x00ffff, transparent: true, opacity: 0.4 }));
-    scene.add(dust);
-
-    // Shockwave Ring
-    const shockwaveGeo = new THREE.RingGeometry(0.1, 0.5, 32);
-    const shockwaveMat = new THREE.MeshBasicMaterial({ color: 0x00ffff, side: THREE.DoubleSide, transparent: true, opacity: 0 });
-    const shockwave = new THREE.Mesh(shockwaveGeo, shockwaveMat);
-    shockwave.rotation.x = Math.PI / 2;
-    shockwave.position.set(0, -2, 0);
-    scene.add(shockwave);
-
-    function triggerShockwave() {
-      shockwave.scale.set(1, 1, 1);
-      shockwaveMat.opacity = 1;
-      gsap.to(shockwave.scale, { x: 30, y: 30, z: 30, duration: 1.2, ease: "power2.out" });
-      gsap.to(shockwaveMat, { opacity: 0, duration: 1.2, ease: "power2.out" });
+    for (let i = 0; i < pCount * 3; i++) {
+      pos[i] = (Math.random() - 0.5) * 60;
     }
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const pMat = new THREE.PointsMaterial({ size: 0.04, color: 0x00ffff, transparent: true, opacity: 0.5 });
+    const dustParticles = new THREE.Points(pGeo, pMat);
+    scene.add(dustParticles);
 
     // ===============================================
-    // 4. GLTF LOADER WITH REAL-TIME PROGRESS
+    // 4. LOADING MANAGER (Poin 5)
     // ===============================================
-    let eagle, mixer, actions = {};
-    let headNode, chestBone;
-    let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    let eagle, mixer;
+    const baseY = -1.2;
+    
+    // Target Vector untuk Smooth Camera Lerp (Poin 2)
+    const currentTarget = new THREE.Vector3(0, 0, 0);
+    const desiredTarget = new THREE.Vector3(0, 0, 0);
 
     const loadingManager = new THREE.LoadingManager();
-    const progressBar = document.getElementById('progress-bar');
+    const progressFill = document.getElementById('progress-fill');
     const loadingStatus = document.getElementById('loading-status');
-    const startBtn = document.getElementById('start-btn');
+    const loadingScreen = document.getElementById('loading-screen');
 
-    loadingManager.onProgress = function (item, loaded, total) {
+    loadingManager.onProgress = function (url, loaded, total) {
       const percent = Math.round((loaded / total) * 100);
-      progressBar.style.width = percent + '%';
+      progressFill.style.width = percent + '%';
       loadingStatus.innerText = `LOADING SYSTEM ASSETS... ${percent}%`;
     };
 
     loadingManager.onLoad = function () {
       loadingStatus.innerText = "SYSTEM 100% READY";
       setTimeout(() => {
-        document.querySelector('.loading-bar-container').style.display = 'none';
-        loadingStatus.style.display = 'none';
-        startBtn.style.display = 'inline-block';
-      }, 500);
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => loadingScreen.remove(), 800);
+      }, 400);
     };
 
     const loader = new THREE.GLTFLoader(loadingManager);
     loader.load('model/eagle.glb', (gltf) => {
       eagle = gltf.scene;
-      eagle.scale.set(4, 4, 4);
-      eagle.position.set(0, -2, 0);
-
-      eagle.traverse((obj) => {
-        if (obj.isMesh) {
-          obj.castShadow = true;
-          obj.receiveShadow = true;
-        }
-        if (obj.name.toLowerCase().includes('head')) headNode = obj;
-        if (obj.name.toLowerCase().includes('chest') || obj.name.toLowerCase().includes('spine')) chestBone = obj;
-      });
-
+      eagle.position.set(0, baseY, 0);
+      eagle.scale.set(1.5, 1.5, 1.5);
       scene.add(eagle);
 
-      if (gltf.animations && gltf.animations.length) {
+      if (gltf.animations.length) {
         mixer = new THREE.AnimationMixer(eagle);
-        gltf.animations.forEach((clip) => {
-          actions[clip.name] = mixer.clipAction(clip);
-        });
-        const defaultClip = gltf.animations[0];
-        actions[defaultClip.name].play();
+        mixer.clipAction(gltf.animations[0]).play();
       }
+
+      initCinematicTimeline();
+      initCardAnimations();
     });
 
+    // ===============================================
+    // 5. MOUSE INTERACTION (Separated via Rig)
+    // ===============================================
+    let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
     window.addEventListener('mousemove', (e) => {
-      mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+      mouse.targetX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouse.targetY = (e.clientY / window.innerHeight - 0.5) * 2;
     });
 
     // ===============================================
-    // 5. INTRO & SCROLL SEQUENCER
+    // 6. GSAP CINEMATIC TIMELINE
     // ===============================================
-    function startExperience() {
-      // Poin 2: Safe Audio Volume Control
-      const bootSfx = document.getElementById('sfx-boot');
-      const screamSfx = document.getElementById('sfx-scream');
-      bootSfx.volume = 0.4;
-      screamSfx.volume = 0.5;
-
-      bootSfx.play().catch(() => {});
-
-      gsap.to('#boot-screen', {
-        opacity: 0,
-        duration: 1,
-        onComplete: () => document.getElementById('boot-screen').remove()
-      });
-
-      const tl = gsap.timeline();
-
-      tl.to(camera.position, {
-        x: 0,
-        y: 2,
-        z: 14,
-        duration: 3,
-        ease: "power3.inOut"
-      })
-      .to('#hero-text', {
-        opacity: 1,
-        y: 0,
-        duration: 1.5,
-        ease: "power2.out"
-      }, "-=1.0")
-      .call(() => {
-        screamSfx.play().catch(() => {});
-        triggerShockwave();
-
-        // Camera Shake
-        gsap.to(camera.position, {
-          x: "+=0.25",
-          y: "+=0.15",
-          repeat: 10,
-          yoyo: true,
-          duration: 0.04,
-          ease: "sine.inOut"
-        });
-
-        initScrollAnimations();
-      });
-    }
-
-    function initScrollAnimations() {
-      gsap.to(camera.position, {
+    function initCinematicTimeline() {
+      const mainTl = gsap.timeline({
         scrollTrigger: {
           trigger: "body",
           start: "top top",
           end: "bottom bottom",
-          scrub: 1.5
-        },
-        y: -10,
-        z: 25,
-        x: 10
+          scrub: 1.2,
+        }
       });
 
-      if (eagle) {
-        gsap.to(eagle.rotation, {
+      // Animasi sekarang mengontrol cameraRig, BUKAN camera langsung!
+      mainTl
+        .to('#scene-1', { opacity: 1, y: 0, duration: 1 })
+        .to('#scene-1', { opacity: 0, y: -40, duration: 1 }, "+=1")
+
+        .to(cameraRig.position, { x: 3, y: 1, z: -2, duration: 3, ease: "power2.inOut" }, "<")
+        .to(eagle.rotation, { y: Math.PI * 0.3, duration: 3 }, "<")
+        .to('#scene-2', { opacity: 1, y: 0, duration: 1 })
+        .to('#scene-2', { opacity: 0, y: -40, duration: 1 }, "+=1")
+
+        .to(cameraRig.position, { x: 0.3, y: 0.3, z: -11.8, duration: 3, ease: "expo.inOut" })
+        .call(() => desiredTarget.set(0.2, 0.3, 0.8)) // Poin 2: Vector Target Update
+        .to('#scene-3', { opacity: 1, y: 0, duration: 1 })
+        .to('#scene-3', { opacity: 0, y: -40, duration: 1 }, "+=1")
+
+        .to(cameraRig.position, { x: 0, y: 1, z: 0, duration: 3, ease: "power3.inOut" })
+        .call(() => desiredTarget.set(0, 0, 0))
+        .to(eagle.rotation, { y: 0, duration: 3 }, "<")
+        .to('#scene-4', { opacity: 1, y: 0, duration: 1 })
+        .to('#scene-4', { opacity: 0, y: -40, duration: 1 }, "+=1")
+
+        .to('#webgl-canvas', { opacity: 0.3, scale: 0.95, duration: 2 }, "-=0.5");
+    }
+
+    // Poin 6: GSAP Micro-Interactions untuk Card Portfolio
+    function initCardAnimations() {
+      gsap.utils.toArray('.card').forEach((card) => {
+        gsap.from(card, {
           scrollTrigger: {
-            trigger: "body",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
           },
-          y: Math.PI * 0.4,
-          x: 0.15
+          opacity: 0,
+          y: 50,
+          duration: 0.8,
+          ease: "power3.out"
         });
-      }
+      });
     }
 
     // ===============================================
-    // 6. ANIMATION & RENDER LOOP
+    // 7. RENDER LOOP (Poin 1 & 2 FIXED)
     // ===============================================
     const clock = new THREE.Clock();
 
     function animate() {
       requestAnimationFrame(animate);
-
       const delta = clock.getDelta();
       const time = clock.getElapsedTime();
 
       if (mixer) mixer.update(delta);
 
+      // Smooth Interpolasi Parallax Mouse
       mouse.x += (mouse.targetX - mouse.x) * 0.05;
       mouse.y += (mouse.targetY - mouse.y) * 0.05;
 
-      const noiseX = Math.sin(time * 7) * 0.015;
-      const noiseY = Math.cos(time * 8) * 0.01;
+      // Parallax Mouse HANYA mengubah offset kamera internal di dalam Rig
+      camera.position.x = mouse.x * 0.4;
+      camera.position.y = -mouse.y * 0.3;
 
+      // Poin 2: Vector3.lerp() untuk Target Kamera yang Mulus tanpa Hentakan
+      currentTarget.lerp(desiredTarget, 0.05);
+      cameraRig.lookAt(currentTarget);
+
+      // Oscillation Bebas Drift
       if (eagle) {
-        eagle.position.y = -2 + Math.sin(time * 1.3) * 0.3;
-        eagle.rotation.y = mouse.x * 0.2 + noiseX;
-        eagle.rotation.x = -mouse.y * 0.1 + noiseY;
-
-        if (headNode) {
-          headNode.rotation.y = mouse.x * 0.4;
-          headNode.rotation.x = -mouse.y * 0.2;
-        }
-
-        if (chestBone) {
-          chestBone.scale.x = 1 + Math.sin(time * 2) * 0.02;
-          chestBone.scale.z = 1 + Math.sin(time * 2) * 0.02;
-        }
+        eagle.position.y = baseY + Math.sin(time * 2) * 0.05;
+        eagle.rotation.z = Math.sin(time * 1.5) * 0.02;
+        eagle.rotation.x = mouse.y * 0.05;
       }
 
-      eyeLight.intensity = 5 + Math.sin(time * 8) * 2;
-      dust.rotation.y = time * 0.02;
+      dustParticles.rotation.y = time * 0.01;
 
       composer.render();
     }
 
     animate();
 
+    // Poin 4: Dynamic Resize Handler (Termasuk Bloom Pass & Pixel Ratio)
     window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      camera.aspect = width / height;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      composer.setSize(window.innerWidth, window.innerHeight);
+
+      renderer.setSize(width, height);
+      composer.setSize(width, height);
+      bloomPass.setSize(width, height); // Bloom Pass Sync Fix
     });
   </script>
 </body>
